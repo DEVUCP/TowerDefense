@@ -48,6 +48,14 @@ public:
    */
   void run_iteration();
 
+  /**
+   * Getters for manager
+   */
+  TowerManager& get_tower_mng() const;
+  EnemyManager& get_enemy_mng() const;
+  WaveManager& get_wave_mng() const;
+  AttackManager& get_attack_mng() const;
+
 private:
   /**
    * @brief Initialize a level by using
