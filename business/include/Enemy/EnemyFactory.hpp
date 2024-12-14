@@ -9,7 +9,13 @@ public:
   /**
    * @brief Get the one instance of EnemyFactory
    */
+  static EnemyFactory get_intance();
 
+  /**
+   * @brief Generate an enemy with specifc type
+   *
+   * @details use private helpers
+   */
   void generate_enemy(BaseEnemy::EnemyType);
 
 private:
