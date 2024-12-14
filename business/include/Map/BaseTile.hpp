@@ -3,8 +3,11 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "Attack/BaseAttack.hpp"
 #include "Utils/Drawable.hpp"
+
+class BaseAttack;  // Declare class without any interface. To use the interface,
+                   // include the header file in source file
+
 /**
  * @class BaseTile
  * @brief Represent the base class for all tiles to inherit

@@ -1,6 +1,8 @@
 #pragma once
 
+#include <memory>
 #include <string>
+#include "Enemy/BaseEnemy.hpp"
 #include "Utils/Drawable.hpp"
 #include "Utils/Moveable.hpp"
 /**
@@ -25,6 +27,20 @@ public:
    * @details Getter for `to_be_removed`
    */
   bool is_to_be_removed();
+
+  /**
+   * @brief Check if the attack has hit an enemy
+   *
+   * @detials Use some collision detection algorithm such as AABA
+   * @detials If it has found the enemy, call `on_hit`
+   */
+  bool hit(std::shared_ptr<BaseEnemy> enemy);
+
+  /**
+   * @brief A callback to run when the attack finds the enemy. Invoke damage to
+   * that enemy
+   */
+  void on_hit();
 
 protected:
   // Inherited callbacks
