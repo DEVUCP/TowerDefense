@@ -42,6 +42,11 @@ public:
    */
   void on_hit();
 
+  /**
+   * @brief Getter for CurrentTile
+   */
+  std::shared_ptr<BaseTile> tile;
+
 protected:
   // Inherited callbacks
   virtual void on_reach()
@@ -56,4 +61,5 @@ private:
                        // removed, either because it's out of edge or because
                        // it's hit target
   int damage;
+  std::shared_ptr<BaseTile> current_tile;
 };
