@@ -12,3 +12,4 @@ add_library(business ${HEADERS} ${SOURCES})
 
 # Include directories
 target_include_directories(business PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(business PUBLIC ${PROJECT_SOURCE_DIR}/public)
