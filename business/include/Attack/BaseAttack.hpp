@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Utils/Drawable.hpp"
 #include "Utils/Moveable.hpp"
 /**
  * @class BaseAttack
@@ -8,12 +9,12 @@
  *
  * @note Most of the logic will be done by the callbacks in `Moveable`
  */
-class BaseAttack : public Moveable {
+class BaseAttack : public Moveable, Drawable {
 public:
   /**
    * @brief Constructor
    *
-   * @note Must call Moveable constructor
+   * @note Must call Moveable, and Drawable constructor
    */
   BaseAttack(float x, float y, float velocity, Vector<float> target,
              const std::string& sprite, int damage);
@@ -25,11 +26,6 @@ public:
    */
   bool is_to_be_removed();
 
-  /**
-   * @brief Getter for sprite
-   */
-  const std::string& get_sprite() const;
-
 protected:
   // Inherited callbacks
   virtual void on_reach()
@@ -40,7 +36,6 @@ protected:
                  // be adjusted by subclasses
 
 private:
-  std::string sprite;
   bool to_be_removed;  // < a flag to indicate that this attack is to be
                        // removed, either because it's out of edge or because
                        // it's hit target

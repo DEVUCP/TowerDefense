@@ -4,11 +4,12 @@
 #include <string>
 #include <vector>
 #include "Attack/BaseAttack.hpp"
+#include "Utils/Drawable.hpp"
 /**
  * @class BaseTile
  * @brief Represent the base class for all tiles to inherit
  */
-class BaseTile {
+class BaseTile : public Drawable {
 public:  // public types
   /**
    * @enum TileType
@@ -34,11 +35,6 @@ public:
   BaseTile(const std::string& sprite_path, TileType type);
 
   /**
-   * @brief Getter for sprite
-   */
-  const std::string& get_sprite() const;
-
-  /**
    * @brief Register attack to be in current tile
    */
   void register_attack(std::shared_ptr<BaseAttack>);
@@ -49,7 +45,6 @@ public:
   void remove_attack(std::shared_ptr<BaseAttack>);
 
 private:
-  std::string sprite;
   TileType type;
   std::vector<std::shared_ptr<BaseAttack>> attacks;
 };
