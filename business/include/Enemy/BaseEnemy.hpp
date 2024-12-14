@@ -2,10 +2,21 @@
 
 #include <memory>
 #include "Map/BaseTile.hpp"
+#include "Map/Map.hpp"
 #include "Utils/Drawable.hpp"
 #include "Utils/Moveable.hpp"
 class BaseEnemy : public Moveable, Drawable {
 public:
+  enum class EnemyType { ANT, COCKROACH, BETTLE };
+
+public:
+  /**
+   * @brief Constructor
+   *
+   * Initialize all variables and call parent constructors
+   */
+  BaseEnemy(float x, float y, float velocity, std::shared_ptr<BaseTile>,
+            Vector<float> dest, const std::string& sprite, int kill_coins);
   /**
    * @brief Update the current tile to be the next tile
    *
@@ -13,7 +24,7 @@ public:
    * GameSettings.get_instance().get_width() and get_height(), and use them to
    * calculate the indices of the current tile
    */
-  void handle_next_tile_redirection();
+  void handle_next_tile_redirection(std::shared_ptr<Map> map);
 
   /**
    * @brief Getter for health
@@ -66,4 +77,5 @@ private:
   int kill_coins;      // represent the amount of money when killing this enemy
   std::shared_ptr<BaseTile>
       current_tile;  // represent the current tile on which the enemy is
+  EnemyType type;
 };
