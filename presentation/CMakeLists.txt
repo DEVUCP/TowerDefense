@@ -12,8 +12,14 @@ FetchContent_Declare(
   GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-set(HEADERS include/App.hpp)
-set(SOURCES src/App.cpp)
+set(HEADERS
+    include/App.hpp
+    # Utilities
+    include/Utils/TextBuilder.hpp)
+set(SOURCES
+    src/App.cpp
+    # Utilities
+    src/Utils/TextBuilder.cpp)
 
 add_library(presentation ${HEADERS} ${SOURCES})
 
