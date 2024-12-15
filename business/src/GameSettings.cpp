@@ -1,4 +1,4 @@
-#define WIDTH 1920
+#define WIDTH 1680
 #define HEIGHT 1080
 #define TILE_LENGTH 60
 #define ROW_NUM 18
