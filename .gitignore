@@ -37,4 +37,5 @@ build/
 .cache/
 
 # For test files
-*/__test/
+__tests/
+cmake-build-debug/
