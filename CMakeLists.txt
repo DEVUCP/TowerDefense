@@ -17,3 +17,12 @@ target_link_libraries(main PRIVATE presentation)
 
 target_include_directories(main
                            PUBLIC ${PROJECT_SOURCE_DIR}/presentation/include)
+set(source "${CMAKE_SOURCE_DIR}/assets")
+set(destination "${CMAKE_CURRENT_BINARY_DIR}/assets")
+
+add_custom_command(
+  TARGET main
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E create_symlink ${source} ${destination} DEPENDS
+          ${destination}
+  COMMENT "symbolic link resources folder from ${source} => ${destination}")
