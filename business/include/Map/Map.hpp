@@ -28,9 +28,9 @@ public:
    *
    * @return Return the tile if it's in the game or nullptr instead
    */
-  std::shared_ptr<BaseTile>& map_coords_to_tile(float x, float y) const;
+  std::shared_ptr<BaseTile> map_coords_to_tile(float x, float y) const;
 
 private:
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
-  std::list<std::shared_ptr<EnemyPathTile>> enemyPath;
+  std::list<std::shared_ptr<EnemyPathTile>> enemy_path;
 };
