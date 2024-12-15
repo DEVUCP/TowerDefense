@@ -5,6 +5,8 @@ project(
   VERSION 1.0
   LANGUAGES CXX)
 
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+
 include(FetchContent)
 FetchContent_Declare(
   SFML
@@ -25,11 +27,14 @@ add_library(presentation ${HEADERS} ${SOURCES})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 
-# Linking libraries
-target_link_libraries(presentation PRIVATE sfml-graphics sfml-audio sfml-system)
-include_directories(${CMAKE_SOURCE_DIR}/business/include)
+target_compile_features(presentation PRIVATE cxx_std_17)
 
+# Linking libraries
+target_link_libraries(presentation PRIVATE sfml-graphics)
+include_directories(${CMAKE_SOURCE_DIR}/business/include)
+message("SFML_INCLUDE_DIR: ${sfml_INCLUDE_DIR}")
 # Include directories
 target_include_directories(
-  presentation PUBLIC ${PROJECT_SOURCE_DIR}/include
-                      ${CMAKE_SOURCE_DIR}/business/include)
+  presentation
+  PUBLIC ${PROJECT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/business/include
+         ${CMAKE_SOURCE_DIR}/dependencies/SFML/include)
