@@ -5,7 +5,7 @@ project(
   VERSION 1.0
   LANGUAGES CXX)
 
-set(HEADERS include/Game.hpp)
+set(HEADERS public/Game.hpp)
 set(SOURCES src/Game.cpp)
 
 add_library(business ${HEADERS} ${SOURCES})
