@@ -21,7 +21,6 @@ set(HEADERS
     include/Utils/FontFactory.hpp
     # Interfaces
     include/Interfaces/Widget.hpp
-    # include/Interfaces/View.hpp
     # Components
     include/Components/BackgroundManager.hpp
     include/Components/SFXPlayer.hpp
@@ -58,8 +57,6 @@ set(SOURCES
     src/Components/PageManager.cpp
     src/Components/Page.cpp
     src/Components/Title.cpp
-    # Interfaces
-    # src/Interfaces/View.cpp
     # Widget
     src/Widgets/MuteButton.cpp
     # Pages
