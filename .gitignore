@@ -35,3 +35,6 @@
 build/
 .idea/
 .cache/
+
+# For test files
+*/__test/
