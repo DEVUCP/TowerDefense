@@ -21,8 +21,8 @@ set(source "${CMAKE_SOURCE_DIR}/assets")
 set(destination "${CMAKE_CURRENT_BINARY_DIR}/assets")
 
 add_custom_command(
-  TARGET main
-  POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E create_symlink ${source} ${destination} DEPENDS
-          ${destination}
-  COMMENT "symbolic link resources folder from ${source} => ${destination}")
+  OUTPUT ${destination}
+  COMMAND ${CMAKE_COMMAND} -E create_symlink ${source} ${destination}
+  COMMENT "Symbolic link resources folder from ${source} => ${destination}")
+
+add_custom_target(create_symlink ALL DEPENDS ${destination})
