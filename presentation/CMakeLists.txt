@@ -18,6 +18,7 @@ set(HEADERS
     include/App.hpp
     # Utilities
     include/Utils/TextBuilder.hpp
+    include/Utils/FontFactory.hpp
     # Interfaces
     include/Interfaces/Widget.hpp
     # Components
@@ -35,6 +36,7 @@ set(SOURCES
     src/App.cpp
     # Utilities
     src/Utils/TextBuilder.cpp
+    src/Utils/FontFactory.cpp
     # Components
     src/Components/BackgroundManager.cpp
     src/Components/Button.cpp
