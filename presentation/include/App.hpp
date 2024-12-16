@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "Components/BackgroundManager.hpp"
+#include "Components/PageManager.hpp"
 #include "SFML/Graphics.hpp"
 
 class App {
@@ -16,6 +17,11 @@ private:
    * @brief Initliaze the window
    */
   void init_window();
+
+  /*
+   * @brief Initialize the page manager
+   */
+  void init_page_manager();
 
   /*
    * @brief Handle all events of the game
@@ -35,5 +41,5 @@ private:
 private:
   std::shared_ptr<sf::RenderWindow> window;
   sf::Event event;
-  BackgroundManager background_mng;
+  std::shared_ptr<PageManager> page_mng;
 };

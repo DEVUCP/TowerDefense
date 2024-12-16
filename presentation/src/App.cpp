@@ -1,18 +1,26 @@
 #include "App.hpp"
+#include <cassert>
+#include <iostream>
 #include <memory>
-#include "Components/BackgroundManager.hpp"
+#include "Components/PageManager.hpp"
 #include "SFML/Window/Event.hpp"
 
 App::App() {
   init_window();
-  background_mng.load_img("assets/background/Default.png", window);
+  init_page_manager();
 }
 
 void App::init_window() {
-  window = std::make_unique<sf::RenderWindow>(
+  window = std::make_shared<sf::RenderWindow>(
       sf::VideoMode::getFullscreenModes()[0], "SFML", sf::Style::Fullscreen);
 }
 
+void App::init_page_manager() {
+  assert(window);  // assert the initialization of window
+  page_mng =
+      std::make_shared<PageManager>(window->getSize().x, window->getSize().y);
+  std::cout << window->getSize().x << " " << window->getSize().y << std::endl;
+}
 void App::run() {
   while (window->isOpen()) {
     handle_events();
@@ -26,20 +34,17 @@ void App::handle_events() {
     if (event.type == sf::Event::Closed) {
       window->close();
     } else {
-      // TODO: handle elsewhere
+      page_mng->handle_events(event);
     }
   }
 }
 
-void App::update() {
-  // update the game
-}
+void App::update() { page_mng->update(); }
 
 void App::render() {
   window->clear();
 
-  background_mng.render(window);
-  // render stuff
+  page_mng->render(window);
 
   window->display();
 }
