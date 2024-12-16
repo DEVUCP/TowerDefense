@@ -60,7 +60,7 @@ protected:
   /**
    * @brief A callback to run when the object is out of board
    *
-   * @details If out of board, invoke damage and remove enemy
+   * @details If out of board, invoke damage to player and remove enemy
    */
   virtual void on_out_of_board() override;
 
