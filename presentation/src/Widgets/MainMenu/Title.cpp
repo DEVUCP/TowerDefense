@@ -5,7 +5,7 @@
 #include "Utils/TextBuilder.hpp"
 
 Title::Title(unsigned target_w, unsigned target_h) {
-  title_text.setFillColor(sf::Color::Yellow);
+  title_text.setFillColor(sf::Color(253, 226, 148));
   title_text.setString("Bug Slayer");
   title_text.setCharacterSize(100);
 
