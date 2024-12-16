@@ -4,11 +4,12 @@
 #include "Utils/TextBuilder.hpp"
 
 Title::Title() {
-  TextBuilder builder;
-  title_text = builder.setText("Bug Slayer")
-                   .setColor(sf::Color::Yellow)
-                   .setSize(200)
-                   .build();
+  title_text.setFillColor(sf::Color::Yellow);
+  title_text.setString("Bug Slayer");
+  title_text.setCharacterSize(200);
+
+  font.loadFromFile("assets/fonts/EnvyCodeRNerdFont.ttf");
+  title_text.setFont(font);
 }
 
 void Title::handle_events(sf::Event) {}
