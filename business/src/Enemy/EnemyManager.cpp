@@ -47,6 +47,16 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy() {
       "Failed to generate an enemy. This should not happen.");
 }
 
+int EnemyManager::get_starting_wave(BaseEnemy::EnemyType type) const {
+  auto it = starting_wave.find(type);
+  return (it != starting_wave.end()) ? it->second
+                                     : -1;  // Default to -1 if not found
+}
+
+void EnemyManager::set_starting_wave(BaseEnemy::EnemyType type, int wave) {
+  starting_wave[type] = wave;
+}
+
 void EnemyManager::filter_enemies() {
   for (int i = 0; i < enemies.size(); i++) {
     if (enemies[i]->is_to_be_removed()) enemies.erase(enemies.begin() + 1);

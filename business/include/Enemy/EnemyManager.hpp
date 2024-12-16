@@ -36,6 +36,22 @@ public:
    */
   std::shared_ptr<BaseEnemy> generate_enemy();
 
+  /**
+   * @brief Get the starting wave for a specific enemy type.
+   *
+   * @param type The enemy type whose starting wave is to be retrieved.
+   * @return The wave number in which the enemy becomes available.
+   */
+  int get_starting_wave(BaseEnemy::EnemyType type) const;
+
+  /**
+   * @brief Set the starting wave for a specific enemy type.
+   *
+   * @param type The enemy type to set the wave for.
+   * @param wave The wave number in which the enemy becomes available.
+   */
+  void set_starting_wave(BaseEnemy::EnemyType type, int wave);
+
   /*
    *@brief remove enemies to be deleted from the enemies list
    */
@@ -50,4 +66,5 @@ public:
 private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
   std::vector<std::shared_ptr<BaseEnemy>> enemies;
+  std::map<BaseEnemy::EnemyType, int> starting_wave;
 };
