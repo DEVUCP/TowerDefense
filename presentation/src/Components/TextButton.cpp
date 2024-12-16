@@ -1,6 +1,7 @@
 #include "Components/TextButton.hpp"
 #include "Components/Button.hpp"
 #include "SFML/Graphics/Rect.hpp"
+#include "Utils/FontFactory.hpp"
 
 TextButton::TextButton(std::string str, unsigned x, unsigned y,
                        Button::ButtonSize size)
@@ -9,7 +10,7 @@ TextButton::TextButton(std::string str, unsigned x, unsigned y,
   text.setString(str);
   text.setCharacterSize(80);
 
-  font.loadFromFile("assets/fonts/EnvyCodeRNerdFont.ttf");
+  font = FontFactory::get_instance().get_primary_font();
   text.setFont(font);
 
   sf::FloatRect bgBounds =

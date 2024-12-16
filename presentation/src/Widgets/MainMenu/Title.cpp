@@ -1,6 +1,7 @@
 #include "Widgets/MainMenu/Title.hpp"
 #include <cassert>
 #include <iostream>
+#include "Utils/FontFactory.hpp"
 #include "Utils/TextBuilder.hpp"
 
 Title::Title(unsigned target_w, unsigned target_h) {
@@ -8,7 +9,7 @@ Title::Title(unsigned target_w, unsigned target_h) {
   title_text.setString("Bug Slayer");
   title_text.setCharacterSize(100);
 
-  font.loadFromFile("assets/fonts/EnvyCodeRNerdFont.ttf");
+  font = FontFactory::get_instance().get_primary_font();
   title_text.setFont(font);
 
   title_text.setPosition(
