@@ -18,5 +18,5 @@ public:
   void update();
 
 private:
-  sf::Text title_text;
+  Button play_button;
 };
