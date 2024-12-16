@@ -37,20 +37,15 @@ public:
   std::shared_ptr<BaseEnemy> generate_enemy();
 
   /*
+   *@brief remove enemies to be deleted from the enemies list
+   */
+  // call this before move_enemies() in gameloop
+  void filter_enemies();
+
+  /*
    * @brief Move all enemies by calling `move_next` on each enemy
    */
   void move_enemies();
-
-/*
- *@brief remove enemies to be deleted from the enemies list 
-*/
-// call this before move_enemies() in gameloop
-  void filter_enemies(){
-    for(int i = 0; i < enemies.size(); i++){
-      if(enemies[i]->is_to_be_removed())
-        enemies.erase(enemies.begin()+1);
-    }
-  }
 
 private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
