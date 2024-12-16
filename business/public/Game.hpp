@@ -14,6 +14,12 @@ public:
    */
   static Game& get_instance();
 
+  /**
+   * @brief Get Level
+   */
+
+  std::shared_ptr<Level> get_level();
+
 private:
   Game();  // < private constructor
 

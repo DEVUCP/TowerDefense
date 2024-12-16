@@ -27,7 +27,9 @@ set(HEADERS
     include/Components/PageFactory.hpp
     include/Components/Page.hpp
     # Pages
-    include/Pages/MainMenu.hpp)
+    include/Pages/MainMenu.hpp
+    # MainMenu Widgets
+    include/Widgets/MainMenu/Title.hpp)
 set(SOURCES
     src/App.cpp
     # Utilities
@@ -39,7 +41,9 @@ set(SOURCES
     src/Components/PageManager.cpp
     src/Components/Page.cpp
     # Pages
-    src/Pages/MainMenu.cpp)
+    src/Pages/MainMenu.cpp
+    # MainMenu Widgets
+    src/Widgets/MainMenu/Title.cpp)
 
 add_library(presentation ${HEADERS} ${SOURCES})
 
