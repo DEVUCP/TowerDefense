@@ -21,6 +21,7 @@ TextBuilder &TextBuilder::setSize(int size) {
   text.setCharacterSize(size);
   return *this;
 }
+
 TextBuilder &TextBuilder::setText(const std::string &value) {
   text.setString(value);
   return *this;

@@ -17,4 +17,5 @@ void MainMenu::update() {}
 
 void MainMenu::render(std::shared_ptr<sf::RenderTarget> window) {
   background.render(window);
+  title.render(window);
 }

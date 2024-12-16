@@ -1,8 +1,10 @@
 #pragma once
 #include <memory>
+#include <vector>
 #include "Components/BackgroundManager.hpp"
 #include "Components/Page.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
+#include "Widgets/MainMenu/Title.hpp"
 
 class MainMenu : public Page {
 public:
@@ -19,4 +21,5 @@ public:
 
 private:
   BackgroundManager background;
+  Title title;
 };
