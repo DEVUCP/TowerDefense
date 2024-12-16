@@ -3,12 +3,12 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "Utils/FontFactory.hpp"
 
-TextButton::TextButton(std::string str, unsigned x, unsigned y,
-                       Button::ButtonSize size)
-    : Button(x, y, size, Button::ButtonType::RECT) {
+TextButton::TextButton(std::string str, unsigned x, unsigned y, ButtonSize size,
+                       ButtonType type)
+    : Button(x, y, size, type) {
   text.setFillColor(sf::Color(164, 146, 95));
   text.setString(str);
-  text.setCharacterSize(80);
+  text.setCharacterSize(size == ButtonSize::LARGE ? 75 : 45);
 
   font = FontFactory::get_instance().get_primary_font();
   text.setFont(font);

@@ -11,7 +11,8 @@ MainMenu::MainMenu(unsigned width, unsigned height)
   background.load_img("./assets/background/Default.png", target_width,
                       target_height);
   play_btn = std::make_shared<TextButton>("PLAY", width / 2.f, height / 2.f,
-                                          Button::ButtonSize::LARGE);
+                                          Button::ButtonSize::LARGE,
+                                          Button::ButtonType::RECT);
 }
 
 void MainMenu::on_pause() {}

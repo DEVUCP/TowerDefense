@@ -5,7 +5,8 @@
 #include "SFML/Graphics/RenderTarget.hpp"
 class TextButton : public Button {
 public:
-  TextButton(std::string text, unsigned x, unsigned y, Button::ButtonSize);
+  TextButton(std::string text, unsigned x, unsigned y, Button::ButtonSize,
+             Button::ButtonType);
 
   ~TextButton() = default;
 
