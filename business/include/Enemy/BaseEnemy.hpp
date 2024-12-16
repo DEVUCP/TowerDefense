@@ -29,24 +29,30 @@ public:
   /**
    * @brief Getter for health
    */
-  const float get_health() const;
+  const float get_health() const{
+    return health;
+  }
 
   /**
    * @brief Getter for initial health
    */
-  const float get_initial_health() const;
+  const float get_initial_health() const{
+    return initial_health;
+  }
 
   /**
    * @brief Getter for `to_be_removed`
    */
-  const bool is_to_be_removed() const;
+  const bool is_to_be_removed() const{
+    return to_be_removed;
+  }
 
   /**
    * @brief Invoke damage to enemy
    *
    * @detail If health reaches zero, call `on_killed`
    */
-  void invoke_damage();
+  void invoke_damage(float amount);
 
 protected:
   /**
@@ -66,11 +72,14 @@ protected:
 
   /**
    * @brief A callback to run when the object is killed
+
+   *@details Call EnemyManager to kill self
    */
   virtual void on_killed() = 0;
 
 private:
   float health;
+  float damage;
   float initial_health;
   bool to_be_removed;  // < indicate if the enemy has invoked damage to player
                        // by -1 or has died due to an attack
