@@ -20,4 +20,5 @@ target_include_directories(main
 set(source "${CMAKE_SOURCE_DIR}/assets")
 set(destination "${CMAKE_CURRENT_BINARY_DIR}/assets")
 
+
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
