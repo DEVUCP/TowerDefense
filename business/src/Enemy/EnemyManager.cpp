@@ -47,6 +47,12 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy() {
       "Failed to generate an enemy. This should not happen.");
 }
 
+void EnemyManager::filter_enemies() {
+  for (int i = 0; i < enemies.size(); i++) {
+    if (enemies[i]->is_to_be_removed()) enemies.erase(enemies.begin() + 1);
+  }
+}
+
 void EnemyManager::move_enemies() {
   for (auto &enemy : enemies) {
     if (enemy) {
