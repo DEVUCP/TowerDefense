@@ -1,0 +1,32 @@
+#include "Components/TextButton.hpp"
+#include "Components/Button.hpp"
+#include "SFML/Graphics/Rect.hpp"
+
+TextButton::TextButton(std::string str, unsigned x, unsigned y,
+                       Button::ButtonSize size)
+    : Button(x, y, size, Button::ButtonType::RECT) {
+  text.setFillColor(sf::Color(164, 146, 95));
+  text.setString(str);
+  text.setCharacterSize(80);
+
+  font.loadFromFile("assets/fonts/EnvyCodeRNerdFont.ttf");
+  text.setFont(font);
+
+  sf::FloatRect bgBounds =
+      bg.getGlobalBounds();  // Get global bounds of the sprite
+  sf::FloatRect textBounds = text.getLocalBounds();  // Get bounds of the text
+
+  // Calculate centered position for the text
+  float textX =
+      bgBounds.left + (bgBounds.width - textBounds.width) / 2 - textBounds.left;
+  float textY =
+      bgBounds.top + (bgBounds.height - textBounds.height) / 2 - textBounds.top;
+
+  // Set the position of the text
+  text.setPosition(textX, textY);
+}
+
+void TextButton::render(std::shared_ptr<sf::RenderTarget> window) {
+  Button::render(window);
+  window->draw(text);
+}

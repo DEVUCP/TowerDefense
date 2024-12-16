@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include "Components/BackgroundManager.hpp"
+#include "Components/Button.hpp"
 #include "Components/Page.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "Widgets/MainMenu/Title.hpp"
@@ -22,4 +23,5 @@ public:
 private:
   BackgroundManager background;
   Title title;
+  std::shared_ptr<Button> play_btn;
 };

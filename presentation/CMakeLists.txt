@@ -23,6 +23,7 @@ set(HEADERS
     # Components
     include/Components/BackgroundManager.hpp
     include/Components/Button.hpp
+    include/Components/TextButton.hpp
     include/Components/PageManager.hpp
     include/Components/PageFactory.hpp
     include/Components/Page.hpp
@@ -37,6 +38,7 @@ set(SOURCES
     # Components
     src/Components/BackgroundManager.cpp
     src/Components/Button.cpp
+    src/Components/TextButton.cpp
     src/Components/PageFactory.cpp
     src/Components/PageManager.cpp
     src/Components/Page.cpp
