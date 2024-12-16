@@ -1,6 +1,5 @@
 #include "App.hpp"
 #include <cassert>
-#include <iostream>
 #include <memory>
 #include "Components/PageManager.hpp"
 #include "SFML/Window/Event.hpp"
@@ -19,7 +18,6 @@ void App::init_page_manager() {
   assert(window);  // assert the initialization of window
   page_mng =
       std::make_shared<PageManager>(window->getSize().x, window->getSize().y);
-  std::cout << window->getSize().x << " " << window->getSize().y << std::endl;
 }
 void App::run() {
   while (window->isOpen()) {

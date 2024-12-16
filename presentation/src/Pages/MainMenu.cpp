@@ -1,6 +1,4 @@
-
 #include "Pages/MainMenu.hpp"
-#include <iostream>
 #include <memory>
 #include "Components/BackgroundManager.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"

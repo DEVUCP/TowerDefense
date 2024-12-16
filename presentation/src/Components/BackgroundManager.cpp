@@ -1,5 +1,4 @@
 #include "Components/BackgroundManager.hpp"
-#include <iostream>
 #include <memory>
 #include "SFML/Graphics/RenderTarget.hpp"
 

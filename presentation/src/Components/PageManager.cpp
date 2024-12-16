@@ -1,10 +1,8 @@
 #include "Components/PageManager.hpp"
 #include <cassert>
-#include <iostream>
 #include <memory>
 #include "Components/PageFactory.hpp"
 #include "Enums/PageType.hpp"
-#include "Pages/MainMenu.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "SFML/Window/Event.hpp"
 
