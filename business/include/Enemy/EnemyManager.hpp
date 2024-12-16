@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <utility>
+#include "BaseEnemy.hpp"
 #include "Enemy/BaseEnemy.hpp"
 class EnemyManager {
 public:
@@ -40,7 +41,18 @@ public:
    */
   void move_enemies();
 
+/*
+ *@brief remove enemies to be deleted from the enemies list 
+*/
+// call this before move_enemies() in gameloop
+  void filter_enemies(){
+    for(int i = 0; i < enemies.size(); i++){
+      if(enemies[i].is_to_be_removed())
+        enemies.pop(i);
+    }
+  }
+
 private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
-  std::vector<std::shared_ptr<BaseEnemy>> enemeis;
+  std::vector<std::shared_ptr<BaseEnemy>> enemies;
 };
