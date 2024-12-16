@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
+#include "Components/BackgroundManager.hpp"
 #include "SFML/Graphics.hpp"
-#include "SFML/Window/Event.hpp"
 
 class App {
 public:
@@ -33,6 +33,7 @@ private:
   void render();
 
 private:
-  std::unique_ptr<sf::RenderWindow> window;
+  std::shared_ptr<sf::RenderWindow> window;
   sf::Event event;
+  BackgroundManager background_mng;
 };

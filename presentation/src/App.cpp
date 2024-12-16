@@ -3,7 +3,10 @@
 #include "Components/BackgroundManager.hpp"
 #include "SFML/Window/Event.hpp"
 
-App::App() : background_mng("assets/background/Default.png") { init_window(); }
+App::App() {
+  init_window();
+  background_mng.load_img("assets/background/Default.png", window);
+}
 
 void App::init_window() {
   window = std::make_unique<sf::RenderWindow>(
@@ -35,6 +38,7 @@ void App::update() {
 void App::render() {
   window->clear();
 
+  background_mng.render(window);
   // render stuff
 
   window->display();

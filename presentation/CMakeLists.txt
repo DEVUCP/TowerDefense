@@ -17,11 +17,19 @@ FetchContent_MakeAvailable(SFML)
 set(HEADERS
     include/App.hpp
     # Utilities
-    include/Utils/TextBuilder.hpp)
+    include/Utils/TextBuilder.hpp
+    # Interfaces
+    include/Interfaces/Widget.hpp
+    # Components
+    include/Components/BackgroundManager.hpp
+    include/Components/Button.hpp)
 set(SOURCES
     src/App.cpp
     # Utilities
-    src/Utils/TextBuilder.cpp)
+    src/Utils/TextBuilder.cpp
+    # Components
+    src/Components/BackgroundManager.cpp
+    src/Components/Button.cpp)
 
 add_library(presentation ${HEADERS} ${SOURCES})
 
