@@ -2,7 +2,7 @@
 #pragma once
 #include <cmath>
 static constexpr double EPS = 1e9;
-template <typename T>
+template <typename T, typename D = T>
 class Vector {
 public:
   Vector(T x, T y) : x{x}, y{y} {}

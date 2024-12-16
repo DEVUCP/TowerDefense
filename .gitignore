@@ -35,3 +35,7 @@
 build/
 .idea/
 .cache/
+
+# For test files
+__tests/
+cmake-build-debug/

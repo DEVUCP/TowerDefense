@@ -47,6 +47,13 @@ public:
    */
   void remove_attack(std::shared_ptr<BaseAttack>);
 
+  /**
+   * @brief return center coordinates
+   *
+   * @details use GameSettings::get_instance()
+   */
+  Vector<float> get_center() const;
+
 private:
   TileType type;
   std::vector<std::shared_ptr<BaseAttack>> attacks;
