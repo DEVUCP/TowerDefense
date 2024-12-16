@@ -47,8 +47,8 @@ public:
 // call this before move_enemies() in gameloop
   void filter_enemies(){
     for(int i = 0; i < enemies.size(); i++){
-      if(enemies[i].is_to_be_removed())
-        enemies.pop(i);
+      if(enemies[i]->is_to_be_removed())
+        enemies.erase(enemies.begin()+1);
     }
   }
 
