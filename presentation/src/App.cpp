@@ -1,8 +1,9 @@
 #include "App.hpp"
 #include <memory>
+#include "Components/BackgroundManager.hpp"
 #include "SFML/Window/Event.hpp"
 
-App::App() { init_window(); }
+App::App() : background_mng("assets/background/Default.png") { init_window(); }
 
 void App::init_window() {
   window = std::make_unique<sf::RenderWindow>(
