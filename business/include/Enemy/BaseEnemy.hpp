@@ -52,8 +52,11 @@ public:
    *
    * @detail If health reaches zero, call `on_killed`
    */
-  void invoke_damage(float amount);
-
+  void invoke_damage(float amount){
+      health-= amount;
+    if(health <= 0)
+      on_killed();
+  }
 protected:
   /**
    * @brief A callback to run when the object reaches its destination
