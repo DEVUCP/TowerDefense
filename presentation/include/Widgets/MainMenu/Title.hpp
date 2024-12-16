@@ -8,7 +8,7 @@ public:
   /*
    * @brief Constructor
    */
-  Title();
+  Title(unsigned target_width, unsigned target_height);
 
   /*
    * @brief Overrided functions
