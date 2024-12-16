@@ -2,7 +2,6 @@
 
 #include "Interfaces/Widget.hpp"
 #include "SFML/Graphics.hpp"
-#include "SFML/Graphics/RenderTarget.hpp"
 
 class BackgroundManager : public Widget {
 public:
@@ -13,11 +12,11 @@ public:
    * @brief Load the background
    *
    * @param image Path to the image to load
-   * @param window The window to scale the image to
+   * @param target_width The width of the window
+   * @param target_height The height of the window
    */
-  void load_img(const std::string& image,
-                std::shared_ptr<sf::RenderTarget> window);
-  void load_img(std::string&& image, std::shared_ptr<sf::RenderTarget> window);
+  void load_img(std::string image, unsigned target_width,
+                unsigned target_height);
 
   /*
    * @brief private overrided functions
