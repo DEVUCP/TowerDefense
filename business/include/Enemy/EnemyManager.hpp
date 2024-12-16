@@ -1,9 +1,9 @@
 #pragma once
 #include <map>
+#include <unordered_map>
 #include <utility>
 #include "BaseEnemy.hpp"
 #include "Enemy/BaseEnemy.hpp"
-#include <unordered_map>
 
 class EnemyManager {
 public:
@@ -14,8 +14,8 @@ public:
   void assign_tickets(BaseEnemy::EnemyType, int);
 
   /**
- *@brief assign a starting wave to each enemy
- */
+   *@brief assign a starting wave to each enemy
+   */
   void set_staritng_wave(BaseEnemy::EnemyType, int);
 
   /**
@@ -50,23 +50,18 @@ public:
   std::shared_ptr<BaseEnemy> generate_enemy();
 
   /*
+   *@brief remove enemies to be deleted from the enemies list
+   */
+  // call this before move_enemies() in gameloop
+  void filter_enemies();
+
+  /*
    * @brief Move all enemies by calling `move_next` on each enemy
    */
   void move_enemies();
 
-/*
- *@brief remove enemies to be deleted from the enemies list
-*/
-// call this before move_enemies() in gameloop
-  void filter_enemies(){
-    for(int i = 0; i < enemies.size(); i++){
-      if(enemies[i]->is_to_be_removed())
-        enemies.erase(enemies.begin()+1);
-    }
-  }
-
 private:
- std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
- std::unordered_map<BaseEnemy, int> starting_waves;
- std::vector<std::shared_ptr<BaseEnemy>> enemies;
+  std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
+  std::unordered_map<BaseEnemy, int> starting_waves;
+  std::vector<std::shared_ptr<BaseEnemy>> enemies;
 };
