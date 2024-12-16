@@ -1,4 +1,6 @@
 #include "Widgets/MainMenu/Title.hpp"
+#include <cassert>
+#include <iostream>
 #include "Utils/TextBuilder.hpp"
 
 Title::Title() {
@@ -8,6 +10,7 @@ Title::Title() {
                    .setSize(200)
                    .build();
 }
+
 void Title::handle_events(sf::Event) {}
 
 void Title::render(std::shared_ptr<sf::RenderTarget> window) {
