@@ -12,19 +12,23 @@ MainMenu::MainMenu(unsigned width, unsigned height)
     : Page(width, height), title(width, height) {
   background.load_img("./assets/background/Default.png", target_width,
                       target_height);
-  play_btn = std::make_shared<TextButton>("PLAY", width / 2.f, height / 2.f,
+  play_btn = std::make_shared<TextButton>("play", width / 2.f, height / 2.f,
                                           Button::ButtonSize::LARGE,
                                           Button::ButtonType::RECT);
-  play_btn->set_handler([]() { std::cout << "clicked" << std::endl; });
+  play_btn->set_handler([]() { std::cout << "play" << std::endl; });
+  // TODO: Make a solution instead of hardcoding the value 200
+  about_btn = std::make_shared<TextButton>(
+      "about", width / 2.f, height / 2.f + 200, Button::ButtonSize::LARGE,
+      Button::ButtonType::RECT);
+  about_btn->set_handler([]() { std::cout << "about" << std::endl; });
 }
 
 void MainMenu::on_pause() {}
 void MainMenu::on_unpause() {}
 
 void MainMenu::handle_events(EventData evt) {
-  // TODO: Change the interface of handle_events to some struct EventData that
-  // will be passed down, so I don't get such a problem again
   play_btn->handle_events(evt);
+  about_btn->handle_events(evt);
 }
 
 void MainMenu::update() {}
@@ -33,4 +37,5 @@ void MainMenu::render(std::shared_ptr<sf::RenderTarget> window) {
   background.render(window);
   title.render(window);
   play_btn->render(window);
+  about_btn->render(window);
 }
