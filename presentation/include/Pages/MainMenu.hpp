@@ -25,4 +25,5 @@ private:
   Title title;
   std::shared_ptr<Button> play_btn;
   std::shared_ptr<Button> about_btn;
+  std::shared_ptr<Button> mute_button;
 };
