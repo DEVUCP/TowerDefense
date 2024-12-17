@@ -2,6 +2,7 @@
 #include <functional>
 #include <string>
 #include <unordered_map>
+#include "Interfaces/EventData.hpp"
 #include "Interfaces/Widget.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Texture.hpp"
@@ -43,9 +44,9 @@ public:
   /*
    * Overrided Functions
    */
-  virtual void handle_events(sf::Event);
-  virtual void render(std::shared_ptr<sf::RenderTarget> window);
-  virtual void update();
+  virtual void handle_events(EventData) override;
+  virtual void render(std::shared_ptr<sf::RenderTarget> window) override;
+  virtual void update() override;
 
 private:
   /*
@@ -55,6 +56,7 @@ private:
 
 protected:
   sf::Texture texture;
+  sf::Texture texture_hover;
   sf::Sprite bg;
 
 private:

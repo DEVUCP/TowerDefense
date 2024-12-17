@@ -32,7 +32,7 @@ void App::handle_events() {
     if (event.type == sf::Event::Closed) {
       window->close();
     } else {
-      page_mng->handle_events(event);
+      page_mng->handle_events({event, sf::Mouse::getPosition()});
     }
   }
 }
