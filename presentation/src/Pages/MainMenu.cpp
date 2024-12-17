@@ -1,5 +1,7 @@
 #include "Pages/MainMenu.hpp"
+#include <iostream>
 #include <memory>
+#include <ostream>
 #include "Components/BackgroundManager.hpp"
 #include "Components/TextButton.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
@@ -13,6 +15,7 @@ MainMenu::MainMenu(unsigned width, unsigned height)
   play_btn = std::make_shared<TextButton>("PLAY", width / 2.f, height / 2.f,
                                           Button::ButtonSize::LARGE,
                                           Button::ButtonType::RECT);
+  play_btn->set_handler([]() { std::cout << "clicked" << std::endl; });
 }
 
 void MainMenu::on_pause() {}
@@ -22,8 +25,6 @@ void MainMenu::handle_events(EventData evt) {
   // TODO: Change the interface of handle_events to some struct EventData that
   // will be passed down, so I don't get such a problem again
   play_btn->handle_events(evt);
-  if (evt.event.type == sf::Event::MouseButtonPressed) {
-  }
 }
 
 void MainMenu::update() {}
