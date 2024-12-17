@@ -3,6 +3,7 @@
 #include <memory>
 #include "Components/PageFactory.hpp"
 #include "Enums/PageType.hpp"
+#include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "SFML/Window/Event.hpp"
 
@@ -31,10 +32,10 @@ void PageManager::render(std::shared_ptr<sf::RenderTarget> window) {
   pages.top()->render(window);
 }
 
-void PageManager::handle_events(sf::Event event) {
+void PageManager::handle_events(EventData evt) {
   assert(pages.size());
 
-  pages.top()->handle_events(event);
+  pages.top()->handle_events(evt);
 }
 
 void PageManager::update() {

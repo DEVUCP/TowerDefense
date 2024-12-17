@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
-#include <vector>
 #include "Components/BackgroundManager.hpp"
 #include "Components/Button.hpp"
 #include "Components/Page.hpp"
+#include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "Widgets/MainMenu/Title.hpp"
 
@@ -14,11 +14,11 @@ public:
   /*
    * Overrided functions
    */
-  void on_pause();
-  void on_unpause();
-  void handle_events(sf::Event);
-  void render(std::shared_ptr<sf::RenderTarget> window);
-  void update();
+  void on_pause() override;
+  void on_unpause() override;
+  void handle_events(EventData) override;
+  void render(std::shared_ptr<sf::RenderTarget> window) override;
+  void update() override;
 
 private:
   BackgroundManager background;

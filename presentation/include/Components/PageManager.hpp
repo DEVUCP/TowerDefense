@@ -3,6 +3,7 @@
 #include <stack>
 #include "Components/Page.hpp"
 #include "Components/PageFactory.hpp"
+#include "Interfaces/EventData.hpp"
 #include "Interfaces/Widget.hpp"
 
 /*
@@ -39,9 +40,9 @@ public:
   /**
    * Overrided functions
    */
-  void handle_events(sf::Event);
-  void render(std::shared_ptr<sf::RenderTarget> window);
-  void update();
+  void handle_events(EventData) override;
+  void render(std::shared_ptr<sf::RenderTarget> window) override;
+  void update() override;
 
 private:
   std::stack<std::shared_ptr<Page>>

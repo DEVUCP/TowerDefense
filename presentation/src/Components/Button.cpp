@@ -1,5 +1,6 @@
 #include "Components/Button.hpp"
 #include <functional>
+#include "Interfaces/EventData.hpp"
 #include "SFML/System/Vector2.hpp"
 
 std::unordered_map<
@@ -26,6 +27,7 @@ std::unordered_map<
 Button::Button(unsigned x, unsigned y, ButtonSize size, ButtonType type)
     : size(size), type(type) {
   texture.loadFromFile(images[type][size].first);
+  texture_hover.loadFromFile(images[type][size].second);
   bg.setTexture(texture);
   bg.setPosition(x - bg.getGlobalBounds().width / 2.f,
                  y - bg.getGlobalBounds().height / 2.f);
@@ -41,7 +43,14 @@ void Button::set_handler(std::function<void(void)> new_handler) {
   handler = new_handler;
 }
 
-void Button::handle_events(sf::Event) {}
+void Button::handle_events(EventData evt) {
+  if (is_hovered({static_cast<float>(evt.mouse_pointer.x),
+                  static_cast<float>(evt.mouse_pointer.y)})) {
+    bg.setTexture(texture);
+  } else {
+    bg.setTexture(texture_hover);
+  }
+}
 void Button::render(std::shared_ptr<sf::RenderTarget> window) {
   window->draw(bg);
 }
