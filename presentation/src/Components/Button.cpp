@@ -33,6 +33,7 @@ Button::Button(unsigned x, unsigned y, ButtonSize size, ButtonType type)
   bg.setTexture(texture);
   bg.setPosition(x - bg.getGlobalBounds().width / 2.f,
                  y - bg.getGlobalBounds().height / 2.f);
+  handler = []() {};
 }
 
 void Button::on_click() { handler(); }
