@@ -6,9 +6,10 @@
 TextButton::TextButton(std::string str, unsigned x, unsigned y, ButtonSize size,
                        ButtonType type)
     : Button(x, y, size, type) {
-  text.setFillColor(sf::Color(164, 146, 95));
+  text.setFillColor(sf::Color(BUTTON_TEXT_COLOR));
   text.setString(str);
-  text.setCharacterSize(size == ButtonSize::LARGE ? 75 : 45);
+  text.setCharacterSize(size == ButtonSize::LARGE ? LARGE_FONT_SIZE
+                                                  : DEFAULT_FONT_SIZE);
 
   font = FontFactory::get_instance().get_primary_font();
   text.setFont(font);
@@ -31,3 +32,5 @@ void TextButton::render(std::shared_ptr<sf::RenderTarget> window) {
   Button::render(window);
   window->draw(text);
 }
+
+void TextButton::set_text(std::string txt) { text.setString(txt); }
