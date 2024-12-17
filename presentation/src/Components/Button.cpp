@@ -1,7 +1,9 @@
 #include "Components/Button.hpp"
 #include <functional>
+#include <iostream>
 #include "Interfaces/EventData.hpp"
 #include "SFML/System/Vector2.hpp"
+#include "SFML/Window/Mouse.hpp"
 
 std::unordered_map<
     Button::ButtonType,
@@ -46,9 +48,12 @@ void Button::set_handler(std::function<void(void)> new_handler) {
 void Button::handle_events(EventData evt) {
   if (is_hovered({static_cast<float>(evt.mouse_pointer.x),
                   static_cast<float>(evt.mouse_pointer.y)})) {
-    bg.setTexture(texture);
-  } else {
     bg.setTexture(texture_hover);
+    if (evt.event.type == sf::Event::MouseButtonPressed) {
+      on_click();
+    }
+  } else {
+    bg.setTexture(texture);
   }
 }
 void Button::render(std::shared_ptr<sf::RenderTarget> window) {
