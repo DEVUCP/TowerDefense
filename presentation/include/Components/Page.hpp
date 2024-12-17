@@ -3,6 +3,7 @@
 /*
  * An interface to all pages in the game
  */
+#include "Interfaces/EventData.hpp"
 #include "Interfaces/Widget.hpp"
 
 class Page : public Widget {
@@ -25,9 +26,9 @@ public:
   /*
    * Overrided functions
    */
-  virtual void handle_events(sf::Event) = 0;
-  virtual void render(std::shared_ptr<sf::RenderTarget> window) = 0;
-  virtual void update() = 0;
+  virtual void handle_events(EventData) override = 0;
+  virtual void render(std::shared_ptr<sf::RenderTarget> window) override = 0;
+  virtual void update() override = 0;
 
 protected:
   unsigned target_width;

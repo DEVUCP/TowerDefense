@@ -1,5 +1,6 @@
 #include "Components/BackgroundManager.hpp"
 #include <memory>
+#include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
 void BackgroundManager::load_img(std::string img, unsigned target_width,
@@ -17,5 +18,5 @@ void BackgroundManager::render(std::shared_ptr<sf::RenderTarget> window) {
   window->draw(background);
 }
 
-void BackgroundManager::handle_events(sf::Event) {}
+void BackgroundManager::handle_events(EventData) {}
 void BackgroundManager::update() {}

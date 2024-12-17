@@ -18,10 +18,11 @@ MainMenu::MainMenu(unsigned width, unsigned height)
 void MainMenu::on_pause() {}
 void MainMenu::on_unpause() {}
 
-void MainMenu::handle_events(sf::Event event) {
+void MainMenu::handle_events(EventData evt) {
   // TODO: Change the interface of handle_events to some struct EventData that
   // will be passed down, so I don't get such a problem again
-  if (event.type == sf::Event::MouseButtonPressed) {
+  play_btn->handle_events(evt);
+  if (evt.event.type == sf::Event::MouseButtonPressed) {
   }
 }
 

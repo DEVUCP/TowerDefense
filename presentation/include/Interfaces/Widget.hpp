@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "Interfaces/EventData.hpp"
 #include "SFML/Graphics.hpp"
 
 /*
@@ -12,7 +13,7 @@ public:
   /*
    * @brief Handle events
    */
-  virtual void handle_events(sf::Event) = 0;
+  virtual void handle_events(EventData data) = 0;
 
   /*
    * @brief Render the widget
