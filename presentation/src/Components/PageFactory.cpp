@@ -10,5 +10,5 @@ PageFactory& PageFactory::get_instance() {
 }
 
 void PageFactory::init_creators() {
-  register_creator<MainMenu, unsigned, unsigned>(PageType::MAIN_MENU);
+  register_creator<MainMenu>(PageType::MAIN_MENU);
 }

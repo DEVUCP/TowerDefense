@@ -15,12 +15,12 @@ public:
    * @brief Get the instance
    */
   static PageFactory& get_instance();
+
   /*
    * @brief Create a page
    */
-  template <typename... Args>
-  std::shared_ptr<Page> create_page(PageType type, Args&&... args) {
-    return creators[type](std::forward<Args>(args)...);
+  std::shared_ptr<Page> create_page(PageType type, unsigned x, unsigned y) {
+    return creators[type](x, y);
   }
 
 private:
@@ -36,10 +36,10 @@ private:
    */
   void init_creators();
 
-  template <typename PageClass, typename... Args>
+  template <typename PageClass>
   void register_creator(PageType type) {
-    creators[type] = [](Args&&... args) {
-      return std::make_shared<PageClass>(std::forward<Args>(args)...);
+    creators[type] = [](unsigned x, unsigned y) {
+      return std::make_shared<PageClass>(x, y);
     };
   }
 
