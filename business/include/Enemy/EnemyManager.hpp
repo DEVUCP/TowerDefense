@@ -36,7 +36,7 @@ public:
    * If we are in 3rd wave, total tickets are 500 only since we cannot generate
    * bettles
    */
-  std::shared_ptr<BaseEnemy> generate_enemy();
+  std::shared_ptr<BaseEnemy> generate_enemy(const int &starting_wave);
 
   /**
    * @brief Get the starting wave for a specific enemy type.
