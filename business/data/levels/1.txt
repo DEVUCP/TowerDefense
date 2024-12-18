@@ -1,0 +1,19 @@
+10 50 25 5
+15 3
+10 5
+8 7
+N N N E E E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E B N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E B N N N N N N N N N N N N N N N N N
+N N N N B E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E N N N N N N N N N N N N N N N N N N
+N N N N N E E E E E E E E E E E N N N N N N N N
