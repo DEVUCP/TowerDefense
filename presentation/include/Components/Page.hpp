@@ -3,6 +3,7 @@
 /*
  * An interface to all pages in the game
  */
+#include "Enums/Events/BackgroundEvents.hpp"
 #include "Enums/Events/PageEvents.hpp"
 #include "Interfaces/EventData.hpp"
 #include "Interfaces/Observable.hpp"
@@ -10,7 +11,7 @@
 
 class PageManager;
 
-class Page : public Widget, public Observable<PageEvent> {
+class Page : public Widget, public Observable {
 public:
   /*
    * @brief Constructor

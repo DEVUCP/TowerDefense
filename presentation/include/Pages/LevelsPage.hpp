@@ -21,7 +21,6 @@ public:
   void update() override;
 
 private:
-  BackgroundManager background;
   unsigned level_count;
   std::vector<std::shared_ptr<Button>> levels_btns;
   std::shared_ptr<Button> go_back;
