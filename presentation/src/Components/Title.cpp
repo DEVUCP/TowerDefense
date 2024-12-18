@@ -1,13 +1,13 @@
-#include "Widgets/MainMenu/Title.hpp"
+#include "Components/Title.hpp"
 #include <cassert>
 #include <iostream>
 #include "Interfaces/EventData.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/TextBuilder.hpp"
 
-Title::Title(unsigned target_w, unsigned target_h) {
+Title::Title(std::string text, unsigned target_w, unsigned target_h) {
   title_text.setFillColor(sf::Color(253, 226, 148));
-  title_text.setString("Bug Slayer");
+  set_text(text);
   title_text.setCharacterSize(100);
 
   font = FontFactory::get_instance().get_primary_font();
@@ -25,3 +25,5 @@ void Title::render(std::shared_ptr<sf::RenderTarget> window) {
 }
 
 void Title::update() {}
+
+void Title::set_text(std::string text) { title_text.setString(text); }

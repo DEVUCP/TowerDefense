@@ -29,7 +29,14 @@ public:
    * @param size The size of the button
    * @param type The type of the button
    */
-  Button(unsigned x, unsigned y, ButtonSize size, ButtonType type);
+  Button(unsigned x, unsigned y, ButtonSize size = ButtonSize::DEFAULT,
+         ButtonType type = ButtonType::RECT);
+
+  /*
+   * @brief Constructor for custom button
+   */
+  Button(unsigned x, unsigned y, sf::Texture texture,
+         sf::Texture texture_hover);
 
   /*
    * @brief handle click event on this button
@@ -58,11 +65,11 @@ protected:
   sf::Texture texture;
   sf::Texture texture_hover;
   sf::Sprite bg;
+  ButtonType type;
+  ButtonSize size;
 
 private:
   std::function<void(void)> handler;
-  ButtonType type;
-  ButtonSize size;
   static std::unordered_map<
       ButtonType,
       std::unordered_map<ButtonSize, std::pair<std::string, std::string>>>
