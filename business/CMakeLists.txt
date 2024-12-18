@@ -11,6 +11,8 @@ set(SOURCES src/Game.cpp
         src/LevelReader.cpp)
 
 add_library(business ${HEADERS} ${SOURCES})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../)
 
 # Include directories
 target_include_directories(business PUBLIC ${PROJECT_SOURCE_DIR}/include)
