@@ -1,4 +1,5 @@
 #pragma once
+#include <Level.hpp>
 
 class LevelReader {
 public:
@@ -15,7 +16,20 @@ public:
    *
    * @param level_num The level number
    */
-  void build_level(int);
+  Level& build_level(int);
+
+  /**
+   * @breif Get the number of level files in data directory.
+   */
+  int levels_count();
+
+  /**
+   * @brief Get the singleton instance of LevelReader
+   */
+  static LevelReader& get_instance() {
+    static LevelReader instance;
+    return instance;
+  }
 
 private:
   LevelReader() = default;
