@@ -10,11 +10,18 @@ void EnemyManager::assign_tickets(BaseEnemy::EnemyType type, int count) {
   tickets.emplace_back(type, count);
 }
 
-std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy() {
+std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
+    const int &starting_wave) {
   int total_tickets = 0;
+
+  // Calculate total tickets for enemy types considering the wave conditions
   for (const auto &[type, count] : tickets) {
-    total_tickets += count;
+    int enemy_wave = get_starting_wave(type);
+    if (enemy_wave <= starting_wave) {
+      total_tickets += count;  // Add tickets for this type
+    }
   }
+
   if (!total_tickets) {
     throw std::runtime_error("No tickets available to generate an enemy.");
   }
@@ -28,18 +35,21 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy() {
   // Determine which enemy type corresponds to the random ticket
   int cumulative = 0;
   for (const auto &[type, count] : tickets) {
-    cumulative += count;
-    if (random_ticket <= cumulative) {
-      // Get the starting wave for the enemy type
-      int wave = get_starting_wave(type);
-      if (wave == -1) {
-        throw std::runtime_error(
-            "Starting wave not assigned for the enemy type.");
-      }
+    int enemy_wave = get_starting_wave(type);
+    if (enemy_wave <=
+        starting_wave) {  // Only consider types that fit the wave condition
+      cumulative += count;
+      if (random_ticket <= cumulative) {
+        // Get the starting wave for the enemy type
+        if (starting_wave == -1) {
+          throw std::runtime_error(
+              "Starting wave not assigned for the enemy type.");
+        }
 
-      // Create and return the corresponding enemy with wave information
-      // Example: return BaseEnemy::create(type, wave);
-      // assuming create method takes wave info.
+        // Create and return the corresponding enemy with wave information
+        // Example: return BaseEnemy::create(type, wave);
+        // assuming create method takes wave info.
+      }
     }
   }
 
