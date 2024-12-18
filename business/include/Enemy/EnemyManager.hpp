@@ -7,7 +7,6 @@
 
 class EnemyManager {
 public:
-  EnemyManager();
   /**
    * @brief Assign a number of tickets to an enemy type
    */
