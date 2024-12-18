@@ -6,7 +6,9 @@ project(
   LANGUAGES CXX)
 
 set(HEADERS public/Game.hpp)
-set(SOURCES src/Game.cpp)
+set(SOURCES src/Game.cpp
+        src/Level.cpp
+        src/LevelReader.cpp)
 
 add_library(business ${HEADERS} ${SOURCES})
 
