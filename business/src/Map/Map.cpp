@@ -7,6 +7,9 @@ Map::Map(std::vector<std::vector<std::shared_ptr<BaseTile>>>&& grid,
 }
 
 std::shared_ptr<BaseTile> Map::map_coords_to_tile(float x, float y) const {
-  int i = x / 60, j = y / 60;
+  int i = x / TILE_LENGTH, j = y / TILE_LENGTH;
+  return grid[i][j];
+}
+std::shared_ptr<BaseTile> tile_coords_to_tile(int i, int j) const{
   return grid[i][j];
 }
