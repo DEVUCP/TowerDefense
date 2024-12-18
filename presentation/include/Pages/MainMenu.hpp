@@ -21,7 +21,6 @@ public:
   void update() override;
 
 private:
-  BackgroundManager background;
   Title title;
   std::shared_ptr<Button> play_btn;
   std::shared_ptr<Button> about_btn;

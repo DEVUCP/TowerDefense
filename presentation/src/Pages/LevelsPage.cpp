@@ -1,12 +1,12 @@
 #include "Pages/LevelsPage.hpp"
+#include <iostream>
 #include <memory>
 #include "Components/BackgroundManager.hpp"
 #include "Components/IconButton.hpp"
 #include "Components/TextButton.hpp"
 #include "Enums/Events/PageEvents.hpp"
 
-LevelsPage::LevelsPage(unsigned w, unsigned h)
-    : Page(w, h), background(BackgroundManager::DEFAULT, w, h) {
+LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   // TODO: Load the level count from the business logic
   level_count = 8;  // hardcoded for now
   // levels_btns.resize(level_count);
@@ -37,7 +37,6 @@ void LevelsPage::handle_events(EventData evt) {
 void LevelsPage::update() {}
 
 void LevelsPage::render(std::shared_ptr<sf::RenderTarget> window) {
-  background.render(window);
   go_back->render(window);
   for (auto& btn : levels_btns) btn->render(window);
 }
