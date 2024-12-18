@@ -4,19 +4,19 @@ Drawable::Drawable(const std::string& sprite, Vector<float> size, float rotation
   this->rotation = rotation;
 }
 
-  const Vector<float>& get_size() const{
+  const Vector<float>& Drawable::get_size() const{
     return size;
   }
 
   
-  const std::string& get_sprite() const{
+  const std::string& Drawable::get_sprite() const{
     return sprite;
   }
 
-  const float get_rotation() const{
+  const float Drawable::get_rotation() const{
     return rotation;
   }
 
-  void set_rotation(float amount){
+  void Drawable::set_rotation(float amount){
     rotation = amount; 
   }
