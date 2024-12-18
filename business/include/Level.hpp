@@ -8,36 +8,77 @@
 #include "WaveManager.hpp"
 
 class Level {
+private:
+ enum GameState {
+  PAUSED,
+  ON,
+  WON,
+  LOST,
+ };
+
 public:
-  Level(int lives, int score, int coins, std::shared_ptr<Map> map);
+ Level(int lives,  int coins, std::shared_ptr<Map> map, std::shared_ptr<WaveManager> wave_mng, std::shared_ptr<AttackManager> attack_mng, std::shared_ptr<TowerManager> tower_mng, std::shared_ptr<EnemyManager> enemy_mng);
 
   /**
-   * @brief modifiers for lives, score, and coins
-   */
-  void decrease_lives(int amount);  // < check if not negative
-  void increase_score(int amount);  // Update game xp as well
-  void increase_coins(int amount);  // < check if not negative
-
-  /**
-   * @brief Start the game by initializing a level by `init_level`
+   * @brief modifier for lives
    *
-   * @details assert that there was no level
+   * @details modifies the player's lives based on the given amount.
+   * If the resulted lives are less than zero, meaning that the player has lost, calls end_game(false).
+   *
+   * @param amount The amount to add/subtract from the player's lives.
+   * A +ve value represents the player has won more lives (survived a wave or got  some sort of bonus).
+   * A -ve value represents taht player has lost lives (an enemy reached the end of the path).
    */
+  void update_lives(int amount);
 
-  void start_game();
+  /**
+   * @brief modifier for score
+   *
+   * @details Modifies the player's socre, and updates the xp in the Game class as well.
+   *
+   * @param amount The +ve amount to be added the player's current score.
+   */
+  void increase_score(int amount);
+
+ /**
+  * @brief modifier for coins
+  *
+  * @details Modifying the player's coins in case of gaining/spending coins.
+  *
+  * @param amount The amount to be add/subtract from the player's coins.
+  * A +ve value represents winning more coins (by killing enemies).
+  * A -ve represents purchasing a new tower/upgrade.
+  *
+  * @return bool, if true then the player gains coins or his purchase is feasible. If false then the player doesn't have enough coins to purchase that tower/upgrade.
+  */
+ bool update_coins(int amount);
 
   /**
    * @brief End Game
    *
    * @details assert the existence of a level. With ending the game, add score
    * to player's xp in Game class, and save it by `save_xp` in Game.
+   *
+   * @return <state, score> if bool is true, the player has won, and his score is `score`. If false, he lost, and score is `score`
    */
-  void end_game();
+  std::pair<bool, int> end_game();
 
   /**
    * @brief Check if the game is paused
    */
   bool is_paused() const;
+
+  /**
+   * @brief Check if the game has ended
+   *
+   * @details Will be helpful in the game loop to validate that the game is not running anymore and has been LOST or WON.
+   */
+  bool has_ended() const;
+
+ /**
+   * @brief getter for the game state
+   */
+  GameState get_game_state() const;
 
   /**
    * @brief Run an iteration of the game loop
@@ -49,28 +90,33 @@ public:
   void run_iteration();
 
   /**
-   * Getters for manager
+   * @brief Getters for managers
    */
-  TowerManager& get_tower_mng() const;
-  EnemyManager& get_enemy_mng() const;
-  WaveManager& get_wave_mng() const;
-  AttackManager& get_attack_mng() const;
+  std::shared_ptr<TowerManager> get_tower_mng() const;
+  std::shared_ptr<EnemyManager> get_enemy_mng() const;
+  std::shared_ptr<WaveManager> get_wave_mng() const;
+  std::shared_ptr<AttackManager> get_attack_mng() const;
 
-private:
   /**
    * @brief Initialize a level by using
    * LevelReader::get_instance().build_level(level_num);
    */
-  void init_level(int level_num);
+ static Level& read_level(int level_num);
+
+ /**
+  * @brief Get the number of levels available
+  * LevelReader::get_instance().levels_count();
+  */
+ static int get_level_count();
 
 private:
   int lives;
   int score;
   int coins;
   std::shared_ptr<Map> map;
-  WaveManager wave_mng;
-  EnemyManager enemy_mng;
-  TowerManager tower_mng;
-  AttackManager attack_mng;
-  bool pause;  // < indicate if the game is paused by presentation layer
+  std::shared_ptr<WaveManager> wave_mng;
+  std::shared_ptr<EnemyManager> enemy_mng;
+  std::shared_ptr<TowerManager> tower_mng;
+  std::shared_ptr<AttackManager> attack_mng;
+  GameState state;
 };
