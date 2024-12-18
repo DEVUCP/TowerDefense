@@ -2,8 +2,7 @@
 
 #include <LevelReader.hpp>
 
-Level::Level(int lives,  int coins, std::shared_ptr<Map> map, std::shared_ptr<WaveManager> wave_mng, std::shared_ptr<AttackManager> attack_mng, std::shared_ptr<TowerManager> tower_mng, std::shared_ptr<EnemyManager> enemy_mng): lives{lives}, coins{coins}, map(map), wave_mng(wave_mng), attack_mng(attack_mng), enemy_mng(enemy_mng), tower_mng{tower_mng}, state(ON)
-{ }
+Level::Level(int lives,  int coins, std::shared_ptr<Map> map, std::shared_ptr<WaveManager> wave_mng, std::shared_ptr<AttackManager> attack_mng, std::shared_ptr<TowerManager> tower_mng, std::shared_ptr<EnemyManager> enemy_mng): lives(lives), coins(coins), map(map), wave_mng(wave_mng), attack_mng(attack_mng), tower_mng(tower_mng), enemy_mng(enemy_mng), state(ON) {}
 
 void Level::update_lives(int amount) {
   lives += amount;
@@ -84,7 +83,7 @@ std::shared_ptr<WaveManager> Level::get_wave_mng() const {
   return wave_mng;
 }
 
-Level& Level::read_level(int level_num) {
+std::shared_ptr<Level> Level::read_level(int level_num) {
   return LevelReader::get_instance().build_level(level_num);
 }
 

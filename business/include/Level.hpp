@@ -17,7 +17,7 @@ private:
  };
 
 public:
- Level(int lives,  int coins, std::shared_ptr<Map> map, std::shared_ptr<WaveManager> wave_mng, std::shared_ptr<AttackManager> attack_mng, std::shared_ptr<TowerManager> tower_mng, std::shared_ptr<EnemyManager> enemy_mng);
+ Level(int lives, int coins, std::shared_ptr<Map> map, std::shared_ptr<WaveManager> wave_mng, std::shared_ptr<AttackManager> attack_mng, std::shared_ptr<TowerManager> tower_mng, std::shared_ptr<EnemyManager> enemy_mng);
 
   /**
    * @brief modifier for lives
@@ -101,7 +101,7 @@ public:
    * @brief Initialize a level by using
    * LevelReader::get_instance().build_level(level_num);
    */
- static Level& read_level(int level_num);
+ static std::shared_ptr<Level> read_level(int level_num);
 
  /**
   * @brief Get the number of levels available
