@@ -3,10 +3,14 @@
 /*
  * An interface to all pages in the game
  */
+#include "Enums/Events/PageEvents.hpp"
 #include "Interfaces/EventData.hpp"
+#include "Interfaces/Observable.hpp"
 #include "Interfaces/Widget.hpp"
 
-class Page : public Widget {
+class PageManager;
+
+class Page : public Widget, public Observable<PageEvent> {
 public:
   /*
    * @brief Constructor

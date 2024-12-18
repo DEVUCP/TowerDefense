@@ -7,9 +7,9 @@
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-class MainMenu : public Page {
+class LevelsPage : public Page {
 public:
-  MainMenu(unsigned width, unsigned height);
+  LevelsPage(unsigned w, unsigned h);
 
   /*
    * Overrided functions
@@ -22,8 +22,7 @@ public:
 
 private:
   BackgroundManager background;
-  Title title;
-  std::shared_ptr<Button> play_btn;
-  std::shared_ptr<Button> about_btn;
-  std::shared_ptr<Button> mute_button;
+  unsigned level_count;
+  std::vector<std::shared_ptr<Button>> levels_btns;
+  std::shared_ptr<Button> go_back;
 };

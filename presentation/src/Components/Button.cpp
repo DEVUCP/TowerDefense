@@ -27,9 +27,19 @@ std::unordered_map<
             "./assets/textures/buttons/Square_Default_Hover.png"}}}}};
 
 Button::Button(unsigned x, unsigned y, ButtonSize size, ButtonType type)
-    : size(size), type(type) {
+    : size(size), type(type), handler([]() {}) {
   texture.loadFromFile(images[type][size].first);
   texture_hover.loadFromFile(images[type][size].second);
+  bg.setTexture(texture);
+  bg.setPosition(x - bg.getGlobalBounds().width / 2.f,
+                 y - bg.getGlobalBounds().height / 2.f);
+}
+
+Button::Button(unsigned x, unsigned y, sf::Texture _texture,
+               sf::Texture _texture_hover)
+    : size(ButtonSize::DEFAULT), type(ButtonType::RECT), handler([]() {}) {
+  texture = _texture;
+  texture_hover = _texture_hover;
   bg.setTexture(texture);
   bg.setPosition(x - bg.getGlobalBounds().width / 2.f,
                  y - bg.getGlobalBounds().height / 2.f);

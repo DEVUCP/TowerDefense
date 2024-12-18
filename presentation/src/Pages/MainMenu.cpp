@@ -5,19 +5,17 @@
 #include "Components/BackgroundManager.hpp"
 #include "Components/IconButton.hpp"
 #include "Components/TextButton.hpp"
+#include "Enums/Events/PageEvents.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
-#include "SFML/Window/Event.hpp"
-#include "Widgets/MainMenu/Title.hpp"
 
 MainMenu::MainMenu(unsigned width, unsigned height)
-    : Page(width, height), title(width, height) {
-  background.load_img("./assets/background/Default.png", target_width,
-                      target_height);
+    : Page(width, height),
+      title("Bug Slayer", width, height),
+      background(BackgroundManager::DEFAULT, width, height) {
   play_btn = std::make_shared<TextButton>("play", width / 2.f, height / 2.f,
                                           Button::ButtonSize::LARGE,
                                           Button::ButtonType::RECT);
-  play_btn->set_handler([]() { std::cout << "play" << std::endl; });
-  // TODO: Make a solution instead of hardcoding the value 200
+  play_btn->set_handler([this]() { notify_observers(LEVEL_PAGE_SWITCH); });
   about_btn = std::make_shared<TextButton>(
       "about", width / 2.f, height / 2.f + 200, Button::ButtonSize::LARGE,
       Button::ButtonType::RECT);
