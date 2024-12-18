@@ -5,6 +5,7 @@
 #include "Tower/BaseTower.hpp"
 class BuildableTile : public BaseTile {
 public:
+  BuildableTile() : BaseTile(Buildable) {};
   /*
    * @brief Set a tower
    */
