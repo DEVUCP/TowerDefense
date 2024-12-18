@@ -80,5 +80,4 @@ private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
   std::unordered_map<BaseEnemy::EnemyType, int> starting_waves;
   std::vector<std::shared_ptr<BaseEnemy>> enemies;
-  std::map<BaseEnemy::EnemyType, int> starting_wave;
 };

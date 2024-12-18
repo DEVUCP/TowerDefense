@@ -58,13 +58,13 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
 }
 
 int EnemyManager::get_starting_wave(BaseEnemy::EnemyType type) const {
-  auto it = starting_wave.find(type);
-  return (it != starting_wave.end()) ? it->second
-                                     : -1;  // Default to -1 if not found
+  auto it = starting_waves.find(type);
+  return (it != starting_waves.end()) ? it->second
+                                      : -1;  // Default to -1 if not found
 }
 
 void EnemyManager::set_starting_wave(BaseEnemy::EnemyType type, int wave) {
-  starting_wave[type] = wave;
+  starting_waves[type] = wave;
 }
 
 void EnemyManager::filter_enemies() {
