@@ -18,6 +18,7 @@ void App::init_page_manager() {
   assert(window);  // assert the initialization of window
   page_mng =
       std::make_shared<PageManager>(window->getSize().x, window->getSize().y);
+  page_mng->go_to_page(PageType::MAIN_MENU);
 }
 void App::run() {
   while (window->isOpen()) {

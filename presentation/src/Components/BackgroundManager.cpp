@@ -3,6 +3,11 @@
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
+BackgroundManager::BackgroundManager(BackgroundType type, unsigned target_width,
+                                     unsigned target_height) {
+  load_img(type == DEFAULT ? DEFAULT_IMAGE_ASSET : SHADOW_IMAGE_ASSET,
+           target_width, target_height);
+}
 void BackgroundManager::load_img(std::string img, unsigned target_width,
                                  unsigned target_height) {
   if (!image.loadFromFile(img)) {

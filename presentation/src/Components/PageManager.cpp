@@ -5,25 +5,31 @@
 #include "Enums/PageType.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
-#include "SFML/Window/Event.hpp"
 
 PageManager::PageManager(unsigned width, unsigned height)
-    : target_width(width), target_height(height) {
-  go_to_page(PageFactory::get_instance().create_page(PageType::MAIN_MENU, width,
-                                                     height));
+    : target_width(width), target_height(height) {}
+
+void PageManager::go_to_page(PageType type) {
+  if (pages.size()) {
+    pages.top()->on_pause();
+  }
+  auto page = PageFactory::get_instance().create_page(type, target_width,
+                                                      target_height);
+  auto self = shared_from_this();
+  page->register_observer(self);
+  pages.push(page);
 }
 
-void PageManager::go_to_page(std::shared_ptr<Page> page) { pages.push(page); }
-
-void PageManager::replace_page(std::shared_ptr<Page> page) {
+void PageManager::replace_page(PageType type) {
   assert(pages.size());
   go_back();
-  go_to_page(page);
+  go_to_page(type);
 }
 
 void PageManager::go_back() {
-  assert(pages.size() > 1);
+  assert(pages.size());
   pages.pop();
+  if (pages.size()) pages.top()->on_unpause();
 }
 
 void PageManager::render(std::shared_ptr<sf::RenderTarget> window) {
@@ -42,4 +48,18 @@ void PageManager::update() {
   assert(pages.size());
 
   pages.top()->update();
+}
+
+void PageManager::onEvent(PageEvent evt) {
+  switch (evt) {
+    case MENU_MENU_SWITCH:
+      go_to_page(PageType::MAIN_MENU);
+      break;
+    case LEVEL_PAGE_SWITCH:
+      go_to_page(PageType::LEVELS_PAGE);
+      break;
+    case GO_BACK_SWITCH:
+      go_back();
+      break;
+  }
 }

@@ -4,11 +4,25 @@
 #include "Interfaces/Widget.hpp"
 #include "SFML/Graphics.hpp"
 
+#define DEFAULT_IMAGE_ASSET "./assets/background/Default.png"
+#define SHADOW_IMAGE_ASSET "./assets/background/Shadow.png"
+
 class BackgroundManager : public Widget {
 public:
-  BackgroundManager() = default;
+  enum BackgroundType { DEFAULT, SHADOW };
+
+public:
+  BackgroundManager(BackgroundType, unsigned, unsigned);
   ~BackgroundManager() = default;
 
+  /*
+   * @brief private overrided functions
+   */
+  void handle_events(EventData) override;
+  void render(std::shared_ptr<sf::RenderTarget> window) override;
+  void update() override;
+
+private:
   /*
    * @brief Load the background
    *
@@ -18,13 +32,6 @@ public:
    */
   void load_img(std::string image, unsigned target_width,
                 unsigned target_height);
-
-  /*
-   * @brief private overrided functions
-   */
-  void handle_events(EventData) override;
-  void render(std::shared_ptr<sf::RenderTarget> window) override;
-  void update() override;
 
 private:
   sf::Sprite background;

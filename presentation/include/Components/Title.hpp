@@ -8,7 +8,7 @@ public:
   /*
    * @brief Constructor
    */
-  Title(unsigned target_width, unsigned target_height);
+  Title(std::string text, unsigned target_width, unsigned target_height);
 
   /*
    * @brief Overrided functions
@@ -16,6 +16,11 @@ public:
   void handle_events(EventData) override;
   void render(std::shared_ptr<sf::RenderTarget> window) override;
   void update() override;
+
+  /*
+   * @brief Set The text
+   */
+  void set_text(std::string text);
 
 private:
   sf::Text title_text;

@@ -12,6 +12,8 @@ class TextButton : public Button {
 public:
   TextButton(std::string text, unsigned x, unsigned y, Button::ButtonSize,
              Button::ButtonType);
+  TextButton(std::string text, unsigned x, unsigned y, sf::Texture texture,
+             sf::Texture texture_hover);
 
   ~TextButton() = default;
 

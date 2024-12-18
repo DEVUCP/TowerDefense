@@ -1,5 +1,6 @@
 #include "Components/PageFactory.hpp"
 #include <memory>
+#include "Pages/LevelsPage.hpp"
 #include "Pages/MainMenu.hpp"
 
 PageFactory::PageFactory() { init_creators(); }
@@ -11,4 +12,5 @@ PageFactory& PageFactory::get_instance() {
 
 void PageFactory::init_creators() {
   register_creator<MainMenu>(PageType::MAIN_MENU);
+  register_creator<LevelsPage>(PageType::LEVELS_PAGE);
 }

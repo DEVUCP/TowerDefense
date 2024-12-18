@@ -29,10 +29,10 @@ set(HEADERS
     include/Components/PageManager.hpp
     include/Components/PageFactory.hpp
     include/Components/Page.hpp
+    include/Components/Title.hpp
     # Pages
     include/Pages/MainMenu.hpp
-    # MainMenu Widgets
-    include/Widgets/MainMenu/Title.hpp)
+    include/Pages/LevelsPage.hpp)
 set(SOURCES
     src/App.cpp
     # Utilities
@@ -46,10 +46,10 @@ set(SOURCES
     src/Components/PageFactory.cpp
     src/Components/PageManager.cpp
     src/Components/Page.cpp
+    src/Components/Title.cpp
     # Pages
     src/Pages/MainMenu.cpp
-    # MainMenu Widgets
-    src/Widgets/MainMenu/Title.cpp)
+    src/Pages/LevelsPage.cpp)
 
 add_library(presentation ${HEADERS} ${SOURCES})
 
