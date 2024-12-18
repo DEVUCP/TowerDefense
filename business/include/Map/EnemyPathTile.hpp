@@ -5,7 +5,7 @@
 #include "Map/BaseTile.hpp"
 class EnemyPathTile : public BaseTile {
 public:
-  EnemyPathTile(const std::string& sprite_path);
+  EnemyPathTile() : BaseTile(EnemyPath) {};
   /*
    * @brief Register an enemy to be in current tile
    */

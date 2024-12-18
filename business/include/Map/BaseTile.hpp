@@ -35,7 +35,7 @@ public:
   /**
    * @brief Constructor
    */
-  BaseTile(const std::string& sprite_path, TileType type);
+  BaseTile(TileType type);
 
   /**
    * @brief Register attack to be in current tile
