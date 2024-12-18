@@ -9,9 +9,7 @@
 #include "SFML/Graphics/RenderTarget.hpp"
 
 MainMenu::MainMenu(unsigned width, unsigned height)
-    : Page(width, height),
-      title("Bug Slayer", width, height),
-      background(BackgroundManager::DEFAULT, width, height) {
+    : Page(width, height), title("Bug Slayer", width, height) {
   play_btn = std::make_shared<TextButton>("play", width / 2.f, height / 2.f,
                                           Button::ButtonSize::LARGE,
                                           Button::ButtonType::RECT);
@@ -37,7 +35,6 @@ void MainMenu::handle_events(EventData evt) {
 void MainMenu::update() {}
 
 void MainMenu::render(std::shared_ptr<sf::RenderTarget> window) {
-  background.render(window);
   title.render(window);
   play_btn->render(window);
   about_btn->render(window);

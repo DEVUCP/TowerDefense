@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <stack>
+#include "Components/BackgroundManager.hpp"
 #include "Components/Page.hpp"
 #include "Enums/Events/PageEvents.hpp"
 #include "Enums/PageType.hpp"
@@ -54,4 +55,5 @@ private:
       pages;  //< A stack with all pages to support going back
   unsigned target_width;
   unsigned target_height;
+  std::shared_ptr<BackgroundManager> back_mng;
 };

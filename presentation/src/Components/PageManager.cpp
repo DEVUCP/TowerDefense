@@ -1,13 +1,19 @@
 #include "Components/PageManager.hpp"
 #include <cassert>
+#include <iostream>
 #include <memory>
+#include "Components/BackgroundManager.hpp"
 #include "Components/PageFactory.hpp"
+#include "Enums/Events/PageEvents.hpp"
 #include "Enums/PageType.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
 PageManager::PageManager(unsigned width, unsigned height)
-    : target_width(width), target_height(height) {}
+    : target_width(width),
+      target_height(height),
+      back_mng(std::make_shared<BackgroundManager>(BackgroundManager::DEFAULT,
+                                                   width, height)) {}
 
 void PageManager::go_to_page(PageType type) {
   if (pages.size()) {
@@ -16,7 +22,7 @@ void PageManager::go_to_page(PageType type) {
   auto page = PageFactory::get_instance().create_page(type, target_width,
                                                       target_height);
   auto self = shared_from_this();
-  page->register_observer(self);
+  page->register_observer<PageEvent>(self);
   pages.push(page);
 }
 
@@ -33,8 +39,8 @@ void PageManager::go_back() {
 }
 
 void PageManager::render(std::shared_ptr<sf::RenderTarget> window) {
+  back_mng->render(window);
   assert(pages.size());
-
   pages.top()->render(window);
 }
 
