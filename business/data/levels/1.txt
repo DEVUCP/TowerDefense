@@ -1,19 +1,22 @@
-10 50 25 5
-15 3
-10 5
-8 7
-N N N E E E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E B N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E B N N N N N N N N N N N N N N N N N
-N N N N B E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E N N N N N N N N N N N N N N N N N N
-N N N N N E E E E E E E E E E E N N N N N N N N
+9 487 11 14
+2 1
+10 1
+6 7
+N N N N N N N E N N E N N N N N N N N N N N N N N N N N
+E N N N E N N N N N N E N N N N N N E N N N N N N N N N
+N N N N N N N N N N E N N N N N N N N E N N N E N N N N
+N N N E E N N N N N N N E N N N N N N E N N N N N E N N
+N E E N N N E N N E N N N N N N N N N N N N E E N N E N
+N N N N N N E N N E N N N N E N N N N N E N N N N N N N
+N N N N N N N E N N N N N N N E N N N N N N N N N E N N
+N N N N N N N N N N N N N N N N N N N N N N N N N N N E
+N E N E N N N E N N N N N E N N N N N E N N N E N N N N
+E N N N N N N E N N N N N E N N N N N N E N N N E E E N
+N E N N N N N N E N N N N E N N N N N E N N E N N N N N
+N N N N E N E N N N E N N N N N N N N N N N N N E N N N
+E N N N N N E E N N N N N N N N E N N N N N N N N N N N
+N N E E N N N E N N N N N N N N N N N N N N N N N N N E
+E N N E N N N N N N N E N N N N N E N E N N N N N E N N
+N N N N N N E N N N N E N E N N N N N N N N N N N N N N
+E N B N N N N B B B B B B B N N N N E N N N N N B B B B
+B B N B B B B N N N N N N N B B B B B B B B B B E N N N

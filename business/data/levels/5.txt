@@ -1,0 +1,22 @@
+6 297 6 39
+9 4
+9 2
+3 1
+N N N N N N N N N N E N N N N N N E N N N N N N N N N E
+N N E N N N N N E N N N N N N N N N E N N E N E N E N N
+N N N E E E N N E N N E N N N N N N N E N N N N N N N N
+E N N E N N N N N N N N E N N N N N N N E N N N N N N N
+N E N N N N N N E N E N N N N N N N N E N N E N N N E N
+N E N E N N N N E N N N N E N N N N N N N N N E N N N N
+E N N N E N E N N E N N N N N N E N N N N N N N N E N N
+E N N N E N N N E N N N N E N N N E N E N N N N E N N N
+N N N N N N E N N E E N N N N N N N N N E N E E N E N N
+N N N N N E N E E N E N N N N E N N N N N E N N N N N E
+E N N N N E N N N N N E N E E N E N N N N N N N E N N N
+N N N N N N N E N N N E E N N N N N E N N N N N N N N E
+N N B N B N B N E E N N N N E N N N N N N E N N N E N N
+B B N B N B N B B N E N N N E N E E N N N E N E E N N N
+N N N E N N N N N B B N N E N E N N N N N N N N E E N N
+E N E E N N N E E E N B N N N N E N N N E N N N E N B N
+N N N N N N N N N N E N B N N B B B N N N N B B N B N B
+N E N N N N N N N E E N N B B N N E B B B B E N B N N N
