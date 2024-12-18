@@ -1,4 +1,4 @@
-#include "../../include/Enemy/EnemyManager.hpp"
+#include "Enemy/EnemyManager.hpp"
 #include <iostream>
 #include <list>
 #include <memory>
