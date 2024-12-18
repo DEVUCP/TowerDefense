@@ -1,4 +1,3 @@
-/*
 #include "LevelReader.hpp"
 
 #include <Attack/AttackManager.hpp>
@@ -17,10 +16,10 @@ Line 4: Beetle_Tickets Beetle_StartingWave
 Line 5-22: "28 space-separated chatacters representing each tile type
 B=Buildable, N=NonBuildable, E=Enemy" e.g. "N B N E E N N N N B ......"
 #1#
+*/
 // TODO: Make enemy initialization dynamic
 
-Level& LevelReader::build_level(int level) {
-
+Level& LevelReader::build_level(int level_num) {
   int lives;
   int coins;
   int max_wave;
@@ -31,28 +30,33 @@ Level& LevelReader::build_level(int level) {
   int cockroach_tickets, cockroach_starting_wave;
   int beetle_tickets, beetle_starting_wave;
 
-
-  // TODO: Read the data from the respective level file e.g. Level 1 -> "1.txt", Level 2 -> "2.txt"
-  // First, read all the values initialized above
+  // TODO: Read the data from the respective level file e.g. Level 1 -> "1.txt",
+  // Level 2 -> "2.txt" First, read all the values initialized above
 
   // Then, read the Map data
   std::shared_ptr<Map> map;
 
-  // Create WaveManager with the initial enemy count and the total number of waves
-  auto wave_manager = std::make_shared<WaveManager>(initial_enemy_count, max_wave);
+  // Create WaveManager with the initial enemy count and the total number of
+  // waves
+  auto wave_manager =
+      std::make_shared<WaveManager>(initial_enemy_count, max_wave);
 
-  // Create Enemy Manager and populate it with the initial info for each type of enemy
+  // Create Enemy Manager and populate it with the initial info for each type of
+  // enemy
   auto enemy_manager = std::make_shared<EnemyManager>();
 
-  enemy_manager->set_staritng_wave(BaseEnemy::EnemyType::ANT, ant_starting_wave);
+  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::ANT,
+                                   ant_starting_wave);
   enemy_manager->assign_tickets(BaseEnemy::EnemyType::ANT, ant_tickets);
 
-  enemy_manager->set_staritng_wave(BaseEnemy::EnemyType::COCKROACH, cockroach_starting_wave);
-  enemy_manager->assign_tickets(BaseEnemy::EnemyType::COCKROACH, cockroach_tickets);
+  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::COCKROACH,
+                                   cockroach_starting_wave);
+  enemy_manager->assign_tickets(BaseEnemy::EnemyType::COCKROACH,
+                                cockroach_tickets);
 
-  enemy_manager->set_staritng_wave(BaseEnemy::EnemyType::BETTLE, beetle_starting_wave);
+  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::BETTLE,
+                                   beetle_starting_wave);
   enemy_manager->assign_tickets(BaseEnemy::EnemyType::BETTLE, beetle_tickets);
-
 
   // Create AttackManager
   auto attack_manager = std::make_shared<AttackManager>();
@@ -61,7 +65,8 @@ Level& LevelReader::build_level(int level) {
   auto tower_manager = std::make_shared<TowerManager>();
 
   // Create a Level with the data read
-  Level level(lives, coins, map, wave_manager, attack_manager, tower_manager, enemy_manager);
+  Level level(lives, coins, map, wave_manager, attack_manager, tower_manager,
+              enemy_manager);
 
   return level;
 }
@@ -73,6 +78,3 @@ int LevelReader::levels_count() {
 
   return count;
 }
-*/
-
-
