@@ -35,7 +35,10 @@ void PageManager::replace_page(PageType type) {
 void PageManager::go_back() {
   assert(pages.size());
   pages.pop();
-  if (pages.size()) pages.top()->on_unpause();
+  std::cout << "post destruction" << std::endl;
+  if (pages.size()) {
+    pages.top()->on_unpause();
+  };
 }
 
 void PageManager::render(std::shared_ptr<sf::RenderTarget> window) {

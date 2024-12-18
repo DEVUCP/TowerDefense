@@ -23,9 +23,11 @@ set(HEADERS
     include/Interfaces/Widget.hpp
     # Components
     include/Components/BackgroundManager.hpp
-    include/Components/Button.hpp
+    include/Components/IButton.hpp
+    include/Components/StandardButton.hpp
     include/Components/TextButton.hpp
     include/Components/IconButton.hpp
+    include/Components/LevelButton.hpp
     include/Components/PageManager.hpp
     include/Components/PageFactory.hpp
     include/Components/Page.hpp
@@ -40,9 +42,11 @@ set(SOURCES
     src/Utils/FontFactory.cpp
     # Components
     src/Components/BackgroundManager.cpp
-    src/Components/Button.cpp
+    src/Components/IButton.cpp
+    src/Components/StandardButton.cpp
     src/Components/TextButton.cpp
     src/Components/IconButton.cpp
+    src/Components/LevelButton.cpp
     src/Components/PageFactory.cpp
     src/Components/PageManager.cpp
     src/Components/Page.cpp
