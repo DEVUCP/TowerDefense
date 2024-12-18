@@ -8,18 +8,7 @@
 #include "SFML/Graphics/Texture.hpp"
 #include "SFML/System/Vector2.hpp"
 
-class Button : public Widget {
-public:
-  enum class ButtonSize {
-    LARGE,
-    DEFAULT,
-  };
-
-  enum class ButtonType {
-    RECT,
-    SQUARE,
-  };
-
+class IButton : public Widget {
 public:
   /*
    * @brief Constructor
@@ -29,14 +18,7 @@ public:
    * @param size The size of the button
    * @param type The type of the button
    */
-  Button(unsigned x, unsigned y, ButtonSize size = ButtonSize::DEFAULT,
-         ButtonType type = ButtonType::RECT);
-
-  /*
-   * @brief Constructor for custom button
-   */
-  Button(unsigned x, unsigned y, sf::Texture texture,
-         sf::Texture texture_hover);
+  IButton(unsigned x, unsigned y);
 
   /*
    * @brief handle click event on this button
@@ -55,6 +37,9 @@ public:
   virtual void render(std::shared_ptr<sf::RenderTarget> window) override;
   virtual void update() override;
 
+protected:
+  void init_image(std::string texture_path, std::string texture_path_hover);
+
 private:
   /*
    * @brief Check if the button is hovered
@@ -65,13 +50,8 @@ protected:
   sf::Texture texture;
   sf::Texture texture_hover;
   sf::Sprite bg;
-  ButtonType type;
-  ButtonSize size;
 
 private:
   std::function<void(void)> handler;
-  static std::unordered_map<
-      ButtonType,
-      std::unordered_map<ButtonSize, std::pair<std::string, std::string>>>
-      images;
+  unsigned x, y;
 };

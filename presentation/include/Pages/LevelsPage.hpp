@@ -1,7 +1,10 @@
 #pragma once
+#include <iostream>
+#include <list>
 #include <memory>
 #include "Components/BackgroundManager.hpp"
-#include "Components/Button.hpp"
+#include "Components/IButton.hpp"
+#include "Components/LevelButton.hpp"
 #include "Components/Page.hpp"
 #include "Components/Title.hpp"
 #include "Interfaces/EventData.hpp"
@@ -10,6 +13,7 @@
 class LevelsPage : public Page {
 public:
   LevelsPage(unsigned w, unsigned h);
+  ~LevelsPage() { std::cout << "hello" << std::endl; }
 
   /*
    * Overrided functions
@@ -22,6 +26,6 @@ public:
 
 private:
   unsigned level_count;
-  std::vector<std::shared_ptr<Button>> levels_btns;
-  std::shared_ptr<Button> go_back;
+  std::vector<std::unique_ptr<LevelButton>> levels_btns;
+  std::shared_ptr<IButton> go_back;
 };

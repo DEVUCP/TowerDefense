@@ -11,16 +11,17 @@
 MainMenu::MainMenu(unsigned width, unsigned height)
     : Page(width, height), title("Bug Slayer", width, height) {
   play_btn = std::make_shared<TextButton>("play", width / 2.f, height / 2.f,
-                                          Button::ButtonSize::LARGE,
-                                          Button::ButtonType::RECT);
+                                          StandardButton::ButtonSize::LARGE,
+                                          StandardButton::ButtonType::RECT);
   play_btn->set_handler([this]() { notify_observers(LEVEL_PAGE_SWITCH); });
   about_btn = std::make_shared<TextButton>(
-      "about", width / 2.f, height / 2.f + 200, Button::ButtonSize::LARGE,
-      Button::ButtonType::RECT);
+      "about", width / 2.f, height / 2.f + 200,
+      StandardButton::ButtonSize::LARGE, StandardButton::ButtonType::RECT);
   about_btn->set_handler([]() { std::cout << "about" << std::endl; });
   mute_button = std::make_shared<IconButton>(
       "./assets/buttons/SoundOn.png", "./assets/buttons/SoundOn_Hover.png", 60,
-      height - 60, Button::ButtonSize::DEFAULT, Button::ButtonType::SQUARE);
+      height - 60, StandardButton::ButtonSize::DEFAULT,
+      StandardButton::ButtonType::SQUARE);
 }
 
 void MainMenu::on_pause() {}
