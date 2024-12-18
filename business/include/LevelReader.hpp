@@ -16,12 +16,19 @@ public:
    *
    * @param level_num The level number
    */
-  Level& build_level(int);
+  std::shared_ptr<Level> build_level(int);
 
   /**
    * @breif Get the number of level files in data directory.
    */
   int levels_count();
+
+  /**
+   * @breif Generate the file path for the given level number.
+   *
+   * @param level_num The level number. If level_num is -1, returns the path of the levels directory.
+   */
+  std::string get_level_path(int);
 
   /**
    * @brief Get the singleton instance of LevelReader
@@ -30,6 +37,8 @@ public:
     static LevelReader instance;
     return instance;
   }
+
+  static const inline std::string levels_path = "/data/levels/";
 
 private:
   LevelReader() = default;
