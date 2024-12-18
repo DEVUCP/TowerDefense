@@ -15,7 +15,6 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
       enemy_mng(enemy_mng),
       tower_mng{tower_mng},
       state(ON) {}
-
 void Level::update_lives(int amount) {
   lives += amount;
 
