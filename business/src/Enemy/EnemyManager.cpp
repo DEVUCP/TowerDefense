@@ -1,8 +1,8 @@
 #include "Enemy/EnemyManager.hpp"
-#include <iostream>
 #include <list>
 #include <memory>
 #include <random>
+#include <stdexcept>
 
 void EnemyManager::assign_tickets(BaseEnemy::EnemyType type, int count) {
   // Remove existing ticket entry for the type, if any

@@ -7,10 +7,21 @@
 
 class EnemyManager {
 public:
+  EnemyManager();
   /**
    * @brief Assign a number of tickets to an enemy type
    */
   void assign_tickets(BaseEnemy::EnemyType, int);
+
+  /**
+   *@brief assign a starting wave to each enemy
+   */
+  void set_staritng_wave(BaseEnemy::EnemyType, int);
+
+  /**
+   *@brief Get the starting wave
+   */
+  int get_starting_wave(BaseEnemy::EnemyType);
 
   /*
    * @breif Given the tickets, generate a random enemy with the given
