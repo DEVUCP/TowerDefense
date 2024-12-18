@@ -4,7 +4,8 @@
 #include <memory>
 #include <vector>
 #include "Map/BaseTile.hpp"
-#include "Map/EnemyPathTile.hpp"
+
+class EnemyPathTile;
 
 /**
  * @class Map
