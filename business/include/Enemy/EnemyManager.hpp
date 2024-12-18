@@ -1,10 +1,13 @@
 #pragma once
 #include <map>
+#include <unordered_map>
 #include <utility>
 #include "BaseEnemy.hpp"
 #include "Enemy/BaseEnemy.hpp"
+
 class EnemyManager {
 public:
+  EnemyManager();
   /**
    * @brief Assign a number of tickets to an enemy type
    */
@@ -19,7 +22,7 @@ public:
    * based on each enemy having a number of tickets. The more tickets it has,
    * the more probabily it will be called
    *
-   * Say we have the tickets and we are in 7th waev
+   * Say we have the tickets and we are in 7th wave
    * ANT: 300 [1 - 300] - open from 1st wave
    * COCKROACH: 200 [301 - 500] - open from 3rd wave
    * BETTLE: 100 [501 - 600] - open from 5th wave
@@ -65,6 +68,6 @@ public:
 
 private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
+  std::unordered_map<BaseEnemy::EnemyType, int> starting_waves;
   std::vector<std::shared_ptr<BaseEnemy>> enemies;
-  std::map<BaseEnemy::EnemyType, int> starting_wave;
 };
