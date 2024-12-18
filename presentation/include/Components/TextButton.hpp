@@ -1,19 +1,18 @@
 #pragma once
 
 #include <memory>
-#include "Components/Button.hpp"
+#include "Components/StandardButton.hpp"
+#include "SFML/Graphics/Color.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
 #define DEFAULT_FONT_SIZE 40
 #define LARGE_FONT_SIZE 70
 #define BUTTON_TEXT_COLOR 164, 146, 95
 
-class TextButton : public Button {
+class TextButton : public StandardButton {
 public:
-  TextButton(std::string text, unsigned x, unsigned y, Button::ButtonSize,
-             Button::ButtonType);
-  TextButton(std::string text, unsigned x, unsigned y, sf::Texture texture,
-             sf::Texture texture_hover);
+  TextButton(std::string text, unsigned x, unsigned y,
+             StandardButton::ButtonSize, StandardButton::ButtonType);
 
   ~TextButton() = default;
 
@@ -26,6 +25,11 @@ public:
    * @brief Change button text
    */
   void set_text(std::string txt);
+
+  /*
+   * @brief Change button color
+   */
+  void set_color(sf::Color clr);
 
 private:
   sf::Text text;

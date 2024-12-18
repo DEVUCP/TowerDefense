@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include "Components/BackgroundManager.hpp"
-#include "Components/Button.hpp"
+#include "Components/IButton.hpp"
 #include "Components/Page.hpp"
 #include "Components/Title.hpp"
 #include "Interfaces/EventData.hpp"
@@ -22,7 +22,7 @@ public:
 
 private:
   Title title;
-  std::shared_ptr<Button> play_btn;
-  std::shared_ptr<Button> about_btn;
-  std::shared_ptr<Button> mute_button;
+  std::shared_ptr<IButton> play_btn;
+  std::shared_ptr<IButton> about_btn;
+  std::shared_ptr<IButton> mute_button;
 };

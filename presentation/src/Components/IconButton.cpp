@@ -1,12 +1,11 @@
 #include "Components/IconButton.hpp"
 #include <iostream>
-#include "Components/Button.hpp"
 #include "SFML/Graphics/Texture.hpp"
 
 IconButton::IconButton(std::string path, std::string path_hover, unsigned x,
-                       unsigned y, Button::ButtonSize size,
-                       Button::ButtonType type)
-    : Button(x, y, size, type) {
+                       unsigned y, StandardButton::ButtonSize size,
+                       StandardButton::ButtonType type)
+    : StandardButton(x, y, size, type) {
   set_icon_texture(path, path_hover);
 }
 
