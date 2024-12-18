@@ -29,6 +29,7 @@ public:
    * @return Return the tile if it's in the game or nullptr instead
    */
   std::shared_ptr<BaseTile> map_coords_to_tile(float x, float y) const;
+  std::shared_ptr<BaseTile> tile_coords_to_tile(int i, int j) const;
 
 private:
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
