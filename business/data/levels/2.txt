@@ -1,0 +1,22 @@
+4 333 5 41
+3 5
+3 2
+3 4
+N N N E N E N N N N E E N N N N E B N N N B N N N N N N
+N N N N E E N N E N E N E N E B B N B E B E B B N N N N
+N N N N N N N E N N N E B N B N N N N B N N N E B B N N
+E E N N N N N N N N N B N B N N N N N N N N N E N N B B
+B N N E N N N N N N B E N N N N N N N N N N E N N N N N
+N B N B N N N N B B N N N N N N N E N N N N N N N N N N
+N N B N B B E B E N N N E N N N N N N N E N E N N N N E
+N N N N N E B N N N N N N N N N E N N N E N N N N N N N
+N N N N N E N N E N N N N N N E N N N N E N N N N N N N
+N N E E N N N N N N N N N N N N N E N N N N E N N N N N
+N N N N N E N N E E N N N N N N N N N E N N E N N N N N
+N N N N E N N N N N N N N E N E N E N N E N E E N N N N
+N N E E N E N N N N E N N N N N N N N N N E N N N N N N
+N N N N N N E N N N N N N E N N E N N N N N N N N N N N
+N N N N N N E N N N N E E N E N N N E N N N E N E N N N
+N N E N N N N N N N N N N N N N N N N N N N E E E E E N
+E N N N N N E N N N N N E N N N E N N N N N N N N E N E
+N N E N E N N N N E N E N N N N E N N N E N N N N E N E
