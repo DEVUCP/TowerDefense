@@ -86,14 +86,14 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
                                    ant_starting_wave);
   enemy_manager->assign_tickets(BaseEnemy::EnemyType::ANT, ant_tickets);
 
-  enemy_manager->set_staritng_wave(BaseEnemy::EnemyType::COCKROACH,
+  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::COCKROACH,
                                    cockroach_starting_wave);
   enemy_manager->assign_tickets(BaseEnemy::EnemyType::COCKROACH,
                                 cockroach_tickets);
 
   enemy_manager->set_starting_wave(BaseEnemy::EnemyType::BETTLE,
                                    beetle_starting_wave);
-  enemy_manager->set_staritng_wave(BaseEnemy::EnemyType::BETTLE,
+  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::BETTLE,
                                    beetle_starting_wave);
   enemy_manager->assign_tickets(BaseEnemy::EnemyType::BETTLE, beetle_tickets);
 
