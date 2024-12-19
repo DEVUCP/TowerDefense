@@ -11,15 +11,15 @@ public:
    * @brief the Basic Operations on the vector: addition, subtracion,
    * reverse_direction, and scalar product
    */
-  Vector operator+(Vector other) { return {x + x, y + y}; }
-  Vector operator-(Vector other) { return {x - x, y - y}; }
-  Vector operator-() { return {-x, -y}; }
-  T operator*(Vector other) { return x * other.x + other.y; }
+  Vector operator+(Vector other) const { return {x + x, y + y}; }
+  Vector operator-(Vector other) const { return {x - x, y - y}; }
+  Vector operator-() const { return {-x, -y}; }
+  T operator*(Vector other) const { return x * other.x + other.y; }
 
   /*
    * @brief Check Equality by comparing x's and y's
    */
-  bool operator==(Vector other) { return x == other.x && y == other.y; }
+  bool operator==(Vector other) const { return x == other.x && y == other.y; }
 
   /*
    * @brief Normalize a vector
