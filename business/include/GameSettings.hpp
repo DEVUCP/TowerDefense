@@ -20,7 +20,7 @@ public:
   /*
    * @brief Return the size of a tile
    */
-  Vector<int> get_tile_size();
+  int get_tile_size();
 
   /*
    * @brief Return the number of rows and columns in the game
