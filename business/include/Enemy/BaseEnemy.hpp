@@ -29,34 +29,25 @@ public:
   /**
    * @brief Getter for health
    */
-  const float get_health() const{
-    return health;
-  }
+  const float get_health() const;
 
   /**
    * @brief Getter for initial health
    */
-  const float get_initial_health() const{
-    return initial_health;
-  }
+  const float get_initial_health() const;
 
   /**
    * @brief Getter for `to_be_removed`
    */
-  const bool is_to_be_removed() const{
-    return to_be_removed;
-  }
+  const bool is_to_be_removed() const;
 
   /**
    * @brief Invoke damage to enemy
    *
    * @detail If health reaches zero, call `on_killed`
    */
-  void invoke_damage(float amount){
-      health-= amount;
-    if(health <= 0)
-      on_killed();
-  }
+  void invoke_damage(float);
+
 protected:
   /**
    * @brief A callback to run when the object reaches its destination
@@ -80,7 +71,7 @@ protected:
    */
   virtual void on_killed() = 0;
 
-private:
+protected:
   float health;
   float damage;
   float initial_health;
