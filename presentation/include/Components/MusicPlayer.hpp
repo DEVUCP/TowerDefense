@@ -23,6 +23,11 @@ public:
    */
   void play(MusicType);
 
+  /*
+   * @brief toggle the state of the music
+   */
+  void toggle();
+
 private:
   MusicPlayer();
 

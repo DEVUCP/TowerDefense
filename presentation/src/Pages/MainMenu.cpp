@@ -4,6 +4,7 @@
 #include <ostream>
 #include "Components/BackgroundManager.hpp"
 #include "Components/IconButton.hpp"
+#include "Components/MusicPlayer.hpp"
 #include "Components/TextButton.hpp"
 #include "Enums/Events/PageEvents.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
@@ -22,6 +23,7 @@ MainMenu::MainMenu(unsigned width, unsigned height)
       "./assets/buttons/SoundOn.png", "./assets/buttons/SoundOn_Hover.png", 60,
       height - 60, StandardButton::ButtonSize::DEFAULT,
       StandardButton::ButtonType::SQUARE);
+  mute_button->set_handler([]() { MusicPlayer::get_instance().toggle(); });
 }
 
 void MainMenu::on_pause() {}

@@ -21,3 +21,11 @@ void MusicPlayer::play(MusicPlayer::MusicType type) {
   music.play();
   music.setLoop(true);
 }
+
+void MusicPlayer::toggle() {
+  if (music.getStatus() == sf::Music::Playing) {
+    music.stop();
+  } else {
+    music.play();
+  }
+}
