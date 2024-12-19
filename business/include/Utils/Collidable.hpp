@@ -15,6 +15,11 @@ class Collidable {
   bool collide_with(const Collidable&);
 
   /**
+   * @brief Checks if single point is within collision shape
+   */
+  bool point_colliding(Vector<float> point);
+
+  /**
    * @brief Sets enable to true
    */
   void enable_collision();
