@@ -36,9 +36,12 @@ set(HEADERS
     include/Components/Title.hpp
     # Widget
     include/Widgets/MuteButton.hpp
+    # Views
+    include/Views/TileView.hpp
     # Pages
     include/Pages/MainMenu.hpp
-    include/Pages/LevelsPage.hpp)
+    include/Pages/LevelsPage.hpp
+    include/Pages/GamePage.hpp)
 set(SOURCES
     src/App.cpp
     # Utilities
@@ -57,11 +60,14 @@ set(SOURCES
     src/Components/PageManager.cpp
     src/Components/Page.cpp
     src/Components/Title.cpp
+    # Views
+    src/Views/TileView.cpp
     # Widget
     src/Widgets/MuteButton.cpp
     # Pages
     src/Pages/MainMenu.cpp
-    src/Pages/LevelsPage.cpp)
+    src/Pages/LevelsPage.cpp
+    src/Pages/GamePage.cpp)
 
 add_library(presentation ${HEADERS} ${SOURCES})
 
