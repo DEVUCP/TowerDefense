@@ -9,10 +9,11 @@
 #include "Enums/Events/PageEvents.hpp"
 
 LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
+  // Initia
   level_count = 8;  // hardcoded for now
 
   const int ROW_COUNT = 5;                 // 5 levels per row
-  const int startx = 430, starty = 400;    // Starting position
+  const int startx = 440, starty = 400;    // Starting position
   const int offsetx = 250, offsety = 200;  // Spacing between buttons
   // Load the buttons
   for (int i = 0; i < level_count; i++) {
@@ -30,6 +31,12 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
       60, StandardButton::ButtonSize::DEFAULT,
       StandardButton::ButtonType::SQUARE);
   go_back->set_handler([this]() { notify_observers(GO_BACK_SWITCH); });
+
+  // Initialize the mute button
+  mute_button = std::make_shared<IconButton>(
+      "./assets/buttons/SoundOn.png", "./assets/buttons/SoundOn_Hover.png", 60,
+      h - 60, StandardButton::ButtonSize::DEFAULT,
+      StandardButton::ButtonType::SQUARE);
 }
 
 void LevelsPage::on_pause() {}
@@ -38,11 +45,13 @@ void LevelsPage::on_unpause() {}
 void LevelsPage::handle_events(EventData evt) {
   for (auto& btn : levels_btns) btn->handle_events(evt);
   go_back->handle_events(evt);
+  mute_button->handle_events(evt);
 }
 
 void LevelsPage::update() {}
 
 void LevelsPage::render(std::shared_ptr<sf::RenderTarget> window) {
-  go_back->render(window);
   for (auto& btn : levels_btns) btn->render(window);
+  go_back->render(window);
+  mute_button->render(window);
 }

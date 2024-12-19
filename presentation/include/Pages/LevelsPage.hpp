@@ -28,4 +28,5 @@ private:
   unsigned level_count;
   std::vector<std::unique_ptr<LevelButton>> levels_btns;
   std::shared_ptr<IButton> go_back;
+  std::shared_ptr<IButton> mute_button;
 };
