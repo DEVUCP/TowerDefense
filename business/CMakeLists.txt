@@ -5,10 +5,9 @@ project(
   VERSION 1.0
   LANGUAGES CXX)
 
-set(HEADERS # Public interfaces
-    public/Game.hpp
-    public/GameSettings.hpp
-    # Sources
+set(HEADERS
+    include/Game.hpp
+    include/GameSettings.hpp
     include/Level.hpp
     include/LevelReader.hpp
     include/WaveManager.hpp
@@ -49,4 +48,3 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data
 
 # Include directories
 target_include_directories(business PUBLIC ${PROJECT_SOURCE_DIR}/include)
-target_include_directories(business PUBLIC ${PROJECT_SOURCE_DIR}/public)
