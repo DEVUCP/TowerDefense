@@ -15,6 +15,7 @@ set(HEADERS
     include/Utils/Drawable.hpp
     include/Utils/Moveable.hpp
     include/Utils/Vector.hpp
+    include/Utils/Collidable.hpp
     # Tower
     include/Tower/BaseTower.hpp
     include/Tower/TowerManager.hpp
@@ -37,7 +38,12 @@ set(SOURCES # Sources
     src/GameSettings.cpp
     src/Level.cpp
     src/LevelReader.cpp
+    # Utils
+    src/Utils/Moveable.cpp
+    src/Utils/Drawable.cpp
+    src/Utils/Collidable.cpp
     # Enemy
+    src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyManager.cpp
     # Map
     src/Map/Map.cpp)
