@@ -9,49 +9,58 @@
 
 class Level {
 private:
- enum GameState {
-  PAUSED,
-  ON,
-  WON,
-  LOST,
- };
+  enum GameState {
+    PAUSED,
+    ON,
+    WON,
+    LOST,
+  };
 
 public:
- Level(int lives,  int coins, std::shared_ptr<Map> map, std::shared_ptr<WaveManager> wave_mng, std::shared_ptr<AttackManager> attack_mng, std::shared_ptr<TowerManager> tower_mng, std::shared_ptr<EnemyManager> enemy_mng);
+  Level(int lives, int coins, std::shared_ptr<Map> map,
+        std::shared_ptr<WaveManager> wave_mng,
+        std::shared_ptr<AttackManager> attack_mng,
+        std::shared_ptr<TowerManager> tower_mng,
+        std::shared_ptr<EnemyManager> enemy_mng);
 
   /**
    * @brief modifier for lives
    *
    * @details modifies the player's lives based on the given amount.
-   * If the resulted lives are less than zero, meaning that the player has lost, calls end_game(false).
+   * If the resulted lives are less than zero, meaning that the player has lost,
+   * calls end_game(false).
    *
    * @param amount The amount to add/subtract from the player's lives.
-   * A +ve value represents the player has won more lives (survived a wave or got  some sort of bonus).
-   * A -ve value represents taht player has lost lives (an enemy reached the end of the path).
+   * A +ve value represents the player has won more lives (survived a wave or
+   * got  some sort of bonus). A -ve value represents taht player has lost lives
+   * (an enemy reached the end of the path).
    */
   void update_lives(int amount);
 
   /**
    * @brief modifier for score
    *
-   * @details Modifies the player's socre, and updates the xp in the Game class as well.
+   * @details Modifies the player's socre, and updates the xp in the Game class
+   * as well.
    *
    * @param amount The +ve amount to be added the player's current score.
    */
   void increase_score(int amount);
 
- /**
-  * @brief modifier for coins
-  *
-  * @details Modifying the player's coins in case of gaining/spending coins.
-  *
-  * @param amount The amount to be add/subtract from the player's coins.
-  * A +ve value represents winning more coins (by killing enemies).
-  * A -ve represents purchasing a new tower/upgrade.
-  *
-  * @return bool, if true then the player gains coins or his purchase is feasible. If false then the player doesn't have enough coins to purchase that tower/upgrade.
-  */
- bool update_coins(int amount);
+  /**
+   * @brief modifier for coins
+   *
+   * @details Modifying the player's coins in case of gaining/spending coins.
+   *
+   * @param amount The amount to be add/subtract from the player's coins.
+   * A +ve value represents winning more coins (by killing enemies).
+   * A -ve represents purchasing a new tower/upgrade.
+   *
+   * @return bool, if true then the player gains coins or his purchase is
+   * feasible. If false then the player doesn't have enough coins to purchase
+   * that tower/upgrade.
+   */
+  bool update_coins(int amount);
 
   /**
    * @brief End Game
@@ -59,7 +68,8 @@ public:
    * @details assert the existence of a level. With ending the game, add score
    * to player's xp in Game class, and save it by `save_xp` in Game.
    *
-   * @return <state, score> if bool is true, the player has won, and his score is `score`. If false, he lost, and score is `score`
+   * @return <state, score> if bool is true, the player has won, and his score
+   * is `score`. If false, he lost, and score is `score`
    */
   std::pair<bool, int> end_game();
 
@@ -71,11 +81,12 @@ public:
   /**
    * @brief Check if the game has ended
    *
-   * @details Will be helpful in the game loop to validate that the game is not running anymore and has been LOST or WON.
+   * @details Will be helpful in the game loop to validate that the game is not
+   * running anymore and has been LOST or WON.
    */
   bool has_ended() const;
 
- /**
+  /**
    * @brief getter for the game state
    */
   GameState get_game_state() const;
@@ -101,13 +112,13 @@ public:
    * @brief Initialize a level by using
    * LevelReader::get_instance().build_level(level_num);
    */
- static Level& read_level(int level_num);
+  static std::shared_ptr<Level> read_level(int level_num);
 
- /**
-  * @brief Get the number of levels available
-  * LevelReader::get_instance().levels_count();
-  */
- static int get_level_count();
+  /**
+   * @brief Get the number of levels available
+   * LevelReader::get_instance().levels_count();
+   */
+  static int get_level_count();
 
 private:
   int lives;

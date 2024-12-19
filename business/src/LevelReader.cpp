@@ -19,7 +19,7 @@ B=Buildable, N=NonBuildable, E=Enemy" e.g. "N B N E E N N N N B ......"
 */
 // TODO: Make enemy initialization dynamic
 
-Level& LevelReader::build_level(int level_num) {
+std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   int lives;
   int coins;
   int max_wave;
@@ -65,8 +65,9 @@ Level& LevelReader::build_level(int level_num) {
   auto tower_manager = std::make_shared<TowerManager>();
 
   // Create a Level with the data read
-  Level level(lives, coins, map, wave_manager, attack_manager, tower_manager,
-              enemy_manager);
+  auto level =
+      std::make_shared<Level>(lives, coins, map, wave_manager, attack_manager,
+                              tower_manager, enemy_manager);
 
   return level;
 }

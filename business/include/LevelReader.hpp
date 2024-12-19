@@ -16,7 +16,7 @@ public:
    *
    * @param level_num The level number
    */
-  Level& build_level(int);
+  std::shared_ptr<Level> build_level(int);
 
   /**
    * @breif Get the number of level files in data directory.
