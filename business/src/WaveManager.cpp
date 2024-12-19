@@ -13,3 +13,7 @@ bool WaveManager::should_spawn_enemy() const {
   // If there are still enemies left to spawn, return true
   return enemies_count_on_map < enemies_total;
 };
+
+int WaveManager::get_total_enemies_spawned() const {
+  return enemies_killed + enemies_count_on_map;
+}
