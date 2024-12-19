@@ -28,7 +28,6 @@ public:
    * @details The interface provide the ability to adjust velcoity as well
    */
   void update_dest(Vector<float> destination);
-  void update_dest(Vector<float> destination, float velocity);
 
   /**
    * @brief Check if an object is out of board of not
@@ -36,6 +35,16 @@ public:
    * @details Use GameSettings::get_instance().get_width() and get_height()
    */
   bool is_out_of_board();
+
+  /**
+   * @brief Getter for rotation
+   */
+  const float get_rotation() const;
+
+  /**
+   * @brief Check if object has reached its destination
+   */
+  bool is_reached_destination() const;
 
 protected:
   /**
@@ -58,4 +67,6 @@ private:
                                  // the object is moving
   Vector<float> dest_point;  // < represent the point the object is moving to
   float velocity;            // < the velocity by which the object is moving
+  float rotation;  // < the direction represented by the angle between direction
+                   // and x-axis
 };
