@@ -10,17 +10,17 @@ public:
   /*
    * @brief Get the one instance
    */
-  GameSettings& get_instance();
+  static GameSettings& get_instance();
 
   /*
    * @brief Return the size of the window
    */
-  Vector<int> get_size();
+  Vector<unsigned> get_size();
 
   /*
    * @brief Return the size of a tile
    */
-  Vector<int> get_tile_size();
+  Vector<unsigned> get_tile_size();
 
   /*
    * @brief Return the number of rows and columns in the game
