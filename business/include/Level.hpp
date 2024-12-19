@@ -109,12 +109,6 @@ public:
   std::shared_ptr<AttackManager> get_attack_mng() const;
 
   /**
-   * @brief Initialize a level by using
-   * LevelReader::get_instance().build_level(level_num);
-   */
-  static std::shared_ptr<Level> read_level(int level_num);
-
-  /**
    * @brief Get the number of levels available
    * LevelReader::get_instance().levels_count();
    */

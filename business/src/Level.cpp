@@ -81,10 +81,6 @@ std::shared_ptr<TowerManager> Level::get_tower_mng() const { return tower_mng; }
 
 std::shared_ptr<WaveManager> Level::get_wave_mng() const { return wave_mng; }
 
-std::shared_ptr<Level> Level::read_level(int level_num) {
-  return LevelReader::get_instance().build_level(level_num);
-}
-
 int Level::get_level_count() {
   return LevelReader::get_instance().levels_count();
 }
