@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Utils/Drawable.hpp"
+#include "Utils/Vector.hpp"
 
 class BaseAttack;  // Declare class without any interface. To use the interface,
                    // include the header file in source file
@@ -46,4 +47,5 @@ public:
 
 private:
   TileType type;
+  Vector<float> position;
 };
