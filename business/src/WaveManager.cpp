@@ -1,5 +1,5 @@
 #include "WaveManager.hpp"
-#include <iostream>
+#include <assert.h>
 
 WaveManager::WaveManager(int wave_1_enemies_total, int wave_count)
     : wave(1),
@@ -27,9 +27,8 @@ bool WaveManager::wave_over() const {
 }
 
 void WaveManager::next_wave() {
-  if (!wave_over())
-    std::cout
-        << "Cannot proceed to the next wave until the current one is over.\n";
+  assert(wave_over() &&
+         "Cannot proceed to the next wave until the current one is over.");
 
   if (wave < wave_count) {
     wave++;
