@@ -8,3 +8,8 @@ WaveManager::WaveManager(int wave_1_enemies_total, int wave_count)
       enemies_killed(0),
       enemies_escaped(0),
       wave_count(wave_count) {}
+
+bool WaveManager::should_spawn_enemy() const {
+  // If there are still enemies left to spawn, return true
+  return enemies_count_on_map < enemies_total;
+};
