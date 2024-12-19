@@ -21,12 +21,8 @@ set(HEADERS
     include/Utils/FontFactory.hpp
     # Interfaces
     include/Interfaces/Widget.hpp
-<<<<<<< HEAD
-=======
-    # include/Interfaces/View.hpp
->>>>>>> e340aed (fix: comment out unused filepath)
-    # Components
     include/Components/BackgroundManager.hpp
+    # Components
     include/Components/SFXPlayer.hpp
     include/Components/MusicPlayer.hpp
     include/Components/IButton.hpp
