@@ -1,6 +1,7 @@
 #include "Components/IButton.hpp"
 #include <functional>
 #include <iostream>
+#include "Components/SFXPlayer.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/System/Vector2.hpp"
 #include "SFML/Window/Mouse.hpp"
@@ -14,7 +15,10 @@ void IButton::init_image(std::string t1, std::string t2) {
   bg.setPosition(x - bg.getGlobalBounds().width / 2.f,
                  y - bg.getGlobalBounds().height / 2.f);
 }
-void IButton::on_click() { handler(); }
+void IButton::on_click() {
+  SFXPlayer::get_instance().play(SFXPlayer::BUTTON_CLICK);
+  handler();
+}
 
 bool IButton::is_hovered(sf::Vector2f point) const {
   return bg.getGlobalBounds().contains(point.x, point.y);

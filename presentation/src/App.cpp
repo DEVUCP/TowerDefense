@@ -1,12 +1,14 @@
 #include "App.hpp"
 #include <cassert>
 #include <memory>
+#include "Components/MusicPlayer.hpp"
 #include "Components/PageManager.hpp"
 #include "SFML/Window/Event.hpp"
 
 App::App() {
   init_window();
   init_page_manager();
+  MusicPlayer::get_instance().play(MusicPlayer::MAIN_MUSIC);
 }
 
 void App::init_window() {
