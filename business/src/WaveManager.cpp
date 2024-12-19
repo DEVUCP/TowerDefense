@@ -1,7 +1,6 @@
 #include "WaveManager.hpp"
-#include <assert.h>
 
-WaveManager::WaveManager(const int &wave_1_enemies_total, const int &wave_count)
+WaveManager::WaveManager(int wave_1_enemies_total, int wave_count)
     : wave(1),
       enemies_total(wave_1_enemies_total),
       enemies_count_on_map(0),
