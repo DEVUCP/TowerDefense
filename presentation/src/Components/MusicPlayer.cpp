@@ -24,7 +24,7 @@ void MusicPlayer::play(MusicPlayer::MusicType type) {
 
 void MusicPlayer::toggle() {
   if (is_playing()) {
-    music.stop();
+    music.pause();
   } else {
     music.play();
   }
