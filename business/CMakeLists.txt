@@ -46,7 +46,8 @@ set(SOURCES # Sources
     src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyManager.cpp
     # Map
-    src/Map/Map.cpp)
+    src/Map/Map.cpp
+    src/Map/BuildableTile.cpp)
 
 add_library(business ${HEADERS} ${SOURCES})
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data
