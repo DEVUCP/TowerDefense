@@ -25,3 +25,17 @@ int WaveManager::get_enemies_on_map() const { return enemies_count_on_map; }
 bool WaveManager::wave_over() const {
   return enemies_total == enemies_killed + enemies_escaped;
 }
+
+void WaveManager::next_wave() {
+  if (!wave_over())
+    std::cout
+        << "Cannot proceed to the next wave until the current one is over.\n";
+
+  if (wave < wave_count) {
+    wave++;
+    enemies_total = static_cast<int>(enemies_total * DIFFICULTY_FACTORY);
+    enemies_count_on_map = 0;
+    enemies_killed = 0;
+    enemies_escaped = 0;
+  }
+}
