@@ -18,19 +18,7 @@ class Drawable {
    */
   const std::string& get_sprite() const;
 
-  /**
-   * @brief Getter for rotation
-   */
-  const float get_rotation() const;
-
-  /**
-   * @brief Set rotation
-   */
-  void set_rotation(float);
-
 private:
   Vector<float> size;
   std::string sprite;
-  float rotation;  // < the direction represented by the angle between direction
-                   // and x-axis
 };
