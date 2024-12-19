@@ -42,11 +42,11 @@ public:
   T x;
   T y;
 };
-template<typename T>
-Vector<T> operator*(Vector<T> vec, T value){
+template <typename T>
+Vector<T> operator*(Vector<T> vec, T value) {
   return Vector<T>(vec.x * value, vec.y * value);
 }
-template<typename T>
-Vector<T> operator*(T value, Vector<T> vec){
+template <typename T>
+Vector<T> operator*(T value, Vector<T> vec) {
   return vec * value;
 }
