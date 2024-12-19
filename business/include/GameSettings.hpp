@@ -25,8 +25,8 @@ public:
   /*
    * @brief Return the number of rows and columns in the game
    */
-  int get_rows();
-  int get_columns();
+  unsigned get_rows();
+  unsigned get_columns();
 
 private:
   GameSettings() = default;
