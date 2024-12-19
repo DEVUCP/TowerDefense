@@ -17,3 +17,5 @@ bool WaveManager::should_spawn_enemy() const {
 int WaveManager::get_total_enemies_spawned() const {
   return enemies_killed + enemies_count_on_map;
 }
+
+int WaveManager::get_killed_enemies() const { return enemies_killed; }
