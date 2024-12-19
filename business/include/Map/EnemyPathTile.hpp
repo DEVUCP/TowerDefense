@@ -5,7 +5,7 @@
 #include "Map/BaseTile.hpp"
 class EnemyPathTile : public BaseTile {
 public:
-  EnemyPathTile() : BaseTile(EnemyPath) {};
+  EnemyPathTile();
   /*
    * @brief Register an enemy to be in current tile
    */
