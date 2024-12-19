@@ -24,7 +24,7 @@ MainMenu::MainMenu(unsigned width, unsigned height)
 }
 
 void MainMenu::on_pause() {}
-void MainMenu::on_unpause() {}
+void MainMenu::on_unpause() { mute_button->check_status(); }
 
 void MainMenu::handle_events(EventData evt) {
   play_btn->handle_events(evt);

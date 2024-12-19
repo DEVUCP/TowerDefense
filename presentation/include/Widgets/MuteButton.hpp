@@ -7,6 +7,5 @@ public:
 
   void on_click() override;
 
-private:
-  bool on;
+  void check_status();
 };

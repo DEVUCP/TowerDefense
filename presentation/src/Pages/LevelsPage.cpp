@@ -30,10 +30,9 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   }
 
   // Initialize the go back button
-  go_back = std::make_shared<IconButton>(
-      "./assets/buttons/GoBack.png", "./assets/buttons/GoBack_Hover.png", 60,
-      60, StandardButton::ButtonSize::DEFAULT,
-      StandardButton::ButtonType::SQUARE);
+  go_back =
+      std::make_shared<IconButton>("./assets/buttons/GoBack.png",
+                                   "./assets/buttons/GoBack_Hover.png", 60, 60);
   go_back->set_handler([this]() { notify_observers(GO_BACK_SWITCH); });
 
   // Initialize the mute button
@@ -41,7 +40,7 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
 }
 
 void LevelsPage::on_pause() {}
-void LevelsPage::on_unpause() {}
+void LevelsPage::on_unpause() { mute_button->check_status(); }
 
 void LevelsPage::handle_events(EventData evt) {
   for (auto& btn : levels_btns) btn->handle_events(evt);

@@ -6,6 +6,7 @@
 #include "Components/Title.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
+#include "Widgets/MuteButton.hpp"
 
 class MainMenu : public Page {
 public:
@@ -24,5 +25,5 @@ private:
   Title title;
   std::shared_ptr<IButton> play_btn;
   std::shared_ptr<IButton> about_btn;
-  std::shared_ptr<IButton> mute_button;
+  std::shared_ptr<MuteButton> mute_button;
 };

@@ -9,8 +9,14 @@
 IButton::IButton(unsigned x, unsigned y) : x{x}, y{y}, handler([]() {}) {}
 
 void IButton::init_image(std::string t1, std::string t2) {
-  texture.loadFromFile(t1);
-  texture_hover.loadFromFile(t2);
+  if (!texture.loadFromFile(t1)) {
+    std::cerr << "Failed to load texture: " << t1 << std::endl;
+    exit(1);
+  }
+  if (!texture_hover.loadFromFile(t2)) {
+    std::cerr << "Failed to load texture: " << t2 << std::endl;
+    exit(1);
+  }
   bg.setTexture(texture);
   bg.setPosition(x - bg.getGlobalBounds().width / 2.f,
                  y - bg.getGlobalBounds().height / 2.f);
