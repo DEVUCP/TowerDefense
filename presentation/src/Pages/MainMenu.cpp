@@ -8,6 +8,7 @@
 #include "Components/TextButton.hpp"
 #include "Enums/Events/PageEvents.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
+#include "Widgets/MuteButton.hpp"
 
 MainMenu::MainMenu(unsigned width, unsigned height)
     : Page(width, height), title("Bug Slayer", width, height) {
@@ -19,11 +20,7 @@ MainMenu::MainMenu(unsigned width, unsigned height)
       "about", width / 2.f, height / 2.f + 200,
       StandardButton::ButtonSize::LARGE, StandardButton::ButtonType::RECT);
   about_btn->set_handler([]() {});
-  mute_button = std::make_shared<IconButton>(
-      "./assets/buttons/SoundOn.png", "./assets/buttons/SoundOn_Hover.png", 60,
-      height - 60, StandardButton::ButtonSize::DEFAULT,
-      StandardButton::ButtonType::SQUARE);
-  mute_button->set_handler([]() { MusicPlayer::get_instance().toggle(); });
+  mute_button = std::make_shared<MuteButton>(60, height - 60);
 }
 
 void MainMenu::on_pause() {}

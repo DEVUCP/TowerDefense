@@ -35,6 +35,8 @@ set(HEADERS
     include/Components/PageFactory.hpp
     include/Components/Page.hpp
     include/Components/Title.hpp
+    # Widget
+    include/Widgets/MuteButton.hpp
     # Pages
     include/Pages/MainMenu.hpp
     include/Pages/LevelsPage.hpp)
@@ -58,6 +60,8 @@ set(SOURCES
     src/Components/Title.cpp
     # Interfaces
     src/Interfaces/View.cpp
+    # Widget
+    src/Widgets/MuteButton.cpp
     # Pages
     src/Pages/MainMenu.cpp
     src/Pages/LevelsPage.cpp)

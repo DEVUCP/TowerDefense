@@ -7,6 +7,7 @@
 #include "Components/TextButton.hpp"
 #include "Enums/Events/PageEvents.hpp"
 #include "Game.hpp"
+#include "Widgets/MuteButton.hpp"
 
 LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   // Initia
@@ -36,10 +37,7 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   go_back->set_handler([this]() { notify_observers(GO_BACK_SWITCH); });
 
   // Initialize the mute button
-  mute_button = std::make_shared<IconButton>(
-      "./assets/buttons/SoundOn.png", "./assets/buttons/SoundOn_Hover.png", 60,
-      h - 60, StandardButton::ButtonSize::DEFAULT,
-      StandardButton::ButtonType::SQUARE);
+  mute_button = std::make_shared<MuteButton>(60, h - 60);
 }
 
 void LevelsPage::on_pause() {}

@@ -23,7 +23,7 @@ public:
   /*
    * @brief handle click event on this button
    */
-  void on_click();
+  virtual void on_click();
 
   /*
    * @brief Set a callback to run when the button is clicked
