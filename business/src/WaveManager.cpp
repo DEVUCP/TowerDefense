@@ -38,3 +38,5 @@ void WaveManager::next_wave() {
     enemies_escaped = 0;
   }
 }
+
+int WaveManager::get_wave() const { return wave; }
