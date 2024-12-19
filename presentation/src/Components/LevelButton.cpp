@@ -9,7 +9,7 @@ LevelButton::LevelButton(unsigned x, unsigned y, int num)
 
   text.setFillColor(sf::Color(LEVEL_NUM_COLOR));
   text.setString(std::to_string(num));
-  text.setCharacterSize(55);
+  text.setCharacterSize(LEVEL_NUM_FONT_SIZE);
 
   font = FontFactory::get_instance().get_primary_font();
   text.setFont(font);
