@@ -38,16 +38,6 @@ public:
   BaseTile(TileType type);
 
   /**
-   * @brief Register attack to be in current tile
-   */
-  void register_attack(std::shared_ptr<BaseAttack>);
-
-  /**
-   * @brief Remove attack from current tile
-   */
-  void remove_attack(std::shared_ptr<BaseAttack>);
-
-  /**
    * @brief return center coordinates
    *
    * @details use GameSettings::get_instance()
@@ -56,5 +46,4 @@ public:
 
 private:
   TileType type;
-  std::vector<std::shared_ptr<BaseAttack>> attacks;
 };
