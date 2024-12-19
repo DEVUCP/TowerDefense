@@ -21,6 +21,10 @@ set(HEADERS
     include/Utils/FontFactory.hpp
     # Interfaces
     include/Interfaces/Widget.hpp
+<<<<<<< HEAD
+=======
+    # include/Interfaces/View.hpp
+>>>>>>> e340aed (fix: comment out unused filepath)
     # Components
     include/Components/BackgroundManager.hpp
     include/Components/SFXPlayer.hpp
