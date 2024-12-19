@@ -25,6 +25,27 @@ class Collidable {
   void disable_collision();
 
 private:
+  /**
+   * @brief Returns top left point coordinates
+   */
+  Vector<float> tl() const;
+
+  /**
+   * @brief Returns top right point coordinates
+   */
+  Vector<float> tr() const;
+
+  /**
+   * @brief Returns bottom left point coordinates
+   */
+  Vector<float> bl() const;
+
+  /**
+   * @brief Returns bottom right point coordinates
+   */
+  Vector<float> br() const;
+
+private:
   bool enabled;
   Vector<float> position;
   union {
