@@ -19,3 +19,5 @@ int WaveManager::get_total_enemies_spawned() const {
 }
 
 int WaveManager::get_killed_enemies() const { return enemies_killed; }
+
+int WaveManager::get_enemies_on_map() const { return enemies_count_on_map; }
