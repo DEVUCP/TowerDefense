@@ -10,17 +10,28 @@ public:
   /**
    * @brief Assign a number of tickets to an enemy type
    */
-  void assign_tickets(BaseEnemy::EnemyType, int);
-
-  /**
-   *@brief assign a starting wave to each enemy
-   */
-  void set_staritng_wave(BaseEnemy::EnemyType, int);
+  void assign_tickets(const BaseEnemy::EnemyType &type, const int &count);
 
   /**
    *@brief Get the starting wave
    */
-  int get_starting_wave(BaseEnemy::EnemyType);
+  int get_starting_wave(const BaseEnemy::EnemyType &type) const;
+
+  /**
+   *@brief assign a starting wave to each enemy
+   */
+  void set_starting_wave(const BaseEnemy::EnemyType &type, const int &wave);
+
+  /*
+   *@brief remove enemies to be deleted from the enemies list
+   */
+  // call this before move_enemies() in gameloop
+  void filter_enemies();
+
+  /*
+   * @brief Move all enemies by calling `move_next` on each enemy
+   */
+  void move_enemies() const;
 
   /*
    * @breif Given the tickets, generate a random enemy with the given
@@ -47,33 +58,6 @@ public:
    * bettles
    */
   std::shared_ptr<BaseEnemy> generate_enemy(const int &starting_wave);
-
-  /**
-   * @brief Get the starting wave for a specific enemy type.
-   *
-   * @param type The enemy type whose starting wave is to be retrieved.
-   * @return The wave number in which the enemy becomes available.
-   */
-  int get_starting_wave(BaseEnemy::EnemyType type) const;
-
-  /**
-   * @brief Set the starting wave for a specific enemy type.
-   *
-   * @param type The enemy type to set the wave for.
-   * @param wave The wave number in which the enemy becomes available.
-   */
-  void set_starting_wave(BaseEnemy::EnemyType type, int wave);
-
-  /*
-   *@brief remove enemies to be deleted from the enemies list
-   */
-  // call this before move_enemies() in gameloop
-  void filter_enemies();
-
-  /*
-   * @brief Move all enemies by calling `move_next` on each enemy
-   */
-  void move_enemies();
 
 private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;

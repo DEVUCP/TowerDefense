@@ -6,7 +6,7 @@ public:
   /**
    * @brief Constructor
    */
-  WaveManager(int wave_1_enemies_total, int wave_count);
+  WaveManager(const int& wave_1_enemies_total, const int& wave_count);
 
   /**
    * @brief Check if there are enemies to spawn

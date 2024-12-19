@@ -5,10 +5,36 @@
 #include <stdexcept>
 #include "Enemy/EnemyFactory.hpp"
 
-void EnemyManager::assign_tickets(BaseEnemy::EnemyType type, int count) {
+void EnemyManager::assign_tickets(const BaseEnemy::EnemyType &type,
+                                  const int &count) {
   // Remove existing ticket entry for the type, if any
   tickets.remove_if([&](const auto &pair) { return pair.first == type; });
   tickets.emplace_back(type, count);
+}
+
+int EnemyManager::get_starting_wave(const BaseEnemy::EnemyType &type) const {
+  auto it = starting_waves.find(type);
+  return (it != starting_waves.end()) ? it->second
+                                      : -1;  // Default to -1 if not found
+}
+
+void EnemyManager::set_starting_wave(const BaseEnemy::EnemyType &type,
+                                     const int &wave) {
+  starting_waves[type] = wave;
+}
+
+void EnemyManager::filter_enemies() {
+  for (int i = 0; i < enemies.size(); i++) {
+    if (enemies[i]->is_to_be_removed()) enemies.erase(enemies.begin() + 1);
+  }
+}
+
+void EnemyManager::move_enemies() const {
+  for (auto &enemy : enemies) {
+    if (enemy) {
+      enemy->move_next();
+    }
+  }
 }
 
 std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
@@ -55,28 +81,4 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
 
   throw std::logic_error(
       "Failed to generate an enemy. This should not happen.");
-}
-
-int EnemyManager::get_starting_wave(BaseEnemy::EnemyType type) const {
-  auto it = starting_waves.find(type);
-  return (it != starting_waves.end()) ? it->second
-                                      : -1;  // Default to -1 if not found
-}
-
-void EnemyManager::set_starting_wave(BaseEnemy::EnemyType type, int wave) {
-  starting_waves[type] = wave;
-}
-
-void EnemyManager::filter_enemies() {
-  for (int i = 0; i < enemies.size(); i++) {
-    if (enemies[i]->is_to_be_removed()) enemies.erase(enemies.begin() + 1);
-  }
-}
-
-void EnemyManager::move_enemies() {
-  for (auto &enemy : enemies) {
-    if (enemy) {
-      enemy->move_next();
-    }
-  }
 }
