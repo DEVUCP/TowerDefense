@@ -17,8 +17,13 @@ public:
   /**
    * @brief Get Level
    */
-
   std::shared_ptr<Level> get_level();
+
+  /**
+   * @brief Initialize a level by using
+   * LevelReader::get_instance().build_level(level_num);
+   */
+  static std::shared_ptr<Level> init_level(int level_num);
 
 private:
   Game();  // < private constructor
