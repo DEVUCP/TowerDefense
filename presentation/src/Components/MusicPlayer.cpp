@@ -17,7 +17,7 @@ MusicPlayer& MusicPlayer::get_instance() {
 void MusicPlayer::play(MusicPlayer::MusicType type) {
   assert(type != UNKNOWN);
   if (type == cur_type) return;
-  music.openFromFile(music_files[type]);
+  music.openFromFile(music_files[MAIN_MUSIC]);
   music.play();
   music.setLoop(true);
 }
