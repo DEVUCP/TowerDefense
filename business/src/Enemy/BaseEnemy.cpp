@@ -14,9 +14,6 @@ const float BaseEnemy::get_health() const { return health; }
 
 const float BaseEnemy::get_initial_health() const { return initial_health; }
 
-/**
- * @brief Getter for `to_be_removed`
- */
 const bool BaseEnemy::is_to_be_removed() const { return to_be_removed; }
 
 void BaseEnemy::invoke_damage(float amount) {
