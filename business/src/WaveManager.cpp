@@ -1,4 +1,5 @@
 #include "WaveManager.hpp"
+#include <cassert>
 
 WaveManager::WaveManager(int wave_1_enemies_total, int wave_count)
     : wave(1),
