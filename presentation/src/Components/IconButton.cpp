@@ -20,4 +20,3 @@ void IconButton::set_icon_texture(std::string path, std::string path_hover) {
   }
   bg.setTexture(texture);
 }
-void IconButton::on_click() { StandardButton::on_click(); }
