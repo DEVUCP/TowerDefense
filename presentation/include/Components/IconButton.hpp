@@ -18,4 +18,9 @@ public:
    * @brief Change the button icon
    */
   void set_icon_texture(std::string path, std::string path_hover);
+
+  /*
+   * Override
+   */
+  virtual void on_click();
 };
