@@ -16,7 +16,7 @@ public:
    *
    * @details use private helpers
    */
-  void generate_enemy(BaseEnemy::EnemyType);
+  std::shared_ptr<BaseEnemy> generate_enemy(BaseEnemy::EnemyType);
 
 private:
   EnemyFactory() = default;  //  < private constructor, for singletons
@@ -24,7 +24,7 @@ private:
   /*
    * @Brief private functions to ease creation of enemies
    */
-  void generate_ant();
-  void generate_cockroach();
-  void generate_bettle();
+  std::shared_ptr<BaseEnemy> generate_ant();
+  std::shared_ptr<BaseEnemy> generate_cockroach();
+  std::shared_ptr<BaseEnemy> generate_bettle();
 };
