@@ -15,6 +15,7 @@ bool WaveManager::should_spawn_enemy() const {
 };
 
 int WaveManager::get_total_enemies_spawned() const {
+  // Total spawned enemies is the sum of killed and enemies still on the map
   return enemies_killed + enemies_count_on_map;
 }
 
@@ -23,6 +24,8 @@ int WaveManager::get_killed_enemies() const { return enemies_killed; }
 int WaveManager::get_enemies_on_map() const { return enemies_count_on_map; }
 
 bool WaveManager::wave_over() const {
+  // The wave is over when the total number of enemies is equal to the sum of
+  // killed and escaped enemies
   return enemies_total == enemies_killed + enemies_escaped;
 }
 
