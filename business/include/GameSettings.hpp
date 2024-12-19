@@ -15,12 +15,12 @@ public:
   /*
    * @brief Return the size of the window
    */
-  Vector<int> get_size();
+  Vector<unsigned> get_size();
 
   /*
    * @brief Return the size of a tile
    */
-  int get_tile_size();
+  unsigned get_tile_size();
 
   /*
    * @brief Return the number of rows and columns in the game
