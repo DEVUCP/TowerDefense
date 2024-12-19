@@ -47,9 +47,7 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
               "Starting wave not assigned for the enemy type.");
         }
 
-        // Create and return the corresponding enemy with wave information
-        // Example: return BaseEnemy::create(type, wave);
-        // assuming create method takes wave info.
+        // Create and return the corresponding enemy type
         return EnemyFactory::get_intance().generate_enemy(type);
       }
     }
