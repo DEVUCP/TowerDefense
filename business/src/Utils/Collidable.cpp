@@ -7,3 +7,7 @@ Collidable::Collidable(float x, float y, float width, float height,
       enabled(enabled)
 
 {}
+
+void enable_collision() { this->enabled = true; }
+
+void disable_collision() { this->enabled = false; }
