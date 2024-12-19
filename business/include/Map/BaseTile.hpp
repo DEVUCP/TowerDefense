@@ -36,7 +36,7 @@ public:
   /**
    * @brief Constructor
    */
-  BaseTile(TileType type);
+  BaseTile(float x, float y, TileType type);
 
   /**
    * @brief return center coordinates
