@@ -1,5 +1,5 @@
 
-#include "Moveable.hpp"
+#include "Utils/Moveable.hpp"
 
 Moveable::Moveable(float x, float y, float velocity,
                    Vector<float> destination) {
