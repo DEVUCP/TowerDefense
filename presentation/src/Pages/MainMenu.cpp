@@ -17,7 +17,7 @@ MainMenu::MainMenu(unsigned width, unsigned height)
   about_btn = std::make_shared<TextButton>(
       "about", width / 2.f, height / 2.f + 200,
       StandardButton::ButtonSize::LARGE, StandardButton::ButtonType::RECT);
-  about_btn->set_handler([]() { std::cout << "about" << std::endl; });
+  about_btn->set_handler([]() {});
   mute_button = std::make_shared<IconButton>(
       "./assets/buttons/SoundOn.png", "./assets/buttons/SoundOn_Hover.png", 60,
       height - 60, StandardButton::ButtonSize::DEFAULT,

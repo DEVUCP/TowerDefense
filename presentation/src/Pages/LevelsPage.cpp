@@ -1,10 +1,12 @@
 #include "Pages/LevelsPage.hpp"
+#include <iostream>
 #include <memory>
 #include <vector>
 #include "Components/IconButton.hpp"
 #include "Components/LevelButton.hpp"
 #include "Components/TextButton.hpp"
 #include "Enums/Events/PageEvents.hpp"
+#include "Game.hpp"
 
 LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   // Initia
@@ -17,10 +19,13 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   for (int i = 0; i < level_count; i++) {
     int column = i % ROW_COUNT;  // Column index (0 to 4)
     int row = i / ROW_COUNT;     // Row index
-    levels_btns.push_back(
+    auto btn =
         std::make_unique<LevelButton>(startx + column * offsetx,  // X-position
                                       starty + row * offsety,     // Y-position
-                                      i + 1));  // Level number
+                                      i + 1);
+    // btn->set_handler([=]() { Game::get_instance().init_level(i + 1); });
+    btn->set_handler([=]() { std::cout << i + 1 << std::endl; });
+    levels_btns.push_back(std::move(btn));  // Level number
   }
 
   // Initialize the go back button

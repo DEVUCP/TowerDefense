@@ -21,8 +21,11 @@ set(HEADERS
     include/Utils/FontFactory.hpp
     # Interfaces
     include/Interfaces/Widget.hpp
+    include/Interfaces/View.hpp
     # Components
     include/Components/BackgroundManager.hpp
+    include/Components/SFXPlayer.hpp
+    include/Components/MusicPlayer.hpp
     include/Components/IButton.hpp
     include/Components/StandardButton.hpp
     include/Components/TextButton.hpp
@@ -42,6 +45,8 @@ set(SOURCES
     src/Utils/FontFactory.cpp
     # Components
     src/Components/BackgroundManager.cpp
+    src/Components/MusicPlayer.cpp
+    src/Components/SFXPlayer.cpp
     src/Components/IButton.cpp
     src/Components/StandardButton.cpp
     src/Components/TextButton.cpp
@@ -51,6 +56,8 @@ set(SOURCES
     src/Components/PageManager.cpp
     src/Components/Page.cpp
     src/Components/Title.cpp
+    # Interfaces
+    src/Interfaces/View.cpp
     # Pages
     src/Pages/MainMenu.cpp
     src/Pages/LevelsPage.cpp)
@@ -62,8 +69,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 target_compile_features(presentation PRIVATE cxx_std_17)
 
 # Linking libraries
-target_link_libraries(presentation PRIVATE sfml-graphics)
-include_directories(${CMAKE_SOURCE_DIR}/business/include)
+target_link_libraries(presentation PRIVATE sfml-graphics sfml-audio business)
 
 # Include directories
 target_include_directories(
