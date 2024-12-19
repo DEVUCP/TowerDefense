@@ -13,7 +13,6 @@
 class LevelsPage : public Page {
 public:
   LevelsPage(unsigned w, unsigned h);
-  ~LevelsPage() { std::cout << "hello" << std::endl; }
 
   /*
    * Overrided functions

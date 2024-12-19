@@ -1,8 +1,6 @@
 #include "Pages/LevelsPage.hpp"
-#include <iostream>
 #include <memory>
 #include <vector>
-#include "Components/BackgroundManager.hpp"
 #include "Components/IconButton.hpp"
 #include "Components/LevelButton.hpp"
 #include "Components/TextButton.hpp"

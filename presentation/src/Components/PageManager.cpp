@@ -1,6 +1,5 @@
 #include "Components/PageManager.hpp"
 #include <cassert>
-#include <iostream>
 #include <memory>
 #include "Components/BackgroundManager.hpp"
 #include "Components/PageFactory.hpp"
@@ -35,7 +34,6 @@ void PageManager::replace_page(PageType type) {
 void PageManager::go_back() {
   assert(pages.size());
   pages.pop();
-  std::cout << "post destruction" << std::endl;
   if (pages.size()) {
     pages.top()->on_unpause();
   };
