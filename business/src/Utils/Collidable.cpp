@@ -8,6 +8,16 @@ Collidable::Collidable(float x, float y, float width, float height,
 
 {}
 
+bool collide_with(const Collidable& other) {
+  return point_colliding(other.tl()) && point_colliding(other.tr()) &&
+         point_colliding(other.bl()) && point_colliding(other.br());
+}
+
+bool point_colliding(Vector<float> point) {
+  return (point.x >= position.x && point.x <= position.x + width) &&
+         (point.y >= position.y && point.y <= position.y - height)
+}
+
 void enable_collision() { this->enabled = true; }
 
 void disable_collision() { this->enabled = false; }
