@@ -9,7 +9,7 @@ public:
   /**
    * @brief Get the one instance of EnemyFactory
    */
-  static EnemyFactory get_intance();
+  static EnemyFactory& get_intance();
 
   /**
    * @brief Generate an enemy with specifc type
