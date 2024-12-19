@@ -12,4 +12,3 @@ const std::string& Drawable::get_sprite() const { return sprite; }
 const float Drawable::get_rotation() const { return rotation; }
 
 void Drawable::set_rotation(float amount) { rotation = amount; }
-when
