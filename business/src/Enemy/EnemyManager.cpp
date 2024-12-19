@@ -3,6 +3,7 @@
 #include <memory>
 #include <random>
 #include <stdexcept>
+#include "Enemy/EnemyFactory.hpp"
 
 void EnemyManager::assign_tickets(BaseEnemy::EnemyType type, int count) {
   // Remove existing ticket entry for the type, if any
@@ -49,6 +50,7 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
         // Create and return the corresponding enemy with wave information
         // Example: return BaseEnemy::create(type, wave);
         // assuming create method takes wave info.
+        return EnemyFactory::get_intance().generate_enemy(type);
       }
     }
   }
