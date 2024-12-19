@@ -5,6 +5,7 @@
 LevelButton::LevelButton(unsigned x, unsigned y, int num)
     : IButton(x, y), num{num} {
   init_image("./assets/buttons/Dummy.png", "./assets/buttons/Dummy.png");
+  bg.setScale(1.5, 1.5);
 
   text.setFillColor(sf::Color(LEVEL_NUM_COLOR));
   text.setString(std::to_string(num));
