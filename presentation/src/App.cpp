@@ -6,9 +6,10 @@
 #include "SFML/Window/Event.hpp"
 
 App::App() {
+  // WARN: this order matters
   init_window();
-  init_page_manager();
   MusicPlayer::get_instance().play(MusicPlayer::MAIN_MUSIC);
+  init_page_manager();
 }
 
 void App::init_window() {

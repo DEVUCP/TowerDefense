@@ -7,20 +7,9 @@
 #define LARGE_FONT_SIZE 70
 #define BUTTON_ICON_COLOR 164, 146, 95
 
-class IconButton : public StandardButton {
+class IconButton : public IButton {
 public:
-  IconButton(std::string path, std::string path_hover, unsigned x, unsigned y,
-             StandardButton::ButtonSize, StandardButton::ButtonType);
+  IconButton(std::string path, std::string path_hover, unsigned x, unsigned y);
 
   ~IconButton() = default;
-
-  /*
-   * @brief Change the button icon
-   */
-  void set_icon_texture(std::string path, std::string path_hover);
-
-  /*
-   * Override
-   */
-  virtual void on_click();
 };

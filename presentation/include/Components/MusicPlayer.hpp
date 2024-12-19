@@ -28,6 +28,11 @@ public:
    */
   void toggle();
 
+  /*
+   * @brief Check if playing
+   */
+  bool is_playing() const;
+
 private:
   MusicPlayer();
 

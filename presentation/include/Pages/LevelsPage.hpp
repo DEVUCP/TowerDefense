@@ -1,14 +1,11 @@
 #pragma once
-#include <iostream>
-#include <list>
 #include <memory>
-#include "Components/BackgroundManager.hpp"
 #include "Components/IButton.hpp"
 #include "Components/LevelButton.hpp"
 #include "Components/Page.hpp"
-#include "Components/Title.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
+#include "Widgets/MuteButton.hpp"
 
 class LevelsPage : public Page {
 public:
@@ -27,5 +24,5 @@ private:
   unsigned level_count;
   std::vector<std::unique_ptr<LevelButton>> levels_btns;
   std::shared_ptr<IButton> go_back;
-  std::shared_ptr<IButton> mute_button;
+  std::shared_ptr<MuteButton> mute_button;
 };
