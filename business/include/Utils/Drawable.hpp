@@ -6,7 +6,7 @@ class Drawable {
   /**
    * @brief Constructor
    */
-  Drawable(const std::string& sprite, Vector<float> size, float rotation);
+  Drawable(const std::string& sprite, Vector<float> size);
 
   /**
    * @brief Getter for size
