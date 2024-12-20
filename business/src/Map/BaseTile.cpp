@@ -3,7 +3,6 @@
 #include "GameSettings.hpp"
 
 
-Vector<float> get_center() const {
 BaseTile::BaseTile(float x, float y, TileType type)
     : Drawable("", Vector<float>(0, 0)),position(Vector<float>(x, y)), type(type) {}
 
