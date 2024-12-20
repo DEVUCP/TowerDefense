@@ -12,6 +12,8 @@ public:
 
   bool in_range(std::shared_ptr<BaseEnemy> enemy);
 
+  void upgrade(int upgrade_index);
+
 private:
   Vector<int> position;
   float range;

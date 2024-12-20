@@ -26,3 +26,15 @@ bool BaseTower::in_range(std::shared_ptr<BaseEnemy> enemy) {
                                std::pow(position.y - enemy_position.y, 2));
     return distance <= range;
 }
+
+void BaseTower::upgrade(int upgrade_index) {
+    // Apply the upgrade based on the index
+    if (offer_upgrades) {
+        range += offer_upgrades->get_range_increase();
+        std::cout << "Upgrade applied: " << offer_upgrades->get_name() << std::endl;
+        upgrades = offer_upgrades; // Assume applying the first upgrade
+    } else {
+        std::cout << "No upgrades available to apply!" << std::endl;
+    }
+}
+
