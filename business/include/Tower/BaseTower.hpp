@@ -28,6 +28,12 @@ public:
    */
   void init_attack(std::shared_ptr<BaseEnemy> enemy);
 
+  /**
+   * @brief Checks if the enemy is within the tower's attack range.
+   *
+   * @param enemy A shared pointer to the enemy to check.
+   * @return True if the enemy is within range, otherwise false.
+   */
   bool in_range(std::shared_ptr<BaseEnemy> enemy);
 
   void upgrade(int upgrade_index);
