@@ -19,3 +19,10 @@ void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
         // Implement attack logic here
     }
 }
+
+bool BaseTower::in_range(std::shared_ptr<BaseEnemy> enemy) {
+  Vector<float> enemy_position = enemy->get_position()->get_position();
+    float distance = std::sqrt(std::pow(position.x - enemy_position.x, 2) + 
+                               std::pow(position.y - enemy_position.y, 2));
+    return distance <= range;
+}

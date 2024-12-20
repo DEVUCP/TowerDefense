@@ -10,6 +10,8 @@ public:
 
   void init_attack(std::shared_ptr<BaseEnemy> enemy);
 
+  bool in_range(std::shared_ptr<BaseEnemy> enemy);
+
 private:
   Vector<int> position;
   float range;
