@@ -1,8 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <string>
-#include <vector>
 #include "Utils/Drawable.hpp"
 #include "Utils/Vector.hpp"
 
