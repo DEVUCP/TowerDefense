@@ -1,11 +1,13 @@
 
 #include "Map/BaseTile.hpp"
+#include "GameSettings.hpp"
 
-public:
-BaseTile(float x, float y, TileType type)
-    : position(Vector<float>(x, y)), type(type) {}
 
 Vector<float> get_center() const {
+BaseTile::BaseTile(float x, float y, TileType type)
+    : Drawable("", Vector<float>(0, 0)),position(Vector<float>(x, y)), type(type) {}
+
+Vector<float> BaseTile::get_center() const {
   unsigned tile_size = GameSettings::get_instance().get_tile_size();
   return Vector<float>(tile_size / 2, tile_size / 2)
 }
