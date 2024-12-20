@@ -6,3 +6,7 @@ Upgrade::Upgrade(std::string name, int cost, float range_increase, float damage_
 std::string Upgrade::get_name() const {
     return name;
 }
+
+int Upgrade::get_cost() const {
+    return cost;
+}

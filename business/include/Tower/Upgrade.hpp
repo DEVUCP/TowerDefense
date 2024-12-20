@@ -7,6 +7,7 @@ public:
     Upgrade(std::string name, int cost, float range_increase, float damage_increase);
 
     std::string get_name() const;
+    int get_cost() const;
 private:
     std::string name;        // Name of the upgrade
     int cost;                // Cost to apply the upgrade
