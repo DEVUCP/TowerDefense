@@ -10,3 +10,7 @@ std::string Upgrade::get_name() const {
 int Upgrade::get_cost() const {
     return cost;
 }
+
+float Upgrade::get_range_increase() const {
+    return range_increase;
+}

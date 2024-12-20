@@ -8,6 +8,7 @@ public:
 
     std::string get_name() const;
     int get_cost() const;
+    float get_range_increase() const;
 private:
     std::string name;        // Name of the upgrade
     int cost;                // Cost to apply the upgrade
