@@ -1,5 +1,5 @@
 
-#include "BaseTile.cpp"
+#include "Map/BaseTile.hpp"
 
 public:
 BaseTile(float x, float y, TileType type)
