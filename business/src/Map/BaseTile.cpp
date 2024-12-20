@@ -11,3 +11,6 @@ Vector<float> BaseTile::get_center() const {
   return Vector<float>(tile_size / 2.0, tile_size / 2.0);
 }
 
+Vector<float> BaseTile::get_position() const {
+  return position;
+}
