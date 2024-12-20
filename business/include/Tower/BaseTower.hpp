@@ -36,6 +36,14 @@ public:
    */
   bool in_range(std::shared_ptr<BaseEnemy> enemy);
 
+  /**
+   * @brief Upgrades the tower based on the selected upgrade index.
+   *
+   * @param upgrade_index The index of the upgrade to apply.
+   *
+   * @details The upgrade improves the tower's attributes, such as range or damage,
+   * based on the selected upgrade option.
+   */
   void upgrade(int upgrade_index);
 
   int get_sell_price();
