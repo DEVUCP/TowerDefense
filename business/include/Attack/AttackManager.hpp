@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <memory>
 #include "Map/BaseTile.hpp"
 class AttackManager {
