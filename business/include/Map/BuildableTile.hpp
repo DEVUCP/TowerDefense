@@ -3,6 +3,7 @@
 #include <memory>
 #include "Map/BaseTile.hpp"
 #include "Tower/BaseTower.hpp"
+
 class BuildableTile : public BaseTile {
 public:
   BuildableTile(float x, float y);

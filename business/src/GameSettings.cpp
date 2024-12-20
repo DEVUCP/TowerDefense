@@ -1,4 +1,5 @@
 #include "GameSettings.hpp"
+
 #define WIDTH 1680
 #define HEIGHT 1080
 #define TILE_LENGTH 60

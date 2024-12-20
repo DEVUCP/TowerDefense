@@ -1,4 +1,5 @@
 #pragma once
+
 #define DIFFICULTY_FACTORY 1.5
 
 class WaveManager {

@@ -1,5 +1,4 @@
 #include "Level.hpp"
-
 #include <LevelReader.hpp>
 
 Level::Level(int lives, int coins, std::shared_ptr<Map> map,

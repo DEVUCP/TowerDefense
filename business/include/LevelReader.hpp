@@ -1,4 +1,5 @@
 #pragma once
+
 #include <Level.hpp>
 
 class LevelReader {

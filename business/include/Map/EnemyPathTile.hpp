@@ -1,8 +1,8 @@
-
 #pragma once
 
 #include "Enemy/BaseEnemy.hpp"
 #include "Map/BaseTile.hpp"
+
 class EnemyPathTile : public BaseTile {
 public:
   EnemyPathTile(float x, float y);

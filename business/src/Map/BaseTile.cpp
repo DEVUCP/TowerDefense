@@ -1,4 +1,3 @@
-
 #include "Map/BaseTile.hpp"
 #include "GameSettings.hpp"
 

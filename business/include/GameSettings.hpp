@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Utils/Vector.hpp"
+
 class GameSettings {
 public:
   // remove copying

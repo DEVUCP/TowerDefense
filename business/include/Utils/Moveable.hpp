@@ -1,10 +1,11 @@
 #pragma once
 
+#include "Utils/Vector.hpp"
+
 /**
  * @class Moveable
  * @brief Represents an abstraction of all moving objects in the game
  */
-#include "Utils/Vector.hpp"
 class Moveable {
 public:
   /**

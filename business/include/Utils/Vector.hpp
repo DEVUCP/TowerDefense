@@ -1,7 +1,10 @@
 #pragma once
+
 #include <cassert>
 #include <cmath>
+
 static constexpr double EPS = 1e9;
+
 template <typename T, typename D = T>
 class Vector {
 public:

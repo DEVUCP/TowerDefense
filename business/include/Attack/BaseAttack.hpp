@@ -5,6 +5,7 @@
 #include "Enemy/BaseEnemy.hpp"
 #include "Utils/Drawable.hpp"
 #include "Utils/Moveable.hpp"
+
 /**
  * @class BaseAttack
  * @brief Represent the base class for all attacks to inherit

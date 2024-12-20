@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Enemy/BaseEnemy.hpp"
+
 class EnemyFactory {
 public:
   // remove copying

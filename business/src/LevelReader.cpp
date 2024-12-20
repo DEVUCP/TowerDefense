@@ -1,5 +1,4 @@
 #include "LevelReader.hpp"
-
 #include <Attack/AttackManager.hpp>
 #include <Enemy/EnemyManager.hpp>
 #include <Level.hpp>
