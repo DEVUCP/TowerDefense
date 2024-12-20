@@ -8,5 +8,6 @@ BaseTile::BaseTile(float x, float y, TileType type)
 
 Vector<float> BaseTile::get_center() const {
   unsigned tile_size = GameSettings::get_instance().get_tile_size();
-  return Vector<float>(tile_size / 2, tile_size / 2)
+  return Vector<float>(tile_size / 2.0, tile_size / 2.0);
 }
+
