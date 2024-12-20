@@ -26,3 +26,12 @@ void TowerManager::update(std::vector<std::shared_ptr<BaseEnemy>>& enemies) {
         }
     }
 }
+
+void TowerManager::upgrade_tower(std::shared_ptr<BaseTower> tower, int upgrade_index) {
+    if (std::find(towers.begin(), towers.end(), tower) != towers.end()) {
+        tower->upgrade(upgrade_index);
+        std::cout << "Tower upgraded!" << std::endl;
+    } else {
+        std::cout << "Tower not found for upgrade!" << std::endl;
+    }
+}
