@@ -5,6 +5,7 @@
 #define BASE_DAMAGE 1.0f
 #define BASE_RANGE 1.0f
 
+// TODO: check the correct initialization for the sprite in BaseTower
 BaseTower::BaseTower()
     : Drawable(sprite, Vector<float>(0, 0)), position({0, 0}), range(BASE_RANGE), damage(BASE_DAMAGE), sprite(""), rotation("") {
     // Initialize upgrades
@@ -16,7 +17,7 @@ void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
     if (in_range(enemy)) {
         std::cout << "Attacking enemy at position: " << enemy->get_position()  << std::endl;
         enemy->invoke_damage(damage) ;
-        // Implement attack logic here
+        // TODO: Implement attack logic here
     }
 }
 
@@ -38,6 +39,7 @@ void BaseTower::upgrade(int upgrade_index) {
     }
 }
 
+// TODO: change base_price
 int BaseTower::get_sell_price() {
     int base_price = 200; // Example base price
     int upgrade_value = upgrades ? upgrades->get_cost() / 2 : 0; // Half of upgrade cost
