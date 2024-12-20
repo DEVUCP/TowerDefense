@@ -46,14 +46,19 @@ public:
    */
   void upgrade(int upgrade_index);
 
+  /**
+   * @brief Calculates the selling price of the tower.
+   *
+   * @return The sell price, including the base price and a portion of the applied upgrade costs.
+   */
   int get_sell_price();
 
 private:
-  std::shared_ptr<Upgrade> offer_upgrades;
-  std::shared_ptr<Upgrade> upgrades;
-  std::string rotation;
   Vector<int> position;           // The position of the tower on the map.
   float range;                    // The attack range of the tower.
   float damage;                   // The attack damage of the tower.
+  std::shared_ptr<Upgrade> offer_upgrades; // The upgrades available for the tower.
+  std::shared_ptr<Upgrade> upgrades;      // The upgrades currently applied to the tower.
   std::string sprite;             // The visual representation of the tower.
+  std::string rotation;           // The rotation state of the tower's sprite.
 };
