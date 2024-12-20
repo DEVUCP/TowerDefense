@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Utils/Vector.cpp"
+#include "Utils/Vector.hpp"
 
 /**
  * Invariant: origin will represent the origin (top-left most point)

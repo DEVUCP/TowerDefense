@@ -1,4 +1,3 @@
-
 #include "Utils/Moveable.hpp"
 #include <sched.h>
 #include "GameSettings.hpp"
