@@ -1,4 +1,4 @@
-#include "Collidable.hpp"
+#include "Utils/Collidable.hpp"
 
 Collidable::Collidable(float x, float y, float width, float height,
                        bool enabled)
