@@ -12,6 +12,7 @@
 #include <cassert>
 #include <filesystem>
 #include <fstream>
+#include "GameSettings.hpp"
 
 /*
 File Format:
@@ -49,6 +50,7 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   // Then, read the Map data
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
   std::list<std::shared_ptr<EnemyPathTile>> enemy_path;
+  auto len = GameSettings::get_instance().get_tile_size();
 
   for (int i = 0; i < 18; i++) {
     for (int j = 0; j < 28; j++) {
@@ -58,12 +60,15 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
       std::shared_ptr<BaseTile> tile;
 
       if (c == 'B') {
-        tile = std::make_shared<BuildableTile>();
+        tile = std::make_shared<BuildableTile>(static_cast<float>(i * len),
+                                               static_cast<float>(j * len));
       } else if (c == 'E') {
-        tile = std::make_shared<EnemyPathTile>();
+        tile = std::make_shared<EnemyPathTile>(static_cast<float>(i * len),
+                                               static_cast<float>(j * len));
         enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(tile));
       } else {
-        tile = std::make_shared<NonBuildableTile>();
+        tile = std::make_shared<NonBuildableTile>(static_cast<float>(i * len),
+                                                  static_cast<float>(j * len));
       }
 
       grid[i].push_back(tile);

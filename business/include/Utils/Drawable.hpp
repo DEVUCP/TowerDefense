@@ -3,6 +3,7 @@
 #include <string>
 #include "Utils/Vector.hpp"
 class Drawable {
+public:
   /**
    * @brief Constructor
    */
