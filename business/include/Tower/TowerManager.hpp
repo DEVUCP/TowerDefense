@@ -13,6 +13,8 @@ public:
 
     void upgrade_tower(std::shared_ptr<BaseTower> tower, int upgrade_index);
 
+    int sell_tower(std::shared_ptr<BaseTower> tower);
+
 private:
     std::vector<std::shared_ptr<BaseTower>> towers; // List of all towers managed by the TowerManager.
 };
