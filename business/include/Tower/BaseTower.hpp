@@ -14,6 +14,8 @@ public:
 
   void upgrade(int upgrade_index);
 
+  int get_sell_price();
+
 private:
   Vector<int> position;
   float range;

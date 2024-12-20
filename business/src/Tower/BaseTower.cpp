@@ -38,3 +38,8 @@ void BaseTower::upgrade(int upgrade_index) {
     }
 }
 
+int BaseTower::get_sell_price() {
+    int base_price = 200; // Example base price
+    int upgrade_value = upgrades ? upgrades->get_cost() / 2 : 0; // Half of upgrade cost
+    return base_price + upgrade_value;
+}
