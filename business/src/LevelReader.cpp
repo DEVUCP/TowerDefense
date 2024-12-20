@@ -51,9 +51,11 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
   std::list<std::shared_ptr<EnemyPathTile>> enemy_path;
   auto len = GameSettings::get_instance().get_tile_size();
+  auto row = GameSettings::get_instance().get_rows();
+  auto col = GameSettings::get_instance().get_columns();
 
-  for (int i = 0; i < 18; i++) {
-    for (int j = 0; j < 28; j++) {
+  for (int i = 0; i < row; i++) {
+    for (int j = 0; j < col; j++) {
       char c;
       file >> c;
 
