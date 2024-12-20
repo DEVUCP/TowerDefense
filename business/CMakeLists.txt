@@ -39,8 +39,9 @@ set(SOURCES # Sources
     src/Level.cpp
     src/LevelReader.cpp
     # Utils
-    src/Utils/Moveable.cpp
     src/Utils/Drawable.cpp
+    src/Utils/Moveable.cpp
+    src/Utils/Vector.cpp
     src/Utils/Collidable.cpp
     # Enemy
     src/Enemy/BaseEnemy.cpp

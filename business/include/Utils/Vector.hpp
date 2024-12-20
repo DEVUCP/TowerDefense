@@ -3,53 +3,67 @@
 #include <cassert>
 #include <cmath>
 
-static constexpr double EPS = 1e9;
-
+/**
+ * @brief Represents a 2D vector with basic operations like addition, subtraction, normalization, and more.
+ *
+ * @tparam T Type for the vector components.
+ * @tparam D Type for derived calculations (defaults to T).
+ */
 template <typename T, typename D = T>
 class Vector {
 public:
-  Vector(T x, T y) : x{x}, y{y} {}
-
-  /*
-   * @brief the Basic Operations on the vector: addition, subtracion,
-   * reverse_direction, and scalar product
+  /**
+   * @brief Constructor to initialize a vector with x and y components.
+   * 
+   * @param x The x-component of the vector.
+   * @param y The y-component of the vector.
    */
-  Vector operator+(Vector other) const { return {x + x, y + y}; }
-  Vector operator-(Vector other) const { return {x - x, y - y}; }
-  Vector operator-() const { return {-x, -y}; }
-  T operator*(Vector other) const { return x * other.x + other.y; }
+  Vector(T x, T y);
 
-  /*
-   * @brief Check Equality by comparing x's and y's
+  /**
+   * @brief Basic vector operations.
    */
-  bool operator==(Vector other) const { return x == other.x && y == other.y; }
+  Vector operator+(Vector other) const;
+  Vector operator-(Vector other) const;
+  Vector operator-() const;
+  T operator*(Vector other) const;
 
-  /*
-   * @brief Normalize a vector
+  /**
+   * @brief Equality check by comparing components.
    *
-   * @note Must check length is not equal to 0
+   * @param other The vector to compare.
+   * @return True if the vectors are equal, otherwise false.
    */
-  Vector normalize() {
-    T len = length();
-    assert(fabs(len) <= EPS);
+  bool operator==(Vector other) const;
 
-    return {x / len, y / len};
-  }
-
-  /*
-   * @brief Get the length of a vector
+  /**
+   * @brief Normalize the vector.
+   *
+   * @note Asserts that the length of the vector is not zero.
+   * @return The normalized vector.
    */
-  T length() { return std::sqrt(x * x + y * y); }
+  Vector normalize();
+
+  /**
+   * @brief Get the length (magnitude) of the vector.
+   * 
+   * @return The length of the vector.
+   */
+  T length();
 
 public:
-  T x;
-  T y;
+  T x; ///< The x-component of the vector.
+  T y; ///< The y-component of the vector.
 };
+
+/**
+ * @brief Scalar multiplication of a vector.
+ */
 template <typename T>
-Vector<T> operator*(Vector<T> vec, T value) {
-  return Vector<T>(vec.x * value, vec.y * value);
-}
+Vector<T> operator*(Vector<T> vec, T value);
+
+/**
+ * @brief Scalar multiplication of a vector (reverse order).
+ */
 template <typename T>
-Vector<T> operator*(T value, Vector<T> vec) {
-  return vec * value;
-}
+Vector<T> operator*(T value, Vector<T> vec);
