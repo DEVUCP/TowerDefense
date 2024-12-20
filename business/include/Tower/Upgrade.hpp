@@ -20,14 +20,37 @@ public:
      */
     Upgrade(std::string name, int cost, float range_increase, float damage_increase);
 
+    /**
+     * @brief Gets the name of the upgrade.
+     * 
+     * @return The name of the upgrade.
+     */
     std::string get_name() const;
+
+    /**
+     * @brief Gets the cost of the upgrade.
+     * 
+     * @return The cost of the upgrade.
+     */
     int get_cost() const;
+
+    /**
+     * @brief Gets the range increase provided by the upgrade.
+     * 
+     * @return The range increase value.
+     */
     float get_range_increase() const;
+
+    /**
+     * @brief Gets the damage increase provided by the upgrade.
+     * 
+     * @return The damage increase value.
+     */
     float get_damage_increase() const;
 
 private:
-    std::string name;        // Name of the upgrade
-    int cost;                // Cost to apply the upgrade
-    float range_increase;    // Increase in tower range
-    float damage_increase;   // Increase in tower damage
+    std::string name;        // The name of the upgrade.
+    int cost;                // The cost of the upgrade.
+    float range_increase;    // The increase in range provided by the upgrade.
+    float damage_increase;   // The increase in damage provided by the upgrade.
 };
