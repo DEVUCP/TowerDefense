@@ -14,3 +14,7 @@ int Upgrade::get_cost() const {
 float Upgrade::get_range_increase() const {
     return range_increase;
 }
+
+float Upgrade::get_damage_increase() const {
+    return damage_increase;
+}
