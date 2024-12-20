@@ -8,6 +8,8 @@ class BaseTower : public Drawable {
 public:
   BaseTower();
 
+  void init_attack(std::shared_ptr<BaseEnemy> enemy);
+
 private:
   Vector<int> position;
   float range;
