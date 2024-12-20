@@ -28,12 +28,8 @@ public:
   int get_sell_price();
 
 private:
-  Vector<int> position;
-  float range;
-  float damage;
   std::shared_ptr<Upgrade> offer_upgrades;
   std::shared_ptr<Upgrade> upgrades;
-  std::string sprite;
   std::string rotation;
   Vector<int> position;           // The position of the tower on the map.
   float range;                    // The attack range of the tower.
