@@ -16,3 +16,13 @@ void TowerManager::remove_tower(std::shared_ptr<BaseTower> tower) {
         std::cout << "Tower not found for removal!" << std::endl;
     }
 }
+
+void TowerManager::update(std::vector<std::shared_ptr<BaseEnemy>>& enemies) {
+    for (auto& tower : towers) {
+        for (auto& enemy : enemies) {
+            if (tower->in_range(enemy)) {
+                tower->init_attack(enemy);
+            }
+        }
+    }
+}
