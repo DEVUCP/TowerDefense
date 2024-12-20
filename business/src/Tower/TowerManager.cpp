@@ -1,6 +1,9 @@
 #include "Tower/TowerManager.hpp"
 #include <iostream>
 #include <algorithm>
+
+// TODO: Implement any missing functionalities instead of cout-ing it
+
 void TowerManager::add_tower(std::shared_ptr<BaseTower> tower) {
     towers.push_back(tower);
     // TODO: Implement adding a tower to the tile position
