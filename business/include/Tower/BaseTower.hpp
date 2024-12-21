@@ -64,10 +64,10 @@ private:
   unsigned damage;                 // The attack damage of the tower.
   unsigned attack_speed;           // The attack speed of the tower.
   std::shared_ptr<BaseTile> tile;  // The tile the tower is on
-  std::shared_ptr<Upgrade>
-      offer_upgrades;  // The upgrades available for the tower.
-  std::shared_ptr<Upgrade>
-      upgrades;          // The upgrades currently applied to the tower.
+  // std::shared_ptr<Upgrade>
+  //     offer_upgrades;  // The upgrades available for the tower.
+  // std::shared_ptr<Upgrade>
+  //     upgrades;          // The upgrades currently applied to the tower.
   std::string sprite;    // The visual representation of the tower.
   std::string rotation;  // The rotation state of the tower's sprite.
 };

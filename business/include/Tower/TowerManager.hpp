@@ -11,11 +11,11 @@
 class TowerManager {
 public:
   /**
-   * @brief Register a new tower to the game.
+   * @brief Check the tower range
    *
-   * @param tower The tower to be added.
+   * @param map The map that holds the tiles to check against
    */
-  void add_tower(std::shared_ptr<BaseTower> tower);
+  void check_tower_range(std::shared_ptr<Map> map) const;
 
   /**
    * @brief Removes a tower from the game.
@@ -29,7 +29,7 @@ public:
    *
    * @param tower The tower to be added.
    */
-  void check_towers_range(std::shared_ptr<Map> map) const;
+  void add_tower(std::shared_ptr<BaseTower> tower);
 
   /**
    * @brief Upgrades a specified tower.
