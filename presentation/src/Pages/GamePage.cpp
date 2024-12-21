@@ -4,9 +4,11 @@
 #include <memory>
 #include "Enums/Event.hpp"
 #include "GameSettings.hpp"
+#include "SFML/System/Vector2.hpp"
 
 GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   init_map();
+  init_sidebar();
 }
 
 void GamePage::on_pause() {}
@@ -31,6 +33,7 @@ void GamePage::render(std::shared_ptr<sf::RenderTarget> window) {
       map[i][j]->render(window);
     }
   }
+  window->draw(sidebar);
 }
 
 void GamePage::update() {
@@ -50,4 +53,14 @@ void GamePage::init_map() {
                                              static_cast<float>(j) * len);
     }
   }
+}
+
+void GamePage::init_sidebar() {
+  auto tile_len = GameSettings::get_instance().get_tile_size();
+  auto col = GameSettings::get_instance().get_columns();
+  auto h = GameSettings::get_instance().get_size().y;
+  auto sidebar_len = GameSettings::get_instance().get_sidebar_row_count();
+  sidebar.setPosition(col * tile_len, 0);
+  sidebar.setSize(sf::Vector2f(col * tile_len, h));
+  sidebar.setFillColor(sf::Color(109, 70, 33));
 }

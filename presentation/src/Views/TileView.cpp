@@ -4,15 +4,18 @@
 #include "GameSettings.hpp"
 #include "SFML/Graphics/Rect.hpp"
 
-std::vector<std::string> buildables = {
+static std::vector<std::string> buildables = {
     "./assets/textures/tiles/BuildableTile1.png",
     "./assets/textures/tiles/BuildableTile2.png",
     "./assets/textures/tiles/BuildableTile3.png",
     "./assets/textures/tiles/BuildableTile4.png",
 };
-std::vector<int> buildables_weights = {
-    25, 1, 1, 1};       // Weights for each texture (must match buildables size)
-std::random_device rd;  // Non-deterministic random number generator
+static std::vector<int> buildables_weights = {
+    25, 1, 1, 1};  // Weights for each texture (must match buildables size)
+static std::vector<std::string> nonbuildables = {
+
+};
+std::random_device rd;   // Non-deterministic random number generator
 std::mt19937 gen(rd());  // Seed the generator
 
 TileView::TileView(float x, float y) : x{x}, y{y} {

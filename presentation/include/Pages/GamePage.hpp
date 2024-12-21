@@ -22,7 +22,12 @@ private:
    */
   void init_map();
 
+  /*
+   * @initialize the sidebar
+   */
+  void init_sidebar();
+
 private:
   std::vector<std::vector<std::shared_ptr<TileView>>> map;
-  sf::RectangleShape shape;
+  sf::RectangleShape sidebar;
 };

@@ -50,6 +50,7 @@ set(SOURCES # Sources
     src/Enemy/EnemyManager.cpp
     # Map
     src/Map/Map.cpp
+    src/Map/BaseTile.cpp
     src/Map/BuildableTile.cpp
     src/Map/NonBuildableTile.cpp
     src/Map/EnemyPathTile.cpp)

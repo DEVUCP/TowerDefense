@@ -45,7 +45,7 @@ public:
   /**
    * @brief Check if object has reached its destination
    */
-  bool is_reached_destination() const;
+  bool has_reached_destination() const;
 
 protected:
   /**
@@ -61,9 +61,6 @@ protected:
    * @details Inherited by the child classes to adjust their behavior
    */
   virtual void on_out_of_board() = 0;
-
-private:
-  bool has_reached_destination() const;
 
 private:
   Vector<float> position;

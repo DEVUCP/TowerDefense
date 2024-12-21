@@ -9,7 +9,7 @@ Moveable::Moveable(float x, float y, float velocity, Vector<float> destination)
 
 void Moveable::move_next() {
   if (is_out_of_board()) on_out_of_board();
-  if (is_reached_destination()) on_reach();
+  if (has_reached_destination()) on_reach();
 
   this->position = this->position + unit_direction * this->velocity;
 }

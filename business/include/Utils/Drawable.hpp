@@ -8,7 +8,7 @@ public:
   /**
    * @brief Constructor
    */
-  Drawable(const std::string& sprite, Vector<float> size);
+  Drawable(std::string sprite, Vector<float> size);
 
   /**
    * @brief Getter for size

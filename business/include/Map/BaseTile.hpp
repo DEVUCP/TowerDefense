@@ -43,9 +43,12 @@ public:
   Vector<float> get_center() const;
 
   /**
+   * @brief Getter for type
+   */
+  TileType get_type() const;
+
+  /**
    * @brief Getter for position
-   *
-   * @details used in the enemy position getter for the tower
    */
   Vector<float> get_position() const;
 

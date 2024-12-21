@@ -21,8 +21,7 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
         std::make_unique<LevelButton>(startx + column * offsetx,  // X-position
                                       starty + row * offsety,     // Y-position
                                       i + 1);
-    // btn->set_handler([=]() {  });
-    btn->set_handler([this]() {
+    btn->set_handler([this, i]() {
       // Game::get_instance().init_level(i + 1);
       notify_observers(Event::GAME_PAGE_SWITCH);
     });
