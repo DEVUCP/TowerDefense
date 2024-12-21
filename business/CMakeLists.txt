@@ -38,6 +38,7 @@ set(SOURCES # Sources
     src/GameSettings.cpp
     src/Level.cpp
     src/LevelReader.cpp
+    src/WaveManager.cpp
     # Utils
     src/Utils/Drawable.cpp
     src/Utils/Moveable.cpp
@@ -45,6 +46,7 @@ set(SOURCES # Sources
     src/Utils/Collidable.cpp
     # Enemy
     src/Enemy/BaseEnemy.cpp
+    src/Enemy/EnemyFactory.cpp
     src/Enemy/EnemyManager.cpp
     # Map
     src/Map/Map.cpp

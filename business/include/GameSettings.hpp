@@ -16,18 +16,23 @@ public:
   /*
    * @brief Return the size of the window
    */
-  Vector<unsigned> get_size();
+  Vector<unsigned> get_size() const;
 
   /*
    * @brief Return the size of a tile
    */
-  unsigned get_tile_size();
+  unsigned get_tile_size() const;
 
   /*
    * @brief Return the number of rows and columns in the game
    */
-  unsigned get_rows();
-  unsigned get_columns();
+  unsigned get_rows() const;
+  unsigned get_columns() const;
+
+  /*
+   * @brief Return the number of rows for the sidebar
+   */
+  unsigned get_sidebar_row_count() const;
 
 private:
   GameSettings() = default;

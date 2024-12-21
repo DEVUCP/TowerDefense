@@ -12,7 +12,10 @@ GameSettings& GameSettings::get_instance() {
   return gs;
 }
 
-Vector<unsigned> GameSettings::get_size() { return {WIDTH, HEIGHT}; }
-unsigned GameSettings::get_tile_size() { return TILE_LENGTH; }
-unsigned GameSettings::get_rows() { return ROW_NUM; }
-unsigned GameSettings::get_columns() { return COLUMN_NUM; }
+Vector<unsigned> GameSettings::get_size() const { return {WIDTH, HEIGHT}; }
+unsigned GameSettings::get_tile_size() const { return TILE_LENGTH; }
+unsigned GameSettings::get_rows() const { return ROW_NUM; }
+unsigned GameSettings::get_columns() const { return COLUMN_NUM; }
+unsigned GameSettings::get_sidebar_row_count() const {
+  return SIDEBAR_WIDTH_COLS;
+}

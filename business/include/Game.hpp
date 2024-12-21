@@ -26,7 +26,7 @@ public:
   static std::shared_ptr<Level> init_level(int level_num);
 
 private:
-  Game();  // < private constructor
+  Game() = default;  // < private constructor
 
 private:
   std::shared_ptr<Level> lvl;  // < if null, the game hasn't started
