@@ -3,7 +3,7 @@
 #include <memory>
 #include "Components/BackgroundManager.hpp"
 #include "Components/PageFactory.hpp"
-#include "Enums/Events/PageEvents.hpp"
+#include "Enums/Event.hpp"
 #include "Enums/PageType.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
@@ -21,7 +21,9 @@ void PageManager::go_to_page(PageType type) {
   auto page = PageFactory::get_instance().create_page(type, target_width,
                                                       target_height);
   auto self = shared_from_this();
-  page->register_observer<PageEvent>(self);
+  page->register_observer(self);
+  page->register_observer(back_mng);
+  page->on_unpause();
   pages.push(page);
 }
 
@@ -57,16 +59,21 @@ void PageManager::update() {
   pages.top()->update();
 }
 
-void PageManager::onEvent(PageEvent evt) {
+void PageManager::onEvent(Event evt) {
   switch (evt) {
-    case MENU_MENU_SWITCH:
+    case Event::MENU_MENU_SWITCH:
       go_to_page(PageType::MAIN_MENU);
       break;
-    case LEVEL_PAGE_SWITCH:
+    case Event::LEVEL_PAGE_SWITCH:
       go_to_page(PageType::LEVELS_PAGE);
       break;
-    case GO_BACK_SWITCH:
+    case Event::GAME_PAGE_SWITCH:
+      go_to_page(PageType::GAME_PAGE);
+      break;
+    case Event::GO_BACK_SWITCH:
       go_back();
+      break;
+    default:
       break;
   }
 }

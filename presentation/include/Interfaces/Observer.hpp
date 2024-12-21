@@ -1,16 +1,8 @@
 #pragma once
 
-#include <string>
+#include "Enums/Event.hpp"
 
-class IObserver {
-public:
-  ~IObserver() = default;
-};
-/*
- * @brief An observer to an Event
- */
-template <typename Event>
-class Observer : public IObserver {
+class Observer {
 public:
   /*
    * @brief Handle when an event has been done

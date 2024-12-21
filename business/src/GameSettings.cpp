@@ -1,10 +1,11 @@
 #include "GameSettings.hpp"
 
-#define WIDTH 1680
-#define HEIGHT 1080
-#define TILE_LENGTH 60
-#define ROW_NUM 18
-#define COLUMN_NUM 28
+#define SIDEBAR_WIDTH_COLS (5)
+#define TILE_LENGTH (60)
+#define WIDTH (1920 - TILE_LENGTH * SIDEBAR_WIDTH_COLS)
+#define HEIGHT (1080)
+#define ROW_NUM (HEIGHT / TILE_LENGTH)
+#define COLUMN_NUM (WIDTH / TILE_LENGTH)
 
 GameSettings& GameSettings::get_instance() {
   static GameSettings gs;

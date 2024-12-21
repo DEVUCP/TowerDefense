@@ -1,12 +1,14 @@
 #include "Components/BackgroundManager.hpp"
+#include <iostream>
 #include <memory>
-#include "Enums/Events/BackgroundEvents.hpp"
+#include "Enums/Event.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "SFML/Graphics/Texture.hpp"
 
 BackgroundManager::BackgroundManager(BackgroundType type, unsigned target_width,
-                                     unsigned target_height) {
+                                     unsigned target_height, bool on)
+    : on{on} {
   load_textures();
   background.setTexture(image_default);
   background.setPosition(0, 0);
@@ -21,22 +23,26 @@ void BackgroundManager::load_textures() {
 }
 
 void BackgroundManager::render(std::shared_ptr<sf::RenderTarget> window) {
-  window->draw(background);
+  if (on) window->draw(background);
 }
 
 void BackgroundManager::handle_events(EventData) {}
 void BackgroundManager::update() {}
 
-void BackgroundManager::onEvent(BackgroundEvents evt) {
+void BackgroundManager::onEvent(Event evt) {
   switch (evt) {
-    case DEFAULT_SWITCH:
+    case Event::BG_DEFAULT_SWITCH:
+      on = true;
       background.setTexture(image_default);
       break;
-    case SHADOW_SWITCH:
+    case Event::BG_SHADOW_SWITCH:
+      on = true;
       background.setTexture(image_shadow);
       break;
-    case CLEAR:
-      // TODO: Figure out what to do
+    case Event::BG_CLEAR:
+      on = false;
+      break;
+    default:
       break;
   }
 }

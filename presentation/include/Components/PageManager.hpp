@@ -3,7 +3,6 @@
 #include <stack>
 #include "Components/BackgroundManager.hpp"
 #include "Components/Page.hpp"
-#include "Enums/Events/PageEvents.hpp"
 #include "Enums/PageType.hpp"
 #include "Interfaces/EventData.hpp"
 #include "Interfaces/Observer.hpp"
@@ -14,7 +13,7 @@
  *  - A page is always in there
  */
 class PageManager : public Widget,
-                    public Observer<PageEvent>,
+                    public Observer,
                     public std::enable_shared_from_this<PageManager> {
 public:
   /*
@@ -48,7 +47,7 @@ public:
   void handle_events(EventData) override;
   void render(std::shared_ptr<sf::RenderTarget> window) override;
   void update() override;
-  void onEvent(PageEvent) override;
+  void onEvent(Event) override;
 
 private:
   std::stack<std::shared_ptr<Page>>

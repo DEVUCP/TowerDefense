@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Interfaces/Widget.hpp"
+#include "SFML/Graphics/RectangleShape.hpp"
 class TileView : public Widget {
 public:
   TileView(float x, float y);
+  ~TileView() = default;
 
   /*
    * Overrided Methods
@@ -17,4 +19,5 @@ private:
   float y;
   sf::Texture texture;
   sf::Sprite sprite;
+  sf::RectangleShape shape;
 };

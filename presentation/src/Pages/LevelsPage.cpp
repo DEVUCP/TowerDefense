@@ -1,12 +1,8 @@
 #include "Pages/LevelsPage.hpp"
-#include <iostream>
 #include <memory>
 #include <vector>
 #include "Components/IconButton.hpp"
 #include "Components/LevelButton.hpp"
-#include "Components/TextButton.hpp"
-#include "Enums/Events/PageEvents.hpp"
-#include "Game.hpp"
 #include "Widgets/MuteButton.hpp"
 
 LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
@@ -25,7 +21,7 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
                                       starty + row * offsety,     // Y-position
                                       i + 1);
     // btn->set_handler([=]() { Game::get_instance().init_level(i + 1); });
-    btn->set_handler([=]() { std::cout << i + 1 << std::endl; });
+    btn->set_handler([this]() { notify_observers(Event::GAME_PAGE_SWITCH); });
     levels_btns.push_back(std::move(btn));  // Level number
   }
 
@@ -33,14 +29,18 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   go_back =
       std::make_shared<IconButton>("./assets/buttons/GoBack.png",
                                    "./assets/buttons/GoBack_Hover.png", 60, 60);
-  go_back->set_handler([this]() { notify_observers(GO_BACK_SWITCH); });
+  go_back->set_handler([this]() { notify_observers(Event::GO_BACK_SWITCH); });
 
   // Initialize the mute button
   mute_button = std::make_shared<MuteButton>(60, h - 60);
 }
 
 void LevelsPage::on_pause() {}
-void LevelsPage::on_unpause() { mute_button->check_status(); }
+void LevelsPage::on_unpause() {
+  mute_button->check_status();
+
+  notify_observers(Event::BG_DEFAULT_SWITCH);
+}
 
 void LevelsPage::handle_events(EventData evt) {
   for (auto& btn : levels_btns) btn->handle_events(evt);

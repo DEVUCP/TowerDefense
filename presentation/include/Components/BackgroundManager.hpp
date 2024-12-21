@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Enums/Events/BackgroundEvents.hpp"
 #include "Interfaces/EventData.hpp"
 #include "Interfaces/Observer.hpp"
 #include "Interfaces/Widget.hpp"
@@ -9,12 +8,12 @@
 #define DEFAULT_IMAGE_ASSET "./assets/background/Default.png"
 #define SHADOW_IMAGE_ASSET "./assets/background/Shadow.png"
 
-class BackgroundManager : public Widget, Observer<BackgroundEvents> {
+class BackgroundManager : public Widget, public Observer {
 public:
   enum BackgroundType { DEFAULT, SHADOW };
 
 public:
-  BackgroundManager(BackgroundType, unsigned, unsigned);
+  BackgroundManager(BackgroundType, unsigned, unsigned, bool on = true);
   ~BackgroundManager() = default;
 
   /*
@@ -23,7 +22,7 @@ public:
   void handle_events(EventData) override;
   void render(std::shared_ptr<sf::RenderTarget> window) override;
   void update() override;
-  void onEvent(BackgroundEvents) override;
+  void onEvent(Event) override;
 
 private:
   /*
@@ -35,4 +34,5 @@ private:
   sf::Sprite background;
   sf::Texture image_default;
   sf::Texture image_shadow;
+  bool on;
 };

@@ -1,12 +1,7 @@
 #include "Pages/MainMenu.hpp"
-#include <iostream>
 #include <memory>
-#include <ostream>
-#include "Components/BackgroundManager.hpp"
-#include "Components/IconButton.hpp"
-#include "Components/MusicPlayer.hpp"
 #include "Components/TextButton.hpp"
-#include "Enums/Events/PageEvents.hpp"
+#include "Enums/Event.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "Widgets/MuteButton.hpp"
 
@@ -15,7 +10,8 @@ MainMenu::MainMenu(unsigned width, unsigned height)
   play_btn = std::make_shared<TextButton>("play", width / 2.f, height / 2.f,
                                           StandardButton::ButtonSize::LARGE,
                                           StandardButton::ButtonType::RECT);
-  play_btn->set_handler([this]() { notify_observers(LEVEL_PAGE_SWITCH); });
+  play_btn->set_handler(
+      [this]() { notify_observers(Event::LEVEL_PAGE_SWITCH); });
   about_btn = std::make_shared<TextButton>(
       "about", width / 2.f, height / 2.f + 200,
       StandardButton::ButtonSize::LARGE, StandardButton::ButtonType::RECT);
@@ -24,7 +20,10 @@ MainMenu::MainMenu(unsigned width, unsigned height)
 }
 
 void MainMenu::on_pause() {}
-void MainMenu::on_unpause() { mute_button->check_status(); }
+void MainMenu::on_unpause() {
+  mute_button->check_status();
+  notify_observers(Event::BG_DEFAULT_SWITCH);
+}
 
 void MainMenu::handle_events(EventData evt) {
   play_btn->handle_events(evt);
