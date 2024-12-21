@@ -17,7 +17,7 @@ public:
   /**
    * @brief Constructor
    *
-   * Initializes all member variables and sets up the base properties of the tower.
+   * @details Initializes all member variables and sets up the base properties of the tower.
    */
   BaseTower(int i, int j, unsigned range, unsigned attack_speed = 1);
 
@@ -31,10 +31,10 @@ public:
   void init_attack(std::shared_ptr<BaseEnemy> enemy);
 
   /**
-   * @brief Checks if the enemy is within the tower's attack range.
+   * @brief Checks range
    *
-   * @param enemy A shared pointer to the enemy to check.
-   * @return True if the enemy is within range, otherwise false.
+   * @details Use BFS to consider all `EnemyPathTile` tiles in range. If it has
+   * enemies, init an attack towards the first enemy there ()
    */
   bool in_range(std::shared_ptr<Map> map);
 
