@@ -19,7 +19,7 @@ public:
    *
    * @details Initializes all member variables and sets up the base properties of the tower.
    */
-  BaseTower(int i, int j, unsigned range, unsigned attack_speed = 1);
+  BaseTower(int i, int j, unsigned range, unsigned attack_speed = 1, unsigned attack_damage = 1);
 
   /**
    * @brief Initiates an attack on the specified enemy.
@@ -57,8 +57,8 @@ public:
 
 private:
   Vector<int> position;           // The position of the tower on the map.
-  float range;                    // The attack range of the tower.
-  float damage;                   // The attack damage of the tower.
+  unsigned range;                    // The attack range of the tower.
+  unsigned damage;                   // The attack damage of the tower.
   unsigned attack_speed;                   // The attack speed of the tower.
   std::shared_ptr<BaseTile> tile; // The tile the tower is on
   std::shared_ptr<Upgrade> offer_upgrades; // The upgrades available for the tower.
