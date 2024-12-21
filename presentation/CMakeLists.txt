@@ -34,6 +34,7 @@ set(HEADERS
     include/Components/PageFactory.hpp
     include/Components/Page.hpp
     include/Components/Title.hpp
+    include/Components/Sidebar.hpp
     # Widget
     include/Widgets/MuteButton.hpp
     # Views
@@ -60,6 +61,7 @@ set(SOURCES
     src/Components/PageManager.cpp
     src/Components/Page.cpp
     src/Components/Title.cpp
+    src/Components/Sidebar.cpp
     # Views
     src/Views/TileView.cpp
     # Widget

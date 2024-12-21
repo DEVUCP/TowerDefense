@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Components/Page.hpp"
+#include "Components/Sidebar.hpp"
 #include "Views/TileView.hpp"
 
 class GamePage : public Page {
@@ -29,5 +30,5 @@ private:
 
 private:
   std::vector<std::vector<std::shared_ptr<TileView>>> map;
-  sf::RectangleShape sidebar;
+  std::shared_ptr<Sidebar> sidebar;
 };

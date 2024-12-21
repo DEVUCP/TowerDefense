@@ -1,38 +1,58 @@
 #include "Views/TileView.hpp"
 #include <ctime>
+#include <iostream>
+#include <memory>
 #include <random>
+#include <stdexcept>
 #include "GameSettings.hpp"
+#include "Map/BaseTile.hpp"
 #include "SFML/Graphics/Rect.hpp"
 
 static std::vector<std::string> buildables = {
-    "./assets/textures/tiles/BuildableTile1.png",
-    "./assets/textures/tiles/BuildableTile2.png",
-    "./assets/textures/tiles/BuildableTile3.png",
-    "./assets/textures/tiles/BuildableTile4.png",
+    "./assets/textures/tiles/Buildables/1.png",
+    "./assets/textures/tiles/Buildables/2.png",
+    "./assets/textures/tiles/Buildables/3.png",
 };
-static std::vector<int> buildables_weights = {
-    25, 1, 1, 1};  // Weights for each texture (must match buildables size)
-static std::vector<std::string> nonbuildables = {
 
+static std::vector<std::string> nonbuildables = {
+    "./assets/textures/tiles/Nonbuildables/1.png",
+    "./assets/textures/tiles/Nonbuildables/2.png",
+    "./assets/textures/tiles/Nonbuildables/3.png",
+};
+static std::vector<std::string> enemypath = {
+    "./assets/textures/tiles/Enemypath/1.png",
+    "./assets/textures/tiles/Enemypath/2.png",
+    "./assets/textures/tiles/Enemypath/3.png",
 };
 std::random_device rd;   // Non-deterministic random number generator
 std::mt19937 gen(rd());  // Seed the generator
 
-TileView::TileView(float x, float y) : x{x}, y{y} {
-  std::discrete_distribution<> dist(buildables_weights.begin(),
-                                    buildables_weights.end());
-  texture.loadFromFile(buildables[dist(gen)]);
+TileView::TileView(std::shared_ptr<BaseTile> tile) : tile{tile} {
+  std::vector<std::string>* tiles = nullptr;
+
+  switch (tile->get_type()) {
+    case BaseTile::Buildable:
+      tiles = &buildables;
+      break;
+    case BaseTile::NonBuildable:
+      tiles = &nonbuildables;
+      break;
+    case BaseTile::EnemyPath:
+      tiles = &enemypath;
+      break;
+    default:
+      throw std::runtime_error("Not enough tiles");
+  }
+  std::uniform_int_distribution<> dist(0, tiles->size() - 1);
+  texture.loadFromFile(tiles->operator[](dist(gen)));
   sprite.setTexture(texture);
-  sprite.setPosition(x, y);
+  auto pos = tile->get_position();
+  sprite.setPosition(pos.x, pos.y);
 
   auto tile_len = GameSettings::get_instance().get_tile_size();
   auto bounds = sprite.getLocalBounds();
 
-  // sprite.setTextureRect(sf::IntRect(0, 127, 16, 127 + 16));
   sprite.setScale(tile_len / bounds.width, tile_len / bounds.height);
-  // shape.setPosition(x, y);
-  // shape.setSize(sf::Vector2f(60, 60));
-  // shape.setFillColor(sf::Color::White);
 }
 
 void TileView::handle_events(EventData data) {}

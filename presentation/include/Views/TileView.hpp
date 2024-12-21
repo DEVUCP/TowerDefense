@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Interfaces/Widget.hpp"
+#include "Map/BaseTile.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
 class TileView : public Widget {
 public:
-  TileView(float x, float y);
+  TileView(std::shared_ptr<BaseTile> tile);
   ~TileView() = default;
 
   /*
@@ -15,9 +16,8 @@ public:
   void update();
 
 private:
-  float x;
-  float y;
   sf::Texture texture;
   sf::Sprite sprite;
   sf::RectangleShape shape;
+  std::shared_ptr<BaseTile> tile;
 };

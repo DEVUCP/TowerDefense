@@ -33,6 +33,14 @@ public:
   virtual void render(std::shared_ptr<sf::RenderTarget> window) override = 0;
   virtual void update() override = 0;
 
+  /**
+   * @brief Scale the width/height of the business to the target
+   */
+  float scale_width(float val);
+  float scale_height(float val);
+  unsigned scale_width(unsigned val);
+  unsigned scale_height(unsigned val);
+
 protected:
   unsigned target_width;
   unsigned target_height;
