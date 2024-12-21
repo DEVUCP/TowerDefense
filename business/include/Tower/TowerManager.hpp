@@ -3,7 +3,6 @@
 #include <vector>
 #include <memory>
 #include "Tower/BaseTower.hpp"
-#include "Enemy/BaseEnemy.hpp"
 
 /**
  * @brief Manages all towers in the game, handling their placement, upgrades, and interactions with enemies.
