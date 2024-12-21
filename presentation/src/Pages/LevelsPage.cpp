@@ -3,6 +3,7 @@
 #include <vector>
 #include "Components/IconButton.hpp"
 #include "Components/LevelButton.hpp"
+#include "Game.hpp"
 #include "Widgets/MuteButton.hpp"
 
 LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
@@ -20,8 +21,11 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
         std::make_unique<LevelButton>(startx + column * offsetx,  // X-position
                                       starty + row * offsety,     // Y-position
                                       i + 1);
-    // btn->set_handler([=]() { Game::get_instance().init_level(i + 1); });
-    btn->set_handler([this]() { notify_observers(Event::GAME_PAGE_SWITCH); });
+    // btn->set_handler([=]() {  });
+    btn->set_handler([this]() {
+      // Game::get_instance().init_level(i + 1);
+      notify_observers(Event::GAME_PAGE_SWITCH);
+    });
     levels_btns.push_back(std::move(btn));  // Level number
   }
 
