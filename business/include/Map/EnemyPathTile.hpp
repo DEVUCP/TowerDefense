@@ -16,6 +16,11 @@ public:
    */
   void remove_enemy(std::shared_ptr<BaseEnemy>);
 
+  /*
+   * @brief Getter for enemies
+   */
+  std::vector<std::shared_ptr<BaseEnemy>> get_enemies() const;
+
 private:
   std::vector<std::shared_ptr<BaseEnemy>> enemies;
 };
