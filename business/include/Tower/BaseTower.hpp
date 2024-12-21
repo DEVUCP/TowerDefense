@@ -2,7 +2,9 @@
 
 #include "Enemy/BaseEnemy.hpp"
 #include "Upgrade.hpp"
+#include "Map/BaseTile.hpp"
 #include "Utils/Drawable.hpp"
+#include "Utils/Vector.hpp"
 
 /**
  * @brief Represents the base functionality of a tower in the game.
@@ -17,7 +19,7 @@ public:
    *
    * Initializes all member variables and sets up the base properties of the tower.
    */
-  BaseTower();
+  BaseTower(int i, int j, unsigned range, unsigned attack_speed = 1);
 
   /**
    * @brief Initiates an attack on the specified enemy.
@@ -57,6 +59,8 @@ private:
   Vector<int> position;           // The position of the tower on the map.
   float range;                    // The attack range of the tower.
   float damage;                   // The attack damage of the tower.
+  unsigned attack_speed;                   // The attack speed of the tower.
+  std::shared_ptr<BaseTile> tile; // The tile the tower is on
   std::shared_ptr<Upgrade> offer_upgrades; // The upgrades available for the tower.
   std::shared_ptr<Upgrade> upgrades;      // The upgrades currently applied to the tower.
   std::string sprite;             // The visual representation of the tower.

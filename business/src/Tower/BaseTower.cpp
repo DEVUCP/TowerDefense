@@ -1,13 +1,15 @@
+#include <iostream>
 #include "Tower/BaseTower.hpp"
 #include "Tower/Upgrade.hpp"
-#include <iostream>
+#include "Enemy/BaseEnemy.hpp"
+#include "Map/Map.hpp"
+#include "Map/EnemyPathTile.hpp"
 
 #define BASE_DAMAGE 1.0f
-#define BASE_RANGE 1.0f
 
 // TODO: check the correct initialization for the sprite in BaseTower
-BaseTower::BaseTower()
-    : Drawable(sprite, Vector<float>(0, 0)), position({0, 0}), range(BASE_RANGE), damage(BASE_DAMAGE), sprite(""), rotation("") {
+BaseTower::BaseTower(int i, int j, unsigned range, unsigned attack_speed)
+    : Drawable(sprite, Vector<float>(0, 0)), position({i, j}), range(range), attack_speed(attack_speed), damage(BASE_DAMAGE), sprite(""), rotation("") {
     // Initialize upgrades
     offer_upgrades = std::make_shared<Upgrade>("Default Upgrade", 100, 10.0f, 5.0f);
     upgrades = nullptr;
