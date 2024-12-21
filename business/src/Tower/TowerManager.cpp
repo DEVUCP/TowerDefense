@@ -21,16 +21,6 @@ void TowerManager::remove_tower(std::shared_ptr<BaseTower> tower) {
     }
 }
 
-void TowerManager::update(std::vector<std::shared_ptr<BaseEnemy>>& enemies) {
-    for (auto& tower : towers) {
-        for (auto& enemy : enemies) {
-            if (tower->in_range(enemy)) {
-                tower->init_attack(enemy);
-            }
-        }
-    }
-}
-
 void TowerManager::upgrade_tower(std::shared_ptr<BaseTower> tower, int upgrade_index) {
     if (std::find(towers.begin(), towers.end(), tower) != towers.end()) {
         tower->upgrade(upgrade_index);

@@ -11,7 +11,7 @@
 class TowerManager {
 public:
     /**
-     * @brief Adds a new tower to the game.
+     * @brief Register a new tower to the game.
      * 
      * @param tower The tower to be added.
      */
@@ -25,11 +25,11 @@ public:
     void remove_tower(std::shared_ptr<BaseTower> tower);
 
     /**
-     * @brief Updates all towers, including their attacks on enemies.
+     * @brief Register a new tower to the game.
      * 
-     * @param enemies The list of enemies in the game.
+     * @param tower The tower to be added.
      */
-    void update(std::vector<std::shared_ptr<BaseEnemy>>& enemies);
+    void check_towers_range(std::shared_ptr<Map> map) const;
 
     /**
      * @brief Upgrades a specified tower.
