@@ -31,6 +31,11 @@ public:
    */
   std::shared_ptr<BaseTile> map_coords_to_tile(float x, float y) const;
 
+  /**
+   * @brief Return the tile at given indices
+   */
+  std::shared_ptr<BaseTile> get_tile(int i, int j) const;
+
 private:
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
   std::list<std::shared_ptr<EnemyPathTile>> enemy_path;
