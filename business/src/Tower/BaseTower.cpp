@@ -1,4 +1,7 @@
 #include <iostream>
+#include <queue>
+#include <cmath>
+#include <set>
 #include "Tower/BaseTower.hpp"
 #include "Tower/Upgrade.hpp"
 #include "Enemy/BaseEnemy.hpp"
@@ -16,18 +19,61 @@ BaseTower::BaseTower(int i, int j, unsigned range, unsigned attack_speed)
 }
 
 void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
-    if (in_range(enemy)) {
-        std::cout << "Attacking enemy at position: " << enemy->get_position()  << std::endl;
-        enemy->invoke_damage(damage) ;
-        // TODO: Implement attack logic here
-    }
+    std::cout << "Attacking enemy at position: " << enemy->get_position()  << std::endl;
+    enemy->invoke_damage(damage) ;
+    // TODO: Implement attack logic here
 }
 
-bool BaseTower::in_range(std::shared_ptr<BaseEnemy> enemy) {
-  Vector<float> enemy_position = enemy->get_position()->get_position();
-    float distance = std::sqrt(std::pow(position.x - enemy_position.x, 2) + 
-                               std::pow(position.y - enemy_position.y, 2));
-    return distance <= range;
+bool BaseTower::in_range(std::shared_ptr<Map> map) {
+    if (!map) return false;
+
+    // Starting position of the tower
+    auto start_tile = map->get_tile(position.x, position.y);
+    if (!start_tile) return false;
+
+    // BFS setup: Pair contains the tile and current depth
+    std::queue<std::pair<std::shared_ptr<BaseTile>, int>> to_visit;
+    std::set<std::shared_ptr<BaseTile>> visited;
+
+    to_visit.push({start_tile, 0});
+    visited.insert(start_tile);
+
+    while (!to_visit.empty()) {
+        auto [current_tile, depth] = to_visit.front();
+        to_visit.pop();
+
+        // Stop if the depth exceeds the range
+        if (depth > static_cast<int>(range)) continue;
+
+        // Check if the tile is an EnemyPathTile
+        auto enemy_path_tile = std::dynamic_pointer_cast<EnemyPathTile>(current_tile);
+        if (enemy_path_tile) {
+            auto enemies = enemy_path_tile->get_enemies();
+            if (!enemies.empty()) {
+                // Attack the first enemy found
+                init_attack(enemies.front());
+                return true;
+            }
+        }
+
+        // Add unvisited neighbors to the BFS queue
+        for (int dx = -1; dx <= 1; ++dx) {
+            for (int dy = -1; dy <= 1; ++dy) {
+                if (dx == 0 && dy == 0) continue; // Skip the current tile
+
+                int neighbor_x = position.x + dx;
+                int neighbor_y = position.y + dy;
+
+                auto neighbor_tile = map->get_tile(neighbor_x, neighbor_y);
+                if (neighbor_tile && visited.find(neighbor_tile) == visited.end()) {
+                    to_visit.push({neighbor_tile, depth + 1});
+                    visited.insert(neighbor_tile);
+                }
+            }
+        }
+    }
+
+    return false; // No enemies found within range
 }
 
 void BaseTower::upgrade(int upgrade_index) {

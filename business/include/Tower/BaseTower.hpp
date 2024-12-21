@@ -36,7 +36,7 @@ public:
    * @param enemy A shared pointer to the enemy to check.
    * @return True if the enemy is within range, otherwise false.
    */
-  bool in_range(std::shared_ptr<BaseEnemy> enemy);
+  bool in_range(std::shared_ptr<Map> map);
 
   /**
    * @brief Upgrades the tower based on the selected upgrade index.
