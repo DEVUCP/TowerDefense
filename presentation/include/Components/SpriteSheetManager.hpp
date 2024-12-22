@@ -70,4 +70,5 @@ private:
   unsigned maximum_count_per_row;
   sf::Clock clock;
   sf::Time time_elapsed;
+  unsigned desired_x, desired_y;
 };

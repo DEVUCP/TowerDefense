@@ -12,9 +12,14 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   // TODO: This is Registration for LeafBug. Make it dynamic tomorrow
   sheet_mng.register_collection("DOWN_MOVEMENT", 0, 12);
   sheet_mng.set_collection("DOWN_MOVEMENT");
-  sheet_mng.set_width(64);
-  sheet_mng.set_height(64);
+  sheet_mng.set_width(SPRITE_WIDTH);
+  sheet_mng.set_height(SPRITE_HEIGHT);
   sheet_mng.set_initial_sprite(sprite);
+
+  // Scale up to desired
+  sprite.setScale(
+      sf::Vector2f(static_cast<float>(DESIRED_SPRITE_WIDTH) / SPRITE_WIDTH,
+                   static_cast<float>(DESIRED_SPRITE_HEIGHT) / SPRITE_HEIGHT));
 }
 
 void EnemyView::handle_events(EventData evt) {}
