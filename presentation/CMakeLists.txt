@@ -35,10 +35,12 @@ set(HEADERS
     include/Components/Page.hpp
     include/Components/Title.hpp
     include/Components/Sidebar.hpp
+    include/Components/SpriteSheetManager.hpp
     # Widget
     include/Widgets/MuteButton.hpp
     # Views
     include/Views/TileView.hpp
+    include/Views/EnemyView.hpp
     # Pages
     include/Pages/MainMenu.hpp
     include/Pages/LevelsPage.hpp
@@ -62,8 +64,10 @@ set(SOURCES
     src/Components/Page.cpp
     src/Components/Title.cpp
     src/Components/Sidebar.cpp
+    src/Components/SpriteSheetManager.cpp
     # Views
     src/Views/TileView.cpp
+    src/Views/EnemyView.cpp
     # Widget
     src/Widgets/MuteButton.cpp
     # Pages

@@ -2,6 +2,7 @@
 
 #include "Components/Page.hpp"
 #include "Components/Sidebar.hpp"
+#include "Views/EnemyView.hpp"
 #include "Views/TileView.hpp"
 
 class GamePage : public Page {
@@ -30,5 +31,6 @@ private:
 
 private:
   std::vector<std::vector<std::shared_ptr<TileView>>> map;
+  std::vector<std::shared_ptr<EnemyView>> enemies;
   std::shared_ptr<Sidebar> sidebar;
 };

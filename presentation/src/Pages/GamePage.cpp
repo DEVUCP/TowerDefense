@@ -3,16 +3,23 @@
 #include <iostream>
 #include <memory>
 #include "Components/MusicPlayer.hpp"
+#include "Enemy/Enemies/LeafBug.hpp"
 #include "Enums/Event.hpp"
 #include "GameSettings.hpp"
 #include "Map/BuildableTile.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Map/NonBuildableTile.hpp"
 #include "SFML/System/Vector2.hpp"
+#include "Utils/Vector.hpp"
+#include "Views/EnemyView.hpp"
 
 GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   init_map();
   init_sidebar();
+  // TODO: Remove this temporary test for EnemyView
+  auto enm = std::make_shared<LeafBug>(500, 500, Vector<float>(600, 600));
+  auto view = std::make_shared<EnemyView>(enm);
+  enemies.push_back(view);
 }
 
 void GamePage::on_pause() {}
@@ -34,12 +41,13 @@ void GamePage::handle_events(EventData evt) {
 }
 
 void GamePage::render(std::shared_ptr<sf::RenderTarget> window) {
-  auto row = map.size();
-  auto col = map[0].size();
-  for (int i = 0; i < row; i++) {
-    for (int j = 0; j < col; j++) {
-      map[i][j]->render(window);
+  for (auto& row : map) {
+    for (auto tl : row) {
+      tl->render(window);
     }
+  }
+  for (auto& enm : enemies) {
+    enm->render(window);
   }
   sidebar->render(window);
 }
@@ -47,6 +55,9 @@ void GamePage::render(std::shared_ptr<sf::RenderTarget> window) {
 void GamePage::update() {
   // Here calls Game::get_instance().get_level().run_iteration()
   sidebar->update();
+  for (auto& enm : enemies) {
+    enm->update();
+  }
 }
 
 // void GamePage::init_map() {
