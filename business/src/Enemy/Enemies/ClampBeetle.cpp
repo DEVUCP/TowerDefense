@@ -2,4 +2,4 @@
 
 ClampBeetle::ClampBeetle(float x, float y, Vector<float> dest)
     : BaseEnemy(x, y, dest, initial_health, velocity, kill_coins,
-                EnemyType::LEAF_BUG) {}
+                EnemyType::CLAMP_BEETLE) {}
