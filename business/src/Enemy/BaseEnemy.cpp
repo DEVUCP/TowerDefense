@@ -24,3 +24,6 @@ void BaseEnemy::invoke_damage(float amount) {
 }
 
 BaseEnemy::EnemyType BaseEnemy::get_type() const { return type; }
+
+void BaseEnemy::on_reach() {}
+void BaseEnemy::on_out_of_board() {}

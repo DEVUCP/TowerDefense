@@ -10,6 +10,7 @@ public:
 
 public:
   LeafBug(float x, float y, Vector<float> dest);
+  virtual ~LeafBug() = default;
 
 private:
   virtual void on_reach() override;

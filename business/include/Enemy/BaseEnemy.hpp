@@ -19,6 +19,10 @@ public:
   BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
             float velocity, int kill_coins, EnemyType type);
   /**
+   * @brief virtual destructor
+   */
+  virtual ~BaseEnemy() = default;
+  /**
    * @brief Update the current tile to be the next tile
    *
    * @details, to do this, use width and height from
