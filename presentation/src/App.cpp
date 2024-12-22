@@ -8,8 +8,9 @@
 App::App() {
   // WARN: this order matters
   init_window();
-  MusicPlayer::get_instance().play(MusicPlayer::MAIN_MUSIC);
+  init_time();
   init_page_manager();
+  MusicPlayer::get_instance().play(MusicPlayer::MAIN_MUSIC);
 }
 
 void App::init_window() {
@@ -29,6 +30,7 @@ void App::run() {
     handle_events();
     update();
     render();
+    deltaTime = clock.restart();
   }
 }
 
@@ -42,7 +44,7 @@ void App::handle_events() {
   }
 }
 
-void App::update() { page_mng->update({deltaTime}); }
+void App::update() { page_mng->update({}); }
 
 void App::render() {
   window->clear();
@@ -51,3 +53,5 @@ void App::render() {
 
   window->display();
 }
+
+void App::init_time() { deltaTime = sf::Time::Zero; }

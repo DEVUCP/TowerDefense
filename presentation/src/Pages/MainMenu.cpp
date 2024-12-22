@@ -1,5 +1,6 @@
 #include "Pages/MainMenu.hpp"
 #include <memory>
+#include "Components/MusicPlayer.hpp"
 #include "Components/TextButton.hpp"
 #include "Enums/Event.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"

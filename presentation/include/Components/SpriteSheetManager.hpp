@@ -2,6 +2,8 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Graphics/Texture.hpp"
 
+#define ANIMATION_DELAY 50
+
 class SpriteSheetManager {
 private:
   struct SpriteCollectionInfo {
@@ -52,8 +54,11 @@ public:
   void set_collection(std::string);
 
   /**
-   * @brief Getter for sprite
+   * @brief Set Initial sprite in current collection
+   *
+   * @details Used to inialize the animation cycle
    */
+  void set_initial_sprite(sf::Sprite& sprite);
 
 private:
   unsigned width;
@@ -63,4 +68,6 @@ private:
   std::string current_collection;
   unsigned current_index;
   unsigned maximum_count_per_row;
+  sf::Clock clock;
+  sf::Time time_elapsed;
 };

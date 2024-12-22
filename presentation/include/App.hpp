@@ -18,6 +18,11 @@ private:
    */
   void init_window();
 
+  /**
+   * @brief Init Time
+   */
+  void init_time();
+
   /*
    * @brief Initialize the page manager
    */
