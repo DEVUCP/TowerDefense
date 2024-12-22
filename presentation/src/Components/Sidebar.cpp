@@ -23,7 +23,8 @@ void Sidebar::init_sidebar_bg() {
 
   // Calculate scale factors
   float scale_x = tile_len * sidebar_row / actual_width;
-  float scale_y = h / actual_height;
+  // float scale_y = h / actual_height;
+  float scale_y = 300 / actual_height;
 
   // Apply scaling
   sidebar_bg.setScale(scale_x, scale_y);
@@ -31,7 +32,7 @@ void Sidebar::init_sidebar_bg() {
 
 void Sidebar::init_content() {
   font = FontFactory::get_instance().get_primary_font();
-  std::vector<sf::Text*> texts = {&lives_t, &enemies_t, &score_t};
+  std::vector<sf::Text*> texts = {&lives_t, &coins_t, &score_t};
   int i = 0;
   auto tile_len = GameSettings::get_instance().get_tile_size();
   auto col = GameSettings::get_instance().get_columns();
@@ -43,7 +44,7 @@ void Sidebar::init_content() {
     i++;
   }
   lives_t.setString("Lives: 100");
-  enemies_t.setString("Enemies: 20/30");
+  coins_t.setString("Coins: 30");
   score_t.setString("Score: 20XP");
 }
 
@@ -52,7 +53,7 @@ void Sidebar::handle_events(EventData data) {}
 void Sidebar::render(std::shared_ptr<sf::RenderTarget> window) {
   window->draw(sidebar_bg);
   window->draw(lives_t);
-  window->draw(enemies_t);
+  window->draw(coins_t);
   window->draw(score_t);
 }
 void Sidebar::update() {}

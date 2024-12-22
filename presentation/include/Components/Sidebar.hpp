@@ -19,13 +19,11 @@ private:
   void init_content();
 
 private:
-  unsigned lives;
-  unsigned enemies_on_board;
-  unsigned enemies_on_total;
+  unsigned lives, coins, score;
   sf::Sprite sidebar_bg;
   sf::Texture sidebar_texture;
   sf::Font font;
   sf::Text lives_t;
-  sf::Text enemies_t;
+  sf::Text coins_t;
   sf::Text score_t;
 };
