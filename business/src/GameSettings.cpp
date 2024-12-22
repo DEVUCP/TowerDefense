@@ -1,7 +1,7 @@
 #include "GameSettings.hpp"
 
-#define SIDEBAR_WIDTH_COLS (5)
-#define TILE_LENGTH (60)
+#define TILE_LENGTH (120)
+#define SIDEBAR_WIDTH_COLS (3)
 #define WIDTH (1920 - TILE_LENGTH * SIDEBAR_WIDTH_COLS)
 #define HEIGHT (1080)
 #define ROW_NUM (HEIGHT / TILE_LENGTH)
