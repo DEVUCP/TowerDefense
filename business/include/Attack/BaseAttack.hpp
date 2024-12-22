@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include "Enemy/BaseEnemy.hpp"
-#include "Utils/Drawable.hpp"
 #include "Utils/Moveable.hpp"
 
 /**
@@ -12,12 +11,12 @@
  *
  * @note Most of the logic will be done by the callbacks in `Moveable`
  */
-class BaseAttack : public Moveable, Drawable {
+class BaseAttack : public Moveable {
 public:
   /**
    * @brief Constructor
    *
-   * @note Must call Moveable, and Drawable constructor
+   * @note Must call Moveable
    */
   BaseAttack(float x, float y, float velocity, Vector<float> target,
              const std::string& sprite, int damage);

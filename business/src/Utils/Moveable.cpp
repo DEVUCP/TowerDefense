@@ -20,12 +20,16 @@ bool Moveable::has_reached_destination() const {
 
 void Moveable::update_dest(Vector<float> destination) {
   this->dest_point = destination;
-  unit_direction = this->dest_point - this->position;
+  unit_direction = (this->dest_point - this->position).normalize();
 }
 
 bool Moveable::is_out_of_board() {
   Vector<unsigned> size = GameSettings::get_instance().get_size();
-  return this->position.x > size.x || this->position.y > size.y;
+  return this->position.x > size.x ||
+         this->position.y > size.y;  // < This line uses the fact that unsigned
+                                     // is never negative, so need to check
 }
 
 const float Moveable::get_rotation() const { return rotation; }
+
+void Moveable::set_velocity(int new_v) { velocity = new_v; }

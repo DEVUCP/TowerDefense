@@ -12,7 +12,6 @@ set(HEADERS
     include/LevelReader.hpp
     include/WaveManager.hpp
     # Utils
-    include/Utils/Drawable.hpp
     include/Utils/Moveable.hpp
     include/Utils/Vector.hpp
     include/Utils/Collidable.hpp
@@ -23,6 +22,10 @@ set(HEADERS
     include/Enemy/BaseEnemy.hpp
     include/Enemy/EnemyFactory.hpp
     include/Enemy/EnemyManager.hpp
+    # Enemies
+    include/Enemy/Enemies/LeafBug.hpp
+    include/Enemy/Enemies/MagmaCrab.hpp
+    include/Enemy/Enemies/ClampBeetle.hpp
     # Map
     include/Map/Map.hpp
     include/Map/BaseTile.hpp
@@ -40,14 +43,17 @@ set(SOURCES # Sources
     src/LevelReader.cpp
     src/WaveManager.cpp
     # Utils
-    src/Utils/Drawable.cpp
-    src/Utils/Moveable.cpp
     src/Utils/Vector.cpp
+    src/Utils/Moveable.cpp
     src/Utils/Collidable.cpp
     # Enemy
     src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyFactory.cpp
     src/Enemy/EnemyManager.cpp
+    # Enemies
+    src/Enemy/Enemies/LeafBug.cpp
+    src/Enemy/Enemies/MagmaCrab.cpp
+    src/Enemy/Enemies/ClampBeetle.cpp
     # Map
     src/Map/Map.cpp
     src/Map/BaseTile.cpp

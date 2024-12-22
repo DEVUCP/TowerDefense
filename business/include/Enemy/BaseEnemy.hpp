@@ -1,11 +1,11 @@
 #pragma once
 
 #include <memory>
+#include <queue>
 #include "Map/BaseTile.hpp"
 #include "Map/Map.hpp"
-#include "Utils/Drawable.hpp"
 #include "Utils/Moveable.hpp"
-class BaseEnemy : public Moveable, Drawable {
+class BaseEnemy : public Moveable {
 public:
   enum class EnemyType { LEAF_BUG = 0, MAGMA_CRAB, CLAMP_BEETLE };
   static constexpr int EnemyTypeCount = 3;
@@ -16,8 +16,8 @@ public:
    *
    * Initialize all variables and call parent constructors
    */
-  BaseEnemy(float x, float y, float velocity, std::shared_ptr<BaseTile>,
-            Vector<float> dest, const std::string& sprite, int kill_coins);
+  BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
+            float velocity, int kill_coins, EnemyType type);
   /**
    * @brief Update the current tile to be the next tile
    *
@@ -83,13 +83,12 @@ protected:
   virtual void on_killed() = 0;
 
 protected:
-  float health;
-  float damage;
-  float initial_health;
+  int health;
+  int initial_health;
   bool to_be_removed;  // < indicate if the enemy has invoked damage to player
                        // by -1 or has died due to an attack
   int kill_coins;      // represent the amount of money when killing this enemy
-  std::shared_ptr<BaseTile>
+  std::queue<std::shared_ptr<BaseTile>>
       current_tile;  // represent the current tile on which the enemy is
   EnemyType type;
 };

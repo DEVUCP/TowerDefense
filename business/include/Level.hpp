@@ -109,6 +109,10 @@ public:
   std::shared_ptr<AttackManager> get_attack_mng() const;
 
   /**
+   * @brief Getters for Map
+   */
+  std::shared_ptr<Map> get_map() const;
+  /**
    * @brief Get the number of levels available
    * LevelReader::get_instance().levels_count();
    */

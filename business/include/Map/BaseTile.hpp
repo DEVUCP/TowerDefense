@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Utils/Drawable.hpp"
 #include "Utils/Vector.hpp"
 
 class BaseAttack;  // Declare class without any interface. To use the interface,
@@ -10,7 +9,7 @@ class BaseAttack;  // Declare class without any interface. To use the interface,
  * @class BaseTile
  * @brief Represent the base class for all tiles to inherit
  */
-class BaseTile : public Drawable {
+class BaseTile {
 public:  // public types
   /**
    * @enum TileType

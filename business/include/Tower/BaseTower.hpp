@@ -3,7 +3,6 @@
 #include "Enemy/BaseEnemy.hpp"
 #include "Map/BaseTile.hpp"
 #include "Upgrade.hpp"
-#include "Utils/Drawable.hpp"
 #include "Utils/Vector.hpp"
 
 /**
@@ -12,7 +11,7 @@
  * Towers attack enemies, have a specific range, can be upgraded,
  * and can be sold for a price based on their current upgrades.
  */
-class BaseTower : public Drawable {
+class BaseTower {
 public:
   /**
    * @brief Constructor

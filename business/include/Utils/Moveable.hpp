@@ -47,6 +47,11 @@ public:
    */
   bool has_reached_destination() const;
 
+  /**
+   * @brief Change Velocity of an object
+   */
+  void set_velocity(int new_v);
+
 protected:
   /**
    * @brief A callback to run when the object reaches its destination

@@ -1,13 +1,14 @@
 #include "Enemy/BaseEnemy.hpp"
 #include "Utils/Moveable.hpp"
 
-BaseEnemy::BaseEnemy(float x, float y, float velocity,
-                     std::shared_ptr<BaseTile> current_tile, Vector<float> dest,
-                     const std::string& sprite, int kill_coins)
-    : Drawable(sprite, Vector<float>(0, 0)), Moveable(x, y, velocity, dest) {
-  this->current_tile = current_tile;
-  this->kill_coins = kill_coins;
-}
+BaseEnemy::BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
+                     float velocity, int kill_coins, EnemyType type)
+    : Moveable(x, y, velocity, dest),
+      kill_coins{kill_coins},
+      type{type},
+      health{initial_health},
+      initial_health{health},
+      to_be_removed(false) {}
 
 void BaseEnemy::handle_next_tile_redirection(std::shared_ptr<Map> map) {}
 
