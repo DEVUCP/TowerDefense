@@ -10,7 +10,7 @@ class LevelButton : public IButton {
 public:
   LevelButton(unsigned x, unsigned y, int num);
 
-  void render(std::shared_ptr<sf::RenderTarget> window) override;
+  void render(RenderData) override;
 
 private:
   int num;

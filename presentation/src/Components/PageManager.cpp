@@ -41,10 +41,10 @@ void PageManager::go_back() {
   };
 }
 
-void PageManager::render(std::shared_ptr<sf::RenderTarget> window) {
-  back_mng->render(window);
+void PageManager::render(RenderData ren) {
+  back_mng->render(ren);
   assert(pages.size());
-  pages.top()->render(window);
+  pages.top()->render(ren);
 }
 
 void PageManager::handle_events(EventData evt) {

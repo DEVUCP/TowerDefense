@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Components/TextButton.hpp"
-#include "SFML/Graphics/Texture.hpp"
+#include "Components/IButton.hpp"
 
 #define DEFAULT_FONT_SIZE 40
 #define LARGE_FONT_SIZE 70

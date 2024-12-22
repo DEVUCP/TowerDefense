@@ -57,7 +57,5 @@ TileView::TileView(std::shared_ptr<BaseTile> tile) : tile{tile} {
 
 void TileView::handle_events(EventData data) {}
 
-void TileView::render(std::shared_ptr<sf::RenderTarget> window) {
-  window->draw(sprite);
-}
+void TileView::render(RenderData ren) { ren.window->draw(sprite); }
 void TileView::update() {}

@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "Interfaces/EventData.hpp"
+#include "Interfaces/RenderData.hpp"
 #include "SFML/Graphics.hpp"
 
 /*
@@ -18,7 +19,7 @@ public:
   /*
    * @brief Render the widget
    */
-  virtual void render(std::shared_ptr<sf::RenderTarget> window) = 0;
+  virtual void render(RenderData) = 0;
 
   /*
    * @brief Update the widget state

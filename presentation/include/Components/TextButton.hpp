@@ -19,7 +19,7 @@ public:
   /*
    * @brief Render the text above the rectangle in the middle of the rect
    */
-  void render(std::shared_ptr<sf::RenderTarget> window) override;
+  void render(RenderData) override;
 
   /*
    * @brief Change button text

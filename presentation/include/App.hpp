@@ -42,4 +42,6 @@ private:
   std::shared_ptr<sf::RenderWindow> window;
   sf::Event event;
   std::shared_ptr<PageManager> page_mng;
+  sf::Clock clock;
+  sf::Time deltaTime;
 };

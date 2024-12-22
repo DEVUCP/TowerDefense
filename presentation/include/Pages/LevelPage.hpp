@@ -10,7 +10,7 @@ public:
   void on_pause() override;
   void on_unpause() override;
   void handle_events(EventData) override;
-  void render(std::shared_ptr<sf::RenderTarget> window) override;
+  void render(RenderData) override;
   void update() override;
 
 private:

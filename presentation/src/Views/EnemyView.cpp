@@ -22,6 +22,4 @@ void EnemyView::update() {
   sprite.setPosition(pos.x, pos.y);
   sheet_mng.next_sprite(sprite);
 }
-void EnemyView::render(std::shared_ptr<sf::RenderTarget> window) {
-  window->draw(sprite);
-}
+void EnemyView::render(RenderData ren) { ren.window->draw(sprite); }

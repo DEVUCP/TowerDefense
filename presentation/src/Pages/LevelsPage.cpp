@@ -53,8 +53,8 @@ void LevelsPage::handle_events(EventData evt) {
 
 void LevelsPage::update() {}
 
-void LevelsPage::render(std::shared_ptr<sf::RenderTarget> window) {
-  for (auto& btn : levels_btns) btn->render(window);
-  go_back->render(window);
-  mute_button->render(window);
+void LevelsPage::render(RenderData ren) {
+  for (auto& btn : levels_btns) btn->render(ren);
+  go_back->render(ren);
+  mute_button->render(ren);
 }

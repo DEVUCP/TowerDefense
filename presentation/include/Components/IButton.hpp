@@ -34,7 +34,7 @@ public:
    * Overrided Functions
    */
   virtual void handle_events(EventData) override;
-  virtual void render(std::shared_ptr<sf::RenderTarget> window) override;
+  virtual void render(RenderData) override;
   virtual void update() override;
 
 protected:

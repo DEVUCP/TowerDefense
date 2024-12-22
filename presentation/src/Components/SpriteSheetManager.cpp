@@ -43,6 +43,5 @@ void SpriteSheetManager::next_sprite(sf::Sprite& sprite) {
       (collection.row_count - 1) * maximum_count_per_row + collection.count;
   current_index = (current_index + 1) % total;
   int x = current_index % total, y = current_index / total;
-  std::cout << x << y << x << width << y + height << std::endl;
   sprite.setTextureRect(sf::IntRect(x, y, x + width, y + height));
 }

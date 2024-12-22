@@ -22,8 +22,8 @@ void BackgroundManager::load_textures() {
   if (!image_shadow.loadFromFile("./assets/background/Shadow.png")) exit(1);
 }
 
-void BackgroundManager::render(std::shared_ptr<sf::RenderTarget> window) {
-  if (on) window->draw(background);
+void BackgroundManager::render(RenderData ren) {
+  if (on) ren.window->draw(background);
 }
 
 void BackgroundManager::handle_events(EventData) {}

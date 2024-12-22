@@ -40,16 +40,16 @@ void GamePage::handle_events(EventData evt) {
   sidebar->handle_events(evt);
 }
 
-void GamePage::render(std::shared_ptr<sf::RenderTarget> window) {
+void GamePage::render(RenderData ren) {
   for (auto& row : map) {
     for (auto tl : row) {
-      tl->render(window);
+      tl->render(ren);
     }
   }
   for (auto& enm : enemies) {
-    enm->render(window);
+    enm->render(ren);
   }
-  sidebar->render(window);
+  sidebar->render(ren);
 }
 
 void GamePage::update() {

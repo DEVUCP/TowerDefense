@@ -28,7 +28,7 @@ LevelButton::LevelButton(unsigned x, unsigned y, int num)
   text.setPosition(textX, textY);
 }
 
-void LevelButton::render(std::shared_ptr<sf::RenderTarget> window) {
-  IButton::render(window);
-  window->draw(text);
+void LevelButton::render(RenderData ren) {
+  IButton::render(ren);
+  ren.window->draw(text);
 }

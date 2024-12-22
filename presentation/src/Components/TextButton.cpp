@@ -27,9 +27,9 @@ TextButton::TextButton(std::string str, unsigned x, unsigned y, ButtonSize size,
   text.setPosition(textX, textY);
 }
 
-void TextButton::render(std::shared_ptr<sf::RenderTarget> window) {
-  StandardButton::render(window);
-  window->draw(text);
+void TextButton::render(RenderData ren) {
+  StandardButton::render(ren);
+  ren.window->draw(text);
 }
 
 void TextButton::set_text(std::string txt) { text.setString(txt); }

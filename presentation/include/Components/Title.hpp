@@ -14,7 +14,7 @@ public:
    * @brief Overrided functions
    */
   void handle_events(EventData) override;
-  void render(std::shared_ptr<sf::RenderTarget> window) override;
+  void render(RenderData) override;
   void update() override;
 
   /*

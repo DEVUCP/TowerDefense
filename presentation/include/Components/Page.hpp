@@ -30,7 +30,7 @@ public:
    * Overrided functions
    */
   virtual void handle_events(EventData) override = 0;
-  virtual void render(std::shared_ptr<sf::RenderTarget> window) override = 0;
+  virtual void render(RenderData) override = 0;
   virtual void update() override = 0;
 
   /**

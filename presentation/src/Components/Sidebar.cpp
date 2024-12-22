@@ -50,10 +50,10 @@ void Sidebar::init_content() {
 
 void Sidebar::handle_events(EventData data) {}
 
-void Sidebar::render(std::shared_ptr<sf::RenderTarget> window) {
-  window->draw(sidebar_bg);
-  window->draw(lives_t);
-  window->draw(coins_t);
-  window->draw(score_t);
+void Sidebar::render(RenderData ren) {
+  ren.window->draw(sidebar_bg);
+  ren.window->draw(lives_t);
+  ren.window->draw(coins_t);
+  ren.window->draw(score_t);
 }
 void Sidebar::update() {}

@@ -11,7 +11,7 @@ public:
    * Overrided Functions
    */
   void handle_events(EventData data);
-  void render(std::shared_ptr<sf::RenderTarget> window);
+  void render(RenderData);
   void update();
 
 private:

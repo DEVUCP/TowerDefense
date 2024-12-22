@@ -20,9 +20,7 @@ Title::Title(std::string text, unsigned target_w, unsigned target_h) {
 
 void Title::handle_events(EventData) {}
 
-void Title::render(std::shared_ptr<sf::RenderTarget> window) {
-  window->draw(title_text);
-}
+void Title::render(RenderData ren) { ren.window->draw(title_text); }
 
 void Title::update() {}
 

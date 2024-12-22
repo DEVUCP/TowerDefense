@@ -45,7 +45,5 @@ void IButton::handle_events(EventData evt) {
     bg.setTexture(texture);
   }
 }
-void IButton::render(std::shared_ptr<sf::RenderTarget> window) {
-  window->draw(bg);
-}
+void IButton::render(RenderData ren) { ren.window->draw(bg); }
 void IButton::update() {}

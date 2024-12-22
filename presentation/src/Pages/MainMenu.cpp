@@ -33,9 +33,9 @@ void MainMenu::handle_events(EventData evt) {
 
 void MainMenu::update() {}
 
-void MainMenu::render(std::shared_ptr<sf::RenderTarget> window) {
-  title.render(window);
-  play_btn->render(window);
-  about_btn->render(window);
-  mute_button->render(window);
+void MainMenu::render(RenderData ren) {
+  title.render(ren);
+  play_btn->render(ren);
+  about_btn->render(ren);
+  mute_button->render(ren);
 }
