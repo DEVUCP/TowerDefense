@@ -43,7 +43,6 @@ set(SOURCES # Sources
     src/LevelReader.cpp
     src/WaveManager.cpp
     # Utils
-    src/Utils/Vector.cpp
     src/Utils/Moveable.cpp
     src/Utils/Collidable.cpp
     # Enemy
