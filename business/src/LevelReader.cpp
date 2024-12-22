@@ -11,19 +11,20 @@
 #include <cassert>
 #include <filesystem>
 #include <fstream>
+#include "Enemy/BaseEnemy.hpp"
 #include "GameSettings.hpp"
 
 /*
 File Format:
-Line 1: lives coins max_wave initial_enemy_count
-Line 2: Ant_Tickets Ant_StartingWave
-Line 3: Cockroach_Tickets Cockroach_StartingWave
-Line 4: Beetle_Tickets Beetle_StartingWave
-Line 5-22: "28 space-separated chatacters representing each tile type
+Line: lives coins max_wave initial_enemy_count
+EnemyTypeCount Lines: enemy[i].tickets enemy[i].starting_wave
+Remaining: "28 space-separated chatacters representing each tile type
 B=Buildable, N=NonBuildable, E=Enemy" e.g. "N B N E E N N N N B ......"
 */
-// TODO: Make enemy initialization dynamic
 
+struct EnemyInfo {
+  int tickets, starting_wave;
+};
 std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   int lives;
   int coins;
@@ -31,9 +32,8 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
 
   int initial_enemy_count;
 
-  int ant_tickets, ant_starting_wave;
-  int cockroach_tickets, cockroach_starting_wave;
-  int beetle_tickets, beetle_starting_wave;
+  // EnemyType is zero-indexed enum, so we can access info with type directly
+  std::vector<EnemyInfo> enemy_info;
 
   std::string path = get_level_path(level_num);
   assert(std::filesystem::exists(path));
@@ -42,9 +42,9 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
 
   // Read the first 4 lines of data in the level's file
   file >> lives >> coins >> max_wave >> initial_enemy_count;
-  file >> ant_tickets >> ant_starting_wave;
-  file >> cockroach_tickets >> cockroach_starting_wave;
-  file >> beetle_tickets >> beetle_starting_wave;
+  for (int i = 0; i < BaseEnemy::EnemyTypeCount; i++) {
+    file >> enemy_info[i].tickets >> enemy_info[i].starting_wave;
+  }
 
   // Then, read the Map data
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
@@ -88,20 +88,13 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   // enemy
   auto enemy_manager = std::make_shared<EnemyManager>();
 
-  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::ANT,
-                                   ant_starting_wave);
-  enemy_manager->assign_tickets(BaseEnemy::EnemyType::ANT, ant_tickets);
-
-  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::COCKROACH,
-                                   cockroach_starting_wave);
-  enemy_manager->assign_tickets(BaseEnemy::EnemyType::COCKROACH,
-                                cockroach_tickets);
-
-  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::BETTLE,
-                                   beetle_starting_wave);
-  enemy_manager->set_starting_wave(BaseEnemy::EnemyType::BETTLE,
-                                   beetle_starting_wave);
-  enemy_manager->assign_tickets(BaseEnemy::EnemyType::BETTLE, beetle_tickets);
+  for (int i = 0; i < enemy_info.size(); i++) {
+    auto& [tickets, starting_wave] = enemy_info[i];
+    enemy_manager->assign_tickets(static_cast<BaseEnemy::EnemyType>(i),
+                                  tickets);
+    enemy_manager->set_starting_wave(static_cast<BaseEnemy::EnemyType>(i),
+                                     starting_wave);
+  }
 
   // Create AttackManager
   auto attack_manager = std::make_shared<AttackManager>();
@@ -110,10 +103,8 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   auto tower_manager = std::make_shared<TowerManager>();
 
   // Create a Level with the data read
-  auto level =
-      std::make_shared<Level>(lives, coins, map, wave_manager, attack_manager,
-                              tower_manager, enemy_manager);
-  return level;
+  return std::make_shared<Level>(lives, coins, map, wave_manager,
+                                 attack_manager, tower_manager, enemy_manager);
 }
 
 int LevelReader::levels_count() {

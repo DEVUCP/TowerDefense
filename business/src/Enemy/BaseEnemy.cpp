@@ -23,3 +23,5 @@ void BaseEnemy::invoke_damage(float amount) {
   health -= amount;
   if (health <= 0) on_killed();
 }
+
+BaseEnemy::EnemyType BaseEnemy::get_type() const { return type; }

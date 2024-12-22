@@ -7,7 +7,8 @@
 #include "Utils/Moveable.hpp"
 class BaseEnemy : public Moveable, Drawable {
 public:
-  enum class EnemyType { ANT, COCKROACH, BETTLE };
+  enum class EnemyType { LEAF_BUG = 0, MAGMA_CRAB, CLAMP_BEETLE };
+  static constexpr int EnemyTypeCount = 3;
 
 public:
   /**
@@ -52,6 +53,11 @@ public:
    * @detail If health reaches zero, call `on_killed`
    */
   void invoke_damage(float);
+
+  /**
+   * @brief Getter for type
+   */
+  EnemyType get_type() const;
 
 protected:
   /**
