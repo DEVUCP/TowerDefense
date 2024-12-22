@@ -58,4 +58,4 @@ TileView::TileView(std::shared_ptr<BaseTile> tile) : tile{tile} {
 void TileView::handle_events(EventData data) {}
 
 void TileView::render(RenderData ren) { ren.window->draw(sprite); }
-void TileView::update() {}
+void TileView::update(UpdateData dat) {}

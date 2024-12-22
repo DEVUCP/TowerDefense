@@ -2,6 +2,7 @@
 #include <memory>
 #include "Interfaces/EventData.hpp"
 #include "Interfaces/RenderData.hpp"
+#include "Interfaces/UpdateData.hpp"
 #include "SFML/Graphics.hpp"
 
 /*
@@ -24,5 +25,5 @@ public:
   /*
    * @brief Update the widget state
    */
-  virtual void update() = 0;
+  virtual void update(UpdateData) = 0;
 };

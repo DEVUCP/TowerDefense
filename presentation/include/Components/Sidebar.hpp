@@ -12,7 +12,7 @@ public:
    */
   void handle_events(EventData data);
   void render(RenderData);
-  void update();
+  void update(UpdateData);
 
 private:
   void init_sidebar_bg();

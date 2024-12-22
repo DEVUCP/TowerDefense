@@ -19,7 +19,7 @@ public:
   void on_unpause() override;
   void handle_events(EventData) override;
   void render(RenderData) override;
-  void update() override;
+  void update(UpdateData) override;
 
 private:
   Title title;

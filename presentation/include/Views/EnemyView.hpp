@@ -15,7 +15,7 @@ public:
    */
   void handle_events(EventData data);
   void render(RenderData);
-  void update();
+  void update(UpdateData);
 
 private:
   std::shared_ptr<BaseEnemy> enemy;

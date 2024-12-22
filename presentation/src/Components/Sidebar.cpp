@@ -56,4 +56,4 @@ void Sidebar::render(RenderData ren) {
   ren.window->draw(coins_t);
   ren.window->draw(score_t);
 }
-void Sidebar::update() {}
+void Sidebar::update(UpdateData dat) {}

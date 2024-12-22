@@ -42,7 +42,7 @@ void App::handle_events() {
   }
 }
 
-void App::update() { page_mng->update(); }
+void App::update() { page_mng->update({deltaTime}); }
 
 void App::render() {
   window->clear();

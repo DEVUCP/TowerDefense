@@ -51,7 +51,7 @@ void LevelsPage::handle_events(EventData evt) {
   mute_button->handle_events(evt);
 }
 
-void LevelsPage::update() {}
+void LevelsPage::update(UpdateData dat) {}
 
 void LevelsPage::render(RenderData ren) {
   for (auto& btn : levels_btns) btn->render(ren);

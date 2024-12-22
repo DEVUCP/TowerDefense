@@ -53,10 +53,10 @@ void PageManager::handle_events(EventData evt) {
   pages.top()->handle_events(evt);
 }
 
-void PageManager::update() {
+void PageManager::update(UpdateData dat) {
   assert(pages.size());
 
-  pages.top()->update();
+  pages.top()->update(dat);
 }
 
 void PageManager::onEvent(Event evt) {

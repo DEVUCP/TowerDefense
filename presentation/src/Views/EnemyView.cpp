@@ -17,7 +17,7 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
 }
 
 void EnemyView::handle_events(EventData evt) {}
-void EnemyView::update() {
+void EnemyView::update(UpdateData dat) {
   auto pos = enemy->get_position();
   sprite.setPosition(pos.x, pos.y);
   sheet_mng.next_sprite(sprite);

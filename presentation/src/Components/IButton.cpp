@@ -46,4 +46,4 @@ void IButton::handle_events(EventData evt) {
   }
 }
 void IButton::render(RenderData ren) { ren.window->draw(bg); }
-void IButton::update() {}
+void IButton::update(UpdateData dat) {}

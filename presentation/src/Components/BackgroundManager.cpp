@@ -27,7 +27,7 @@ void BackgroundManager::render(RenderData ren) {
 }
 
 void BackgroundManager::handle_events(EventData) {}
-void BackgroundManager::update() {}
+void BackgroundManager::update(UpdateData dat) {}
 
 void BackgroundManager::onEvent(Event evt) {
   switch (evt) {

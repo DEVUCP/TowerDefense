@@ -46,7 +46,7 @@ public:
    */
   void handle_events(EventData) override;
   void render(RenderData) override;
-  void update() override;
+  void update(UpdateData) override;
   void onEvent(Event) override;
 
 private:

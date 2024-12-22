@@ -31,7 +31,7 @@ void MainMenu::handle_events(EventData evt) {
   mute_button->handle_events(evt);
 }
 
-void MainMenu::update() {}
+void MainMenu::update(UpdateData dat) {}
 
 void MainMenu::render(RenderData ren) {
   title.render(ren);

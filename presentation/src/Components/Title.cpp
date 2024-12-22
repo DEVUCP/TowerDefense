@@ -22,6 +22,6 @@ void Title::handle_events(EventData) {}
 
 void Title::render(RenderData ren) { ren.window->draw(title_text); }
 
-void Title::update() {}
+void Title::update(UpdateData dat) {}
 
 void Title::set_text(std::string text) { title_text.setString(text); }

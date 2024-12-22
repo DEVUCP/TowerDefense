@@ -35,7 +35,7 @@ public:
    */
   virtual void handle_events(EventData) override;
   virtual void render(RenderData) override;
-  virtual void update() override;
+  virtual void update(UpdateData) override;
 
 protected:
   void init_image(std::string texture_path, std::string texture_path_hover);

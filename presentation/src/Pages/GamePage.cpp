@@ -52,11 +52,11 @@ void GamePage::render(RenderData ren) {
   sidebar->render(ren);
 }
 
-void GamePage::update() {
+void GamePage::update(UpdateData dat) {
   // Here calls Game::get_instance().get_level().run_iteration()
-  sidebar->update();
+  sidebar->update(dat);
   for (auto& enm : enemies) {
-    enm->update();
+    enm->update(dat);
   }
 }
 

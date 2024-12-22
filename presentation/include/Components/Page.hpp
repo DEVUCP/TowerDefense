@@ -31,7 +31,7 @@ public:
    */
   virtual void handle_events(EventData) override = 0;
   virtual void render(RenderData) override = 0;
-  virtual void update() override = 0;
+  virtual void update(UpdateData) override = 0;
 
   /**
    * @brief Scale the width/height of the business to the target
