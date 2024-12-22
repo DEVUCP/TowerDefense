@@ -33,11 +33,6 @@ public:
   const float get_health() const;
 
   /**
-   * @brief Getter for position
-   */
-  const std::shared_ptr<BaseTile> get_position() const;
-
-  /**
    * @brief Getter for initial health
    */
   const float get_initial_health() const;

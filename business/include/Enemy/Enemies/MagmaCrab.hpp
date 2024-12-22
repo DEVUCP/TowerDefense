@@ -6,6 +6,7 @@ class MagmaCrab : public BaseEnemy {
 public:
   static constexpr int velocity = 3;
   static constexpr int kill_coins = 1;
+  static constexpr int initial_health = 10;
 
 public:
   MagmaCrab(float x, float y, Vector<float> dest);
