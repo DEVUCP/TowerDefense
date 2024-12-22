@@ -33,3 +33,5 @@ bool Moveable::is_out_of_board() {
 const float Moveable::get_rotation() const { return rotation; }
 
 void Moveable::set_velocity(int new_v) { velocity = new_v; }
+
+Vector<float> Moveable::get_position() const { return position; }

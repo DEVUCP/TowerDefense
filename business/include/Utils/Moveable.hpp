@@ -52,6 +52,11 @@ public:
    */
   void set_velocity(int new_v);
 
+  /**
+   * @brief Getter for position
+   */
+  Vector<float> get_position() const;
+
 protected:
   /**
    * @brief A callback to run when the object reaches its destination
