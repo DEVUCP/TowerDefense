@@ -2,7 +2,7 @@
 #include "Enemy/BaseEnemy.hpp"
 
 LeafBug::LeafBug(float x, float y, Vector<float> dest)
-    : BaseEnemy(x, y, dest, initial_health, velocity, kill_coins,
+    : BaseEnemy(x, y, dest, INITIAL_HEALTH, VELOCITY, KILL_COINS,
                 EnemyType::LEAF_BUG) {}
 
 void LeafBug::on_reach() {}
