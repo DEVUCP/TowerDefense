@@ -53,13 +53,6 @@ public:
    */
   void set_collection(std::string);
 
-  /**
-   * @brief Set Initial sprite in current collection
-   *
-   * @details Used to inialize the animation cycle
-   */
-  void set_initial_sprite(sf::Sprite& sprite);
-
 private:
   unsigned width;
   unsigned height;

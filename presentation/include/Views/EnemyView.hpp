@@ -7,11 +7,6 @@
 #include "Interfaces/Widget.hpp"
 #include "SFML/Graphics/Texture.hpp"
 
-#define SPRITE_WIDTH 64
-#define SPRITE_HEIGHT 64
-#define DESIRED_SPRITE_WIDTH 120
-#define DESIRED_SPRITE_HEIGHT 120
-
 class EnemyView : public Widget {
 public:
   EnemyView(std::shared_ptr<BaseEnemy>);
