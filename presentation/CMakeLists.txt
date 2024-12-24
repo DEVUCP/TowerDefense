@@ -36,11 +36,14 @@ set(HEADERS
     include/Components/Title.hpp
     include/Components/Sidebar.hpp
     include/Components/SpriteSheetManager.hpp
+    # Interfaces
+    include/Interfaces/Clickable.hpp
     # Widget
     include/Widgets/MuteButton.hpp
     # Views
     include/Views/TileView.hpp
     include/Views/EnemyView.hpp
+    include/Views/TowerView.hpp
     # Pages
     include/Pages/MainMenu.hpp
     include/Pages/LevelsPage.hpp
@@ -68,6 +71,9 @@ set(SOURCES
     # Views
     src/Views/TileView.cpp
     src/Views/EnemyView.cpp
+    src/Views/TowerView.cpp
+    # Interfaces
+    src/Interfaces/Clickable.cpp
     # Widget
     src/Widgets/MuteButton.cpp
     # Pages

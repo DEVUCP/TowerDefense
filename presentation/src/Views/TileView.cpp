@@ -6,7 +6,9 @@
 #include <stdexcept>
 #include "GameSettings.hpp"
 #include "Map/BaseTile.hpp"
+#include "Map/BuildableTile.hpp"
 #include "SFML/Graphics/Rect.hpp"
+#include "SFML/Window/Event.hpp"
 
 static std::vector<std::string> buildables = {
     "./assets/textures/tiles/Buildables/1.png",
@@ -53,9 +55,23 @@ TileView::TileView(std::shared_ptr<BaseTile> tile) : tile{tile} {
   auto bounds = sprite.getLocalBounds();
 
   sprite.setScale(tile_len / bounds.width, tile_len / bounds.height);
+
+  if (tile->get_type() == BaseTile::Buildable) {
+    set_handler([tile]() {
+      // auto converted = std::dynamic_pointer_cast<BuildableTile>(tile);
+      // converted->set_tower(nullptr);
+      std::cout << "hello" << std::endl;
+    });
+  }
 }
 
-void TileView::handle_events(EventData data) {}
+void TileView::handle_events(EventData data) {
+  if (data.event.type == sf::Event::MouseButtonPressed &&
+      is_hovered(sf::Vector2f{static_cast<float>(data.mouse_pointer.x),
+                              static_cast<float>(data.mouse_pointer.y)},
+                 sprite))
+    on_click();
+}
 
 void TileView::render(RenderData ren) { ren.window->draw(sprite); }
 void TileView::update(UpdateData dat) {}

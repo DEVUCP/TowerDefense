@@ -6,6 +6,7 @@ std::unordered_map<BaseEnemy::EnemyType, std::string> EnemyView::sheets = {
     {BaseEnemy::EnemyType::LEAF_BUG, "./assets/textures/enemies/Leafbug.png"}};
 
 EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
+  assert(enm != nullptr);
   sheet_mng.load_sheet(sprite, sprite_sheet, sheets[enm->get_type()]);
 
   // TODO: This is Registration for LeafBug. Make it dynamic tomorrow

@@ -1,12 +1,13 @@
 #pragma once
 
+#include "Interfaces/Clickable.hpp"
 #include "Interfaces/Widget.hpp"
 #include "Map/BaseTile.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
-class TileView : public Widget {
+class TileView : public Clickable, public Widget {
 public:
   TileView(std::shared_ptr<BaseTile> tile);
-  ~TileView() = default;
+  virtual ~TileView() = default;
 
   /*
    * Overrided Methods
