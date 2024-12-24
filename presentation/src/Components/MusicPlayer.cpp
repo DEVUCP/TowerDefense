@@ -14,14 +14,19 @@ MusicPlayer& MusicPlayer::get_instance() {
   return m;
 }
 
-void MusicPlayer::play(MusicPlayer::MusicType type) {
-  assert(type != UNKNOWN);
-  if (type == cur_type) return;
-  music.openFromFile(music_files[type]);
+// TODO: Make Change Music & Continue Music
+void MusicPlayer::play() {
+  music.openFromFile(music_files[cur_type]);
   music.play();
   music.setLoop(true);
 }
-
+void MusicPlayer::set_current_music(MusicType type) {
+  assert(type != UNKNOWN);
+  if (type != cur_type) {
+    cur_type = type;
+    if (is_playing()) play();
+  }
+}
 void MusicPlayer::toggle() {
   if (is_playing()) {
     music.stop();

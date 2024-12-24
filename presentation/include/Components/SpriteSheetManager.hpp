@@ -53,6 +53,11 @@ public:
    */
   void set_collection(std::string);
 
+  /**
+   * @brief Initialize the sprite with the first texture
+   */
+  void init_sprite_texture(sf::Sprite& sprite);
+
 private:
   unsigned width;
   unsigned height;

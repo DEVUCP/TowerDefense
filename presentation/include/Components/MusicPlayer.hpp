@@ -21,7 +21,7 @@ public:
   /*
    * @brief Play a game
    */
-  void play(MusicType);
+  void play();
 
   /*
    * @brief toggle the state of the music
@@ -32,6 +32,11 @@ public:
    * @brief Check if playing
    */
   bool is_playing() const;
+
+  /**
+   * @brief Change Current Music
+   */
+  void set_current_music(MusicType);
 
 private:
   MusicPlayer();

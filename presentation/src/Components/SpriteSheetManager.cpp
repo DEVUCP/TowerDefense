@@ -1,5 +1,4 @@
 #include "Components/SpriteSheetManager.hpp"
-#include <algorithm>
 #include <cassert>
 #include <iostream>
 #include <stdexcept>
@@ -56,12 +55,19 @@ void SpriteSheetManager::next_sprite(sf::Sprite& sprite) {
   sprite.setTextureRect(sf::IntRect(x, y, width, height));
 }
 
-void SpriteSheetManager::set_initial_sprite(sf::Sprite& sprite) {
-  auto collection = info[current_collection];
-  int offset = collection.row_num * height;
-  int x = 0, y = offset;
-  sprite.setTextureRect(sf::IntRect(x, y, x + width, y + height));
+void SpriteSheetManager::init_sprite_texture(sf::Sprite& sprite) {
+  assert(!current_collection.empty());
 
-  // Initialize time_elapsed
-  time_elapsed = sf::Time::Zero;
+  if (info.find(current_collection) == info.end())
+    throw std::runtime_error("No current collection");
+
+  auto collection = info[current_collection];
+
+  unsigned total =
+      (collection.row_count - 1) * maximum_count_per_row + collection.count;
+  current_index = (current_index + 1) % total;
+  int offsetY = collection.row_num * height;
+  int x = (current_index % total) * width,
+      y = offsetY + (current_index / total) * height;
+  sprite.setTextureRect(sf::IntRect(x, y, width, height));
 }

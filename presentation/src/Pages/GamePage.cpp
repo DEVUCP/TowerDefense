@@ -26,7 +26,7 @@ void GamePage::on_pause() {}
 
 void GamePage::on_unpause() {
   notify_observers(Event::BG_CLEAR);
-  MusicPlayer::get_instance().play(MusicPlayer::LEVEL_MUSIC);
+  MusicPlayer::get_instance().set_current_music(MusicPlayer::LEVEL_MUSIC);
 }
 
 void GamePage::handle_events(EventData evt) {

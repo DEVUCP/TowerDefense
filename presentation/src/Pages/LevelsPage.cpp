@@ -3,6 +3,7 @@
 #include <vector>
 #include "Components/IconButton.hpp"
 #include "Components/LevelButton.hpp"
+#include "Components/MusicPlayer.hpp"
 #include "Game.hpp"
 #include "Widgets/MuteButton.hpp"
 
@@ -40,9 +41,9 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
 
 void LevelsPage::on_pause() {}
 void LevelsPage::on_unpause() {
-  mute_button->check_status();
-
   notify_observers(Event::BG_DEFAULT_SWITCH);
+  MusicPlayer::get_instance().set_current_music(MusicPlayer::MAIN_MUSIC);
+  mute_button->check_status();
 }
 
 void LevelsPage::handle_events(EventData evt) {
@@ -51,7 +52,7 @@ void LevelsPage::handle_events(EventData evt) {
   mute_button->handle_events(evt);
 }
 
-void LevelsPage::update(UpdateData dat) {}
+void LevelsPage::update(UpdateData dat) { mute_button->check_status(); }
 
 void LevelsPage::render(RenderData ren) {
   for (auto& btn : levels_btns) btn->render(ren);

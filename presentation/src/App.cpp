@@ -10,7 +10,7 @@ App::App() {
   init_window();
   init_time();
   init_page_manager();
-  MusicPlayer::get_instance().play(MusicPlayer::MAIN_MUSIC);
+  MusicPlayer::get_instance().play();
 }
 
 void App::init_window() {

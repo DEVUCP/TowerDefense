@@ -22,8 +22,8 @@ MainMenu::MainMenu(unsigned width, unsigned height)
 
 void MainMenu::on_pause() {}
 void MainMenu::on_unpause() {
-  mute_button->check_status();
   notify_observers(Event::BG_DEFAULT_SWITCH);
+  MusicPlayer::get_instance().set_current_music(MusicPlayer::MAIN_MUSIC);
 }
 
 void MainMenu::handle_events(EventData evt) {
@@ -32,7 +32,7 @@ void MainMenu::handle_events(EventData evt) {
   mute_button->handle_events(evt);
 }
 
-void MainMenu::update(UpdateData dat) {}
+void MainMenu::update(UpdateData dat) { mute_button->check_status(); }
 
 void MainMenu::render(RenderData ren) {
   title.render(ren);
