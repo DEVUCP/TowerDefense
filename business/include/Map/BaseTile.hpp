@@ -34,6 +34,8 @@ public:
    */
   BaseTile(float x, float y, TileType type);
 
+  virtual ~BaseTile() = default;
+
   /**
    * @brief return center coordinates
    *

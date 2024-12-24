@@ -13,15 +13,17 @@
  */
 class BaseTower {
 public:
+  enum TowerType { IonPrism };
+
+public:
   /**
    * @brief Constructor
    *
    * @details Initializes all member variables and sets up the base properties
    * of the tower.
    */
-  BaseTower(int i, int j, unsigned range, unsigned attack_speed = 1,
-            unsigned attack_damage = 1);
-
+  BaseTower(int i, int j, unsigned range, unsigned attack_speed,
+            unsigned attack_damage, TowerType type);
   /**
    * @brief Initiates an attack on the specified enemy.
    *
@@ -57,6 +59,11 @@ public:
    */
   int get_sell_price();
 
+  /**
+   * @brief Get tower Type
+   */
+  TowerType get_type() const;
+
 private:
   Vector<int> position;            // The position of the tower on the map.
   unsigned range;                  // The attack range of the tower.
@@ -67,6 +74,6 @@ private:
   //     offer_upgrades;  // The upgrades available for the tower.
   // std::shared_ptr<Upgrade>
   //     upgrades;          // The upgrades currently applied to the tower.
-  std::string sprite;    // The visual representation of the tower.
-  std::string rotation;  // The rotation state of the tower's sprite.
+  int lvl;
+  TowerType type;
 };

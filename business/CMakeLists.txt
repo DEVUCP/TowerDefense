@@ -45,6 +45,9 @@ set(SOURCES # Sources
     # Utils
     src/Utils/Moveable.cpp
     src/Utils/Collidable.cpp
+    # Tower
+    src/Tower/BaseTower.cpp
+    src/Tower/TowerManager.cpp
     # Enemy
     src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyFactory.cpp
