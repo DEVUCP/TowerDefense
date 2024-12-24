@@ -1,0 +1,1 @@
+-I"C:/Users/Youssef/Documents/Uni/TowerDefense/mbuild/_deps/sfml-src/include" -I"C:/Users/Youssef/Documents/Uni/TowerDefense/mbuild/_deps/sfml-src/src" -I"C:/Users/Youssef/Documents/Uni/TowerDefense/mbuild/_deps/sfml-src/extlibs/headers/vulkan" -isystem "C:/Users/Youssef/Documents/Uni/TowerDefense/mbuild/_deps/sfml-src/extlibs/headers/glad/include"

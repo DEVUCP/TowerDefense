@@ -1,0 +1,1 @@
+ "../_deps/sfml-build/lib/libsfml-graphics.a" "../_deps/sfml-build/lib/libsfml-audio.a" "../_deps/sfml-build/lib/libsfml-window.a" "../_deps/sfml-build/lib/libsfml-system.a" -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
