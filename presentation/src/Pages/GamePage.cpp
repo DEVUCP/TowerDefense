@@ -114,7 +114,11 @@ void GamePage::init_map() {
       }
 
       map[i][j] = std::make_shared<TileView>(tile);
+      if (tile->get_type() == BaseTile::BuildableTile) {
+        map[i][j]->set_handler([](){ set_selected(map[i][j]); });
+      }
     }
   }
 }
 void GamePage::init_sidebar() { sidebar = std::make_shared<Sidebar>(); }
+

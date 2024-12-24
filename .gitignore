@@ -39,3 +39,6 @@ build/
 # For test files
 __tests/
 cmake-build-debug/
+
+.vs/
+mbuild/
