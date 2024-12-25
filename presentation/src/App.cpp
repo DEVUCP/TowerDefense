@@ -10,7 +10,8 @@ App::App() {
   init_window();
   init_time();
   init_page_manager();
-  MusicPlayer::get_instance().play();
+  MusicPlayer::get_instance()
+      .play();  // TODO: Use some local file to update status
 }
 
 void App::init_window() {

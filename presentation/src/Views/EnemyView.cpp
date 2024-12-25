@@ -3,7 +3,8 @@
 #include "Interfaces/EventData.hpp"
 
 std::unordered_map<BaseEnemy::EnemyType, std::string> EnemyView::sheets = {
-    {BaseEnemy::EnemyType::LEAF_BUG, "./assets/textures/enemies/Leafbug.png"}};
+    {BaseEnemy::EnemyType::LEAF_BUG,
+     "./assets/textures/enemies/Flying Locust.png"}};
 
 EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   assert(enm != nullptr);

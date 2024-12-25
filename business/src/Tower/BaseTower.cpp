@@ -10,7 +10,8 @@
 // TODO: check the correct initialization for the sprite in BaseTower
 BaseTower::BaseTower(int i, int j, unsigned range, unsigned attack_speed,
                      unsigned attack_damage, TowerType type)
-    : position({i, j}),
+
+    : position(i, j),
       range(range),
       attack_speed(attack_speed),
       damage(attack_damage),

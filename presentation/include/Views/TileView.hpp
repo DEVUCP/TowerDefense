@@ -16,6 +16,11 @@ public:
   void render(RenderData);
   void update(UpdateData);
 
+  /**
+   * @brief Get the tile position
+   */
+  Vector<float> get_position() const;
+
 private:
   sf::Texture texture;
   sf::Sprite sprite;

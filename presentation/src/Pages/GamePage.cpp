@@ -1,7 +1,8 @@
 #include "Pages/GamePage.hpp"
 #include <bits/types/wint_t.h>
-#include <iostream>
 #include <memory>
+#include <memory>  // For std::shared_ptr
+#include <random>  // For random number generation
 #include "Components/MusicPlayer.hpp"
 #include "Enemy/Enemies/LeafBug.hpp"
 #include "Enums/Event.hpp"
@@ -9,9 +10,10 @@
 #include "Map/BuildableTile.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Map/NonBuildableTile.hpp"
-#include "SFML/System/Vector2.hpp"
+#include "Tower/Towers/IonPrism.hpp"
 #include "Utils/Vector.hpp"
 #include "Views/EnemyView.hpp"
+#include "Views/TowerView.hpp"
 
 GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   init_map();
@@ -37,6 +39,7 @@ void GamePage::handle_events(EventData evt) {
       map[i][j]->handle_events(evt);
     }
   }
+
   sidebar->handle_events(evt);
 }
 
@@ -46,18 +49,15 @@ void GamePage::render(RenderData ren) {
       tl->render(ren);
     }
   }
-  for (auto& enm : enemies) {
-    enm->render(ren);
-  }
+  for (auto& enm : enemies) enm->render(ren);
+  for (auto& twr : towers) twr->render(ren);
   sidebar->render(ren);
 }
 
 void GamePage::update(UpdateData dat) {
   // Here calls Game::get_instance().get_level().run_iteration()
   sidebar->update(dat);
-  for (auto& enm : enemies) {
-    enm->update(dat);
-  }
+  for (auto& enm : enemies) enm->update(dat);
 }
 
 // void GamePage::init_map() {
@@ -76,9 +76,6 @@ void GamePage::update(UpdateData dat) {
 //     }
 //   }
 // }
-
-#include <memory>  // For std::shared_ptr
-#include <random>  // For random number generation
 
 void GamePage::init_map() {
   auto row = GameSettings::get_instance().get_rows();
@@ -114,11 +111,23 @@ void GamePage::init_map() {
       }
 
       map[i][j] = std::make_shared<TileView>(tile);
-      if (tile->get_type() == BaseTile::BuildableTile) {
-        map[i][j]->set_handler([](){ set_selected(map[i][j]); });
-      }
+      if (tile->get_type() == BaseTile::Buildable)
+        map[i][j]->set_handler([this, i, j]() { set_selected(map[i][j]); });
     }
   }
 }
 void GamePage::init_sidebar() { sidebar = std::make_shared<Sidebar>(); }
 
+void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
+  selected_tile = tile_view;
+
+  // TODO: This logic is to be transfered to another method, just because
+  // business isn't complete
+  auto pos = tile_view->get_position();
+  build_tower(pos.x, pos.y, BaseTower::IonPrism);
+}
+
+void GamePage::build_tower(float i, float j, BaseTower::TowerType) {
+  auto tower = std::make_shared<IonPrism>(i, j);
+  towers.push_back(std::make_shared<TowerView>(tower));
+}

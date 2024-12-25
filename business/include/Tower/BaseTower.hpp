@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "Enemy/BaseEnemy.hpp"
 #include "Map/BaseTile.hpp"
 #include "Upgrade.hpp"
@@ -65,15 +66,14 @@ public:
   TowerType get_type() const;
 
 private:
-  Vector<int> position;            // The position of the tower on the map.
-  unsigned range;                  // The attack range of the tower.
-  unsigned damage;                 // The attack damage of the tower.
-  unsigned attack_speed;           // The attack speed of the tower.
-  std::shared_ptr<BaseTile> tile;  // The tile the tower is on
+  Vector<float> position;  // The position of the tower
+  unsigned range;          // The attack range of the tower.
+  unsigned damage;         // The attack damage of the tower.
+  unsigned attack_speed;   // The attack speed of the tower.
   // std::shared_ptr<Upgrade>
   //     offer_upgrades;  // The upgrades available for the tower.
   // std::shared_ptr<Upgrade>
   //     upgrades;          // The upgrades currently applied to the tower.
-  int lvl;
-  TowerType type;
+  int lvl;         // < The greater the leve, the greater the power
+  TowerType type;  // < The type
 };
