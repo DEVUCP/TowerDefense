@@ -17,7 +17,6 @@ App::App() {
 void App::init_window() {
   window = std::make_shared<sf::RenderWindow>(
       sf::VideoMode::getFullscreenModes()[0], "SFML", sf::Style::Fullscreen);
-  window->setFramerateLimit(60);
 }
 
 void App::init_page_manager() {
