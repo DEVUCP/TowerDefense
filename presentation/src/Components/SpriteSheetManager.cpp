@@ -13,7 +13,6 @@ void SpriteSheetManager::load_sheet(sf::Sprite& sprite, sf::Texture& texture,
   }
   sprite.setTexture(texture);
   current_index = -1;
-  maximum_count_per_row = sprite.getGlobalBounds().width / width;
 }
 
 void SpriteSheetManager::set_width(unsigned wid) { width = wid; }
@@ -23,7 +22,7 @@ void SpriteSheetManager::register_collection(std::string identifier,
                                              int row_num, int count,
                                              int row_count) {
   info[identifier].row_num = row_num;
-  info[identifier].count = count == -1 ? maximum_count_per_row : count;
+  info[identifier].count = count;
   info[identifier].row_count = row_count;
 }
 
@@ -45,6 +44,7 @@ void SpriteSheetManager::next_sprite(sf::Sprite& sprite) {
     throw std::runtime_error("No current collection");
 
   auto collection = info[current_collection];
+  auto maximum_count_per_row = sprite.getGlobalBounds().width / width;
 
   unsigned total =
       (collection.row_count - 1) * maximum_count_per_row + collection.count;
@@ -62,6 +62,7 @@ void SpriteSheetManager::init_sprite_texture(sf::Sprite& sprite) {
     throw std::runtime_error("No current collection");
 
   auto collection = info[current_collection];
+  auto maximum_count_per_row = sprite.getGlobalBounds().width / width;
 
   unsigned total =
       (collection.row_count - 1) * maximum_count_per_row + collection.count;

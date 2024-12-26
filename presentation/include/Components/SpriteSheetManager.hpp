@@ -36,11 +36,10 @@ public:
    *
    * @param identifier The name for the collection (e.g. movement, spawn)
    * @param row_num The starting row for these collections in the sheets
-   * @param count The count of sprites in the ending row (if count = -1, set to
-   * default)
+   * @param count The count of sprites in the ending row
    * @param row_count The number of rows that represent this info
    */
-  void register_collection(std::string identifier, int row_num, int count = -1,
+  void register_collection(std::string identifier, int row_num, int count,
                            int row_count = 1);
 
   /**
@@ -65,7 +64,6 @@ private:
       info;  // < This holds the data for every row
   std::string current_collection;
   unsigned current_index;
-  unsigned maximum_count_per_row;
   sf::Clock clock;
   sf::Time time_elapsed;
   unsigned desired_x, desired_y;
