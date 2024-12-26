@@ -10,7 +10,7 @@ std::unordered_map<BaseTower::TowerType, TowerView::TowerInfo>
         {BaseTower::IonPrism,
          {
              "./assets/textures/towers/IonPrism.png",
-             "./assets/textures/attacks/IonPrism/lvl1.png",
+             "./assets/textures/attacks/IonPrism_weapons.png",
          }}};
 
 TowerView::TowerView(std::shared_ptr<BaseTower> tower) : tower(tower) {
@@ -49,6 +49,8 @@ void TowerView::init_weapon_sprite() {
   weapon_sprite_mng.set_width(64);
   weapon_sprite_mng.set_height(64);
   weapon_sprite_mng.register_collection("LVL1", 0, 6);
+  weapon_sprite_mng.register_collection("LVL2", 1, 9);
+  weapon_sprite_mng.register_collection("LVL3", 2, 6);
   weapon_sprite_mng.set_collection("LVL1");
   weapon_sprite_mng.init_sprite_texture(weapon);
 
