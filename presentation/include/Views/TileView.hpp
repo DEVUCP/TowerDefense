@@ -12,14 +12,17 @@ public:
   /*
    * Overrided Methods
    */
-  void handle_events(EventData data);
-  void render(RenderData);
-  void update(UpdateData);
+  virtual void handle_events(EventData data);
+  virtual void render(RenderData);
+  virtual void update(UpdateData);
 
   /**
-   * @brief Get the tile position
+   * @brief Get the tile
    */
-  Vector<float> get_position() const;
+  std::shared_ptr<BaseTile> get_tile() const;
+
+protected:
+  void load_sheets(const std::vector<std::string>&);
 
 private:
   sf::Texture texture;

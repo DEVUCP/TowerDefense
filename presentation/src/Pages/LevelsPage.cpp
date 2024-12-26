@@ -23,7 +23,7 @@ LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
                                       starty + row * offsety,     // Y-position
                                       i + 1);
     btn->set_handler([this, i]() {
-      // Game::get_instance().init_level(i + 1);
+      Game::get_instance().init_level(i + 1);
       notify_observers(Event::GAME_PAGE_SWITCH);
     });
     levels_btns.push_back(std::move(btn));  // Level number

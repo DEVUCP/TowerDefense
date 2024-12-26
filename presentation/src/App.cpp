@@ -4,6 +4,7 @@
 #include "Components/MusicPlayer.hpp"
 #include "Components/PageManager.hpp"
 #include "SFML/Window/Event.hpp"
+#include "SFML/Window/Keyboard.hpp"
 
 App::App() {
   // WARN: this order matters
@@ -36,7 +37,8 @@ void App::run() {
 
 void App::handle_events() {
   while (window->pollEvent(event)) {
-    if (event.type == sf::Event::Closed) {
+    if (event.type == sf::Event::Closed ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
       window->close();
     } else {
       page_mng->handle_events({event, sf::Mouse::getPosition()});

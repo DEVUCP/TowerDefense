@@ -7,6 +7,12 @@
 #include "Tower/BaseTower.hpp"
 class TowerView : public Widget {
 public:
+  struct Comparator {
+    bool operator()(std::shared_ptr<TowerView>,
+                    std::shared_ptr<TowerView>) const;
+  };
+
+public:
   TowerView(std::shared_ptr<BaseTower> tower);
   /**
    * Overrided Functions

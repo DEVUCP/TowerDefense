@@ -10,10 +10,10 @@
 #include "Map/BuildableTile.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Map/NonBuildableTile.hpp"
-#include "Tower/Towers/IonPrism.hpp"
+#include "Tower/BaseTower.hpp"
 #include "Utils/Vector.hpp"
+#include "Views/BuildableTileView.hpp"
 #include "Views/EnemyView.hpp"
-#include "Views/TowerView.hpp"
 
 GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   init_map();
@@ -50,7 +50,6 @@ void GamePage::render(RenderData ren) {
     }
   }
   for (auto& enm : enemies) enm->render(ren);
-  for (auto& twr : towers) twr->render(ren);
   sidebar->render(ren);
 }
 
@@ -93,7 +92,8 @@ void GamePage::init_map() {
     map[i].resize(row);
     for (int j = 0; j < row; j++) {
       // Randomly select tile type
-      int tile_type = dis(gen);
+      // int tile_type = dis(gen);
+      int tile_type = 1;
 
       std::shared_ptr<BaseTile> tile;
       if (tile_type == 0) {
@@ -110,24 +110,21 @@ void GamePage::init_map() {
                                                static_cast<float>(j) * len);
       }
 
-      map[i][j] = std::make_shared<TileView>(tile);
+      auto res = std::make_shared<BuildableTileView>(tile);
       if (tile->get_type() == BaseTile::Buildable)
-        map[i][j]->set_handler([this, i, j]() { set_selected(map[i][j]); });
+        res->set_handler([res, i, j, this]() { set_selected(res); });
+      map[i][j] = std::move(res);
     }
   }
 }
 void GamePage::init_sidebar() { sidebar = std::make_shared<Sidebar>(); }
 
-void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
+void GamePage::set_selected(std::shared_ptr<BuildableTileView> tile_view) {
   selected_tile = tile_view;
 
   // TODO: This logic is to be transfered to another method, just because
   // business isn't complete
-  auto pos = tile_view->get_position();
-  build_tower(pos.x, pos.y, BaseTower::IonPrism);
+  tile_view->build_tower(BaseTower::IonPrism, tile_view->get_tile());
 }
 
-void GamePage::build_tower(float i, float j, BaseTower::TowerType) {
-  auto tower = std::make_shared<IonPrism>(i, j);
-  towers.push_back(std::make_shared<TowerView>(tower));
-}
+void GamePage::build_tower(float i, float j, BaseTower::TowerType) {}

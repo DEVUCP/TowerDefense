@@ -42,6 +42,7 @@ set(HEADERS
     include/Widgets/MuteButton.hpp
     # Views
     include/Views/TileView.hpp
+    include/Views/BuildableTileView.hpp
     include/Views/EnemyView.hpp
     include/Views/TowerView.hpp
     # Pages
@@ -70,6 +71,7 @@ set(SOURCES
     src/Components/SpriteSheetManager.cpp
     # Views
     src/Views/TileView.cpp
+    src/Views/BuildableTileView.cpp
     src/Views/EnemyView.cpp
     src/Views/TowerView.cpp
     # Interfaces

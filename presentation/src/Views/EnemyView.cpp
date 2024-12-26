@@ -12,10 +12,10 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
 
   // TODO: This is Registration for LeafBug. Make it dynamic tomorrow
   // TODO: Fix These magic numbers by some kind of table
-  sheet_mng.register_collection("DOWN_MOVEMENT", 0, 6);
-  sheet_mng.set_collection("DOWN_MOVEMENT");
   sheet_mng.set_width(64);
   sheet_mng.set_height(64);
+  sheet_mng.register_collection("DOWN_MOVEMENT", 0, 6);
+  sheet_mng.set_collection("DOWN_MOVEMENT");
   sheet_mng.init_sprite_texture(sprite);
 
   // Scale up to desired
