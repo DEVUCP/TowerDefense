@@ -23,8 +23,7 @@ TowerView::TowerView(std::shared_ptr<BaseTower> tower) {
   auto pos = tower->get_position();
   auto tile_len = GameSettings::get_instance().get_tile_size();
   pos.x += tile_len / 2.f * (1 - TOWER_TILE_FACTOR);
-  pos.y -= tile_len / 2.f * (1 - TOWER_TILE_FACTOR) +
-           tile_len * TOWER_TILE_FACTOR / 2.f;
+  pos.y -= tile_len / 2.f * (TOWER_TILE_FACTOR);
   sprite.setPosition(pos.x, pos.y);
 
   // Set Scale to the sprite
