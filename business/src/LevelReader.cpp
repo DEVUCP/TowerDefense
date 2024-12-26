@@ -20,13 +20,30 @@
 File Format:
 Line: lives coins max_wave initial_enemy_count
 EnemyTypeCount Lines: enemy[i].tickets enemy[i].starting_wave
+Enemy Path Beginning: row column
 Remaining: "28 space-separated chatacters representing each tile type
-B=Buildable, N=NonBuildable, E=Enemy" e.g. "N B N E E N N N N B ......"
+B=Buildable, N=NonBuildable, U(p) D(own) R(ight) L(eft)=Enemy" e.g. "N B N R R R D N N B ......"
 */
 
 struct EnemyInfo {
   int tickets, starting_wave;
 };
+
+void write_level_data(const std::string& path) {
+  std::ifstream file(path);
+  if (!file.is_open()) {
+    std::cerr << "Error: Unable to open the file: " << path << std::endl;
+    exit(1);
+  }
+
+  char c;
+  while (file >> c) {
+    std::cout << c;
+  }
+
+  file.close();
+}
+
 std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   int lives;
   int coins;
@@ -35,6 +52,8 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
 
   auto row = GameSettings::get_instance().get_rows();
   auto col = GameSettings::get_instance().get_columns();
+
+  std::pair<unsigned, unsigned> enemy_path_begin;
 
   std::string path = get_level_path(level_num);
   assert(std::filesystem::exists(path));
@@ -61,6 +80,11 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   std::list<std::shared_ptr<EnemyPathTile>> enemy_path;
   auto len = GameSettings::get_instance().get_tile_size();
 
+  // Read enemy path begining (assuming rows & columns are zero-indexed)
+  file >> enemy_path_begin.first >> enemy_path_begin.second;
+
+  std::unordered_map<unsigned, char> enemy_path_positions;
+
   // Then, read the Map data
   for (int i = 0; i < row; i++) {
     for (int j = 0; j < col; j++) {
@@ -74,11 +98,14 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
           tile = std::make_shared<BuildableTile>(static_cast<float>(j * len),
                                                  static_cast<float>(i * len));
           break;
-        case 'E':
+        case 'L':
+        case 'R':
+        case 'U':
+        case 'D':
           tile = std::make_shared<EnemyPathTile>(static_cast<float>(j * len),
                                                  static_cast<float>(i * len));
-          // TODO: Wrong Gettign Enemy Path
-          // enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(tile));
+
+          enemy_path_positions.insert({i*col + j, c});
           break;
         case 'N':
           tile = std::make_shared<NonBuildableTile>(
@@ -89,6 +116,29 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
       };
 
       grid[i][j] = tile;
+    }
+  }
+
+  // populate enemy_path with enemy tiles in the appropriate order
+  unsigned current_row = enemy_path_begin.first;
+  unsigned current_column = enemy_path_begin.second;
+
+  while(enemy_path_positions.find(current_row*col + current_column) != enemy_path_positions.end()) {
+    enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(grid[current_row][current_column]));
+
+    switch (enemy_path_positions[current_row*col + current_column]) {
+      case 'U':
+        current_row -= 1;
+        break;
+      case 'D':
+        current_row += 1;
+        break;
+      case 'R':
+        current_column += 1;
+        break;
+      case 'L':
+        current_column -= 1;
+        break;
     }
   }
 
