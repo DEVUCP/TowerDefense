@@ -1,6 +1,7 @@
 #include "Views/TowerView.hpp"
 #include <memory>
 #include <unordered_map>
+#include "GameSettings.hpp"
 #include "Tower/BaseTower.hpp"
 
 std::unordered_map<BaseTower::TowerType, std::string> TowerView::sheets = {
@@ -20,8 +21,10 @@ TowerView::TowerView(std::shared_ptr<BaseTower> tower) {
 
   // Set Position with Offset
   auto pos = tower->get_position();
-  sprite.setOrigin(sprite.getGlobalBounds().getSize().x / 2,
-                   sprite.getGlobalBounds().getSize().x / 2);
+  auto tile_len = GameSettings::get_instance().get_tile_size();
+  pos.x += tile_len / 2.f * (1 - TOWER_TILE_FACTOR);
+  pos.y -= tile_len / 2.f * (1 - TOWER_TILE_FACTOR) +
+           tile_len * TOWER_TILE_FACTOR / 2.f;
   sprite.setPosition(pos.x, pos.y);
 
   // Set Scale to the sprite

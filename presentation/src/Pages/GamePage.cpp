@@ -2,6 +2,7 @@
 #include <bits/types/wint_t.h>
 #include <memory>
 #include "Components/MusicPlayer.hpp"
+#include "Components/SFXPlayer.hpp"
 #include "Enemy/Enemies/LeafBug.hpp"
 #include "Enums/Event.hpp"
 #include "Game.hpp"
@@ -69,16 +70,18 @@ void GamePage::init_map() {
 
   for (int i = 0; i < row; i++)
     for (int j = 0; j < col; j++) {
-      // TODO: The error is in the following lines
       auto tile = mmap->get_tile(i, j);
       assert(tile != nullptr);
 
       std::shared_ptr<TileView> view = nullptr;
       auto type = tile->get_type();
       switch (type) {
-        case BaseTile::Buildable:
-          view = std::make_shared<BuildableTileView>(tile);
+        case BaseTile::Buildable: {
+          auto res = std::make_shared<BuildableTileView>(tile);
+          res->set_handler([this, res]() { set_selected(res); });
+          view = std::move(res);
           break;
+        };
         case BaseTile::NonBuildable:
           view = std::make_shared<NonBuildableTileView>(tile);
           break;
@@ -97,6 +100,7 @@ void GamePage::set_selected(std::shared_ptr<BuildableTileView> tile_view) {
   // TODO: This logic is to be transfered to another method, just because
   // business isn't complete
   tile_view->build_tower(BaseTower::IonPrism, tile_view->get_tile());
+  SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
 }
 
 void GamePage::build_tower(float i, float j, BaseTower::TowerType) {}

@@ -1,10 +1,16 @@
 #include "Components/SFXPlayer.hpp"
 #include <iostream>
 
-std::unordered_map<SFXPlayer::SoundEffect, std::string> SFXPlayer::effects = {{
-    SFXPlayer::BUTTON_CLICK,
-    "./assets/sfx/button_click.wav",
-}};
+std::unordered_map<SFXPlayer::SoundEffect, std::string> SFXPlayer::effects = {
+    {
+        SFXPlayer::BUTTON_CLICK,
+        "./assets/sfx/button_click.wav",
+    },
+    {
+        SFXPlayer::TOWER_BUILD,
+        "./assets/sfx/tower_build.mp3",
+    },
+};
 
 SFXPlayer& SFXPlayer::get_instance() {
   static SFXPlayer m;

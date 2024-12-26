@@ -19,6 +19,7 @@ void MusicPlayer::play() {
   music.openFromFile(music_files[cur_type]);
   music.play();
   music.setLoop(true);
+  music.setVolume(50);
 }
 void MusicPlayer::set_current_music(MusicType type) {
   assert(type != UNKNOWN);

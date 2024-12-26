@@ -12,6 +12,7 @@ public:
     GAME_OVER,
     GAME_WIN,
     BUTTON_CLICK,
+    TOWER_BUILD,
   };
 
 public:
