@@ -1,5 +1,4 @@
 #include "Pages/GamePage.hpp"
-#include <bits/types/wint_t.h>
 #include <memory>
 #include "Components/MusicPlayer.hpp"
 #include "Components/SFXPlayer.hpp"
