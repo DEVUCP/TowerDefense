@@ -1,18 +1,11 @@
 #include "Views/TileView.hpp"
 #include <ctime>
-#include <iostream>
 #include <memory>
 #include <random>
-#include <stdexcept>
 #include "GameSettings.hpp"
 #include "Map/BaseTile.hpp"
-#include "Map/BuildableTile.hpp"
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Window/Event.hpp"
-#include "Tower/Towers/IonPrism.hpp"
-
-static std::vector<std::string> nonbuildables = {};
-static std::vector<std::string> enemypath = {};
 
 TileView::TileView(std::shared_ptr<BaseTile> tile) : tile{tile} {}
 
