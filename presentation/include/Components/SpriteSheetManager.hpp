@@ -2,8 +2,6 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Graphics/Texture.hpp"
 
-#define ANIMATION_DELAY 50
-
 class SpriteSheetManager {
 private:
   struct SpriteCollectionInfo {
@@ -13,6 +11,10 @@ private:
   };
 
 public:
+  static constexpr unsigned DEFAULT_ANIMATION_DELAY = 50;
+
+public:
+  SpriteSheetManager();
   /**
    * @brief Load the texture
    */
@@ -56,6 +58,11 @@ public:
    * @brief Initialize the sprite with the first texture
    */
   void init_sprite_texture(sf::Sprite& sprite);
+
+  /**
+   * @brief Update the animation delay value in milliseconds
+   */
+  void update_animation_delay(unsigned new_value);
 
 private:
   unsigned width;

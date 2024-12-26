@@ -5,6 +5,9 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 
+SpriteSheetManager::SpriteSheetManager()
+    : animation_delay(DEFAULT_ANIMATION_DELAY) {}
+
 void SpriteSheetManager::load_sheet(sf::Sprite& sprite, sf::Texture& texture,
                                     std::string sheet_path) {
   if (!texture.loadFromFile(sheet_path)) {
@@ -34,11 +37,11 @@ void SpriteSheetManager::next_sprite(sf::Sprite& sprite) {
   time_elapsed += clock.restart();
 
   // Check if the elapsed time exceeds the animation delay
-  if (time_elapsed.asMilliseconds() < ANIMATION_DELAY) return;
+  if (time_elapsed.asMilliseconds() < animation_delay) return;
 
   assert(!current_collection.empty());
 
-  time_elapsed -= sf::milliseconds(ANIMATION_DELAY);
+  time_elapsed -= sf::milliseconds(animation_delay);
 
   if (info.find(current_collection) == info.end())
     throw std::runtime_error("No current collection");
@@ -71,4 +74,8 @@ void SpriteSheetManager::init_sprite_texture(sf::Sprite& sprite) {
   int x = (current_index % total) * width,
       y = offsetY + (current_index / total) * height;
   sprite.setTextureRect(sf::IntRect(x, y, width, height));
+}
+
+void SpriteSheetManager::update_animation_delay(unsigned new_value) {
+  animation_delay = new_value;
 }
