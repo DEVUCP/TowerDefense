@@ -11,16 +11,8 @@
 #include "SFML/Window/Event.hpp"
 #include "Tower/Towers/IonPrism.hpp"
 
-static std::vector<std::string> nonbuildables = {
-    "./assets/textures/tiles/Nonbuildables/1.png",
-    "./assets/textures/tiles/Nonbuildables/2.png",
-    "./assets/textures/tiles/Nonbuildables/3.png",
-};
-static std::vector<std::string> enemypath = {
-    "./assets/textures/tiles/Enemypath/1.png",
-    "./assets/textures/tiles/Enemypath/2.png",
-    "./assets/textures/tiles/Enemypath/3.png",
-};
+static std::vector<std::string> nonbuildables = {};
+static std::vector<std::string> enemypath = {};
 
 TileView::TileView(std::shared_ptr<BaseTile> tile) : tile{tile} {}
 
@@ -41,7 +33,7 @@ void TileView::load_sheets(const std::vector<std::string>& tiles) {
   std::random_device rd;   // Non-deterministic random number generator
   std::mt19937 gen(rd());  // Seed the generator
   std::uniform_int_distribution<> dist(0, tiles.size() - 1);
-  texture.loadFromFile(tiles.operator[](dist(gen)));
+  texture.loadFromFile(tiles[dist(gen)]);
   sprite.setTexture(texture);
   auto pos = tile->get_position();
   sprite.setPosition(pos.x, pos.y);

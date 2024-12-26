@@ -43,6 +43,8 @@ set(HEADERS
     # Views
     include/Views/TileView.hpp
     include/Views/BuildableTileView.hpp
+    include/Views/NonBuildableTileView.hpp
+    include/Views/EnemyPathTileView.hpp
     include/Views/EnemyView.hpp
     include/Views/TowerView.hpp
     # Pages
@@ -72,6 +74,8 @@ set(SOURCES
     # Views
     src/Views/TileView.cpp
     src/Views/BuildableTileView.cpp
+    src/Views/NonBuildableTileView.cpp
+    src/Views/EnemyPathTileView.cpp
     src/Views/EnemyView.cpp
     src/Views/TowerView.cpp
     # Interfaces

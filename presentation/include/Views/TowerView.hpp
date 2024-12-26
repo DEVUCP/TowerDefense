@@ -7,7 +7,7 @@
 #include "Tower/BaseTower.hpp"
 class TowerView : public Widget {
 public:
-  static constexpr float TOWER_TILE_FACTOR = 0.9;
+  static constexpr float TOWER_TILE_FACTOR = 0.6;
 
 public:
   TowerView(std::shared_ptr<BaseTower> tower);

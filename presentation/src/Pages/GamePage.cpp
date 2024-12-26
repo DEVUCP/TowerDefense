@@ -1,19 +1,17 @@
 #include "Pages/GamePage.hpp"
 #include <bits/types/wint_t.h>
 #include <memory>
-#include <memory>  // For std::shared_ptr
-#include <random>  // For random number generation
 #include "Components/MusicPlayer.hpp"
 #include "Enemy/Enemies/LeafBug.hpp"
 #include "Enums/Event.hpp"
+#include "Game.hpp"
 #include "GameSettings.hpp"
-#include "Map/BuildableTile.hpp"
-#include "Map/EnemyPathTile.hpp"
-#include "Map/NonBuildableTile.hpp"
 #include "Tower/BaseTower.hpp"
 #include "Utils/Vector.hpp"
 #include "Views/BuildableTileView.hpp"
+#include "Views/EnemyPathTileView.hpp"
 #include "Views/EnemyView.hpp"
+#include "Views/NonBuildableTileView.hpp"
 
 GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   init_map();
@@ -59,63 +57,37 @@ void GamePage::update(UpdateData dat) {
   for (auto& enm : enemies) enm->update(dat);
 }
 
-// void GamePage::init_map() {
-//   auto row = GameSettings::get_instance().get_rows();
-//   auto col = GameSettings::get_instance().get_columns();
-//   auto len = GameSettings::get_instance().get_tile_size();
-//
-//   map.resize(col);
-//   for (int i = 0; i < col; i++) {
-//     map[i].resize(row);
-//     for (int j = 0; j < row; j++) {
-//       // TODO: When linking backend to frontend, use get_tile instead of this
-//       std::shared_ptr<BaseTile> tile = std::make_shared<NonBuildableTile>(
-//           static_cast<float>(i) * len, static_cast<float>(j) * len);
-//       map[i][j] = std::make_shared<TileView>(tile);
-//     }
-//   }
-// }
-
 void GamePage::init_map() {
   auto row = GameSettings::get_instance().get_rows();
   auto col = GameSettings::get_instance().get_columns();
   auto len = GameSettings::get_instance().get_tile_size();
 
-  map.resize(col);
+  map.resize(row, std::vector<std::shared_ptr<TileView>>(col));
+  auto lvl = Game::get_instance().get_level();
+  auto mmap = lvl->get_map();
+  assert(mmap);
 
-  // Random number generation setup
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<> dis(0, 2);  // Randomly choose 0, 1, or 2
+  for (int i = 0; i < row; i++)
+    for (int j = 0; j < col; j++) {
+      // TODO: The error is in the following lines
+      auto tile = mmap->get_tile(i, j);
+      assert(tile != nullptr);
 
-  for (int i = 0; i < col; i++) {
-    map[i].resize(row);
-    for (int j = 0; j < row; j++) {
-      // Randomly select tile type
-      // int tile_type = dis(gen);
-      int tile_type = 1;
-
-      std::shared_ptr<BaseTile> tile;
-      if (tile_type == 0) {
-        // NonBuildableTile
-        tile = std::make_shared<NonBuildableTile>(static_cast<float>(i) * len,
-                                                  static_cast<float>(j) * len);
-      } else if (tile_type == 1) {
-        // BuildableTile
-        tile = std::make_shared<BuildableTile>(static_cast<float>(i) * len,
-                                               static_cast<float>(j) * len);
-      } else {
-        // EnemyPathTile
-        tile = std::make_shared<EnemyPathTile>(static_cast<float>(i) * len,
-                                               static_cast<float>(j) * len);
+      std::shared_ptr<TileView> view = nullptr;
+      auto type = tile->get_type();
+      switch (type) {
+        case BaseTile::Buildable:
+          view = std::make_shared<BuildableTileView>(tile);
+          break;
+        case BaseTile::NonBuildable:
+          view = std::make_shared<NonBuildableTileView>(tile);
+          break;
+        case BaseTile::EnemyPath:
+          view = std::make_shared<EnemyPathTileView>(tile);
+          break;
       }
-
-      auto res = std::make_shared<BuildableTileView>(tile);
-      if (tile->get_type() == BaseTile::Buildable)
-        res->set_handler([res, i, j, this]() { set_selected(res); });
-      map[i][j] = std::move(res);
+      map[i][j] = std::move(view);
     }
-  }
 }
 void GamePage::init_sidebar() { sidebar = std::make_shared<Sidebar>(); }
 

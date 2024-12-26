@@ -9,16 +9,22 @@ std::unordered_map<BaseTower::TowerType, std::string> TowerView::sheets = {
 
 TowerView::TowerView(std::shared_ptr<BaseTower> tower) {
   assert(tower != nullptr);
-  sheet_mng.load_sheet(sprite, sprite_sheet, sheets[tower->get_type()]);
 
+  // Initialize the sheet manager
+  sheet_mng.load_sheet(sprite, sprite_sheet, sheets[tower->get_type()]);
   sheet_mng.set_width(64);
   sheet_mng.set_height(128);
   sheet_mng.register_collection("LVL1", 0, 1);
   sheet_mng.set_collection("LVL1");
   sheet_mng.init_sprite_texture(sprite);
+
+  // Set Position with Offset
   auto pos = tower->get_position();
+  sprite.setOrigin(sprite.getGlobalBounds().getSize().x / 2,
+                   sprite.getGlobalBounds().getSize().x / 2);
   sprite.setPosition(pos.x, pos.y);
 
+  // Set Scale to the sprite
   sprite.setScale(TOWER_TILE_FACTOR * 120.f / 64,
                   TOWER_TILE_FACTOR * 120.f / 64);
 }
