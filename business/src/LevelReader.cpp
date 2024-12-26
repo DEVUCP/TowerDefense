@@ -44,8 +44,6 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   if (!file.is_open()) {
     std::cerr << "Failed to open file" << std::endl;
     exit(1);
-  } else {
-    std::cout << "Reading level data from " << path << std::endl;
   }
 
   // Read the first 4 lines of data in the level's file
@@ -73,18 +71,18 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
 
       switch (c) {
         case 'B':
-          tile = std::make_shared<BuildableTile>(static_cast<float>(i * len),
-                                                 static_cast<float>(j * len));
+          tile = std::make_shared<BuildableTile>(static_cast<float>(j * len),
+                                                 static_cast<float>(i * len));
           break;
         case 'E':
-          tile = std::make_shared<EnemyPathTile>(static_cast<float>(i * len),
-                                                 static_cast<float>(j * len));
+          tile = std::make_shared<EnemyPathTile>(static_cast<float>(j * len),
+                                                 static_cast<float>(i * len));
           // TODO: Wrong Gettign Enemy Path
           // enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(tile));
           break;
         case 'N':
           tile = std::make_shared<NonBuildableTile>(
-              static_cast<float>(i * len), static_cast<float>(j * len));
+              static_cast<float>(j * len), static_cast<float>(i * len));
           break;
         default:
           throw std::runtime_error("Invalid Format from file");
