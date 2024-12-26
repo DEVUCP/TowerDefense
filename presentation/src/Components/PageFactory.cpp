@@ -4,6 +4,7 @@
 #include "Pages/AboutPage.hpp"
 #include "Pages/GamePage.hpp"
 #include "Pages/LevelsPage.hpp"
+#include "Pages/LosePage.hpp"
 #include "Pages/MainMenu.hpp"
 #include "Pages/PausePage.hpp"
 #include "Pages/WinPage.hpp"
@@ -22,4 +23,5 @@ void PageFactory::init_creators() {
   register_creator<AboutPage>(PageType::ABOUT_PAGE);
   register_creator<PausePage>(PageType::PAUSE_PAGE);
   register_creator<WinPage>(PageType::WIN_PAGE);
+  register_creator<LosePage>(PageType::LOSE_PAGE);
 }
