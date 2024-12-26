@@ -3,6 +3,7 @@
 #include <memory>
 #include "Attack/AttackManager.hpp"
 #include "Enemy/EnemyManager.hpp"
+#include "Map/BuildableTile.hpp"
 #include "Map/Map.hpp"
 #include "Tower/TowerManager.hpp"
 #include "WaveManager.hpp"
@@ -117,6 +118,12 @@ public:
    * LevelReader::get_instance().levels_count();
    */
   static int get_level_count();
+
+  /**
+   * @brief Build a tower
+   */
+  std::shared_ptr<BaseTower> build_tower(BaseTower::TowerType,
+                                         std::shared_ptr<BuildableTile> tile);
 
 private:
   int lives;

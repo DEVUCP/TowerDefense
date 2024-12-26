@@ -11,6 +11,8 @@
 #include <cassert>
 #include <filesystem>
 #include <fstream>
+#include <iostream>
+#include <stdexcept>
 #include "Enemy/BaseEnemy.hpp"
 #include "GameSettings.hpp"
 
@@ -25,52 +27,83 @@ B=Buildable, N=NonBuildable, E=Enemy" e.g. "N B N E E N N N N B ......"
 struct EnemyInfo {
   int tickets, starting_wave;
 };
+void write_level_data(const std::string& path) {
+  std::ifstream file(path);
+  if (!file.is_open()) {
+    std::cerr << "Error: Unable to open the file: " << path << std::endl;
+    exit(1);
+  }
+
+  char c;
+  while (file >> c) {
+    std::cout << c;
+  }
+
+  file.close();
+}
 std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   int lives;
   int coins;
   int max_wave;
-
   int initial_enemy_count;
 
-  // EnemyType is zero-indexed enum, so we can access info with type directly
-  std::vector<EnemyInfo> enemy_info;
+  auto row = GameSettings::get_instance().get_rows();
+  auto col = GameSettings::get_instance().get_columns();
 
   std::string path = get_level_path(level_num);
   assert(std::filesystem::exists(path));
 
   std::ifstream file(path);
 
+  if (!file.is_open()) {
+    std::cerr << "Failed to open file" << std::endl;
+    exit(1);
+  } else {
+    std::cout << "Reading level data from " << path << std::endl;
+  }
+
   // Read the first 4 lines of data in the level's file
+  std::cout << "Reading from file" << std::endl;
   file >> lives >> coins >> max_wave >> initial_enemy_count;
+
+  // Read Enemies Info
+  // EnemyType is zero-indexed enum, so we can access info with type directly
+  std::vector<EnemyInfo> enemy_info(BaseEnemy::EnemyTypeCount);
+
   for (int i = 0; i < BaseEnemy::EnemyTypeCount; i++) {
     file >> enemy_info[i].tickets >> enemy_info[i].starting_wave;
   }
-
-  // Then, read the Map data
-  std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
+  std::vector<std::vector<std::shared_ptr<BaseTile>>> grid(
+      row, std::vector<std::shared_ptr<BaseTile>>(col));
   std::list<std::shared_ptr<EnemyPathTile>> enemy_path;
   auto len = GameSettings::get_instance().get_tile_size();
-  auto row = GameSettings::get_instance().get_rows();
-  auto col = GameSettings::get_instance().get_columns();
 
+  // Then, read the Map data
   for (int i = 0; i < row; i++) {
     for (int j = 0; j < col; j++) {
       char c;
       file >> c;
 
-      std::shared_ptr<BaseTile> tile;
+      std::shared_ptr<BaseTile> tile = nullptr;
 
-      if (c == 'B') {
-        tile = std::make_shared<BuildableTile>(static_cast<float>(i * len),
-                                               static_cast<float>(j * len));
-      } else if (c == 'E') {
-        tile = std::make_shared<EnemyPathTile>(static_cast<float>(i * len),
-                                               static_cast<float>(j * len));
-        enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(tile));
-      } else {
-        tile = std::make_shared<NonBuildableTile>(static_cast<float>(i * len),
-                                                  static_cast<float>(j * len));
-      }
+      switch (c) {
+        case 'B':
+          tile = std::make_shared<BuildableTile>(static_cast<float>(i * len),
+                                                 static_cast<float>(j * len));
+          break;
+        case 'E':
+          tile = std::make_shared<EnemyPathTile>(static_cast<float>(i * len),
+                                                 static_cast<float>(j * len));
+          // TODO: Wrong Gettign Enemy Path
+          // enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(tile));
+          break;
+        case 'N':
+          tile = std::make_shared<NonBuildableTile>(
+              static_cast<float>(i * len), static_cast<float>(j * len));
+          break;
+        default:
+          throw std::runtime_error("Invalid Format from file");
+      };
 
       grid[i].push_back(tile);
     }

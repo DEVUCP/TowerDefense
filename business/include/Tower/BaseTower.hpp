@@ -23,8 +23,8 @@ public:
    * @details Initializes all member variables and sets up the base properties
    * of the tower.
    */
-  BaseTower(int i, int j, unsigned range, unsigned attack_speed,
-            unsigned attack_damage, TowerType type);
+  BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
+            unsigned attack_speed, unsigned attack_damage, TowerType type);
   /**
    * @brief Initiates an attack on the specified enemy.
    *
@@ -65,11 +65,16 @@ public:
    */
   TowerType get_type() const;
 
+  /**
+   * @brief Get position
+   */
+  Vector<float> get_position() const;
+
 private:
-  Vector<float> position;  // The position of the tower
-  unsigned range;          // The attack range of the tower.
-  unsigned damage;         // The attack damage of the tower.
-  unsigned attack_speed;   // The attack speed of the tower.
+  std::shared_ptr<BaseTile> tile;  // The tile this tower is on
+  unsigned range;                  // The attack range of the tower.
+  unsigned damage;                 // The attack damage of the tower.
+  unsigned attack_speed;           // The attack speed of the tower.
   // std::shared_ptr<Upgrade>
   //     offer_upgrades;  // The upgrades available for the tower.
   // std::shared_ptr<Upgrade>

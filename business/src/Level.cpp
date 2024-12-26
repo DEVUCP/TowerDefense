@@ -1,5 +1,9 @@
 #include "Level.hpp"
 #include <LevelReader.hpp>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include "Tower/Towers/IonPrism.hpp"
 
 Level::Level(int lives, int coins, std::shared_ptr<Map> map,
              std::shared_ptr<WaveManager> wave_mng,
@@ -64,7 +68,7 @@ void Level::run_iteration() {
 
   enemy_mng->filter_enemies();
   enemy_mng->move_enemies();
-  attack_mng->move_attacks();
+  // attack_mng->move_attacks();
 
   // TODO: Call the appropriate tower manager method when it is implemented.
   // tower_mng.check_ranges();
@@ -82,4 +86,20 @@ std::shared_ptr<WaveManager> Level::get_wave_mng() const { return wave_mng; }
 
 int Level::get_level_count() {
   return LevelReader::get_instance().levels_count();
+}
+
+std::shared_ptr<Map> Level::get_map() const { return map; }
+
+std::shared_ptr<BaseTower> Level::build_tower(
+    BaseTower::TowerType type, std::shared_ptr<BuildableTile> tile) {
+  std::shared_ptr<BaseTower> twr = nullptr;
+  switch (type) {
+    case BaseTower::IonPrism:
+      twr = std::make_shared<IonPrism>(tile);
+      break;
+  }
+  assert(twr);
+  tower_mng->add_tower(twr);
+  std::cout << "made it here" << std::endl;
+  return twr;
 }

@@ -23,7 +23,7 @@ public:
    * @brief Initialize a level by using
    * LevelReader::get_instance().build_level(level_num);
    */
-  static std::shared_ptr<Level> init_level(int level_num);
+  void init_level(int level_num);
 
 private:
   Game() = default;  // < private constructor

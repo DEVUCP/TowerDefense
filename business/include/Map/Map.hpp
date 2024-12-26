@@ -2,6 +2,7 @@
 
 #include <list>
 #include <memory>
+#include <utility>
 #include <vector>
 #include "Map/BaseTile.hpp"
 
@@ -30,6 +31,11 @@ public:
    * @return Return the tile if it's in the game or nullptr instead
    */
   std::shared_ptr<BaseTile> map_coords_to_tile(float x, float y) const;
+
+  /**
+   * @brief Map Game Coordinates to a tile indices
+   */
+  std::pair<int, int> map_coords_to_indices(float x, float y) const;
 
   /**
    * @brief Return the tile at given indices

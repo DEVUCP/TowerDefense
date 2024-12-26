@@ -8,6 +8,6 @@ Game& Game::get_instance() {
 
 std::shared_ptr<Level> Game::get_level() { return lvl; }
 
-std::shared_ptr<Level> Game::init_level(int level_num) {
-  return LevelReader::get_instance().build_level(level_num);
+void Game::init_level(int level_num) {
+  lvl = LevelReader::get_instance().build_level(level_num);
 }

@@ -8,10 +8,11 @@
 #include "Map/Map.hpp"
 
 // TODO: check the correct initialization for the sprite in BaseTower
-BaseTower::BaseTower(int i, int j, unsigned range, unsigned attack_speed,
-                     unsigned attack_damage, TowerType type)
+BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
+                     unsigned attack_speed, unsigned attack_damage,
+                     TowerType type)
 
-    : position(i, j),
+    : tile(tile),
       range(range),
       attack_speed(attack_speed),
       damage(attack_damage),
@@ -32,7 +33,8 @@ bool BaseTower::in_range(std::shared_ptr<Map> map) {
   if (!map) return false;
 
   // Starting position of the tower
-  auto start_tile = map->get_tile(position.x, position.y);
+  auto start_tile = tile;
+  auto pos = tile->get_position();
   if (!start_tile) return false;
 
   // BFS setup: Pair contains the tile and current depth
@@ -66,8 +68,8 @@ bool BaseTower::in_range(std::shared_ptr<Map> map) {
       for (int dy = -1; dy <= 1; ++dy) {
         if (dx == 0 && dy == 0) continue;  // Skip the current tile
 
-        int neighbor_x = position.x + dx;
-        int neighbor_y = position.y + dy;
+        int neighbor_x = pos.x + dx;
+        int neighbor_y = pos.y + dy;
 
         auto neighbor_tile = map->get_tile(neighbor_x, neighbor_y);
         if (neighbor_tile && visited.find(neighbor_tile) == visited.end()) {
@@ -93,3 +95,5 @@ int BaseTower::get_sell_price() {
 }
 
 BaseTower::TowerType BaseTower::get_type() const { return type; }
+
+Vector<float> BaseTower::get_position() const { return tile->get_position(); }

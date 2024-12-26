@@ -10,19 +10,19 @@ public:
   /*
    * @brief Set a tower
    */
-  // void set_tower(std::shared_ptr<BaseTower> tower);
+  void set_tower(std::shared_ptr<BaseTower> tower);
 
   /*
    * @brief Get a tower
    */
-  // std::shared_ptr<BaseTower> get_tower() const;
+  std::shared_ptr<BaseTower> get_tower() const;
 
   /*
    * @brief Remove the current tower
    *
    * @details check if there's a current tower before removal
    */
-  // void remove_tower();
+  void remove_tower();
 
 private:
   std::shared_ptr<BaseTower> tower;

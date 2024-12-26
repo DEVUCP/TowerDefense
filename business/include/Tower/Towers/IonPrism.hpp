@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "Tower/BaseTower.hpp"
 class IonPrism : public BaseTower {
 public:
@@ -8,5 +9,5 @@ public:
   static constexpr unsigned ATTACK_DAMAGE = 1;
 
 public:
-  IonPrism(int i, int j);
+  IonPrism(std::shared_ptr<BaseTile> tile);
 };
