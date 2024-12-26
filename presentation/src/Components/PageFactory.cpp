@@ -5,6 +5,7 @@
 #include "Pages/GamePage.hpp"
 #include "Pages/LevelsPage.hpp"
 #include "Pages/MainMenu.hpp"
+#include "Pages/PausePage.hpp"
 
 PageFactory::PageFactory() { init_creators(); }
 
@@ -18,4 +19,5 @@ void PageFactory::init_creators() {
   register_creator<LevelsPage>(PageType::LEVELS_PAGE);
   register_creator<GamePage>(PageType::GAME_PAGE);
   register_creator<AboutPage>(PageType::ABOUT_PAGE);
+  register_creator<PausePage>(PageType::PAUSE_PAGE);
 }
