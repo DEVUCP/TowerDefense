@@ -13,4 +13,5 @@ enum class Event {
   GO_BACK_SWITCH,
   ABOUT_PAGE_SWITCH,
   PAUSE_PAGE_SWITCH,
+  WIN_PAGE_SWITCH,
 };

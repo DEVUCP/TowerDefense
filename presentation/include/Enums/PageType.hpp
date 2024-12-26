@@ -5,5 +5,6 @@ enum class PageType {
   LEVELS_PAGE,
   GAME_PAGE,
   ABOUT_PAGE,
-  PAUSE_PAGE
+  PAUSE_PAGE,
+  WIN_PAGE
 };

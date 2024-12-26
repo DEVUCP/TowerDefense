@@ -76,6 +76,9 @@ void PageManager::onEvent(Event evt) {
     case Event::PAUSE_PAGE_SWITCH:
       go_to_page(PageType::PAUSE_PAGE);
       break;
+    case Event::WIN_PAGE_SWITCH:
+      go_to_page(PageType::WIN_PAGE);
+    break;
     case Event::GO_BACK_SWITCH:
       go_back();
       break;
