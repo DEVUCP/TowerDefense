@@ -19,17 +19,10 @@ TowerView::TowerView(std::shared_ptr<BaseTower> tower) {
   auto pos = tower->get_position();
   sprite.setPosition(pos.x, pos.y);
 
-  sprite.setScale(120.f / 64, 120.f / 64);
+  sprite.setScale(TOWER_TILE_FACTOR * 120.f / 64,
+                  TOWER_TILE_FACTOR * 120.f / 64);
 }
 
 void TowerView::handle_events(EventData data) {}
 void TowerView::render(RenderData ren) { ren.window->draw(sprite); }
 void TowerView::update(UpdateData dat) {}
-
-bool TowerView::Comparator::operator()(std::shared_ptr<TowerView> a,
-                                       std::shared_ptr<TowerView> b) const {
-  auto pos = a->tower->get_position();
-  auto other_pos = b->tower->get_position();
-  if (pos.y != other_pos.y) return pos.y > other_pos.y;
-  return pos.x > other_pos.x;
-}

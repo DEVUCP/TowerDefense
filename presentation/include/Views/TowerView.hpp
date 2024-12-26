@@ -7,10 +7,7 @@
 #include "Tower/BaseTower.hpp"
 class TowerView : public Widget {
 public:
-  struct Comparator {
-    bool operator()(std::shared_ptr<TowerView>,
-                    std::shared_ptr<TowerView>) const;
-  };
+  static constexpr float TOWER_TILE_FACTOR = 0.9;
 
 public:
   TowerView(std::shared_ptr<BaseTower> tower);
