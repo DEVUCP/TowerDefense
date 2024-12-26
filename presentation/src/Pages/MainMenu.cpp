@@ -16,7 +16,8 @@ MainMenu::MainMenu(unsigned width, unsigned height)
   about_btn = std::make_shared<TextButton>(
       "about", width / 2.f, height / 2.f + 200,
       StandardButton::ButtonSize::LARGE, StandardButton::ButtonType::RECT);
-  about_btn->set_handler([]() {});
+  about_btn->set_handler(
+      [this]() { notify_observers(Event::ABOUT_PAGE_SWITCH); });
   mute_button = std::make_shared<MuteButton>(60, height - 60);
 }
 

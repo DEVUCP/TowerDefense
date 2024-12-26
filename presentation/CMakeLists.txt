@@ -50,7 +50,8 @@ set(HEADERS
     # Pages
     include/Pages/MainMenu.hpp
     include/Pages/LevelsPage.hpp
-    include/Pages/GamePage.hpp)
+    include/Pages/GamePage.hpp
+    include/Pages/AboutPage.hpp)
 set(SOURCES
     src/App.cpp
     # Utilities
@@ -85,7 +86,8 @@ set(SOURCES
     # Pages
     src/Pages/MainMenu.cpp
     src/Pages/LevelsPage.cpp
-    src/Pages/GamePage.cpp)
+    src/Pages/GamePage.cpp
+    src/Pages/AboutPage.cpp)
 
 add_library(presentation ${HEADERS} ${SOURCES})
 
