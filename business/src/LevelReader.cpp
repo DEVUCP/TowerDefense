@@ -27,20 +27,6 @@ B=Buildable, N=NonBuildable, E=Enemy" e.g. "N B N E E N N N N B ......"
 struct EnemyInfo {
   int tickets, starting_wave;
 };
-void write_level_data(const std::string& path) {
-  std::ifstream file(path);
-  if (!file.is_open()) {
-    std::cerr << "Error: Unable to open the file: " << path << std::endl;
-    exit(1);
-  }
-
-  char c;
-  while (file >> c) {
-    std::cout << c;
-  }
-
-  file.close();
-}
 std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   int lives;
   int coins;
@@ -63,7 +49,6 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   }
 
   // Read the first 4 lines of data in the level's file
-  std::cout << "Reading from file" << std::endl;
   file >> lives >> coins >> max_wave >> initial_enemy_count;
 
   // Read Enemies Info
@@ -105,7 +90,7 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
           throw std::runtime_error("Invalid Format from file");
       };
 
-      grid[i].push_back(tile);
+      grid[i][j] = tile;
     }
   }
 

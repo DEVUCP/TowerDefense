@@ -12,6 +12,8 @@ std::shared_ptr<BaseTile> Map::map_coords_to_tile(float x, float y) const {
 }
 
 std::shared_ptr<BaseTile> Map::get_tile(int i, int j) const {
+  assert(i >= 0 && i < grid.size());
+  assert(j >= 0 && j < grid[0].size());
   return grid[i][j];
 }
 
