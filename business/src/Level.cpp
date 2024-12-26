@@ -100,6 +100,5 @@ std::shared_ptr<BaseTower> Level::build_tower(
   }
   assert(twr);
   tower_mng->add_tower(twr);
-  std::cout << "made it here" << std::endl;
   return twr;
 }

@@ -34,7 +34,6 @@ void BuildableTileView::build_tower(BaseTower::TowerType type,
                                     std::shared_ptr<BaseTile> tile) {
   auto lvl = Game::get_instance().get_level();
   auto converted_tile = std::dynamic_pointer_cast<BuildableTile>(tile);
-  std::cout << "hello" << std::endl;
   auto twr = lvl->build_tower(BaseTower::IonPrism, converted_tile);
   tower = std::make_shared<TowerView>(twr);
 }

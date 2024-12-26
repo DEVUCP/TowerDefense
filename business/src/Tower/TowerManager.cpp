@@ -5,7 +5,6 @@
 // TODO: Implement any missing functionalities instead of cout-ing it
 
 void TowerManager::add_tower(std::shared_ptr<BaseTower> tower) {
-  std::cout << "made it here" << std::endl;
   towers.push_back(tower);
   // TODO: Implement adding a tower to the tile position
   // will need a getter for get_position() ?
