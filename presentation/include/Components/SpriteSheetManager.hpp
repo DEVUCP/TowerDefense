@@ -67,4 +67,5 @@ private:
   sf::Clock clock;
   sf::Time time_elapsed;
   unsigned desired_x, desired_y;
+  unsigned animation_delay;
 };
