@@ -27,7 +27,7 @@ public:
   /**
    * @brief Set the clicked on tiled as the selected_tile
    */
-  void set_selected(std::shared_ptr<BuildableTileView> tile_view);
+  void set_selected(std::shared_ptr<TileView> tile_view);
 
 private:
   /*

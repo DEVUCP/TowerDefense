@@ -7,7 +7,10 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Window/Event.hpp"
 
-TileView::TileView(std::shared_ptr<BaseTile> tile) : tile{tile} {}
+TileView::TileView(std::shared_ptr<BaseTile> tile)
+    : tile{tile}, selected(false) {
+  init_selected();
+}
 
 void TileView::handle_events(EventData data) {
   if (data.event.type == sf::Event::MouseButtonPressed &&
@@ -17,8 +20,17 @@ void TileView::handle_events(EventData data) {
     on_click();
 }
 
-void TileView::render(RenderData ren) { ren.window->draw(sprite); }
-void TileView::update(UpdateData dat) {}
+void TileView::render(RenderData ren) {
+  ren.window->draw(sprite);
+  if (selected) {
+    ren.window->draw(selected_sprite);
+  }
+}
+void TileView::update(UpdateData dat) {
+  if (selected) {
+    selected_mng.next_sprite(selected_sprite);
+  }
+}
 
 std::shared_ptr<BaseTile> TileView::get_tile() const { return tile; }
 
@@ -36,3 +48,23 @@ void TileView::load_sheets(const std::vector<std::string>& tiles) {
 
   sprite.setScale(tile_len / bounds.width, tile_len / bounds.height);
 }
+
+void TileView::init_selected() {
+  selected_mng.load_sheet(selected_sprite, selected_texture,
+                          "./assets/textures/tiles/selected.png");
+
+  selected_mng.set_width(32);
+  selected_mng.set_height(32);
+  selected_mng.register_collection("C", 0, 4);
+  selected_mng.set_collection("C");
+  selected_mng.init_sprite_texture(selected_sprite);
+
+  auto pos = tile->get_position();
+  selected_sprite.setPosition(pos.x, pos.y);
+
+  auto tile_len = GameSettings::get_instance().get_tile_size();
+  auto bounds = selected_sprite.getLocalBounds();
+  selected_sprite.setScale(tile_len / bounds.width, tile_len / bounds.height);
+}
+
+void TileView::set_selected(bool value) { selected = value; }

@@ -42,19 +42,18 @@ void GamePage::handle_events(EventData evt) {
 }
 
 void GamePage::render(RenderData ren) {
-  for (auto& row : map) {
-    for (auto tl : row) {
-      tl->render(ren);
-    }
-  }
+  for (auto& row : map)
+    for (auto tl : row) tl->render(ren);
   for (auto& enm : enemies) enm->render(ren);
   sidebar->render(ren);
 }
 
 void GamePage::update(UpdateData dat) {
   // Here calls Game::get_instance().get_level().run_iteration()
-  sidebar->update(dat);
+  for (auto& row : map)
+    for (auto tl : row) tl->update(dat);
   for (auto& enm : enemies) enm->update(dat);
+  sidebar->update(dat);
 }
 
 void GamePage::init_map() {
@@ -93,13 +92,15 @@ void GamePage::init_map() {
 }
 void GamePage::init_sidebar() { sidebar = std::make_shared<Sidebar>(); }
 
-void GamePage::set_selected(std::shared_ptr<BuildableTileView> tile_view) {
+void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
+  if (selected_tile != nullptr) selected_tile->set_selected(false);
   selected_tile = tile_view;
+  selected_tile->set_selected(true);
 
-  // TODO: This logic is to be transfered to another method, just because
-  // business isn't complete
-  tile_view->build_tower(BaseTower::IonPrism, tile_view->get_tile());
-  SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
+  // // TODO: This logic is to be transfered to another method, just because
+  // // business isn't complete
+  // tile_view->build_tower(BaseTower::IonPrism, tile_view->get_tile());
+  // SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
 }
 
 void GamePage::build_tower(float i, float j, BaseTower::TowerType) {}

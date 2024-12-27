@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Components/SpriteSheetManager.hpp"
 #include "Interfaces/Clickable.hpp"
 #include "Interfaces/Widget.hpp"
 #include "Map/BaseTile.hpp"
@@ -21,12 +22,24 @@ public:
    */
   std::shared_ptr<BaseTile> get_tile() const;
 
+  /**
+   * @brief Set Selected
+   */
+  void set_selected(bool value);
+
 protected:
   void load_sheets(const std::vector<std::string>&);
+
+private:
+  void init_selected();
 
 private:
   sf::Texture texture;
   sf::Sprite sprite;
   sf::RectangleShape shape;
   std::shared_ptr<BaseTile> tile;
+  sf::Texture selected_texture;
+  sf::Sprite selected_sprite;
+  SpriteSheetManager selected_mng;
+  bool selected;
 };
