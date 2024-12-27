@@ -37,6 +37,15 @@ public:
   void check_collisions(std::shared_ptr<Map> map);
 
   /**
+   * @brief Filter nearby tiles
+   *
+   * @details helper for check_collisions that returns vector of only the tiles
+   * the attack is in that are enemypaths.
+   */
+  std::vector<std::shared_ptr<BaseTile>> filter_tiles(
+      std::vector<std::shared_ptr<BaseTile>> nearby);
+
+  /**
    * @brief Check if the attack has hit an enemy
    *
    * @detials Use some collision detection algorithm such as AABA
