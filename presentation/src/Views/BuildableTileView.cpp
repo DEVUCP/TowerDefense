@@ -30,9 +30,10 @@ void BuildableTileView::update(UpdateData upd) {
   if (tower) tower->update(upd);
 }
 
-void BuildableTileView::build_tower(BaseTower::TowerType type) {
+bool BuildableTileView::build_tower(BaseTower::TowerType type) {
   auto lvl = Game::get_instance().get_level();
   auto converted_tile = std::dynamic_pointer_cast<BuildableTile>(tile);
   auto twr = lvl->build_tower(BaseTower::IonPrism, converted_tile);
   tower = std::make_shared<TowerView>(twr);
+  return true;
 }

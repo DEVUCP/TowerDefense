@@ -1,6 +1,7 @@
 #include "Components/Sidebar.hpp"
 #include <memory>
 #include <string>
+#include "Components/SFXPlayer.hpp"
 #include "Components/SidebarItem.hpp"
 #include "Components/SidebarTowerButton.hpp"
 #include "Game.hpp"
@@ -10,13 +11,6 @@
 
 std::vector<std::pair<BaseTower::TowerType, std::string>> Sidebar::towers_info =
     {
-        {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
-        {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
-        {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
-        {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
-        {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
-        {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
-        {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
         {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
 };
 Sidebar::Sidebar() {
@@ -52,18 +46,6 @@ void Sidebar::init_content() {
   auto col = GameSettings::get_instance().get_columns();
   auto sidebar_len =
       GameSettings::get_instance().get_sidebar_row_count() * tile_len;
-  // lives_t.setString("Lives: 100");
-  // coins_t.setString("Coins: 30");
-  // score_t.setString("Score: 20XP");
-  // for (auto& txt : texts) {
-  //   txt->setFont(font);
-  //   txt->setCharacterSize(30);
-  //   txt->setFillColor(sf::Color::White);
-  //   txt->setPosition(
-  //       col * tile_len + (sidebar_len - txt->getLocalBounds().width) / 2.f,
-  //       50 * i + 75);
-  //   i++;
-  // }
 
   init_item(
       lives, "./assets/textures/sidebar/lives.png",
@@ -142,9 +124,11 @@ void Sidebar::init_tower_buttons() {
     twr->set_handler([this, type]() {
       if (target->get_tile()->get_type() != BaseTile::Buildable) return;
       auto converted = std::dynamic_pointer_cast<BuildableTileView>(target);
-      converted->build_tower(type);
-      target->set_selected(false);
-      target = nullptr;
+      if (converted->build_tower(type)) {
+        target->set_selected(false);
+        target = nullptr;
+        SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
+      }
     });
 
     twr_btns.push_back(twr);

@@ -19,7 +19,7 @@ public:
   /**
    * @brief Build a tower on this tile
    */
-  void build_tower(BaseTower::TowerType type);
+  bool build_tower(BaseTower::TowerType type);
 
 private:
   static std::vector<std::string> sheets;
