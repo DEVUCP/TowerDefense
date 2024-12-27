@@ -6,6 +6,7 @@
 #include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Tower/BaseTower.hpp"
+#include "Views/BuildableTileView.hpp"
 
 std::vector<std::pair<BaseTower::TowerType, std::string>> Sidebar::towers_info =
     {
@@ -21,6 +22,7 @@ std::vector<std::pair<BaseTower::TowerType, std::string>> Sidebar::towers_info =
 Sidebar::Sidebar() {
   init_sidebar_bg();
   init_content();
+  init_tower_buttons();
 }
 
 void Sidebar::init_sidebar_bg() {
@@ -77,13 +79,11 @@ void Sidebar::init_content() {
         return "Coins: " + std::to_string(lvl->get_coins());
       },
       200);
-
-  // Initialize the tower buttons
-  // TODO: Make this dynamic
-  init_tower_buttons();
 }
 
-void Sidebar::handle_events(EventData data) {}
+void Sidebar::handle_events(EventData data) {
+  for (auto& twr : twr_btns) twr->handle_events(data);
+}
 
 void Sidebar::render(RenderData ren) {
   ren.window->draw(sidebar_bg);
@@ -129,7 +129,7 @@ void Sidebar::init_tower_buttons() {
   int y_start = 400;
 
   int index = 0;
-  for (auto& twr : towers_info) {
+  for (auto& [type, path] : towers_info) {
     // Calculate row and column based on index
     int row = index / grid_width;
     int column = index % grid_width;
@@ -138,7 +138,16 @@ void Sidebar::init_tower_buttons() {
     int x = x_start + column * cell_width + (column != 0 ? TOWERS_OFFSET : 0);
     int y = y_start + static_cast<int>(row * cell_height * vertical_spacing);
 
-    twr_btns.push_back(std::make_shared<SidebarTowerButton>(x, y, twr.second));
+    auto twr = std::make_shared<SidebarTowerButton>(x, y, path);
+    twr->set_handler([this, type]() {
+      if (target->get_tile()->get_type() != BaseTile::Buildable) return;
+      auto converted = std::dynamic_pointer_cast<BuildableTileView>(target);
+      converted->build_tower(type);
+      target->set_selected(false);
+      target = nullptr;
+    });
+
+    twr_btns.push_back(twr);
     index++;
   }
 }

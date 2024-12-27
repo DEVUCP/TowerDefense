@@ -1,6 +1,7 @@
 #include "Components/SidebarTowerButton.hpp"
 #include <iostream>
 #include "SFML/Graphics/Rect.hpp"
+#include "SFML/Window/Event.hpp"
 
 SidebarTowerButton::SidebarTowerButton(unsigned x, unsigned y,
                                        std::string tower_path) {
@@ -28,7 +29,14 @@ SidebarTowerButton::SidebarTowerButton(unsigned x, unsigned y,
       y + (bg.getGlobalBounds().height - twr.getGlobalBounds().height) / 2 -
           15);
 }
-void SidebarTowerButton::handle_events(EventData data) {}
+void SidebarTowerButton::handle_events(EventData data) {
+  if (data.event.type == sf::Event::MouseButtonPressed &&
+      is_hovered(sf::Vector2f{static_cast<float>(data.mouse_pointer.x),
+                              static_cast<float>(data.mouse_pointer.y)},
+                 bg)) {
+    on_click();
+  }
+}
 void SidebarTowerButton::render(RenderData ren) {
   ren.window->draw(bg);
   ren.window->draw(twr);

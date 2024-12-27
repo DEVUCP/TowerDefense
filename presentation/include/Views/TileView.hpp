@@ -33,11 +33,13 @@ protected:
 private:
   void init_selected();
 
+protected:
+  std::shared_ptr<BaseTile> tile;
+
 private:
   sf::Texture texture;
   sf::Sprite sprite;
   sf::RectangleShape shape;
-  std::shared_ptr<BaseTile> tile;
   sf::Texture selected_texture;
   sf::Sprite selected_sprite;
   SpriteSheetManager selected_mng;

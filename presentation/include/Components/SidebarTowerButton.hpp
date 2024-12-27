@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Interfaces/Clickable.hpp"
 #include "Interfaces/Widget.hpp"
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Texture.hpp"
-class SidebarTowerButton : public Widget {
+
+class SidebarTowerButton : public Widget, public Clickable {
 public:
   SidebarTowerButton(unsigned x, unsigned y, std::string tower_path);
 

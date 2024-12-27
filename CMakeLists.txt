@@ -6,6 +6,7 @@ project(
   LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS True)
+set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(./presentation)
 add_subdirectory(./business)
@@ -19,6 +20,5 @@ target_include_directories(main
                            PUBLIC ${PROJECT_SOURCE_DIR}/presentation/include)
 set(source "${CMAKE_SOURCE_DIR}/assets")
 set(destination "${CMAKE_CURRENT_BINARY_DIR}/assets")
-
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
