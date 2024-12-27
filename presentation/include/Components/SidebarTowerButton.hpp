@@ -23,4 +23,6 @@ public:
 private:
   sf::Sprite bg;
   sf::Texture bg_texture;
+  sf::Sprite twr;
+  sf::Texture twr_texture;
 };

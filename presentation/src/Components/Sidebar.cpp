@@ -90,8 +90,8 @@ void Sidebar::render(RenderData ren) {
   lives->render(ren);
   coins->render(ren);
 
-  // if (target != nullptr)
-  for (auto& twr_btn : twr_btns) twr_btn->render(ren);
+  if (target != nullptr)
+    for (auto& twr_btn : twr_btns) twr_btn->render(ren);
 }
 void Sidebar::update(UpdateData dat) {
   lives->update(dat);

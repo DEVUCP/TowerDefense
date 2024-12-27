@@ -1,5 +1,6 @@
 #include "Components/SidebarTowerButton.hpp"
 #include <iostream>
+#include "SFML/Graphics/Rect.hpp"
 
 SidebarTowerButton::SidebarTowerButton(unsigned x, unsigned y,
                                        std::string tower_path) {
@@ -10,12 +11,28 @@ SidebarTowerButton::SidebarTowerButton(unsigned x, unsigned y,
   bg.setTexture(bg_texture);
   bg.setPosition(x, y);
 
-  // Scale
+  // Scale Bg
   auto bounds = bg.getGlobalBounds();
   bg.setScale(120.f / bounds.width, 120.f / bounds.height);
+
+  // Initiate the tower bg
+  if (!twr_texture.loadFromFile(tower_path)) {
+    std::cerr << "Failed to load tower" << std::endl;
+    exit(1);
+  }
+  twr.setTexture(twr_texture);
+  twr.setTextureRect(sf::IntRect(0, 0, 64, 128));
+  twr.setScale(0.8, 0.8);
+  twr.setPosition(
+      x + (bg.getGlobalBounds().width - twr.getGlobalBounds().width) / 2,
+      y + (bg.getGlobalBounds().height - twr.getGlobalBounds().height) / 2 -
+          15);
 }
 void SidebarTowerButton::handle_events(EventData data) {}
-void SidebarTowerButton::render(RenderData ren) { ren.window->draw(bg); }
+void SidebarTowerButton::render(RenderData ren) {
+  ren.window->draw(bg);
+  ren.window->draw(twr);
+}
 void SidebarTowerButton::update(UpdateData) {}
 
 const sf::FloatRect SidebarTowerButton::getGlobalBounds() {
