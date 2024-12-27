@@ -46,6 +46,15 @@ public:
       std::vector<std::shared_ptr<BaseTile>> nearby);
 
   /**
+   * @brief get all nearby tiles
+   *
+   * @details helper for check_collisions that returns vector of any tiles that
+   * are within collision points
+   */
+  std::vector<std::shared_ptr<BaseTile>> get_nearby_tiles(
+      std::shared_ptr<Map> map);
+
+  /**
    * @brief Check if the attack has hit an enemy
    *
    * @detials Use some collision detection algorithm such as AABA
