@@ -7,11 +7,11 @@ BaseAttack::BaseAttack(float x, float y, float width, float height,
       Collidable(x, y, width, height),
       damage(damage) {}
 
-bool BaseAttack::is_to_be_removed() {}
+bool BaseAttack::is_to_be_removed() { return to_be_removed; }
 
 bool BaseAttack::hit(std::shared_ptr<BaseEnemy> enemy) {}
 
 void BaseAttack::on_hit() {}
 
-void on_reach() {}
-void BaseAttack::on_out_of_board() {}
+void BaseAttack::on_reach() { to_be_removed = true; }
+void BaseAttack::on_out_of_board() { to_be_removed = true; }
