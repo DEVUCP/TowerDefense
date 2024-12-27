@@ -87,5 +87,5 @@ private:
                        // removed, either because it's out of edge or because
                        // it's hit target
   int damage;
-  std::shared_ptr<BaseTile> current_tile;
+  std::vector<std::shared_ptr<BaseTile>> current_tile;
 };
