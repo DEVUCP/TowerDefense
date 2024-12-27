@@ -7,7 +7,7 @@ B B B B B N N N N N N N N
 B B B B B N N N N R R D N
 N N N N B B B R R U N D N
 R R R R D B B U N B B D N
-N N N N D N N U N B B D B
+N N N B D N N U N B B D B
 N N N N R R R U B B B D B
 N N N N N N N B B B N D N
 N N N N N N N B B B B L L

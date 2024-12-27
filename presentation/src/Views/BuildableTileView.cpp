@@ -35,5 +35,6 @@ bool BuildableTileView::build_tower(BaseTower::TowerType type) {
   auto converted_tile = std::dynamic_pointer_cast<BuildableTile>(tile);
   auto twr = lvl->build_tower(BaseTower::IonPrism, converted_tile);
   tower = std::make_shared<TowerView>(twr);
+  std::cout << "made a tower" << std::endl;
   return true;
 }

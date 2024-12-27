@@ -1,11 +1,11 @@
 #include "Pages/GamePage.hpp"
 #include <memory>
 #include "Components/MusicPlayer.hpp"
-#include "Components/SFXPlayer.hpp"
 #include "Enemy/Enemies/LeafBug.hpp"
 #include "Enums/Event.hpp"
 #include "Game.hpp"
 #include "GameSettings.hpp"
+#include "Map/EnemyPathTile.hpp"
 #include "Tower/BaseTower.hpp"
 #include "Utils/Vector.hpp"
 #include "Views/BuildableTileView.hpp"
@@ -17,7 +17,12 @@ GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   init_map();
   init_sidebar();
   // TODO: Remove this temporary test for EnemyView
-  auto enm = std::make_shared<LeafBug>(500, 500, Vector<float>(600, 600));
+  auto tile_in = Game::get_instance().get_level()->get_map()->get_tile(3, 4);
+  auto enm =
+      std::make_shared<LeafBug>(tile_in->get_position().x,
+                                tile_in->get_position().y, Vector<float>(0, 0));
+  auto enemy_path = std::dynamic_pointer_cast<EnemyPathTile>(tile_in);
+  enemy_path->register_enemy(enm);
   auto view = std::make_shared<EnemyView>(enm);
   enemies.push_back(view);
 }

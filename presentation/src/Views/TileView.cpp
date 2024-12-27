@@ -22,9 +22,7 @@ void TileView::handle_events(EventData data) {
 
 void TileView::render(RenderData ren) {
   ren.window->draw(sprite);
-  if (selected) {
-    ren.window->draw(selected_sprite);
-  }
+  if (selected) ren.window->draw(selected_sprite);
 }
 void TileView::update(UpdateData dat) {
   if (selected) {

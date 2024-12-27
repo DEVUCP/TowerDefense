@@ -70,7 +70,7 @@ void TowerView::init_weapon_sprite() {
 void TowerView::handle_events(EventData data) {}
 void TowerView::render(RenderData ren) {
   ren.window->draw(sprite);
-  ren.window->draw(weapon);
+  if (tower->in_range()) ren.window->draw(weapon);
   weapon_sprite_mng.next_sprite(weapon);
 }
 void TowerView::update(UpdateData dat) {}

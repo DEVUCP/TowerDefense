@@ -5,6 +5,7 @@
 #include <set>
 #include "Enemy/BaseEnemy.hpp"
 #include "Game.hpp"
+#include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Map/Map.hpp"
 
@@ -36,7 +37,6 @@ bool BaseTower::in_range() {
 
   // Starting position of the tower
   auto start_tile = tile;
-  auto pos = tile->get_position();
   if (!start_tile) return false;
 
   // BFS setup: Pair contains the tile and current depth
@@ -64,15 +64,17 @@ bool BaseTower::in_range() {
         return true;
       }
     }
+    auto len = GameSettings::get_instance().get_tile_size();
+    auto x = current_tile->get_position().y / len;
+    auto y = current_tile->get_position().x / len;
 
     // Add unvisited neighbors to the BFS queue
     for (int dx = -1; dx <= 1; ++dx) {
       for (int dy = -1; dy <= 1; ++dy) {
         if (dx == 0 && dy == 0) continue;  // Skip the current tile
 
-        int neighbor_x = pos.x + dx;
-        int neighbor_y = pos.y + dy;
-
+        int neighbor_x = x + dx;
+        int neighbor_y = y + dy;
         auto neighbor_tile = map->get_tile(neighbor_x, neighbor_y);
         if (neighbor_tile && visited.find(neighbor_tile) == visited.end()) {
           to_visit.push({neighbor_tile, depth + 1});
