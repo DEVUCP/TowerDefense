@@ -41,6 +41,11 @@ public:
    */
   T length() { return std::sqrt(x * x + y * y); }
 
+  float get_distance_to(Vector<T> destination) {
+    return std::sqrt(std::pow(destination.x - x, 2) +
+                     std::pow(destination.y - y, 2));
+  }
+
 public:
   T x;
   T y;
