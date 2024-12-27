@@ -13,7 +13,16 @@ bool BaseAttack::is_to_be_removed() { return to_be_removed; }
 void BaseAttack::check_collisions(std::shared_ptr<Map> map) {}
 
 std::vector<std::shared_ptr<BaseTile>> BaseAttack::filter_tiles(
-    std::vector<std::shared_ptr<BaseTile>> nearby) {}
+    std::vector<std::shared_ptr<BaseTile>> nearby) {
+  auto it = std::unique(nearby.begin(), nearby.end());
+  nearby.erase(it, nearby.end());
+
+  for (int i = 0; i < nearby.size(); i++) {
+    if (nearby[i]->get_type() != BaseTile::EnemyPath)
+      nearby.erase(nearby.begin() + i);
+  }
+  return nearby;
+}
 
 std::vector<std::shared_ptr<BaseTile>> BaseAttack::get_nearby_tiles(
     std::shared_ptr<Map> map) {
