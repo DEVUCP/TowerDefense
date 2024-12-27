@@ -2,10 +2,15 @@
 
 #include <memory>
 #include "Components/SidebarItem.hpp"
+#include "Components/SidebarTowerButton.hpp"
 #include "Interfaces/Widget.hpp"
+#include "Tower/BaseTower.hpp"
 #include "Views/TileView.hpp"
 
 class Sidebar : public Widget {
+public:
+  static constexpr unsigned TOWERS_OFFSET = 10;
+
 public:
   Sidebar();
 
@@ -26,6 +31,7 @@ private:
   void init_content();
   void init_item(std::shared_ptr<SidebarItem>& item, std::string icon_path,
                  std::function<std::string(void)> func, int y);
+  void init_tower_buttons();
 
 private:
   sf::Sprite sidebar_bg;
@@ -33,4 +39,6 @@ private:
   std::shared_ptr<SidebarItem> lives;
   std::shared_ptr<SidebarItem> coins;
   std::shared_ptr<TileView> target;
+  std::vector<std::shared_ptr<SidebarTowerButton>> twr_btns;
+  static std::vector<std::pair<BaseTower::TowerType, std::string>> towers_info;
 };

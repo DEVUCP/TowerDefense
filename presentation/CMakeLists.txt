@@ -37,6 +37,7 @@ set(HEADERS
     include/Components/Sidebar.hpp
     include/Components/SidebarItem.hpp
     include/Components/SpriteSheetManager.hpp
+    include/Components/SidebarTowerButton.hpp
     # Interfaces
     include/Interfaces/Clickable.hpp
     # Widget
@@ -77,6 +78,7 @@ set(SOURCES
     src/Components/Sidebar.cpp
     src/Components/SidebarItem.cpp
     src/Components/SpriteSheetManager.cpp
+    src/Components/SidebarTowerButton.cpp
     # Views
     src/Views/TileView.cpp
     src/Views/BuildableTileView.cpp
