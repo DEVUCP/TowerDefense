@@ -3,7 +3,7 @@
 #include <memory>
 #include "Components/SidebarItem.hpp"
 #include "Interfaces/Widget.hpp"
-#include "SFML/Graphics/Font.hpp"
+#include "Views/TileView.hpp"
 
 class Sidebar : public Widget {
 public:
@@ -16,6 +16,11 @@ public:
   void render(RenderData);
   void update(UpdateData);
 
+  /**
+   * @brief Set the target tile for the tower construction
+   */
+  void set_tile_target(std::shared_ptr<TileView> tile);
+
 private:
   void init_sidebar_bg();
   void init_content();
@@ -27,4 +32,5 @@ private:
   sf::Texture sidebar_texture;
   std::shared_ptr<SidebarItem> lives;
   std::shared_ptr<SidebarItem> coins;
+  std::shared_ptr<TileView> target;
 };

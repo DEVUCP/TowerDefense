@@ -96,6 +96,7 @@ void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
   if (selected_tile != nullptr) selected_tile->set_selected(false);
   selected_tile = tile_view;
   selected_tile->set_selected(true);
+  sidebar->set_tile_target(tile_view);
 
   // // TODO: This logic is to be transfered to another method, just because
   // // business isn't complete

@@ -7,7 +7,7 @@
 
 class SidebarItem : public Widget {
 public:
-  static constexpr int ICON_LEN = 48;
+  static constexpr int ICON_LEN = 32;
   static constexpr int ICON_TEXT_MARGIN = 10;
 
 public:
@@ -36,4 +36,6 @@ private:
   sf::Texture icon_texture;
   sf::Sprite icon;
   std::function<std::string(void)> text_generator;
+  sf::Texture bg_texture;
+  sf::Sprite bg;
 };

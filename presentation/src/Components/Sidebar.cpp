@@ -1,12 +1,9 @@
 #include "Components/Sidebar.hpp"
-#include <iostream>
 #include <memory>
 #include <string>
 #include "Components/SidebarItem.hpp"
 #include "Game.hpp"
 #include "GameSettings.hpp"
-#include "SFML/System/Vector3.hpp"
-#include "Utils/FontFactory.hpp"
 
 Sidebar::Sidebar() {
   init_sidebar_bg();
@@ -92,3 +89,5 @@ void Sidebar::init_item(std::shared_ptr<SidebarItem>& item,
   auto bounds = item->get_global_bounds();
   item->set_position(col * tile_len + (sidebar_len - bounds.width) / 2.f, y);
 }
+
+void Sidebar::set_tile_target(std::shared_ptr<TileView> tile) { target = tile; }

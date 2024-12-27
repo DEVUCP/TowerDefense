@@ -1,15 +1,11 @@
 #pragma once
 
 #include <memory>
-#include <set>
 #include "Components/Page.hpp"
 #include "Components/Sidebar.hpp"
-#include "Interfaces/Clickable.hpp"
 #include "Tower/BaseTower.hpp"
-#include "Views/BuildableTileView.hpp"
 #include "Views/EnemyView.hpp"
 #include "Views/TileView.hpp"
-#include "Views/TowerView.hpp"
 
 class GamePage : public Page {
 public:
