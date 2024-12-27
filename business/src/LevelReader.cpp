@@ -22,27 +22,13 @@ Line: lives coins max_wave initial_enemy_count
 EnemyTypeCount Lines: enemy[i].tickets enemy[i].starting_wave
 Enemy Path Beginning: row column
 Remaining: "28 space-separated chatacters representing each tile type
-B=Buildable, N=NonBuildable, U(p) D(own) R(ight) L(eft)=Enemy" e.g. "N B N R R R D N N B ......"
+B=Buildable, N=NonBuildable, U(p) D(own) R(ight) L(eft)=Enemy" e.g. "N B N R R R
+D N N B ......"
 */
 
 struct EnemyInfo {
   int tickets, starting_wave;
 };
-
-void write_level_data(const std::string& path) {
-  std::ifstream file(path);
-  if (!file.is_open()) {
-    std::cerr << "Error: Unable to open the file: " << path << std::endl;
-    exit(1);
-  }
-
-  char c;
-  while (file >> c) {
-    std::cout << c;
-  }
-
-  file.close();
-}
 
 std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   int lives;
@@ -89,7 +75,12 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   for (int i = 0; i < row; i++) {
     for (int j = 0; j < col; j++) {
       char c;
-      file >> c;
+      if (!(file >> c)) {
+        if (file.eof())
+          throw std::runtime_error("Unexpected end of file while reading data");
+        else
+          throw std::runtime_error("Error reading from file");
+      }
 
       std::shared_ptr<BaseTile> tile = nullptr;
 
@@ -105,7 +96,7 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
           tile = std::make_shared<EnemyPathTile>(static_cast<float>(j * len),
                                                  static_cast<float>(i * len));
 
-          enemy_path_positions.insert({i*col + j, c});
+          enemy_path_positions.insert({i * col + j, c});
           break;
         case 'N':
           tile = std::make_shared<NonBuildableTile>(
@@ -123,10 +114,12 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   unsigned current_row = enemy_path_begin.first;
   unsigned current_column = enemy_path_begin.second;
 
-  while(enemy_path_positions.find(current_row*col + current_column) != enemy_path_positions.end()) {
-    enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(grid[current_row][current_column]));
+  while (enemy_path_positions.find(current_row * col + current_column) !=
+         enemy_path_positions.end()) {
+    enemy_path.push_back(std::static_pointer_cast<EnemyPathTile>(
+        grid[current_row][current_column]));
 
-    switch (enemy_path_positions[current_row*col + current_column]) {
+    switch (enemy_path_positions[current_row * col + current_column]) {
       case 'U':
         current_row -= 1;
         break;
