@@ -11,7 +11,7 @@
  *
  * @note Most of the logic will be done by the callbacks in `Moveable`
  */
-class BaseAttack : public Moveable {
+class BaseAttack : public Moveable, public Collidable {
 public:
   /**
    * @brief Constructor
