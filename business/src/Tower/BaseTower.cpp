@@ -4,6 +4,7 @@
 #include <queue>
 #include <set>
 #include "Enemy/BaseEnemy.hpp"
+#include "Game.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Map/Map.hpp"
 
@@ -29,7 +30,8 @@ void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
   // TODO: Implement attack logic here
 }
 
-bool BaseTower::in_range(std::shared_ptr<Map> map) {
+bool BaseTower::in_range() {
+  auto map = Game::get_instance().get_level()->get_map();
   if (!map) return false;
 
   // Starting position of the tower

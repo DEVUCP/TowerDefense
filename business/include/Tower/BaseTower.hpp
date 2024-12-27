@@ -40,7 +40,7 @@ public:
    * @details Use BFS to consider all `EnemyPathTile` tiles in range. If it has
    * enemies, init an attack towards the first enemy there ()
    */
-  bool in_range(std::shared_ptr<Map> map);
+  bool in_range();
 
   /**
    * @brief Upgrades the tower based on the selected upgrade index.
