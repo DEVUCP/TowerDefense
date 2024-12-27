@@ -125,6 +125,13 @@ public:
   std::shared_ptr<BaseTower> build_tower(BaseTower::TowerType,
                                          std::shared_ptr<BuildableTile> tile);
 
+  /**
+   * @brief Getters for game info
+   */
+  int get_lives() const;
+  int get_score() const;
+  int get_coins() const;
+
 private:
   int lives;
   int score;

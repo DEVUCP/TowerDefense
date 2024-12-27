@@ -102,3 +102,7 @@ std::shared_ptr<BaseTower> Level::build_tower(
   tower_mng->add_tower(twr);
   return twr;
 }
+
+int Level::get_lives() const { return lives; }
+int Level::get_score() const { return score; }
+int Level::get_coins() const { return coins; }

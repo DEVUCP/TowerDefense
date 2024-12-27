@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+#include "Components/SidebarItem.hpp"
 #include "Interfaces/Widget.hpp"
 #include "SFML/Graphics/Font.hpp"
 
@@ -17,13 +19,12 @@ public:
 private:
   void init_sidebar_bg();
   void init_content();
+  void init_item(std::shared_ptr<SidebarItem>& item, std::string icon_path,
+                 std::function<std::string(void)> func, int y);
 
 private:
-  unsigned lives, coins, score;
   sf::Sprite sidebar_bg;
   sf::Texture sidebar_texture;
-  sf::Font font;
-  sf::Text lives_t;
-  sf::Text coins_t;
-  sf::Text score_t;
+  std::shared_ptr<SidebarItem> lives;
+  std::shared_ptr<SidebarItem> coins;
 };

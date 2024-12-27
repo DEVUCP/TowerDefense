@@ -35,6 +35,7 @@ set(HEADERS
     include/Components/Page.hpp
     include/Components/Title.hpp
     include/Components/Sidebar.hpp
+    include/Components/SidebarItem.hpp
     include/Components/SpriteSheetManager.hpp
     # Interfaces
     include/Interfaces/Clickable.hpp
@@ -74,6 +75,7 @@ set(SOURCES
     src/Components/Page.cpp
     src/Components/Title.cpp
     src/Components/Sidebar.cpp
+    src/Components/SidebarItem.cpp
     src/Components/SpriteSheetManager.cpp
     # Views
     src/Views/TileView.cpp
