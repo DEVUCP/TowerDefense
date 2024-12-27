@@ -18,8 +18,8 @@ public:
    *
    * @note Must call Moveable
    */
-  BaseAttack(float x, float y, float width, float height, float velocity, Vector<float> target,
-             const std::string& sprite, int damage);
+  BaseAttack(float x, float y, float width, float height, float velocity,
+             Vector<float> target, const std::string& sprite, int damage);
 
   /**
    * @brief Check if the element is to be removed
@@ -27,6 +27,14 @@ public:
    * @details Getter for `to_be_removed`
    */
   bool is_to_be_removed();
+
+  /**
+   * @brief Will call helper methods to detect collisions and apply them in
+   * correct order.
+   *
+   * @details will be called by AttackManager after moving.
+   */
+  void check_collisions(std::shared_ptr<Map> map);
 
   /**
    * @brief Check if the attack has hit an enemy
