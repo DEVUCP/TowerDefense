@@ -18,7 +18,7 @@ public:
    *
    * @note Must call Moveable
    */
-  BaseAttack(float x, float y, float velocity, Vector<float> target,
+  BaseAttack(float x, float y, float width, float height, float velocity, Vector<float> target,
              const std::string& sprite, int damage);
 
   /**
