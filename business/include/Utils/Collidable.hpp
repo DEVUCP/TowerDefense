@@ -6,6 +6,7 @@
  * Invariant: origin will represent the origin (top-left most point)
  */
 class Collidable {
+  public:
   Collidable(float x, float y, float width, float height, bool enabled = true);
 
   /**
@@ -29,7 +30,7 @@ class Collidable {
    */
   void disable_collision();
 
-private:
+protected:
   /**
    * @brief Returns top left point coordinates
    */
