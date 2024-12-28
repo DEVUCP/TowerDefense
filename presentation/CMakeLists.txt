@@ -56,7 +56,8 @@ set(HEADERS
     include/Pages/AboutPage.hpp
     include/Pages/PausePage.hpp
     include/Pages/WinPage.hpp
-    include/Pages/LosePage.hpp)
+    include/Pages/LosePage.hpp
+    include/Components/Text.hpp)
 set(SOURCES
     src/App.cpp
     # Utilities
@@ -97,7 +98,8 @@ set(SOURCES
     src/Pages/AboutPage.cpp
     src/Pages/PausePage.cpp
     src/Pages/WinPage.cpp
-    src/Pages/LosePage.cpp)
+    src/Pages/LosePage.cpp
+    src/Components/Text.cpp)
 
 add_library(presentation ${HEADERS} ${SOURCES})
 
