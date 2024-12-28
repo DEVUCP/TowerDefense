@@ -65,7 +65,9 @@ set(SOURCES # Sources
     src/Map/BaseTile.cpp
     src/Map/BuildableTile.cpp
     src/Map/NonBuildableTile.cpp
-    src/Map/EnemyPathTile.cpp)
+    src/Map/EnemyPathTile.cpp
+    # Attack
+    src/Attack/BaseAttack.cpp)
 
 add_library(business ${HEADERS} ${SOURCES})
 file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})
