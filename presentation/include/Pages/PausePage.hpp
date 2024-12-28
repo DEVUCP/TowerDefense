@@ -23,6 +23,7 @@ public:
 
 private:
   Title title;
-  std::shared_ptr<IButton> go_back;
-  std::shared_ptr<MuteButton> mute_button;
+  std::shared_ptr<IButton> restart_button;
+  std::shared_ptr<IButton> levels_button;
+  std::shared_ptr<IButton> continue_button;
 };
