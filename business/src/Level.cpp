@@ -23,6 +23,7 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
       state(ON),
       score(0),
       level_num(level_num) {}
+
 void Level::update_lives(int amount) {
   lives += amount;
 
