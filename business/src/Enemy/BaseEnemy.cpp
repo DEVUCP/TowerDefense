@@ -1,6 +1,5 @@
 #include "Enemy/BaseEnemy.hpp"
 #include <algorithm>
-#include <iostream>
 #include <memory>
 #include "Game.hpp"
 #include "GameSettings.hpp"
@@ -48,16 +47,17 @@ void BaseEnemy::update_current_tile(
     assert(!!converted);
     converted->remove_enemy(shared_from_this());
     current_tiles.erase(tile);
-    std::cout << "removing a tile" << std::endl;
   }
 
   // Add new tiles
   for (auto& tile : nearby) {
-    std::cout << "inserting a tile" << std::endl;
-    auto converted = std::dynamic_pointer_cast<EnemyPathTile>(tile);
-    assert(!!converted);
-    converted->register_enemy(shared_from_this());
-    current_tiles.insert(tile);
+    // Only insert if needed
+    if (current_tiles.find(tile) == current_tiles.end()) {
+      auto converted = std::dynamic_pointer_cast<EnemyPathTile>(tile);
+      assert(!!converted);
+      converted->register_enemy(shared_from_this());
+      current_tiles.insert(tile);
+    }
   }
 }
 
@@ -118,10 +118,7 @@ void BaseEnemy::invoke_damage(float amount) {
 
 BaseEnemy::EnemyType BaseEnemy::get_type() const { return type; }
 
-void BaseEnemy::on_out_of_board() {
-  to_be_removed = true;
-  std::cout << "Removing" << std::endl;
-}
+void BaseEnemy::on_out_of_board() { to_be_removed = true; }
 
 void BaseEnemy::on_move() {
   auto map = Game::get_instance().get_level()->get_map();
