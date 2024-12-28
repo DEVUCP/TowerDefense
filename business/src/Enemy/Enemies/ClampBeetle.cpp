@@ -1,7 +1,7 @@
 #include "Enemy/Enemies/ClampBeetle.hpp"
 
-ClampBeetle::ClampBeetle(float x, float y, Vector<float> dest)
-    : BaseEnemy(x, y, dest, INITIAL_HEALTH, VELOCITY, KILL_COINS,
+ClampBeetle::ClampBeetle(float x, float y, float width, float height, Vector<float> dest)
+    : BaseEnemy(x, y, width, height, dest, INITIAL_HEALTH, VELOCITY, KILL_COINS,
                 EnemyType::CLAMP_BEETLE) {}
 
 void ClampBeetle::on_reach() {}

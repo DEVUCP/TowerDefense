@@ -9,7 +9,7 @@ public:
   static constexpr int INITIAL_HEALTH = 10;
 
 public:
-  ClampBeetle(float x, float y, Vector<float> dest);
+  ClampBeetle(float x, float y, float width, float height, Vector<float> dest);
 
 private:
   virtual void on_reach() override;
