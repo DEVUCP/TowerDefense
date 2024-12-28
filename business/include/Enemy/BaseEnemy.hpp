@@ -35,6 +35,11 @@ public:
 
   void update_current_tile(std::vector<std::shared_ptr<BaseTile>>);
 
+  std::vector<std::shared_ptr<BaseTile>> filter_tiles(
+      std::vector<std::shared_ptr<BaseTile>>);
+
+  std::vector<std::shared_ptr<BaseTile>> get_nearby_tiles(std::shared_ptr<Map>);
+
   /**
    * @brief Getter for health
    */
