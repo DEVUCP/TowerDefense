@@ -1,12 +1,13 @@
 #pragma once
 
+#include "Utils/Positionable.hpp"
 #include "Utils/Vector.hpp"
 
 /**
  * Invariant: origin will represent the origin (top-left most point)
  */
-class Collidable {
-  public:
+class Collidable : virtual public Positionable {
+public:
   Collidable(float x, float y, float width, float height, bool enabled = true);
 
   /**
@@ -53,7 +54,6 @@ protected:
 
 private:
   bool enabled;
-  Vector<float> position;
   union {
     Vector<float> size;
     float width, height;

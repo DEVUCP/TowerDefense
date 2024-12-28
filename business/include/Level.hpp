@@ -153,13 +153,6 @@ public:
    */
   int get_level_num() const;
 
-  /**
-   * @brief A callback for when an enemy has been created
-   * Specified by the presentation lyer
-   */
-  void set_on_enemy_created(
-      std::function<void(std::shared_ptr<BaseEnemy>)> handler);
-
 private:
   int lives;
   int score;

@@ -1,12 +1,14 @@
 #include "Attack/BaseAttack.hpp"
 #include <algorithm>
 #include "Map/EnemyPathTile.hpp"
+#include "Utils/Positionable.hpp"
 
 BaseAttack::BaseAttack(float x, float y, float width, float height,
                        float velocity, Vector<float> target,
                        const std::string& sprite, int damage)
     : Moveable(x, y, velocity, target),
       Collidable(x, y, width, height),
+      Positionable(x, y),
       damage(damage) {}
 
 bool BaseAttack::is_to_be_removed() { return to_be_removed; }
@@ -38,8 +40,8 @@ void BaseAttack::check_collisions(std::shared_ptr<Map> map) {
   // find nearest enemy
   float shortest_distance_index = 0;
   for (int i = 0; i < enemies.size(); i++) {
-    if (Moveable::position.get_distance_to(enemies[i]->get_position()) <
-        Moveable::position.get_distance_to(
+    if (get_position().get_distance_to(enemies[i]->get_position()) <
+        get_position().get_distance_to(
             enemies[shortest_distance_index]->get_position()))
       shortest_distance_index = i;
   }

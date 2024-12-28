@@ -12,6 +12,7 @@ set(HEADERS
     include/LevelReader.hpp
     include/WaveManager.hpp
     # Utils
+    include/Utils/Positionable.hpp
     include/Utils/Moveable.hpp
     include/Utils/Vector.hpp
     include/Utils/Collidable.hpp
@@ -46,6 +47,7 @@ set(SOURCES # Sources
     src/LevelReader.cpp
     src/WaveManager.cpp
     # Utils
+    src/Utils/Positionable.cpp
     src/Utils/Moveable.cpp
     src/Utils/Collidable.cpp
     # Tower

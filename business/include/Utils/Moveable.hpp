@@ -1,12 +1,13 @@
 #pragma once
 
+#include "Utils/Positionable.hpp"
 #include "Utils/Vector.hpp"
 
 /**
  * @class Moveable
  * @brief Represents an abstraction of all moving objects in the game
  */
-class Moveable {
+class Moveable : virtual public Positionable {
 public:
   /**
    * @brief Constructor
@@ -52,11 +53,6 @@ public:
    */
   void set_velocity(int new_v);
 
-  /**
-   * @brief Getter for position
-   */
-  Vector<float> get_position() const;
-
 protected:
   /**
    * @brief A callback to run when the object reaches its destination
@@ -80,7 +76,6 @@ protected:
   virtual void on_move() = 0;
 
 protected:
-  Vector<float> position;
   Vector<float> dest_point;  // < represent the point the object is moving to
   Vector<float> unit_direction;  // < represent a unit vector in the direction
                                  // the object is moving

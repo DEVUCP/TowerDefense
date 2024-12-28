@@ -1,13 +1,15 @@
 #pragma once
 
 #include <memory>
-#include <queue>
+#include <set>
 #include "Map/BaseTile.hpp"
 #include "Map/Map.hpp"
 #include "Utils/Collidable.hpp"
 #include "Utils/Moveable.hpp"
 
-class BaseEnemy : public Moveable, public Collidable {
+class BaseEnemy : public Moveable,
+                  public Collidable,
+                  public std::enable_shared_from_this<BaseEnemy> {
 public:
   enum class EnemyType { LEAF_BUG = 0, MAGMA_CRAB, CLAMP_BEETLE };
   static constexpr int EnemyTypeCount = 3;
@@ -33,12 +35,12 @@ public:
    */
   void handle_next_tile_redirection(std::shared_ptr<Map> map);
 
-  void update_current_tile(std::vector<std::shared_ptr<BaseTile>>);
+  void update_current_tile(std::set<std::shared_ptr<BaseTile>>);
 
-  std::vector<std::shared_ptr<BaseTile>> filter_tiles(
-      std::vector<std::shared_ptr<BaseTile>>);
+  std::set<std::shared_ptr<BaseTile>> filter_tiles(
+      std::set<std::shared_ptr<BaseTile>>&&);
 
-  std::vector<std::shared_ptr<BaseTile>> get_nearby_tiles(std::shared_ptr<Map>);
+  std::set<std::shared_ptr<BaseTile>> get_nearby_tiles(std::shared_ptr<Map>);
 
   /**
    * @brief Getter for health
@@ -103,8 +105,8 @@ protected:
   bool to_be_removed;  // < indicate if the enemy has invoked damage to player
                        // by -1 or has died due to an attack
   int kill_coins;      // represent the amount of money when killing this enemy
-  std::vector<std::shared_ptr<BaseTile>>
-      current_tile;  // represent the current tile on which the enemy is
+  std::set<std::shared_ptr<BaseTile>>
+      current_tiles;  // represent the current tile on which the enemy is
   EnemyType type;
   Map::enemy_path_list::iterator dest_tile;
 };

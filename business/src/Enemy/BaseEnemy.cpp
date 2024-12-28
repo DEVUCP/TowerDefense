@@ -1,81 +1,99 @@
 #include "Enemy/BaseEnemy.hpp"
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
+#include "Utils/Collidable.hpp"
 #include "Utils/Moveable.hpp"
+#include "Utils/Positionable.hpp"
 
 BaseEnemy::BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
                      float velocity, int kill_coins, EnemyType type)
-    : Moveable(x, y, velocity, dest),
-      kill_coins{kill_coins},
-      type{type},
-      health{initial_health},
-      initial_health{health},
+
+    : Positionable(x, y),
+      Moveable(x, y, velocity, dest),
       Collidable(x - GameSettings::get_instance().get_enemy_width() / 2.f,
                  y - GameSettings::get_instance().get_enemy_height() / 2.f,
                  GameSettings::get_instance().get_enemy_width(),
                  GameSettings::get_instance().get_enemy_height()),
+      kill_coins{kill_coins},
+      type{type},
+      health{initial_health},
+      initial_health{health},
       to_be_removed(false) {
   dest_tile =
       Game::get_instance().get_level()->get_map()->get_first_enemy_tile();
 }
 
 void BaseEnemy::handle_next_tile_redirection(std::shared_ptr<Map> map) {
-  std::vector<std::shared_ptr<BaseTile>> nearby =
+  std::set<std::shared_ptr<BaseTile>> nearby =
       filter_tiles(get_nearby_tiles(map));
+  // std::cout << nearby.size() << std::endl;
   update_current_tile(nearby);
 }
 
 void BaseEnemy::update_current_tile(
-    std::vector<std::shared_ptr<BaseTile>> nearby) {
-  if (current_tile.empty() && nearby.size() == 1) {
-    current_tile.push_back(nearby[0]);
-    return;
+    std::set<std::shared_ptr<BaseTile>> nearby) {
+  // Compute difference to find tiles to remove
+  std::set<std::shared_ptr<BaseTile>> to_remove;
+  std::set_difference(current_tiles.begin(), current_tiles.end(),
+                      nearby.begin(), nearby.end(),
+                      std::inserter(to_remove, to_remove.end()));
+
+  // Remove outdated tiles
+  for (auto& tile : to_remove) {
+    auto converted = std::dynamic_pointer_cast<EnemyPathTile>(tile);
+    assert(!!converted);
+    converted->remove_enemy(shared_from_this());
+    current_tiles.erase(tile);
+    std::cout << "removing a tile" << std::endl;
   }
 
-  if (nearby.size() == 2) {
-    if (current_tile.front() == nearby[0] && current_tile[1] == nearby[1])
-      return;
-    if (current_tile.front() == nearby[0] && current_tile[1] != nearby[1]) {
-      current_tile.push_back(nearby[1]);
-      return;
-    }
-    if (current_tile.front() == nearby[1] && current_tile[1] == nearby[0])
-      return;
-    if (current_tile.front() == nearby[1] && current_tile[1] != nearby[0]) {
-      current_tile.push_back(nearby[0]);
-      return;
-    }
-    current_tile.erase(current_tile.begin());
-    current_tile.push_back(nearby[0]);
-    current_tile.push_back(nearby[1]);
-    return;
+  // Add new tiles
+  for (auto& tile : nearby) {
+    std::cout << "inserting a tile" << std::endl;
+    auto converted = std::dynamic_pointer_cast<EnemyPathTile>(tile);
+    assert(!!converted);
+    converted->register_enemy(shared_from_this());
+    current_tiles.insert(tile);
   }
 }
 
-std::vector<std::shared_ptr<BaseTile>> BaseEnemy::filter_tiles(
-    std::vector<std::shared_ptr<BaseTile>> nearby) {
-  auto it = std::unique(nearby.begin(), nearby.end());
-  nearby.erase(it, nearby.end());
-
-  for (int i = 0; i < nearby.size(); i++) {
-    if (nearby[i]->get_type() != BaseTile::EnemyPath)
-      nearby.erase(nearby.begin() + i);
+std::set<std::shared_ptr<BaseTile>> BaseEnemy::filter_tiles(
+    std::set<std::shared_ptr<BaseTile>>&& nearby) {
+  for (auto it = nearby.begin(); it != nearby.end();) {
+    if ((*it)->get_type() != BaseTile::EnemyPath) {
+      it = nearby.erase(it);
+    } else {
+      ++it;
+    }
   }
   return nearby;
 }
 
-std::vector<std::shared_ptr<BaseTile>> BaseEnemy::get_nearby_tiles(
+std::set<std::shared_ptr<BaseTile>> BaseEnemy::get_nearby_tiles(
     std::shared_ptr<Map> map) {
   // return the tiles of all 4 points of collidable
-  std::vector<std::shared_ptr<BaseTile>> nearby_tiles =
-      std::vector<std::shared_ptr<BaseTile>>();
-  nearby_tiles.push_back(map->map_coords_to_tile(tl().x, tl().y));
-  nearby_tiles.push_back(map->map_coords_to_tile(tr().x, tr().y));
-  nearby_tiles.push_back(map->map_coords_to_tile(bl().x, bl().y));
-  nearby_tiles.push_back(map->map_coords_to_tile(br().x, br().y));
+  auto nearby_tiles = std::set<std::shared_ptr<BaseTile>>();
+  std::vector<Vector<float>> points;
+
+  // Push the four corners of the enemy
+  points.push_back(tl());
+  points.push_back(tr());
+  points.push_back(bl());
+  points.push_back(br());
+
+  // Add the points tiles
+  for (auto p : points) {
+    auto tile = map->map_coords_to_tile(p.y, p.x);
+    // if (tile != nullptr)
+    //   std::cout << "positions: " << p.x << " " << p.y
+    //             << " and tile indices are " << tile->get_position().x / 120
+    //             << " " << tile->get_position().y / 120 << std::endl;
+    if (tile != nullptr) nearby_tiles.insert(tile);
+  }
   return nearby_tiles;
 }
 
@@ -105,4 +123,7 @@ void BaseEnemy::on_out_of_board() {
   std::cout << "Removing" << std::endl;
 }
 
-void BaseEnemy::on_move() {}
+void BaseEnemy::on_move() {
+  auto map = Game::get_instance().get_level()->get_map();
+  handle_next_tile_redirection(map);
+}
