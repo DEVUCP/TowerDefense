@@ -1,5 +1,6 @@
 #include "Views/EnemyView.hpp"
 #include <memory>
+#include "GameSettings.hpp"
 #include "Interfaces/EventData.hpp"
 
 std::unordered_map<BaseEnemy::EnemyType, std::string> EnemyView::sheets = {
@@ -19,7 +20,9 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   sheet_mng.init_sprite_texture(sprite);
 
   // Scale up to desired
-  sprite.setScale(sf::Vector2f(0.9 * 120 / 64.f, 0.9 * 120 / 64.f));
+  auto width = GameSettings::get_instance().get_enemy_width();
+  auto height = GameSettings::get_instance().get_enemy_height();
+  sprite.setScale(sf::Vector2f(width / 64.f, height / 64.f));
 }
 
 void EnemyView::handle_events(EventData evt) {}
