@@ -4,6 +4,9 @@
 
 class LevelReader {
 public:
+  static const inline std::string levels_path = "/data/levels/";
+
+public:
   // remove copying
   LevelReader(const LevelReader&) = delete;
   LevelReader& operator=(const LevelReader&) = delete;
@@ -27,19 +30,15 @@ public:
   /**
    * @breif Generate the file path for the given level number.
    *
-   * @param level_num The level number. If level_num is -1, returns the path of the levels directory.
+   * @param level_num The level number. If level_num is -1, returns the path of
+   * the levels directory.
    */
   std::string get_level_path(int);
 
   /**
    * @brief Get the singleton instance of LevelReader
    */
-  static LevelReader& get_instance() {
-    static LevelReader instance;
-    return instance;
-  }
-
-  static const inline std::string levels_path = "/data/levels/";
+  static LevelReader& get_instance();
 
 private:
   LevelReader() = default;

@@ -185,3 +185,8 @@ std::string LevelReader::get_level_path(int level_num = -1) {
   return std::filesystem::current_path().string() + levels_path +
          std::to_string(level_num) + ".txt";
 }
+
+LevelReader& LevelReader::get_instance() {
+  static LevelReader instance;
+  return instance;
+}
