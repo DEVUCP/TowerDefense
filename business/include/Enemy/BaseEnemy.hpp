@@ -33,6 +33,8 @@ public:
    */
   void handle_next_tile_redirection(std::shared_ptr<Map> map);
 
+  void update_current_tile(std::vector<std::shared_ptr<BaseTile>>);
+
   /**
    * @brief Getter for health
    */
