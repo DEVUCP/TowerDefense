@@ -9,7 +9,8 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
              std::shared_ptr<WaveManager> wave_mng,
              std::shared_ptr<AttackManager> attack_mng,
              std::shared_ptr<TowerManager> tower_mng,
-             std::shared_ptr<EnemyManager> enemy_mng)
+             std::shared_ptr<EnemyManager> enemy_mng,
+             int level_num)
     : lives{lives},
       coins{coins},
       map(map),
@@ -17,7 +18,9 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
       attack_mng(attack_mng),
       enemy_mng(enemy_mng),
       tower_mng{tower_mng},
-      state(ON) {}
+      state(ON),
+      score(0),
+      level_num(level_num) {}
 void Level::update_lives(int amount) {
   lives += amount;
 
@@ -106,3 +109,5 @@ std::shared_ptr<BaseTower> Level::build_tower(
 int Level::get_lives() const { return lives; }
 int Level::get_score() const { return score; }
 int Level::get_coins() const { return coins; }
+
+int Level::get_level_num() const { return level_num; }

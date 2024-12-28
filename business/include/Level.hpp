@@ -22,7 +22,8 @@ public:
         std::shared_ptr<WaveManager> wave_mng,
         std::shared_ptr<AttackManager> attack_mng,
         std::shared_ptr<TowerManager> tower_mng,
-        std::shared_ptr<EnemyManager> enemy_mng);
+        std::shared_ptr<EnemyManager> enemy_mng,
+        int level_num);
 
   /**
    * @brief modifier for lives
@@ -132,6 +133,11 @@ public:
   int get_score() const;
   int get_coins() const;
 
+  /**
+   * @brief Getters for the current level number
+   */
+  int get_level_num() const;
+
 private:
   int lives;
   int score;
@@ -142,4 +148,5 @@ private:
   std::shared_ptr<TowerManager> tower_mng;
   std::shared_ptr<AttackManager> attack_mng;
   GameState state;
+  int level_num;
 };
