@@ -35,6 +35,21 @@ void GamePage::on_unpause() {
 }
 
 void GamePage::handle_events(EventData evt) {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::P) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+    // Game::get_instance().get_level().pause();
+    notify_observers(Event::PAUSE_PAGE_SWITCH);
+  }
+
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    // Game::get_instance().get_level()->end_game();
+    notify_observers(Event::WIN_PAGE_SWITCH);
+  }
+
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
+    // Game::get_instance().get_level()->end_game();
+    notify_observers(Event::LOSE_PAGE_SWITCH);
+  }
+
   auto row = map.size();
   auto col = map[0].size();
   for (int i = 0; i < row; i++) {
