@@ -11,6 +11,9 @@
 #include "WaveManager.hpp"
 
 class Level {
+public:
+  static constexpr int frame_time_ms = 100;
+
 private:
   enum GameState {
     PAUSED,
@@ -163,5 +166,4 @@ private:
 
   // Timer Info
   std::chrono::steady_clock::time_point last_run_time;  // Track last run time
-  const int frame_time_ms = 100;
 };
