@@ -9,7 +9,7 @@ public:
   static constexpr int INITIAL_HEALTH = 10;
 
 public:
-  LeafBug(float x, float y, Vector<float> dest);
+  LeafBug(float x, float y, float width, float height, Vector<float> dest);
   virtual ~LeafBug() = default;
 
 private:
