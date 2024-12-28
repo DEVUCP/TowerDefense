@@ -1,5 +1,6 @@
 #include "Attack/BaseAttack.hpp"
 #include <algorithm>
+#include "Map/EnemyPathTile.hpp"
 
 BaseAttack::BaseAttack(float x, float y, float width, float height,
                        float velocity, Vector<float> target,
@@ -10,7 +11,41 @@ BaseAttack::BaseAttack(float x, float y, float width, float height,
 
 bool BaseAttack::is_to_be_removed() { return to_be_removed; }
 
-void BaseAttack::check_collisions(std::shared_ptr<Map> map) {}
+void BaseAttack::check_collisions(std::shared_ptr<Map> map) {
+  // get nearby tiles
+  // filter tiles
+  std::vector<std::shared_ptr<BaseTile>> nearby =
+      filter_tiles(get_nearby_tiles(map));
+
+  // update current tile
+  current_tile = nearby;
+
+  // get enemies in current tile(s)
+  std::vector<std::shared_ptr<BaseEnemy>> enemies;
+  for (int i = 0; i < nearby.size(); i++) {
+    auto enemy_path_tile = static_cast<EnemyPathTile*>(nearby[i].get());
+    enemies.insert(enemies.end(), enemy_path_tile->get_enemies().begin(),
+                   enemy_path_tile->get_enemies().end());
+  }
+
+  if (enemies.empty()) return;
+
+  // filter non colliding enemies
+  for (int i = 0; i < enemies.size(); i++) {
+    if (!hit(enemies[i])) enemies.erase(enemies.begin() + i);
+  }
+
+  // find nearest enemy
+  float shortest_distance_index = 0;
+  for (int i = 0; i < enemies.size(); i++) {
+    if (Moveable::position.get_distance_to(enemies[i]->get_position()) <
+        Moveable::position.get_distance_to(
+            enemies[shortest_distance_index]->get_position()))
+      shortest_distance_index = i;
+  }
+
+  // apply damage to nearest (im not sure with the architecture, omar)
+}
 
 std::vector<std::shared_ptr<BaseTile>> BaseAttack::filter_tiles(
     std::vector<std::shared_ptr<BaseTile>> nearby) {
@@ -35,7 +70,9 @@ std::vector<std::shared_ptr<BaseTile>> BaseAttack::get_nearby_tiles(
   return nearby_tiles;
 }
 
-bool BaseAttack::hit(std::shared_ptr<BaseEnemy> enemy) {}
+bool BaseAttack::hit(std::shared_ptr<BaseEnemy> enemy) {
+  return collide_with(static_cast<const Collidable&>(*enemy));
+}
 
 void BaseAttack::on_hit() {}
 
