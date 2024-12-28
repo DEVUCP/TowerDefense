@@ -150,11 +150,6 @@ public:
    */
   void set_on_enemy_created(
       std::function<void(std::shared_ptr<BaseEnemy>)> handler);
-  /**
-   * @brief Getters for the current level number
-   */
-  int get_level_num() const;
-
 
 private:
   int lives;
