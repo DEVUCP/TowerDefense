@@ -1,11 +1,10 @@
 #pragma once
 
-#include <memory>
 #include "Tower/BaseTower.hpp"
-class IonPrism : public BaseTower {
+class ArcheryTower : public BaseTower {
 public:
   static constexpr unsigned RANGE = 1;
 
 public:
-  IonPrism(std::shared_ptr<BaseTile> tile);
+  ArcheryTower(std::shared_ptr<BaseTile> tile);
 };
