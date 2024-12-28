@@ -1,16 +1,22 @@
 #include "Views/TowerView.hpp"
 #include <memory>
-#include <tuple>
 #include <unordered_map>
 #include "GameSettings.hpp"
 #include "Tower/BaseTower.hpp"
 
 std::unordered_map<BaseTower::TowerType, TowerView::TowerInfo>
     TowerView::towers_info = {
-        {BaseTower::IonPrism,
+        {
+            BaseTower::IonPrism,
+            {
+                "./assets/textures/towers/IonPrism.png",
+                "./assets/textures/attacks/IonPrism_weapons.png",
+            },
+        },
+        {BaseTower::ArcheryTower,
          {
-             "./assets/textures/towers/IonPrism.png",
-             "./assets/textures/attacks/IonPrism_weapons.png",
+             "./assets/textures/towers/ArcheryTower.png",
+             "./assets/textures/attacks/IonPrism_Weapons.png",
          }}};
 
 TowerView::TowerView(std::shared_ptr<BaseTower> tower) : tower(tower) {

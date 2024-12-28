@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+#include <functional>
 #include <memory>
 #include "Attack/AttackManager.hpp"
 #include "Enemy/EnemyManager.hpp"
@@ -22,8 +24,7 @@ public:
         std::shared_ptr<WaveManager> wave_mng,
         std::shared_ptr<AttackManager> attack_mng,
         std::shared_ptr<TowerManager> tower_mng,
-        std::shared_ptr<EnemyManager> enemy_mng,
-        int level_num);
+        std::shared_ptr<EnemyManager> enemy_mng, int level_num);
 
   /**
    * @brief modifier for lives
@@ -138,6 +139,13 @@ public:
    */
   int get_level_num() const;
 
+  /**
+   * @brief A callback for when an enemy has been created
+   * Specified by the presentation lyer
+   */
+  void set_on_enemy_created(
+      std::function<void(std::shared_ptr<BaseEnemy>)> handler);
+
 private:
   int lives;
   int score;
@@ -149,4 +157,11 @@ private:
   std::shared_ptr<AttackManager> attack_mng;
   GameState state;
   int level_num;
+
+  // Callbacks
+  std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_created;
+
+  // Timer Info
+  std::chrono::steady_clock::time_point last_run_time;  // Track last run time
+  const int frame_time_ms = 100;
 };

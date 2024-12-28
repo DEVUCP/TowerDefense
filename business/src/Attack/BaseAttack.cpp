@@ -75,6 +75,7 @@ bool BaseAttack::hit(std::shared_ptr<BaseEnemy> enemy) {
 }
 
 void BaseAttack::on_hit() {}
+void BaseAttack::on_move() {}
 
 void BaseAttack::on_reach() { to_be_removed = true; }
 void BaseAttack::on_out_of_board() { to_be_removed = true; }

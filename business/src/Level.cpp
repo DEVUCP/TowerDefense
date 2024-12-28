@@ -3,14 +3,14 @@
 #include <iostream>
 #include <memory>
 #include <stdexcept>
+#include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/IonPrism.hpp"
 
 Level::Level(int lives, int coins, std::shared_ptr<Map> map,
              std::shared_ptr<WaveManager> wave_mng,
              std::shared_ptr<AttackManager> attack_mng,
              std::shared_ptr<TowerManager> tower_mng,
-             std::shared_ptr<EnemyManager> enemy_mng,
-             int level_num)
+             std::shared_ptr<EnemyManager> enemy_mng, int level_num)
     : lives{lives},
       coins{coins},
       map(map),
@@ -60,13 +60,31 @@ bool Level::has_ended() const { return state == WON || state == LOST; }
 Level::GameState Level::get_game_state() const { return state; }
 
 void Level::run_iteration() {
+  // Get the current time
+  auto now = std::chrono::steady_clock::now();
+
+  // Calculate the time elapsed since the last run
+  auto elapsed_ms =
+      std::chrono::duration_cast<std::chrono::milliseconds>(now - last_run_time)
+          .count();
+
+  // Return early if the elapsed time is less than the minimum frame time
+  if (elapsed_ms < frame_time_ms) return;
+
+  // Update the last run time
+  last_run_time = now;
+
+  // Iterate
   if (is_paused() || has_ended()) return;
   if (wave_mng->wave_over()) {
     wave_mng->next_wave();
   }
 
   if (wave_mng->should_spawn_enemy()) {
-    enemy_mng->generate_enemy(wave_mng->get_wave());
+    auto enm = enemy_mng->generate_enemy(wave_mng->get_wave());
+    on_enemy_created(enm);
+    wave_mng->spawn_enemy();
+    enemy_mng->regiseter_enemy(enm);
   }
 
   enemy_mng->filter_enemies();
@@ -100,6 +118,11 @@ std::shared_ptr<BaseTower> Level::build_tower(
     case BaseTower::IonPrism:
       twr = std::make_shared<IonPrism>(tile);
       break;
+    case BaseTower::ArcheryTower:
+      twr = std::make_shared<ArcheryTower>(tile);
+      break;
+    default:
+      throw std::runtime_error("Load all assets");
   }
   assert(twr);
   tower_mng->add_tower(twr);
@@ -111,3 +134,7 @@ int Level::get_score() const { return score; }
 int Level::get_coins() const { return coins; }
 
 int Level::get_level_num() const { return level_num; }
+void Level::set_on_enemy_created(
+    std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
+  on_enemy_created = handler;
+}

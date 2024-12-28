@@ -1,7 +1,9 @@
 #include "Enemy/BaseEnemy.hpp"
 #include <algorithm>
+#include <iostream>
 #include "Game.hpp"
 #include "GameSettings.hpp"
+#include "Map/EnemyPathTile.hpp"
 #include "Utils/Moveable.hpp"
 
 BaseEnemy::BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
@@ -11,9 +13,14 @@ BaseEnemy::BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
       type{type},
       health{initial_health},
       initial_health{health},
-      Collidable(x, y, GameSettings::get_instance().get_enemy_width(),
+      Collidable(x - GameSettings::get_instance().get_enemy_width() / 2.f,
+                 y - GameSettings::get_instance().get_enemy_height() / 2.f,
+                 GameSettings::get_instance().get_enemy_width(),
                  GameSettings::get_instance().get_enemy_height()),
-      to_be_removed(false) {}
+      to_be_removed(false) {
+  dest_tile =
+      Game::get_instance().get_level()->get_map()->get_first_enemy_tile();
+}
 
 void BaseEnemy::handle_next_tile_redirection(std::shared_ptr<Map> map) {
   std::vector<std::shared_ptr<BaseTile>> nearby =
@@ -73,7 +80,12 @@ std::vector<std::shared_ptr<BaseTile>> BaseEnemy::get_nearby_tiles(
 }
 
 void BaseEnemy::on_reach() {
-  handle_next_tile_redirection(Game::get_instance().get_level()->get_map());
+  if (dest_tile ==
+      Game::get_instance().get_level()->get_map()->get_last_enemy_tile())
+    return;
+  dest_tile++;
+  update_dest((*dest_tile)->get_center());
+  // TODO: Handle we are on last tile
 }
 const float BaseEnemy::get_health() const { return health; }
 
@@ -88,4 +100,9 @@ void BaseEnemy::invoke_damage(float amount) {
 
 BaseEnemy::EnemyType BaseEnemy::get_type() const { return type; }
 
-void BaseEnemy::on_out_of_board() {}
+void BaseEnemy::on_out_of_board() {
+  to_be_removed = true;
+  std::cout << "Removing" << std::endl;
+}
+
+void BaseEnemy::on_move() {}

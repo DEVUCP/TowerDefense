@@ -32,3 +32,12 @@ std::pair<int, int> Map::map_coords_to_indices(float x, float y) const {
   int i = x / len, j = y / len;
   return {i, j};
 }
+
+Map::enemy_path_list::iterator Map::get_first_enemy_tile() {
+  return enemy_path.begin();
+}
+Map::enemy_path_list::iterator Map::get_last_enemy_tile() {
+  auto itr = enemy_path.end();
+  --itr;
+  return itr;
+}

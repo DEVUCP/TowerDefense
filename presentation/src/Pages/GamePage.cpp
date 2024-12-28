@@ -17,14 +17,18 @@ GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   init_map();
   init_sidebar();
   // TODO: Remove this temporary test for EnemyView
-  auto tile_in = Game::get_instance().get_level()->get_map()->get_tile(3, 4);
-  auto enm =
-      std::make_shared<LeafBug>(tile_in->get_position().x,
-                                tile_in->get_position().y, Vector<float>(0, 0));
-  auto enemy_path = std::dynamic_pointer_cast<EnemyPathTile>(tile_in);
-  enemy_path->register_enemy(enm);
-  auto view = std::make_shared<EnemyView>(enm);
-  enemies.push_back(view);
+  // auto tile_in = Game::get_instance().get_level()->get_map()->get_tile(3, 4);
+  // auto enm =
+  //     std::make_shared<LeafBug>(tile_in->get_position().x,
+  //                               tile_in->get_position().y, Vector<float>(0,
+  //                               0));
+  // auto enemy_path = std::dynamic_pointer_cast<EnemyPathTile>(tile_in);
+  // enemy_path->register_enemy(enm);
+  // auto view = std::make_shared<EnemyView>(enm);
+  // enemies.push_back(view);
+
+  // Set a callback for the business
+  init_enemy_creation_callback();
 }
 
 void GamePage::on_pause() {}
@@ -69,9 +73,18 @@ void GamePage::render(RenderData ren) {
 }
 
 void GamePage::update(UpdateData dat) {
-  // Here calls Game::get_instance().get_level().run_iteration()
+  // Iterate in the game
+  Game::get_instance().get_level()->run_iteration();
   for (auto& row : map)
     for (auto tl : row) tl->update(dat);
+  // Filter enemies
+  for (auto itr = enemies.begin(); itr != enemies.end();) {
+    if ((*itr)->is_to_be_removed())
+      itr = enemies.erase(itr);
+    else
+      itr++;
+  }
+
   for (auto& enm : enemies) enm->update(dat);
   sidebar->update(dat);
 }
@@ -124,4 +137,11 @@ void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
   // SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
 }
 
-void GamePage::build_tower(float i, float j, BaseTower::TowerType) {}
+void GamePage::init_enemy_creation_callback() {
+  auto lvl = Game::get_instance().get_level();
+  assert(lvl != nullptr);
+
+  lvl->set_on_enemy_created([this](std::shared_ptr<BaseEnemy> enm) {
+    enemies.push_back(std::make_shared<EnemyView>(enm));
+  });
+}

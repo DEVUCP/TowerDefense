@@ -90,6 +90,13 @@ protected:
    */
   virtual void on_killed() = 0;
 
+  /**
+   * @brief A callback to run when the object is moving
+   *
+   * @details Inherited by the child classes to adjust their behavior
+   */
+  virtual void on_move() override;
+
 protected:
   int health;
   int initial_health;
@@ -99,4 +106,5 @@ protected:
   std::vector<std::shared_ptr<BaseTile>>
       current_tile;  // represent the current tile on which the enemy is
   EnemyType type;
+  Map::enemy_path_list::iterator dest_tile;
 };

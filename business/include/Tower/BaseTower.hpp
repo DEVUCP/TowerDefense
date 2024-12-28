@@ -14,7 +14,7 @@
  */
 class BaseTower {
 public:
-  enum TowerType { IonPrism };
+  enum TowerType { ArcheryTower, IonPrism };
 
 public:
   /**
@@ -23,8 +23,7 @@ public:
    * @details Initializes all member variables and sets up the base properties
    * of the tower.
    */
-  BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
-            unsigned attack_speed, unsigned attack_damage, TowerType type);
+  BaseTower(std::shared_ptr<BaseTile> tile, unsigned range, TowerType type);
   /**
    * @brief Initiates an attack on the specified enemy.
    *
@@ -73,8 +72,6 @@ public:
 private:
   std::shared_ptr<BaseTile> tile;  // The tile this tower is on
   unsigned range;                  // The attack range of the tower.
-  unsigned damage;                 // The attack damage of the tower.
-  unsigned attack_speed;           // The attack speed of the tower.
   // std::shared_ptr<Upgrade>
   //     offer_upgrades;  // The upgrades available for the tower.
   // std::shared_ptr<Upgrade>

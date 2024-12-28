@@ -18,6 +18,11 @@ public:
   void render(RenderData);
   void update(UpdateData);
 
+  /**
+   * @brief Return if the element should be removed
+   */
+  bool is_to_be_removed() const;
+
 private:
   std::shared_ptr<BaseEnemy> enemy;
   sf::Texture sprite_sheet;

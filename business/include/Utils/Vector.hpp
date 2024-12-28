@@ -29,7 +29,7 @@ public:
    *
    * @note Must check length is not equal to 0
    */
-  Vector normalize() {
+  Vector normalize() const {
     assert(has_direction());
     T len = length();
 
@@ -39,12 +39,12 @@ public:
   /*
    * @brief Get the length of a vector
    */
-  float length() { return std::sqrt(x * x + y * y); }
+  float length() const { return std::sqrt(x * x + y * y); }
 
   /**
    * @brief Return The distance between two vectors using vector arithmetic
    */
-  float get_distance_to(Vector<T> destination) {
+  float get_distance_to(Vector<T> destination) const {
     return std::sqrt(std::pow(destination.x - x, 2) +
                      std::pow(destination.y - y, 2));
   }
@@ -55,7 +55,7 @@ public:
    * @brief
    * Make sure neither is the origin point
    */
-  bool is_same_direction_as(Vector<T> other) {
+  bool is_same_direction_as(Vector<T> other) const {
     assert(has_direction());
     assert(other.has_direction());
     return this->normalize() == other.normalize();
@@ -65,12 +65,12 @@ public:
    * @brief Return true if a vector is the same as the origin point (same as has
    * no direction)
    */
-  bool is_origin() { return x == 0 && y == 0; }
+  bool is_origin() const { return x == 0 && y == 0; }
 
   /**
    * @brief Return true if the vector has direction
    */
-  bool has_direction() { return !is_origin(); };
+  bool has_direction() const { return !is_origin(); };
 
 public:
   T x;

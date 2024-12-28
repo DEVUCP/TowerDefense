@@ -171,9 +171,7 @@ int LevelReader::levels_count() {
 
   std::string levels_directory = get_level_path(-1);
 
-  for (auto& p : std::filesystem::directory_iterator(levels_directory)) {
-    count++;
-  }
+  for (auto& p : std::filesystem::directory_iterator(levels_directory)) count++;
 
   return count;
 }

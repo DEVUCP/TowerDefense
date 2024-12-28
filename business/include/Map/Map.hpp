@@ -16,6 +16,9 @@ class EnemyPathTile;
  */
 class Map {
 public:
+  using enemy_path_list = std::list<std::shared_ptr<EnemyPathTile>>;
+
+public:
   /**
    * @brief Constructor with rvalues
    */
@@ -54,6 +57,16 @@ public:
    * enemy path tile
    */
   const Vector<float> get_initial_enemy_destination() const;
+
+  /**
+   * @brief Return an iterator to the beginning of the enemy path
+   */
+  enemy_path_list::iterator get_first_enemy_tile();
+
+  /**
+   * @brief Return an iterator to the final tile of the enemy path
+   */
+  enemy_path_list::iterator get_last_enemy_tile();
 
 private:
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;

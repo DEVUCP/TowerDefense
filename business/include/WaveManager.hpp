@@ -15,6 +15,11 @@ public:
   bool should_spawn_enemy() const;
 
   /**
+   * @brief decrease the number of enemies on the map
+   */
+  void spawn_enemy();
+
+  /**
    * @brief Returns the total number of enemies that are either on board or
    * killed
    */

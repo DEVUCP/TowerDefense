@@ -20,6 +20,7 @@ set(HEADERS
     include/Tower/TowerManager.hpp
     # Towers
     include/Tower/Towers/IonPrism.hpp
+    include/Tower/Towers/ArcheryTower.hpp
     # Enemy
     include/Enemy/BaseEnemy.hpp
     include/Enemy/EnemyFactory.hpp
@@ -52,6 +53,7 @@ set(SOURCES # Sources
     src/Tower/TowerManager.cpp
     # Towers
     src/Tower/Towers/IonPrism.cpp
+    src/Tower/Towers/ArcheryTower.cpp
     # Enemy
     src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyFactory.cpp

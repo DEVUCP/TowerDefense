@@ -82,10 +82,12 @@ protected:
       override;  // Provide a default behavior of removing the attack. This can
                  // be adjusted by subclasses
 
+  virtual void on_move() override;
+
 private:
-  bool to_be_removed;  // < a flag to indicate that this attack is to be
-                       // removed, either because it's out of edge or because
-                       // it's hit target
+  bool to_be_removed;  // < a flag to indicate that this attack is
+                       // to be removed, either because it's out of
+                       // edge or because it's hit target
   int damage;
   std::vector<std::shared_ptr<BaseTile>> current_tile;
 };

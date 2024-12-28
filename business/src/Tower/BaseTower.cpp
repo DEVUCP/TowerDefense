@@ -11,13 +11,10 @@
 
 // TODO: check the correct initialization for the sprite in BaseTower
 BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
-                     unsigned attack_speed, unsigned attack_damage,
                      TowerType type)
 
     : tile(tile),
       range(range),
-      attack_speed(attack_speed),
-      damage(attack_damage),
       type(type),
       lvl(1)  // The starting level for each tower
 {

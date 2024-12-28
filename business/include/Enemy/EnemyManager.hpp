@@ -59,6 +59,16 @@ public:
    */
   std::shared_ptr<BaseEnemy> generate_enemy(const int &starting_wave);
 
+  /**
+   * @brief Register an enemy
+   */
+  void regiseter_enemy(std::shared_ptr<BaseEnemy> enm);
+
+  /**
+   * @brief Remove an enemy
+   */
+  void remove_enemy(std::shared_ptr<BaseEnemy> enm);
+
 private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;
   std::unordered_map<BaseEnemy::EnemyType, int> starting_waves;

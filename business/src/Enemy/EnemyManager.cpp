@@ -1,4 +1,5 @@
 #include "Enemy/EnemyManager.hpp"
+#include <iostream>
 #include <list>
 #include <memory>
 #include <random>
@@ -24,17 +25,18 @@ void EnemyManager::set_starting_wave(const BaseEnemy::EnemyType &type,
 }
 
 void EnemyManager::filter_enemies() {
-  for (int i = 0; i < enemies.size(); i++) {
-    if (enemies[i]->is_to_be_removed()) enemies.erase(enemies.begin() + 1);
-  }
+  for (auto itr = enemies.begin(); itr != enemies.end();)
+    if ((*itr)->is_to_be_removed()) {
+      itr = enemies.erase(itr);
+      std::cout << "Removing enemy " << itr - enemies.begin() << std::endl;
+    } else {
+      itr++;
+    }
 }
 
 void EnemyManager::move_enemies() const {
-  for (auto &enemy : enemies) {
-    if (enemy) {
-      enemy->move_next();
-    }
-  }
+  for (auto &enemy : enemies)
+    if (enemy) enemy->move_next();
 }
 
 std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
@@ -81,4 +83,8 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
 
   throw std::logic_error(
       "Failed to generate an enemy. This should not happen.");
+}
+
+void EnemyManager::regiseter_enemy(std::shared_ptr<BaseEnemy> enm) {
+  enemies.push_back(enm);
 }

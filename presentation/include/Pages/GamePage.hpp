@@ -37,9 +37,11 @@ private:
   void init_sidebar();
 
   /**
-   * @brief Build a tower
+   * @brief Initialize the handler for enemy creation in the levels
+   *
+   * @details Capture the enemy and create a view for it
    */
-  void build_tower(float x, float y, BaseTower::TowerType);
+  void init_enemy_creation_callback();
 
 private:
   std::vector<std::vector<std::shared_ptr<TileView>>> map;

@@ -72,12 +72,19 @@ protected:
    */
   virtual void on_out_of_board() = 0;
 
+  /**
+   * @brief A callback to run when the object is moving
+   *
+   * @details Inherited by the child classes to adjust their behavior
+   */
+  virtual void on_move() = 0;
+
 protected:
   Vector<float> position;
+  Vector<float> dest_point;  // < represent the point the object is moving to
   Vector<float> unit_direction;  // < represent a unit vector in the direction
                                  // the object is moving
-  Vector<float> dest_point;  // < represent the point the object is moving to
-  float velocity;            // < the velocity by which the object is moving
+  float velocity;                // < the velocity by which the object is moving
   float rotation;  // < the direction represented by the angle between direction
                    // and x-axis
 };

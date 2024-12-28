@@ -43,3 +43,5 @@ void WaveManager::next_wave() {
 }
 
 int WaveManager::get_wave() const { return wave; }
+
+void WaveManager::spawn_enemy() { enemies_count_on_map++; }
