@@ -138,3 +138,4 @@ void Level::set_on_enemy_created(
     std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
   on_enemy_created = handler;
 }
+int Level::get_level_num() const { return level_num; }
