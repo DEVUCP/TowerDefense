@@ -23,7 +23,16 @@ std::vector<std::shared_ptr<BaseTile>> BaseEnemy::filter_tiles(
     std::vector<std::shared_ptr<BaseTile>> nearby) {}
 
 std::vector<std::shared_ptr<BaseTile>> BaseEnemy::get_nearby_tiles(
-    std::shared_ptr<Map> map) {}
+    std::shared_ptr<Map> map) {
+  // return the tiles of all 4 points of collidable
+  std::vector<std::shared_ptr<BaseTile>> nearby_tiles =
+      std::vector<std::shared_ptr<BaseTile>>();
+  nearby_tiles.push_back(map->map_coords_to_tile(tl().x, tl().y));
+  nearby_tiles.push_back(map->map_coords_to_tile(tr().x, tr().y));
+  nearby_tiles.push_back(map->map_coords_to_tile(bl().x, bl().y));
+  nearby_tiles.push_back(map->map_coords_to_tile(br().x, br().y));
+  return nearby_tiles;
+}
 
 void BaseEnemy::on_reach() {
   handle_next_tile_redirection(Game::get_instance().get_level()->get_map());
