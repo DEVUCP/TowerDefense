@@ -20,6 +20,7 @@ public:
     SlingshotTower,
     CatapultTower,
   };
+  enum TowerType { ArcheryTower, IonPrism };
 
 public:
   /**

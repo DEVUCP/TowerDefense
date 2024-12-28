@@ -6,6 +6,7 @@
 #include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/CatapultTower.hpp"
 #include "Tower/Towers/ElectroTower.hpp"
+#include "Tower/Towers/IonPrism.hpp"
 #include "Tower/Towers/SlingshotTower.hpp"
 
 Level::Level(int lives, int coins, std::shared_ptr<Map> map,
@@ -118,9 +119,6 @@ std::shared_ptr<BaseTower> Level::build_tower(
     BaseTower::TowerType type, std::shared_ptr<BuildableTile> tile) {
   std::shared_ptr<BaseTower> twr = nullptr;
   switch (type) {
-    case BaseTower::ArcheryTower:
-      twr = std::make_shared<ArcheryTower>(tile);
-      break;
     case BaseTower::CatapultTower:
       twr = std::make_shared<CatapultTower>(tile);
       break;
@@ -132,6 +130,11 @@ std::shared_ptr<BaseTower> Level::build_tower(
       break;
     default:
       throw std::runtime_error("Load all towers");
+    case BaseTower::ArcheryTower:
+      twr = std::make_shared<ArcheryTower>(tile);
+      break;
+    default:
+      throw std::runtime_error("Load all assets");
   }
 
   if (twr->get_buy_price(type) <= get_coins()) {
