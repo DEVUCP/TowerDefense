@@ -163,7 +163,7 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
 
   // Create a Level with the data read
   return std::make_shared<Level>(lives, coins, map, wave_manager,
-                                 attack_manager, tower_manager, enemy_manager);
+                                 attack_manager, tower_manager, enemy_manager, level_num);
 }
 
 int LevelReader::levels_count() {
