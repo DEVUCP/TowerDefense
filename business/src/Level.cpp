@@ -11,8 +11,6 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
              std::shared_ptr<AttackManager> attack_mng,
              std::shared_ptr<TowerManager> tower_mng,
              std::shared_ptr<EnemyManager> enemy_mng, int level_num)
-             std::shared_ptr<EnemyManager> enemy_mng,
-             int level_num)
     : lives{lives},
       coins{coins},
       map(map),
@@ -141,3 +139,7 @@ void Level::set_on_enemy_created(
   on_enemy_created = handler;
 }
 int Level::get_level_num() const { return level_num; }
+void Level::set_on_enemy_created(
+    std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
+  on_enemy_created = handler;
+}
