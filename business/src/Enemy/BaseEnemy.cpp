@@ -25,8 +25,9 @@ std::vector<std::shared_ptr<BaseTile>> BaseEnemy::filter_tiles(
 std::vector<std::shared_ptr<BaseTile>> BaseEnemy::get_nearby_tiles(
     std::shared_ptr<Map> map) {}
 
-void BaseEnemy::on_reach() {}
-
+void BaseEnemy::on_reach() {
+  handle_next_tile_redirection(Game::get_instance().get_level()->get_map());
+}
 const float BaseEnemy::get_health() const { return health; }
 
 const float BaseEnemy::get_initial_health() const { return initial_health; }
