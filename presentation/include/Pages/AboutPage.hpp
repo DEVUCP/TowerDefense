@@ -3,6 +3,7 @@
 #include "Components/BackgroundManager.hpp"
 #include "Components/IButton.hpp"
 #include "Components/Page.hpp"
+#include "Components/Text.hpp"
 #include "Components/Title.hpp"
 #include "Interfaces/EventData.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
@@ -24,5 +25,5 @@ public:
 private:
   Title title;
   std::shared_ptr<IButton> go_back;
-  std::shared_ptr<MuteButton> mute_button;
+  std::shared_ptr<Text> about_text;
 };
