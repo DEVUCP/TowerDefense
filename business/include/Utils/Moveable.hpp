@@ -72,10 +72,7 @@ protected:
    */
   virtual void on_out_of_board() = 0;
 
-private:
-  bool has_reached_destination() const;
-
-private:
+protected:
   Vector<float> position;
   Vector<float> unit_direction;  // < represent a unit vector in the direction
                                  // the object is moving
