@@ -1,17 +1,18 @@
 #include "Enemy/BaseEnemy.hpp"
 #include <algorithm>
 #include "Game.hpp"
+#include "GameSettings.hpp"
 #include "Utils/Moveable.hpp"
 
-BaseEnemy::BaseEnemy(float x, float y, float width, float height,
-                     Vector<float> dest, int initial_health, float velocity,
-                     int kill_coins, EnemyType type)
+BaseEnemy::BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
+                     float velocity, int kill_coins, EnemyType type)
     : Moveable(x, y, velocity, dest),
       kill_coins{kill_coins},
       type{type},
       health{initial_health},
       initial_health{health},
-      Collidable(x, y, width, height),
+      Collidable(x, y, GameSettings::get_instance().get_enemy_width(),
+                 GameSettings::get_instance().get_enemy_height()),
       to_be_removed(false) {}
 
 void BaseEnemy::handle_next_tile_redirection(std::shared_ptr<Map> map) {

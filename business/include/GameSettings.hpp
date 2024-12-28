@@ -34,6 +34,16 @@ public:
    */
   unsigned get_sidebar_row_count() const;
 
+  /**
+   * @brief Return the width of enemies on map
+   */
+  unsigned get_enemy_width() const;
+
+  /**
+   * @brief Return the width of enemies on map
+   */
+  unsigned get_enemy_height() const;
+
 private:
   GameSettings() = default;
 };

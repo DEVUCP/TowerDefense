@@ -18,8 +18,8 @@ public:
    *
    * Initialize all variables and call parent constructors
    */
-  BaseEnemy(float x, float y, float width, float height, Vector<float> dest,
-            int initial_health, float velocity, int kill_coins, EnemyType type);
+  BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
+            float velocity, int kill_coins, EnemyType type);
   /**
    * @brief virtual destructor
    */
