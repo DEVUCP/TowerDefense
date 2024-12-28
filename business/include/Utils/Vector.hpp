@@ -3,7 +3,7 @@
 #include <cassert>
 #include <cmath>
 
-static constexpr double EPS = 1e9;
+static constexpr double EPS = 1e-9;
 
 template <typename T, typename D = T>
 class Vector {
@@ -14,10 +14,10 @@ public:
    * @brief the Basic Operations on the vector: addition, subtracion,
    * reverse_direction, and scalar product
    */
-  Vector operator+(Vector other) const { return {x + x, y + y}; }
-  Vector operator-(Vector other) const { return {x - x, y - y}; }
+  Vector operator+(Vector other) const { return {x + other.x, y + other.y}; }
+  Vector operator-(Vector other) const { return {x - other.x, y - other.y}; }
   Vector operator-() const { return {-x, -y}; }
-  T operator*(Vector other) const { return x * other.x + other.y; }
+  T operator*(Vector other) const { return x * other.x + y * other.y; }
 
   /*
    * @brief Check Equality by comparing x's and y's
@@ -31,7 +31,7 @@ public:
    */
   Vector normalize() {
     T len = length();
-    assert(fabs(len) <= EPS);
+    assert(fabs(len) >= EPS);
 
     return {x / len, y / len};
   }
