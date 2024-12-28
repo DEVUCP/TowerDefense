@@ -17,7 +17,31 @@ BaseEnemy::BaseEnemy(float x, float y, float width, float height,
 void BaseEnemy::handle_next_tile_redirection(std::shared_ptr<Map> map) {}
 
 void BaseEnemy::update_current_tile(
-    std::vector<std::shared_ptr<BaseTile>> nearby) {}
+    std::vector<std::shared_ptr<BaseTile>> nearby) {
+  if (current_tile.empty() && nearby.size() == 1) {
+    current_tile.push_back(nearby[0]);
+    return;
+  }
+
+  if (nearby.size() == 2) {
+    if (current_tile.front() == nearby[0] && current_tile[1] == nearby[1])
+      return;
+    if (current_tile.front() == nearby[0] && current_tile[1] != nearby[1]) {
+      current_tile.push_back(nearby[1]);
+      return;
+    }
+    if (current_tile.front() == nearby[1] && current_tile[1] == nearby[0])
+      return;
+    if (current_tile.front() == nearby[1] && current_tile[1] != nearby[0]) {
+      current_tile.push_back(nearby[0]);
+      return;
+    }
+    current_tile.erase(current_tile.begin());
+    current_tile.push_back(nearby[0]);
+    current_tile.push_back(nearby[1]);
+    return;
+  }
+}
 
 std::vector<std::shared_ptr<BaseTile>> BaseEnemy::filter_tiles(
     std::vector<std::shared_ptr<BaseTile>> nearby) {
