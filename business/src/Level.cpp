@@ -11,6 +11,8 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
              std::shared_ptr<AttackManager> attack_mng,
              std::shared_ptr<TowerManager> tower_mng,
              std::shared_ptr<EnemyManager> enemy_mng, int level_num)
+             std::shared_ptr<EnemyManager> enemy_mng,
+             int level_num)
     : lives{lives},
       coins{coins},
       map(map),
