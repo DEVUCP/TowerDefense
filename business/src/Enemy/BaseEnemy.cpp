@@ -14,7 +14,11 @@ BaseEnemy::BaseEnemy(float x, float y, float width, float height,
       Collidable(x, y, width, height),
       to_be_removed(false) {}
 
-void BaseEnemy::handle_next_tile_redirection(std::shared_ptr<Map> map) {}
+void BaseEnemy::handle_next_tile_redirection(std::shared_ptr<Map> map) {
+  std::vector<std::shared_ptr<BaseTile>> nearby =
+      filter_tiles(get_nearby_tiles(map));
+  update_current_tile(nearby);
+}
 
 void BaseEnemy::update_current_tile(
     std::vector<std::shared_ptr<BaseTile>> nearby) {
