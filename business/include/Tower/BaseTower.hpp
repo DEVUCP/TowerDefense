@@ -19,6 +19,7 @@ public:
     IonPrism,
     ElectroTower,
     SlingshotTower,
+    CatapultTower,
   };
 
 public:
