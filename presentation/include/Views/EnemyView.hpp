@@ -8,6 +8,12 @@
 #include "SFML/Graphics/Texture.hpp"
 
 class EnemyView : public Widget {
+private:
+  struct EnemyInfo {
+    std::string texture_path;
+    std::vector<std::tuple<std::string, int, int>> collections;
+  };
+
 public:
   EnemyView(std::shared_ptr<BaseEnemy>);
 
@@ -28,5 +34,5 @@ private:
   sf::Texture sprite_sheet;
   sf::Sprite sprite;
   SpriteSheetManager sheet_mng;
-  static std::unordered_map<BaseEnemy::EnemyType, std::string> sheets;
+  static std::unordered_map<BaseEnemy::EnemyType, EnemyInfo> enemies_info;
 };

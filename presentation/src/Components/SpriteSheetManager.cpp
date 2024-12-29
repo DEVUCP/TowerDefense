@@ -2,6 +2,7 @@
 #include <cassert>
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 
@@ -58,6 +59,14 @@ void SpriteSheetManager::next_sprite(sf::Sprite& sprite) {
   sprite.setTextureRect(sf::IntRect(x, y, width, height));
 }
 
+void SpriteSheetManager::next_sprite(sf::Sprite& sprite,
+                                     std::string collection_name) {
+  if (current_collection == collection_name)
+    next_sprite(sprite);
+  else
+    set_collection(collection_name);
+}
+
 void SpriteSheetManager::init_sprite_texture(sf::Sprite& sprite) {
   assert(!current_collection.empty());
 
@@ -78,4 +87,19 @@ void SpriteSheetManager::init_sprite_texture(sf::Sprite& sprite) {
 
 void SpriteSheetManager::update_animation_delay(unsigned new_value) {
   animation_delay = new_value;
+}
+
+std::string SpriteSheetManager::get_current_collection() const {
+  return current_collection;
+}
+
+void SpriteSheetManager::handle_reverse(bool value, sf::Sprite spr) {
+  if (value == reversed) return;
+  reverse_sprite(spr);
+  reversed = value;
+}
+
+void SpriteSheetManager::reverse_sprite(sf::Sprite& spr) {
+  auto current_scale = spr.getScale();
+  spr.setScale(-1 * current_scale.x, -1 * current_scale.y);
 }

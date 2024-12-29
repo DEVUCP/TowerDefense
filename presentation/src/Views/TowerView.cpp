@@ -64,14 +64,11 @@ void TowerView::init_weapon_sprite() {
   float weapon_offset_x = (tile_len) / 2.f;
   float weapon_offset_y =
       -(tile_len / 2.f) + attacks_offsets[tower->get_level() - 1];
-  std::cout << "Y Offset per tower: " << attacks_offsets[tower->get_level() - 1]
-            << std::endl;
 
   // Set weapon position
   pos.x += weapon_offset_x;
   pos.y += weapon_offset_y;
   weapon.setPosition(pos.x, pos.y);
-  std::cout << "Position: " << pos.x << " " << pos.y << std::endl;
 
   // Set scale using attacks_size
   weapon.setScale(WEAPON_SPRITE_LEN / attacks_size.first,
@@ -80,9 +77,6 @@ void TowerView::init_weapon_sprite() {
   // Set the origin of the weapon to its center (important for correct rotation)
   weapon.setOrigin(weapon.getLocalBounds().width / 2.f,
                    weapon.getLocalBounds().height / 2.f);
-
-  std::cout << "Width of Weapon: " << weapon.getGlobalBounds().width
-            << std::endl;
 }
 void TowerView::handle_events(EventData data) {}
 void TowerView::render(RenderData ren) {
@@ -108,12 +102,6 @@ void TowerView::render(RenderData ren) {
 
     // Rotate the weapon to face the enemy (ensure it rotates around its center)
     weapon.setRotation(angle + 90);  // Adjust by 90 if necessary
-
-    std::cout << "Enemy Position: " << enemy_position.x << " "
-              << enemy_position.y << std::endl;
-    std::cout << "Weapon Position: " << weapon_pos.x << " " << weapon_pos.y
-              << std::endl;
-    std::cout << "Calculated Angle: " << angle << std::endl;
   }
 }
 void TowerView::update(UpdateData dat) {}

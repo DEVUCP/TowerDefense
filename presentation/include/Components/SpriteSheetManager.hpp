@@ -50,6 +50,11 @@ public:
   void next_sprite(sf::Sprite& sprite);
 
   /**
+   * @brief Move To the next sprite in the current collection if it's the same
+   * as the collection_name, or move to that other collection
+   */
+  void next_sprite(sf::Sprite& sprite, std::string collection_name);
+  /**
    * @brief Change current collection
    */
   void set_collection(std::string);
@@ -64,6 +69,22 @@ public:
    */
   void update_animation_delay(unsigned new_value);
 
+  /**
+   * @brief Return the current animation name
+   */
+  std::string get_current_collection() const;
+
+  /**
+   * @brief Control the sprite being reversed or not
+   */
+  void handle_reverse(bool value, sf::Sprite spr);
+
+private:
+  /**
+   * @brief A helper to handle reversing the sprite
+   */
+  void reverse_sprite(sf::Sprite&);
+
 private:
   unsigned width;
   unsigned height;
@@ -75,4 +96,5 @@ private:
   sf::Time time_elapsed;
   unsigned desired_x, desired_y;
   unsigned animation_delay;
+  bool reversed;  // < helps check in case of needing to reverse a direction
 };
