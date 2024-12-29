@@ -89,7 +89,7 @@ void TowerView::render(RenderData ren) {
   ren.window->draw(sprite);
   ren.window->draw(weapon);
 
-  auto enemies_in_range = tower->in_range();
+  auto enemies_in_range = tower->enemies_in_range();
   if (enemies_in_range.size()) {
     weapon_sprite_mng.next_sprite(weapon);
 

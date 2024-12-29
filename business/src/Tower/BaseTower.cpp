@@ -30,7 +30,7 @@ void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
   // TODO: Implement attack logic here
 }
 
-std::vector<std::shared_ptr<BaseEnemy>> BaseTower::in_range() {
+std::vector<std::shared_ptr<BaseEnemy>> BaseTower::enemies_in_range() {
   auto map = Game::get_instance().get_level()->get_map();
   if (!map) return {};  // Return an empty vector if the map is not found
 
