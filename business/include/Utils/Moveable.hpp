@@ -41,7 +41,7 @@ public:
   /**
    * @brief Getter for rotation
    */
-  const float get_rotation() const;
+  float get_rotation() const;
 
   /**
    * @brief Check if object has reached its destination
@@ -80,6 +80,4 @@ protected:
   Vector<float> unit_direction;  // < represent a unit vector in the direction
                                  // the object is moving
   float velocity;                // < the velocity by which the object is moving
-  float rotation;  // < the direction represented by the angle between direction
-                   // and x-axis
 };

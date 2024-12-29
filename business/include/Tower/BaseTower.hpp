@@ -39,12 +39,12 @@ public:
   void init_attack(std::shared_ptr<BaseEnemy> enemy);
 
   /**
-   * @brief Checks range
+   * @brief Returns all enemies in `range`
    *
    * @details Use BFS to consider all `EnemyPathTile` tiles in range. If it has
    * enemies, init an attack towards the first enemy there ()
    */
-  bool in_range();
+  std::vector<std::shared_ptr<BaseEnemy>> in_range();
 
   /**
    * @brief Upgrades the tower based on the selected upgrade index.

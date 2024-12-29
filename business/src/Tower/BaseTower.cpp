@@ -30,13 +30,14 @@ void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
   // TODO: Implement attack logic here
 }
 
-bool BaseTower::in_range() {
+std::vector<std::shared_ptr<BaseEnemy>> BaseTower::in_range() {
   auto map = Game::get_instance().get_level()->get_map();
-  if (!map) return false;
+  if (!map) return {};  // Return an empty vector if the map is not found
 
   // Starting position of the tower
   auto start_tile = tile;
-  if (!start_tile) return false;
+  if (!start_tile)
+    return {};  // Return an empty vector if the tile is not valid
 
   // BFS setup: Pair contains the tile and current depth
   std::queue<std::pair<std::shared_ptr<BaseTile>, int>> to_visit;
@@ -44,6 +45,9 @@ bool BaseTower::in_range() {
 
   to_visit.push({start_tile, 0});
   visited.insert(start_tile);
+
+  // Vector to hold all found enemies
+  std::vector<std::pair<int, std::shared_ptr<BaseEnemy>>> enemies_in_range;
 
   while (!to_visit.empty()) {
     auto [current_tile, depth] = to_visit.front();
@@ -58,11 +62,15 @@ bool BaseTower::in_range() {
           std::dynamic_pointer_cast<EnemyPathTile>(current_tile);
       auto enemies = enemy_path_tile->get_enemies();
       if (!enemies.empty()) {
-        // Attack the first enemy found
-        init_attack(enemies.front());
-        return true;
+        // For each enemy on the current tile, store it with the distance
+        // (depth)
+        for (auto& enemy : enemies) {
+          enemies_in_range.push_back({depth, enemy});
+        }
       }
     }
+
+    // Get the tile's position in the map (assuming tile is indexed by x and y)
     auto len = GameSettings::get_instance().get_tile_size();
     auto x = current_tile->get_position().y / len;
     auto y = current_tile->get_position().x / len;
@@ -83,7 +91,19 @@ bool BaseTower::in_range() {
     }
   }
 
-  return false;  // No enemies found within range
+  // Sort enemies by distance (closest first)
+  std::sort(enemies_in_range.begin(), enemies_in_range.end(),
+            [](const auto& a, const auto& b) {
+              return a.first < b.first;  // Compare by distance (depth)
+            });
+
+  // Extract only the enemies (ignoring distance)
+  std::vector<std::shared_ptr<BaseEnemy>> sorted_enemies;
+  for (const auto& enemy_pair : enemies_in_range) {
+    sorted_enemies.push_back(enemy_pair.second);
+  }
+
+  return sorted_enemies;
 }
 
 void BaseTower::upgrade(int upgrade_index) {}

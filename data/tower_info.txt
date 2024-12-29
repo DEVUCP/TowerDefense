@@ -1,4 +1,4 @@
-ArcheryTower ./assets/textures/towers/ArcheryTower.png ./assets/textures/attacks/ArcheryTower_Weapons.png 30,2,1 96,96 6,6,6 1,1,1
-CatapultTower ./assets/textures/towers/CatapultTower.png ./assets/textures/attacks/CatapultTower_Weapons.png 20,2,1 128,128 17,17,17 4,4,4
-SlingshotTower ./assets/textures/towers/SlingshotTower.png ./assets/textures/attacks/SlingshotTower_Weapons.png 30,2,3 96,96 6,6,6 1,1,1
-ElectroTower ./assets/textures/towers/ElectroTower.png ./assets/textures/attacks/ElectroTower_Weapons.png 15,2,3 64,64 6,6,6 1,1,1
+ArcheryTower ./assets/textures/towers/ArcheryTower.png ./assets/textures/attacks/ArcheryTower_Weapons.png 85,2,1 96,96 6,6,6 1,1,1
+CatapultTower ./assets/textures/towers/CatapultTower.png ./assets/textures/attacks/CatapultTower_Weapons.png 75,2,1 128,128 17,17,17 4,4,4
+SlingshotTower ./assets/textures/towers/SlingshotTower.png ./assets/textures/attacks/SlingshotTower_Weapons.png 85,2,3 96,96 6,6,6 1,1,1
+ElectroTower ./assets/textures/towers/ElectroTower.png ./assets/textures/attacks/ElectroTower_Weapons.png 70,2,3 64,64 6,6,6 1,1,1

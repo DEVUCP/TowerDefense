@@ -72,6 +72,24 @@ public:
    */
   bool has_direction() const { return !is_origin(); };
 
+  /**
+   * @brief Return the rotation of the vector relative to the positive x-axis
+   */
+  float get_angle() const {
+    // Calculate the angle in radians
+    float angle_radians = std::atan2(y, x);
+
+    // Convert to degrees
+    float angle_degrees = angle_radians * (180.0f / M_PI);
+
+    // Ensure the angle is in the range [0, 360)
+    if (angle_degrees < 0) {
+      angle_degrees += 360.0f;
+    }
+
+    return angle_degrees;
+  }
+
 public:
   T x;
   T y;

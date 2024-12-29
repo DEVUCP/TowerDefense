@@ -61,10 +61,9 @@ void TowerView::init_weapon_sprite() {
   auto tile_len = GameSettings::get_instance().get_tile_size();
 
   // Fetch weapon dimensions from attacks_size
-
-  float weapon_offset_x = (tile_len - WEAPON_SPRITE_LEN) / 2.f;
-  float weapon_offset_y = -(tile_len / 2.f * TOWER_TILE_FACTOR) +
-                          attacks_offsets[tower->get_level() - 1];
+  float weapon_offset_x = (tile_len) / 2.f;
+  float weapon_offset_y =
+      -(tile_len / 2.f) + attacks_offsets[tower->get_level() - 1];
   std::cout << "Y Offset per tower: " << attacks_offsets[tower->get_level() - 1]
             << std::endl;
 
@@ -77,6 +76,11 @@ void TowerView::init_weapon_sprite() {
   // Set scale using attacks_size
   weapon.setScale(WEAPON_SPRITE_LEN / attacks_size.first,
                   WEAPON_SPRITE_LEN / attacks_size.second);
+
+  // Set the origin of the weapon to its center (important for correct rotation)
+  weapon.setOrigin(weapon.getLocalBounds().width / 2.f,
+                   weapon.getLocalBounds().height / 2.f);
+
   std::cout << "Width of Weapon: " << weapon.getGlobalBounds().width
             << std::endl;
 }
@@ -84,8 +88,32 @@ void TowerView::handle_events(EventData data) {}
 void TowerView::render(RenderData ren) {
   ren.window->draw(sprite);
   ren.window->draw(weapon);
-  if (tower->in_range()) {
+
+  auto enemies_in_range = tower->in_range();
+  if (enemies_in_range.size()) {
     weapon_sprite_mng.next_sprite(weapon);
+
+    // Get the position of the first enemy in range
+    auto enemy_position = enemies_in_range[0]->get_position();
+    auto weapon_pos = weapon.getPosition();
+
+    // Calculate the direction vector (enemy position - weapon position)
+    float dx = enemy_position.x - weapon_pos.x;
+    float dy = enemy_position.y - weapon_pos.y;
+
+    // Use the existing get_angle() method to calculate the angle of the
+    // direction
+    Vector<float> direction(dx, dy);
+    float angle = direction.get_angle();
+
+    // Rotate the weapon to face the enemy (ensure it rotates around its center)
+    weapon.setRotation(angle + 90);  // Adjust by 90 if necessary
+
+    std::cout << "Enemy Position: " << enemy_position.x << " "
+              << enemy_position.y << std::endl;
+    std::cout << "Weapon Position: " << weapon_pos.x << " " << weapon_pos.y
+              << std::endl;
+    std::cout << "Calculated Angle: " << angle << std::endl;
   }
 }
 void TowerView::update(UpdateData dat) {}

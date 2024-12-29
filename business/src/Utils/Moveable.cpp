@@ -3,6 +3,7 @@
 #include <iostream>
 #include "GameSettings.hpp"
 #include "Utils/Positionable.hpp"
+#include "cmath"
 
 Moveable::Moveable(float x, float y, float velocity, Vector<float> destination)
     : Positionable(x, y),
@@ -42,6 +43,9 @@ bool Moveable::is_out_of_board() {
                            // is never negative, so need to check
 }
 
-const float Moveable::get_rotation() const { return rotation; }
+float Moveable::get_rotation() const {
+  assert(unit_direction.has_direction());
+  return unit_direction.get_angle();
+}
 
 void Moveable::set_velocity(int new_v) { velocity = new_v; }
