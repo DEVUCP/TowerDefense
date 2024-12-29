@@ -28,6 +28,7 @@ set(HEADERS
     include/Enemy/EnemyManager.hpp
     # Enemies
     include/Enemy/Enemies/LeafBug.hpp
+    include/Enemy/Enemies/FireBug.hpp
     include/Enemy/Enemies/MagmaCrab.hpp
     include/Enemy/Enemies/ClampBeetle.hpp
     # Map
@@ -64,6 +65,7 @@ set(SOURCES # Sources
     src/Enemy/Enemies/LeafBug.cpp
     src/Enemy/Enemies/MagmaCrab.cpp
     src/Enemy/Enemies/ClampBeetle.cpp
+    src/Enemy/Enemies/FireBug.cpp
     # Map
     src/Map/Map.cpp
     src/Map/BaseTile.cpp
