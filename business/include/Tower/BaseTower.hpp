@@ -14,7 +14,11 @@
  */
 class BaseTower {
 public:
-  enum TowerType { ArcheryTower, IonPrism };
+  enum TowerType {
+    ArcheryTower,
+    IonPrism,
+    ElectroTower,
+  };
 
 public:
   /**
