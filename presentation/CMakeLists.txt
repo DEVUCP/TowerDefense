@@ -38,6 +38,7 @@ set(HEADERS
     include/Components/SidebarItem.hpp
     include/Components/SpriteSheetManager.hpp
     include/Components/SidebarTowerButton.hpp
+    include/Components/PriceModal.hpp
     # Interfaces
     include/Interfaces/Clickable.hpp
     # Widget
@@ -80,6 +81,7 @@ set(SOURCES
     src/Components/SidebarItem.cpp
     src/Components/SpriteSheetManager.cpp
     src/Components/SidebarTowerButton.cpp
+    src/Components/PriceModal.cpp
     # Views
     src/Views/TileView.cpp
     src/Views/BuildableTileView.cpp
