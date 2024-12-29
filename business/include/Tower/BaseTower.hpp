@@ -60,6 +60,13 @@ public:
   int get_sell_price();
 
   /**
+   * @brief Get tower's price.
+   *
+   * @return The base price of the tower.
+   */
+  static int get_buy_price(TowerType type);
+
+  /**
    * @brief Get tower Type
    */
   TowerType get_type() const;

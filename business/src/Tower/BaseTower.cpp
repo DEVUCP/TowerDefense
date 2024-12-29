@@ -8,6 +8,8 @@
 #include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Map/Map.hpp"
+#include "Tower/Towers/ArcheryTower.hpp"
+#include "Tower/Towers/IonPrism.hpp"
 
 // TODO: check the correct initialization for the sprite in BaseTower
 BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
@@ -85,6 +87,23 @@ bool BaseTower::in_range() {
 }
 
 void BaseTower::upgrade(int upgrade_index) {}
+
+int BaseTower::get_buy_price(BaseTower::TowerType type) {
+  int price;
+
+  switch (type) {
+    case IonPrism:
+      price = IonPrism::PRICE;
+      break;
+    case ArcheryTower:
+      price = ArcheryTower::PRICE;
+      break;
+    default:
+      price = 0;
+  }
+
+  return price;
+}
 
 // TODO: change base_price
 int BaseTower::get_sell_price() {
