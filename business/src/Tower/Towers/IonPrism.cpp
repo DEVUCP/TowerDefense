@@ -2,4 +2,4 @@
 #include "Tower/BaseTower.hpp"
 
 IonPrism::IonPrism(std::shared_ptr<BaseTile> tile)
-    : BaseTower(tile, RANGE, BaseTower::IonPrism, PRICE) {}
+    : BaseTower(tile, RANGE, BaseTower::IonPrism) {}
