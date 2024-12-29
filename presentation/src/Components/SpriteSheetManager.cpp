@@ -103,3 +103,5 @@ void SpriteSheetManager::reverse_sprite(sf::Sprite& spr) {
   auto current_scale = spr.getScale();
   spr.setScale(-1 * current_scale.x, -1 * current_scale.y);
 }
+
+unsigned SpriteSheetManager::get_current_index() { return current_index; }

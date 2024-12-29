@@ -84,25 +84,28 @@ void TowerView::render(RenderData ren) {
   ren.window->draw(weapon);
 
   auto enemies_in_range = tower->enemies_in_range();
-  if (enemies_in_range.size()) {
-    weapon_sprite_mng.next_sprite(weapon);
-
-    // Get the position of the first enemy in range
-    auto enemy_position = enemies_in_range[0]->get_position();
-    auto weapon_pos = weapon.getPosition();
-
-    // Calculate the direction vector (enemy position - weapon position)
-    float dx = enemy_position.x - weapon_pos.x;
-    float dy = enemy_position.y - weapon_pos.y;
-
-    // Use the existing get_angle() method to calculate the angle of the
-    // direction
-    Vector<float> direction(dx, dy);
-    float angle = direction.get_angle();
-
-    // Rotate the weapon to face the enemy (ensure it rotates around its center)
-    weapon.setRotation(angle + 90);  // Adjust by 90 if necessary
+  if (!enemies_in_range.size()) {
+    if (weapon_sprite_mng.get_current_index() != 0)
+      weapon_sprite_mng.next_sprite(weapon);
+    return;
   }
+  weapon_sprite_mng.next_sprite(weapon);
+
+  // Get the position of the first enemy in range
+  auto enemy_position = enemies_in_range[0]->get_position();
+  auto weapon_pos = weapon.getPosition();
+
+  // Calculate the direction vector (enemy position - weapon position)
+  float dx = enemy_position.x - weapon_pos.x;
+  float dy = enemy_position.y - weapon_pos.y;
+
+  // Use the existing get_angle() method to calculate the angle of the
+  // direction
+  Vector<float> direction(dx, dy);
+  float angle = direction.get_angle();
+
+  // Rotate the weapon to face the enemy (ensure it rotates around its center)
+  weapon.setRotation(angle + 90);  // Adjust by 90 if necessary
 }
 void TowerView::update(UpdateData dat) {}
 

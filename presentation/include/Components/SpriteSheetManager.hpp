@@ -54,6 +54,12 @@ public:
    * as the collection_name, or move to that other collection
    */
   void next_sprite(sf::Sprite& sprite, std::string collection_name);
+
+  /**
+   * @brief Reset the sequence of sprite animation
+   */
+  unsigned get_current_index();
+
   /**
    * @brief Change current collection
    */
