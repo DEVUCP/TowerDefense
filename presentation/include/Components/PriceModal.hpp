@@ -2,15 +2,15 @@
 
 #include "Interfaces/Clickable.hpp"
 #include "Interfaces/Widget.hpp"
-#include "PriceModal.hpp"
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Texture.hpp"
+#include "SidebarItem.hpp"
 #include "Text.hpp"
 
-class SidebarTowerButton : public Widget, public Clickable {
+class PriceModal : public Widget {
 public:
-  SidebarTowerButton(unsigned x, unsigned y, std::string tower_path, int price);
+  PriceModal(unsigned x, unsigned y, int price);
 
   /**
    * Overrided Methods
@@ -20,6 +20,16 @@ public:
   void update(UpdateData);
 
   /**
+   * @brief Returns true if it is currently visible, false otherwise
+   */
+  bool is_visible();
+
+  /**
+   * @brief Sets the visibility of the price modal
+   */
+  void set_visibility(bool);
+
+  /**
    * @brief Return the global bounds
    */
   const sf::FloatRect getGlobalBounds();
@@ -27,7 +37,8 @@ public:
 private:
   sf::Sprite bg;
   sf::Texture bg_texture;
-  sf::Sprite twr;
-  sf::Texture twr_texture;
-  std::shared_ptr<PriceModal> price_modal;
+  sf::Sprite icon;
+  sf::Texture icon_texture;
+  std::shared_ptr<Text> money_text;
+  bool show;
 };
