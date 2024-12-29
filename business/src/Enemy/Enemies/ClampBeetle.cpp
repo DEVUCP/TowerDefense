@@ -5,6 +5,4 @@ ClampBeetle::ClampBeetle(float x, float y, Vector<float> dest)
                 EnemyType::CLAMP_BEETLE),
       Positionable(x, y) {}
 
-void ClampBeetle::on_reach() {}
-void ClampBeetle::on_out_of_board() {}
 void ClampBeetle::on_killed() {}

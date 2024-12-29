@@ -5,6 +5,4 @@ FlyingLocust::FlyingLocust(float x, float y, Vector<float> dest)
                 EnemyType::CLAMP_BEETLE),
       Positionable(x, y) {}
 
-void FlyingLocust::on_reach() {}
-void FlyingLocust::on_out_of_board() {}
 void FlyingLocust::on_killed() {}

@@ -12,7 +12,5 @@ public:
   FireBug(float x, float y, Vector<float> dest);
 
 private:
-  virtual void on_reach() override;
-  virtual void on_out_of_board() override;
   virtual void on_killed() override;
 };

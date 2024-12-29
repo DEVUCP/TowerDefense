@@ -5,6 +5,4 @@ VoidButterfly::VoidButterfly(float x, float y, Vector<float> dest)
                 EnemyType::CLAMP_BEETLE),
       Positionable(x, y) {}
 
-void VoidButterfly::on_reach() {}
-void VoidButterfly::on_out_of_board() {}
 void VoidButterfly::on_killed() {}

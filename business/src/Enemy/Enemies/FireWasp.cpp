@@ -5,6 +5,4 @@ FireWasp::FireWasp(float x, float y, Vector<float> dest)
                 EnemyType::CLAMP_BEETLE),
       Positionable(x, y) {}
 
-void FireWasp::on_reach() {}
-void FireWasp::on_out_of_board() {}
 void FireWasp::on_killed() {}

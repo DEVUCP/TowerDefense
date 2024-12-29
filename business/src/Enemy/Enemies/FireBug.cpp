@@ -5,6 +5,4 @@ FireBug::FireBug(float x, float y, Vector<float> dest)
                 EnemyType::CLAMP_BEETLE),
       Positionable(x, y) {}
 
-void FireBug::on_reach() {}
-void FireBug::on_out_of_board() {}
 void FireBug::on_killed() {}
