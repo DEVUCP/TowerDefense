@@ -43,6 +43,11 @@ private:
    */
   void render();
 
+  /**
+   * @brief Initialize all needed assets, info, reading from file, etc.
+   */
+  void init_info();
+
 private:
   std::shared_ptr<sf::RenderWindow> window;
   sf::Event event;

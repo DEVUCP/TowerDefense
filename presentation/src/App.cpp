@@ -5,9 +5,11 @@
 #include "Components/PageManager.hpp"
 #include "SFML/Window/Event.hpp"
 #include "SFML/Window/Keyboard.hpp"
+#include "Views/TowerView.hpp"
 
 App::App() {
   // WARN: this order matters
+  init_info();
   init_window();
   init_time();
   init_page_manager();
@@ -57,3 +59,4 @@ void App::render() {
 }
 
 void App::init_time() { deltaTime = sf::Time::Zero; }
+void App::init_info() { TowerView::load_tower_info(); }

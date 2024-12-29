@@ -41,5 +41,4 @@ bool BuildableTileView::build_tower(BaseTower::TowerType type) {
     std::cout << "you don't have enough coins to buy that tower" << std::endl;
     return false;
   }
-  return true;
 }
