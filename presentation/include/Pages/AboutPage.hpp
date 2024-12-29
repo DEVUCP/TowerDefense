@@ -26,4 +26,6 @@ private:
   Title title;
   std::shared_ptr<IButton> go_back;
   std::shared_ptr<Text> about_text;
+  sf::Texture image_texture;
+  sf::Sprite image;
 };
