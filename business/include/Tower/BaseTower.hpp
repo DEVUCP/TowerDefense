@@ -18,6 +18,7 @@ public:
     ArcheryTower,
     IonPrism,
     ElectroTower,
+    SlingshotTower,
   };
 
 public:
