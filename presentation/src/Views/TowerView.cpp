@@ -7,7 +7,6 @@
 #include "GameSettings.hpp"
 #include "Tower/BaseTower.hpp"
 
-// TODO: Store this data somewhere
 std::unordered_map<BaseTower::TowerType, TowerView::TowerInfo>
     TowerView::towers_info = {};
 
