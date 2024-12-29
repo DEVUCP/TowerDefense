@@ -10,14 +10,31 @@ std::unordered_map<BaseTower::TowerType, TowerView::TowerInfo>
             BaseTower::IonPrism,
             {
                 "./assets/textures/towers/IonPrism.png",
-                "./assets/textures/attacks/IonPrism_weapons.png",
+                "./assets/textures/attacks/IonPrism_Weapons.png",
             },
         },
         {BaseTower::ArcheryTower,
          {
              "./assets/textures/towers/ArcheryTower.png",
-             "./assets/textures/attacks/IonPrism_Weapons.png",
-         }}};
+             "./assets/textures/attacks/ArcheryTower_Weapons.png",
+         }},
+
+        {BaseTower::CatapultTower,
+         {
+             "./assets/textures/towers/CatapultTower.png",
+             "./assets/textures/attacks/CatapultTower_Weapons.png",
+         }},
+        {BaseTower::SlingshotTower,
+         {
+             "./assets/textures/towers/SlingshotTower.png",
+             "./assets/textures/attacks/SlingshotTower_Weapons.png",
+         }},
+        {BaseTower::ElectroTower,
+         {
+             "./assets/textures/towers/ElectroTower.png",
+             "./assets/textures/attacks/ElectroTower_Weapons.png",
+         }},
+};
 
 TowerView::TowerView(std::shared_ptr<BaseTower> tower) : tower(tower) {
   init_tower_sprite();

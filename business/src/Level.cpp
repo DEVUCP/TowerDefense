@@ -4,7 +4,10 @@
 #include <memory>
 #include <stdexcept>
 #include "Tower/Towers/ArcheryTower.hpp"
+#include "Tower/Towers/CatapultTower.hpp"
+#include "Tower/Towers/ElectroTower.hpp"
 #include "Tower/Towers/IonPrism.hpp"
+#include "Tower/Towers/SlingshotTower.hpp"
 
 Level::Level(int lives, int coins, std::shared_ptr<Map> map,
              std::shared_ptr<WaveManager> wave_mng,
@@ -121,8 +124,17 @@ std::shared_ptr<BaseTower> Level::build_tower(
     case BaseTower::ArcheryTower:
       twr = std::make_shared<ArcheryTower>(tile);
       break;
+    case BaseTower::CatapultTower:
+      twr = std::make_shared<CatapultTower>(tile);
+      break;
+    case BaseTower::ElectroTower:
+      twr = std::make_shared<ElectroTower>(tile);
+      break;
+    case BaseTower::SlingshotTower:
+      twr = std::make_shared<SlingshotTower>(tile);
+      break;
     default:
-      throw std::runtime_error("Load all assets");
+      throw std::runtime_error("Load all towers");
   }
 
   if (twr->get_buy_price(type) <= get_coins()) {

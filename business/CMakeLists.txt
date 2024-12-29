@@ -22,6 +22,9 @@ set(HEADERS
     # Towers
     include/Tower/Towers/IonPrism.hpp
     include/Tower/Towers/ArcheryTower.hpp
+    include/Tower/Towers/ElectroTower.hpp
+    include/Tower/Towers/SlingshotTower.hpp
+    include/Tower/Towers/CatapultTower.hpp
     # Enemy
     include/Enemy/BaseEnemy.hpp
     include/Enemy/EnemyFactory.hpp
@@ -34,7 +37,6 @@ set(HEADERS
     include/Enemy/Enemies/MagmaCrab.hpp
     include/Enemy/Enemies/ClampBeetle.hpp
     include/Enemy/Enemies/VoidButterfly.hpp
-
     # Map
     include/Map/Map.hpp
     include/Map/BaseTile.hpp
@@ -61,6 +63,9 @@ set(SOURCES # Sources
     # Towers
     src/Tower/Towers/IonPrism.cpp
     src/Tower/Towers/ArcheryTower.cpp
+    src/Tower/Towers/ElectroTower.cpp
+    src/Tower/Towers/SlingshotTower.cpp
+    src/Tower/Towers/CatapultTower.cpp
     # Enemy
     src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyFactory.cpp

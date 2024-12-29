@@ -4,7 +4,6 @@
 #include "Game.hpp"
 #include "Map/BaseTile.hpp"
 #include "Tower/BaseTower.hpp"
-#include "Tower/Towers/IonPrism.hpp"
 #include "Views/TileView.hpp"
 
 std::vector<std::string> BuildableTileView::sheets = {
@@ -34,7 +33,7 @@ bool BuildableTileView::build_tower(BaseTower::TowerType type) {
   auto lvl = Game::get_instance().get_level();
   auto converted_tile = std::dynamic_pointer_cast<BuildableTile>(tile);
   auto twr = lvl->build_tower(type, converted_tile);
-  if(twr) {
+  if (twr) {
     tower = std::make_shared<TowerView>(twr);
     std::cout << "made a tower" << std::endl;
     return true;
@@ -42,4 +41,5 @@ bool BuildableTileView::build_tower(BaseTower::TowerType type) {
     std::cout << "you don't have enough coins to buy that tower" << std::endl;
     return false;
   }
+  return true;
 }

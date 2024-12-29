@@ -12,6 +12,12 @@
 std::vector<std::pair<BaseTower::TowerType, std::string>> Sidebar::towers_info =
     {
         {BaseTower::IonPrism, "./assets/textures/towers/IonPrism.png"},
+        {BaseTower::ArcheryTower, "./assets/textures/towers/ArcheryTower.png"},
+        {BaseTower::CatapultTower,
+         "./assets/textures/towers/CatapultTower.png"},
+        {BaseTower::ElectroTower, "./assets/textures/towers/ElectroTower.png"},
+        {BaseTower::SlingshotTower,
+         "./assets/textures/towers/SlingshotTower.png"},
 };
 Sidebar::Sidebar() {
   init_sidebar_bg();

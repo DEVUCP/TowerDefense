@@ -39,17 +39,18 @@ void GamePage::on_unpause() {
 }
 
 void GamePage::handle_events(EventData evt) {
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::P) || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) ||
+      sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
     // Game::get_instance().get_level().pause();
     notify_observers(Event::PAUSE_PAGE_SWITCH);
   }
 
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
     // Game::get_instance().get_level()->end_game();
     notify_observers(Event::WIN_PAGE_SWITCH);
   }
 
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
     // Game::get_instance().get_level()->end_game();
     notify_observers(Event::LOSE_PAGE_SWITCH);
   }
@@ -130,11 +131,6 @@ void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
   selected_tile = tile_view;
   selected_tile->set_selected(true);
   sidebar->set_tile_target(tile_view);
-
-  // // TODO: This logic is to be transfered to another method, just because
-  // // business isn't complete
-  // tile_view->build_tower(BaseTower::IonPrism, tile_view->get_tile());
-  // SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
 }
 
 void GamePage::init_enemy_creation_callback() {
