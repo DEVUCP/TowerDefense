@@ -3,12 +3,17 @@
 #include <memory>
 #include <queue>
 #include <set>
+#include <stdexcept>
+#include <unordered_map>
 #include "Enemy/BaseEnemy.hpp"
 #include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Map/Map.hpp"
 #include "Tower/Towers/ArcheryTower.hpp"
+#include "Tower/Towers/CatapultTower.hpp"
+#include "Tower/Towers/ElectroTower.hpp"
+#include "Tower/Towers/SlingshotTower.hpp"
 
 // TODO: check the correct initialization for the sprite in BaseTower
 BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
@@ -110,17 +115,16 @@ std::vector<std::shared_ptr<BaseEnemy>> BaseTower::enemies_in_range() {
 void BaseTower::upgrade(int upgrade_index) {}
 
 int BaseTower::get_buy_price(BaseTower::TowerType type) {
-  int price;
+  static std::unordered_map<BaseTower::TowerType, int> prices = {
+      {BaseTower::ArcheryTower, ArcheryTower::PRICE},
+      {BaseTower::CatapultTower, CatapultTower::PRICE},
+      {BaseTower::ElectroTower, ElectroTower::PRICE},
+      {BaseTower::SlingshotTower, SlingshotTower::PRICE},
+  };
 
-  switch (type) {
-    case ArcheryTower:
-      price = ArcheryTower::PRICE;
-      break;
-    default:
-      price = 0;
-  }
-
-  return price;
+  if (prices.find(type) == prices.end())
+    throw std::runtime_error("Unidentified tower type");
+  return prices[type];
 }
 
 // TODO: change base_price
