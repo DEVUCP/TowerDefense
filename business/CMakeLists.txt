@@ -33,6 +33,8 @@ set(HEADERS
     include/Enemy/Enemies/FlyingLocust.hpp
     include/Enemy/Enemies/MagmaCrab.hpp
     include/Enemy/Enemies/ClampBeetle.hpp
+    include/Enemy/Enemies/VoidButterfly.hpp
+
     # Map
     include/Map/Map.hpp
     include/Map/BaseTile.hpp
@@ -70,6 +72,7 @@ set(SOURCES # Sources
     src/Enemy/Enemies/FireBug.cpp
     src/Enemy/Enemies/FireWasp.cpp
     src/Enemy/Enemies/FlyingLocust.cpp
+    src/Enemy/Enemies/VoidButterfly.cpp
     # Map
     src/Map/Map.cpp
     src/Map/BaseTile.cpp
