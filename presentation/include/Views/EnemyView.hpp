@@ -15,6 +15,9 @@ private:
   };
 
 public:
+  static const inline std::string FILE_PATH = "./data/enemy_info.txt";
+
+public:
   EnemyView(std::shared_ptr<BaseEnemy>);
 
   /*
@@ -28,6 +31,11 @@ public:
    * @brief Return if the element should be removed
    */
   bool is_to_be_removed() const;
+
+  /**
+   * @brief Initialize the enemy info
+   */
+  static void load_enemy_info();
 
 private:
   std::shared_ptr<BaseEnemy> enemy;

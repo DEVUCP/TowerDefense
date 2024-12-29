@@ -1,7 +1,11 @@
 #include "Views/EnemyView.hpp"
+#include <fstream>
 #include <iostream>
 #include <memory>
+#include <sstream>
 #include <stdexcept>
+#include <string>
+#include <tuple>
 #include "GameSettings.hpp"
 #include "Interfaces/EventData.hpp"
 
@@ -13,38 +17,7 @@
 #define DOWN_DESTRUCTION "DOWN_DESTRUCTION"
 
 std::unordered_map<BaseEnemy::EnemyType, EnemyView::EnemyInfo>
-    EnemyView::enemies_info = {
-        {BaseEnemy::EnemyType::LEAF_BUG,
-         {"./assets/textures/enemies/LeafBug.png",
-          {
-              {LEFT_MOVEMENT, 5, 8},
-              {UP_MOVEMENT, 4, 8},
-              {DOWN_MOVEMENT, 3, 8},
-              {LEFT_DESTRUCTION, 5 + 3, 8},
-              {UP_DESTRUCTION, 4 + 3, 8},
-              {DOWN_DESTRUCTION, 3 + 3, 8},
-          }}},
-        {BaseEnemy::EnemyType::MAGMA_CRAB,
-         {"./assets/textures/enemies/MagmaCrab.png",
-          {
-              {LEFT_MOVEMENT, 5, 8},
-              {UP_MOVEMENT, 4, 8},
-              {DOWN_MOVEMENT, 3, 8},
-              {LEFT_DESTRUCTION, 5 + 3, 8},
-              {UP_DESTRUCTION, 4 + 3, 8},
-              {DOWN_DESTRUCTION, 3 + 3, 8},
-          }}},
-        {BaseEnemy::EnemyType::CLAMP_BEETLE,
-         {"./assets/textures/enemies/ClampBeetle.png",
-          {
-              {LEFT_MOVEMENT, 5, 8},
-              {UP_MOVEMENT, 4, 8},
-              {DOWN_MOVEMENT, 3, 8},
-              {LEFT_DESTRUCTION, 5 + 3, 8},
-              {UP_DESTRUCTION, 4 + 3, 8},
-              {DOWN_DESTRUCTION, 3 + 3, 8},
-          }}},
-};
+    EnemyView::enemies_info = {};
 
 EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   assert(enm != nullptr);
@@ -100,3 +73,44 @@ void EnemyView::update(UpdateData dat) {
 void EnemyView::render(RenderData ren) { ren.window->draw(sprite); }
 
 bool EnemyView::is_to_be_removed() const { return enemy->is_to_be_removed(); }
+
+// EnemyName AssetName [CollectionName,row,count]*
+void EnemyView::load_enemy_info() {
+  std::ifstream file(FILE_PATH);
+  if (!file.is_open()) {
+    throw std::runtime_error("Failed to open towers info file: " + FILE_PATH);
+  }
+
+  enemies_info.clear();  // Clear existing data if any
+  std::string line;
+
+  while (std::getline(file, line)) {
+    if (line.empty() || line[0] == '#') continue;
+
+    std::istringstream line_stream(line);
+    std::string enemy_name, asset_name;
+    line_stream >> enemy_name >> asset_name;
+
+    BaseEnemy::EnemyType type;
+
+    if (enemy_name == "LEAF_BUG")
+      type = BaseEnemy::EnemyType::LEAF_BUG;
+    else if (enemy_name == "MAGMA_CRAB")
+      type = BaseEnemy::EnemyType::MAGMA_CRAB;
+    else if (enemy_name == "CLAMP_BEETLE")
+      type = BaseEnemy::EnemyType::CLAMP_BEETLE;
+    else
+      throw std::runtime_error("Unknown enemy data: " + enemy_name);
+
+    std::vector<std::tuple<std::string, int, int>> collections;
+    std::string collection_name;
+    int row, count;
+
+    // Read the remaining parts of the line (the collections and counts)
+    while (line_stream >> collection_name >> row >> count) {
+      collections.push_back(std::make_tuple(collection_name, row, count));
+    }
+
+    enemies_info[type] = {asset_name, collections};
+  }
+}

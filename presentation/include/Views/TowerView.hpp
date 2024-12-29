@@ -7,7 +7,7 @@
 #include "Interfaces/Widget.hpp"
 #include "Tower/BaseTower.hpp"
 class TowerView : public Widget {
-public:
+private:
   struct TowerInfo {
     std::string tower_sprite;
     std::string tower_weapon;
