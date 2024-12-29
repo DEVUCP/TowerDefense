@@ -4,7 +4,7 @@
 #include "SFML/Window/Event.hpp"
 
 SidebarTowerButton::SidebarTowerButton(unsigned x, unsigned y,
-                                       std::string tower_path) {
+                                       std::string tower_path, int price) {
   if (!bg_texture.loadFromFile("./assets/textures/sidebar/tower_bg.png")) {
     std::cerr << "Failed to load tower background" << std::endl;
     exit(1);
@@ -28,6 +28,9 @@ SidebarTowerButton::SidebarTowerButton(unsigned x, unsigned y,
       x + (bg.getGlobalBounds().width - twr.getGlobalBounds().width) / 2,
       y + (bg.getGlobalBounds().height - twr.getGlobalBounds().height) / 2 -
           15);
+
+  // Initiate the price modal
+  price_modal = std::make_shared<PriceModal>(x - bg.getGlobalBounds().width * 1.5f - 10 ,y + (bg.getGlobalBounds().height) / 2 - 20, price);
 }
 void SidebarTowerButton::handle_events(EventData data) {
   if (data.event.type == sf::Event::MouseButtonPressed &&
@@ -36,10 +39,21 @@ void SidebarTowerButton::handle_events(EventData data) {
                  bg)) {
     on_click();
   }
+
+  // Show price modal only when tower button is hovered
+  if (is_hovered(sf::Vector2f{static_cast<float>(data.mouse_pointer.x),
+                              static_cast<float>(data.mouse_pointer.y)},
+                 bg)) {
+    price_modal->set_visibility(true);
+  } else {
+    price_modal->set_visibility(false);
+  }
+
 }
 void SidebarTowerButton::render(RenderData ren) {
   ren.window->draw(bg);
   ren.window->draw(twr);
+  price_modal->render(ren);
 }
 void SidebarTowerButton::update(UpdateData) {}
 
