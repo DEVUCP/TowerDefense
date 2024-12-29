@@ -123,9 +123,3 @@ void BaseEnemy::on_move() {
   auto map = Game::get_instance().get_level()->get_map();
   handle_next_tile_redirection(map);
 }
-void BaseEnemy::on_out_of_board() {
-  to_be_removed = true;
-  std::cout << "Removing" << std::endl;
-}
-
-void BaseEnemy::on_move() {}

@@ -9,11 +9,10 @@
 #include "Map/EnemyPathTile.hpp"
 #include "Map/Map.hpp"
 #include "Tower/Towers/ArcheryTower.hpp"
-#include "Tower/Towers/IonPrism.hpp"
 
 // TODO: check the correct initialization for the sprite in BaseTower
 BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
-                     TowerType type)
+                     TowerType type, int price)
 
     : tile(tile),
       range(range),
@@ -21,6 +20,8 @@ BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
       lvl(1)  // The starting level for each tower
 {
   // Initialize upgrades
+  // TODO: Handle price decreasing
+  // Invariant: Current number of coins is already >= price
 }
 
 void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
@@ -112,9 +113,6 @@ int BaseTower::get_buy_price(BaseTower::TowerType type) {
   int price;
 
   switch (type) {
-    case IonPrism:
-      price = IonPrism::PRICE;
-      break;
     case ArcheryTower:
       price = ArcheryTower::PRICE;
       break;

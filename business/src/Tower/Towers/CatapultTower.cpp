@@ -2,4 +2,4 @@
 #include "Tower/BaseTower.hpp"
 
 CatapultTower::CatapultTower(std::shared_ptr<BaseTile> tile)
-    : BaseTower(tile, RANGE, BaseTower::CatapultTower) {}
+    : BaseTower(tile, RANGE, BaseTower::CatapultTower, PRICE) {}

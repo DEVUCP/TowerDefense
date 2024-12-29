@@ -60,25 +60,10 @@ set(SOURCES # Sources
     src/Tower/BaseTower.cpp
     src/Tower/TowerManager.cpp
     # Towers
-    <<<<<<<
-    HEAD
     src/Tower/Towers/ArcheryTower.cpp
+    src/Tower/Towers/CatapultTower.cpp
     src/Tower/Towers/ElectroTower.cpp
     src/Tower/Towers/SlingshotTower.cpp
-    src/Tower/Towers/CatapultTower.cpp
-    =======
-    src/Tower/Towers/IonPrism.cpp
-    src/Tower/Towers/ArcheryTower.cpp
-    >>>>>>>
-    843556d
-    (feat:
-     Enemies
-     moving
-     on
-     the
-     enemy
-     path
-     (hooray!!!))
     # Enemy
     src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyFactory.cpp

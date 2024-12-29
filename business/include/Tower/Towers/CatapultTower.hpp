@@ -4,6 +4,7 @@
 class CatapultTower : public BaseTower {
 public:
   static constexpr unsigned RANGE = 3;
+  static constexpr unsigned PRICE = 100;
 
 public:
   CatapultTower(std::shared_ptr<BaseTile> tile);

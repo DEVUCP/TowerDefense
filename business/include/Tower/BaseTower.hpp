@@ -20,7 +20,6 @@ public:
     SlingshotTower,
     CatapultTower,
   };
-  enum TowerType { ArcheryTower, IonPrism };
 
 public:
   /**
@@ -29,7 +28,8 @@ public:
    * @details Initializes all member variables and sets up the base properties
    * of the tower.
    */
-  BaseTower(std::shared_ptr<BaseTile> tile, unsigned range, TowerType type);
+  BaseTower(std::shared_ptr<BaseTile> tile, unsigned range, TowerType type,
+            int price);
   /**
    * @brief Initiates an attack on the specified enemy.
    *
