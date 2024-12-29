@@ -10,29 +10,31 @@
 
 PausePage::PausePage(unsigned width, unsigned height)
     : Page(width, height), title("Pause", width, height) {
-  unsigned start_x = width/2, start_y = height/2;
+  unsigned start_x = width / 2, start_y = height / 2;
   int offset_y = 20;
   int button_spacing_x = 80;
 
-  restart_button =
-      std::make_shared<IconButton>("./assets/buttons/Restart.png",
-                                   "./assets/buttons/Restart_Hover.png", start_x - button_spacing_x, start_y + offset_y);
+  restart_button = std::make_shared<IconButton>(
+      "./assets/buttons/Restart.png", "./assets/buttons/Restart_Hover.png",
+      start_x - button_spacing_x, start_y + offset_y);
   restart_button->set_handler([this]() {
-    Game::get_instance().init_level(Game::get_instance().get_level()->get_level_num());
+    Game::get_instance().init_level(
+        Game::get_instance().get_level()->get_level_num());
     notify_observers(Event::GAME_PAGE_SWITCH);
   });
-  continue_button =
-    std::make_shared<IconButton>("./assets/buttons/Play.png",
-                                 "./assets/buttons/Play_Hover.png", start_x + button_spacing_x, start_y + offset_y);
+  continue_button = std::make_shared<IconButton>(
+      "./assets/buttons/Play.png", "./assets/buttons/Play_Hover.png",
+      start_x + button_spacing_x, start_y + offset_y);
   continue_button->set_handler([this]() {
     // Game::get_instance().get_level().un_pause();
-    notify_observers(Event::GAME_PAGE_SWITCH);
+    notify_observers(Event::GO_BACK_SWITCH);
   });
 
-  levels_button =
-      std::make_shared<IconButton>("./assets/buttons/Levels.png",
-                                   "./assets/buttons/Levels_Hover.png", width - button_spacing_x, height - button_spacing_x);
-  levels_button->set_handler([this]() { notify_observers(Event::LEVEL_PAGE_SWITCH); });
+  levels_button = std::make_shared<IconButton>(
+      "./assets/buttons/Levels.png", "./assets/buttons/Levels_Hover.png",
+      width - button_spacing_x, height - button_spacing_x);
+  levels_button->set_handler(
+      [this]() { notify_observers(Event::LEVEL_PAGE_SWITCH); });
 }
 
 void PausePage::on_pause() {}
@@ -47,7 +49,7 @@ void PausePage::handle_events(EventData evt) {
   continue_button->handle_events(evt);
 }
 
-void PausePage::update(UpdateData dat) {  }
+void PausePage::update(UpdateData dat) {}
 
 void PausePage::render(RenderData ren) {
   title.render(ren);

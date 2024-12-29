@@ -1,13 +1,9 @@
 #include "Pages/GamePage.hpp"
 #include <memory>
 #include "Components/MusicPlayer.hpp"
-#include "Enemy/Enemies/LeafBug.hpp"
 #include "Enums/Event.hpp"
 #include "Game.hpp"
 #include "GameSettings.hpp"
-#include "Map/EnemyPathTile.hpp"
-#include "Tower/BaseTower.hpp"
-#include "Utils/Vector.hpp"
 #include "Views/BuildableTileView.hpp"
 #include "Views/EnemyPathTileView.hpp"
 #include "Views/EnemyView.hpp"

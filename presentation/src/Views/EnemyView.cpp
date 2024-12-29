@@ -13,16 +13,38 @@
 #define DOWN_DESTRUCTION "DOWN_DESTRUCTION"
 
 std::unordered_map<BaseEnemy::EnemyType, EnemyView::EnemyInfo>
-    EnemyView::enemies_info = {{BaseEnemy::EnemyType::LEAF_BUG,
-                                {"./assets/textures/enemies/Leafbug.png",
-                                 {
-                                     {LEFT_MOVEMENT, 5, 8},
-                                     {UP_MOVEMENT, 4, 8},
-                                     {DOWN_MOVEMENT, 3, 8},
-                                     {LEFT_DESTRUCTION, 5 + 3, 8},
-                                     {UP_DESTRUCTION, 4 + 3, 8},
-                                     {DOWN_DESTRUCTION, 3 + 3, 8},
-                                 }}}};
+    EnemyView::enemies_info = {
+        {BaseEnemy::EnemyType::LEAF_BUG,
+         {"./assets/textures/enemies/LeafBug.png",
+          {
+              {LEFT_MOVEMENT, 5, 8},
+              {UP_MOVEMENT, 4, 8},
+              {DOWN_MOVEMENT, 3, 8},
+              {LEFT_DESTRUCTION, 5 + 3, 8},
+              {UP_DESTRUCTION, 4 + 3, 8},
+              {DOWN_DESTRUCTION, 3 + 3, 8},
+          }}},
+        {BaseEnemy::EnemyType::MAGMA_CRAB,
+         {"./assets/textures/enemies/MagmaCrab.png",
+          {
+              {LEFT_MOVEMENT, 5, 8},
+              {UP_MOVEMENT, 4, 8},
+              {DOWN_MOVEMENT, 3, 8},
+              {LEFT_DESTRUCTION, 5 + 3, 8},
+              {UP_DESTRUCTION, 4 + 3, 8},
+              {DOWN_DESTRUCTION, 3 + 3, 8},
+          }}},
+        {BaseEnemy::EnemyType::CLAMP_BEETLE,
+         {"./assets/textures/enemies/ClampBeetle.png",
+          {
+              {LEFT_MOVEMENT, 5, 8},
+              {UP_MOVEMENT, 4, 8},
+              {DOWN_MOVEMENT, 3, 8},
+              {LEFT_DESTRUCTION, 5 + 3, 8},
+              {UP_DESTRUCTION, 4 + 3, 8},
+              {DOWN_DESTRUCTION, 3 + 3, 8},
+          }}},
+};
 
 EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   assert(enm != nullptr);
