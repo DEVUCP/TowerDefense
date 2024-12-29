@@ -6,7 +6,6 @@
 #include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/CatapultTower.hpp"
 #include "Tower/Towers/ElectroTower.hpp"
-#include "Tower/Towers/IonPrism.hpp"
 #include "Tower/Towers/SlingshotTower.hpp"
 
 Level::Level(int lives, int coins, std::shared_ptr<Map> map,
@@ -118,9 +117,6 @@ std::shared_ptr<BaseTower> Level::build_tower(
     BaseTower::TowerType type, std::shared_ptr<BuildableTile> tile) {
   std::shared_ptr<BaseTower> twr = nullptr;
   switch (type) {
-    case BaseTower::IonPrism:
-      twr = std::make_shared<IonPrism>(tile);
-      break;
     case BaseTower::ArcheryTower:
       twr = std::make_shared<ArcheryTower>(tile);
       break;

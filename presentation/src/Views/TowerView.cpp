@@ -4,35 +4,33 @@
 #include "GameSettings.hpp"
 #include "Tower/BaseTower.hpp"
 
+// TODO: Store this data somewhere
 std::unordered_map<BaseTower::TowerType, TowerView::TowerInfo>
     TowerView::towers_info = {
-        {
-            BaseTower::IonPrism,
-            {
-                "./assets/textures/towers/IonPrism.png",
-                "./assets/textures/attacks/IonPrism_Weapons.png",
-            },
-        },
         {BaseTower::ArcheryTower,
          {
              "./assets/textures/towers/ArcheryTower.png",
              "./assets/textures/attacks/ArcheryTower_Weapons.png",
+             {1, 2, 3},
          }},
 
         {BaseTower::CatapultTower,
          {
              "./assets/textures/towers/CatapultTower.png",
              "./assets/textures/attacks/CatapultTower_Weapons.png",
+             {1, 2, 3},
          }},
         {BaseTower::SlingshotTower,
          {
              "./assets/textures/towers/SlingshotTower.png",
              "./assets/textures/attacks/SlingshotTower_Weapons.png",
+             {1, 2, 3},
          }},
         {BaseTower::ElectroTower,
          {
              "./assets/textures/towers/ElectroTower.png",
              "./assets/textures/attacks/ElectroTower_Weapons.png",
+             {1, 2, 3},
          }},
 };
 
@@ -66,6 +64,8 @@ void TowerView::init_tower_sprite() {
 }
 
 void TowerView::init_weapon_sprite() {
+  auto& [tower_texture_sheet, weapon_texture_sheet, attacks_offsets] =
+      towers_info[tower->get_type()];
   // Handle the change in levels
   weapon_sprite_mng.load_sheet(weapon, weapon_texture,
                                towers_info[tower->get_type()].tower_weapon);
@@ -82,19 +82,19 @@ void TowerView::init_weapon_sprite() {
   auto tile_len = GameSettings::get_instance().get_tile_size();
   pos.x += tile_len / 2.f * (1 - TOWER_TILE_FACTOR);
   pos.y -= (tile_len / 2.f * (TOWER_TILE_FACTOR)) -
-           27;  // TODO: Fix this magic number by doing maths
+           attacks_offsets[tower->get_level()];  // TODO: Fix this magic number
+                                                 // by doing maths
   weapon.setPosition(pos.x, pos.y);
 
   // Set Scale to the sprite
   // NOTE: Scale as much as the tower has been scaled
-  weapon.setScale(TOWER_TILE_FACTOR * 120.f / 64,
-                  TOWER_TILE_FACTOR * 120.f / 64);
+  weapon.setScale(2, 2);
 }
 void TowerView::handle_events(EventData data) {}
 void TowerView::render(RenderData ren) {
   ren.window->draw(sprite);
+  ren.window->draw(weapon);
   if (tower->in_range()) {
-    ren.window->draw(weapon);
     weapon_sprite_mng.next_sprite(weapon);
   }
 }

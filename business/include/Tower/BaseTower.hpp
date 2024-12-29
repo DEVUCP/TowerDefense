@@ -16,7 +16,6 @@ class BaseTower {
 public:
   enum TowerType {
     ArcheryTower,
-    IonPrism,
     ElectroTower,
     SlingshotTower,
     CatapultTower,
@@ -81,6 +80,11 @@ public:
    * @brief Get position
    */
   Vector<float> get_position() const;
+
+  /**
+   * @brief Get the tower level
+   */
+  int get_level() const;
 
 private:
   std::shared_ptr<BaseTile> tile;  // The tile this tower is on

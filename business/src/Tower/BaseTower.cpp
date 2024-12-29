@@ -117,3 +117,5 @@ int BaseTower::get_sell_price() {
 BaseTower::TowerType BaseTower::get_type() const { return type; }
 
 Vector<float> BaseTower::get_position() const { return tile->get_position(); }
+
+int BaseTower::get_level() const { return lvl; }

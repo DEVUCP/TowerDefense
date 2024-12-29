@@ -20,7 +20,6 @@ set(HEADERS
     include/Tower/BaseTower.hpp
     include/Tower/TowerManager.hpp
     # Towers
-    include/Tower/Towers/IonPrism.hpp
     include/Tower/Towers/ArcheryTower.hpp
     include/Tower/Towers/ElectroTower.hpp
     include/Tower/Towers/SlingshotTower.hpp
@@ -61,7 +60,6 @@ set(SOURCES # Sources
     src/Tower/BaseTower.cpp
     src/Tower/TowerManager.cpp
     # Towers
-    src/Tower/Towers/IonPrism.cpp
     src/Tower/Towers/ArcheryTower.cpp
     src/Tower/Towers/ElectroTower.cpp
     src/Tower/Towers/SlingshotTower.cpp
