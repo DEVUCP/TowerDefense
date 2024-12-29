@@ -120,7 +120,7 @@ void Sidebar::init_tower_buttons() {
     int x = x_start + column * cell_width + (column != 0 ? TOWERS_OFFSET : 0);
     int y = y_start + static_cast<int>(row * cell_height * vertical_spacing);
 
-    auto twr = std::make_shared<SidebarTowerButton>(x, y, path);
+    auto twr = std::make_shared<SidebarTowerButton>(x, y, path, BaseTower::get_buy_price(type));
     twr->set_handler([this, type]() {
       if (target->get_tile()->get_type() != BaseTile::Buildable) return;
       auto converted = std::dynamic_pointer_cast<BuildableTileView>(target);
@@ -128,6 +128,11 @@ void Sidebar::init_tower_buttons() {
         target->set_selected(false);
         target = nullptr;
         SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
+      } else {
+        target->set_selected(false);
+        target = nullptr;
+        // TODO: Replace with failed to builed sound
+        // SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
       }
     });
 
