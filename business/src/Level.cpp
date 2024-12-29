@@ -124,8 +124,14 @@ std::shared_ptr<BaseTower> Level::build_tower(
     default:
       throw std::runtime_error("Load all assets");
   }
-  assert(twr);
-  tower_mng->add_tower(twr);
+
+  if(twr->get_buy_price(type) <= get_coins()) {
+    tower_mng->add_tower(twr);
+    update_coins(-1 * twr->get_buy_price(type));
+  } else {
+    twr = nullptr;
+  }
+
   return twr;
 }
 
@@ -133,11 +139,6 @@ int Level::get_lives() const { return lives; }
 int Level::get_score() const { return score; }
 int Level::get_coins() const { return coins; }
 
-int Level::get_level_num() const { return level_num; }
-void Level::set_on_enemy_created(
-    std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
-  on_enemy_created = handler;
-}
 int Level::get_level_num() const { return level_num; }
 void Level::set_on_enemy_created(
     std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
