@@ -11,6 +11,7 @@ class EnemyView : public Widget {
 private:
   struct EnemyInfo {
     std::string texture_path;
+    std::pair<float, float> size;
     std::vector<std::tuple<std::string, int, int>> collections;
   };
 

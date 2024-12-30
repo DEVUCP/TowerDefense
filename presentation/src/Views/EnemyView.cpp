@@ -21,13 +21,11 @@ std::unordered_map<BaseEnemy::EnemyType, EnemyView::EnemyInfo>
 
 EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   assert(enm != nullptr);
-  auto& [texture_path, collections] = enemies_info[enm->get_type()];
+  auto& [texture_path, size, collections] = enemies_info[enm->get_type()];
   sheet_mng.load_sheet(sprite, sprite_sheet, texture_path);
 
-  // TODO: This is Registration for LeafBug. Make it dynamic tomorrow
-  // TODO: Fix These magic numbers by some kind of table
-  sheet_mng.set_width(64);
-  sheet_mng.set_height(64);
+  sheet_mng.set_width(size.first);
+  sheet_mng.set_height(size.second);
   for (auto& clc : collections) {
     auto& [name, row, count] = clc;
     sheet_mng.register_collection(name, row, count);
@@ -38,7 +36,7 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   // Scale up to desired
   auto width = GameSettings::get_instance().get_enemy_width();
   auto height = GameSettings::get_instance().get_enemy_height();
-  sprite.setScale(sf::Vector2f(width / 64.f, height / 64.f));
+  sprite.setScale(sf::Vector2f(width / size.first, height / size.second));
   sprite.setOrigin(width / 2.f, height / 2.f);
 }
 
@@ -102,15 +100,19 @@ void EnemyView::load_enemy_info() {
     else
       throw std::runtime_error("Unknown enemy data: " + enemy_name);
 
+    // Read Size
+    float width, height;
+    line_stream >> width >> height;
+
+    // Read the remaining parts of the line (the collections and counts)
     std::vector<std::tuple<std::string, int, int>> collections;
     std::string collection_name;
     int row, count;
 
-    // Read the remaining parts of the line (the collections and counts)
     while (line_stream >> collection_name >> row >> count) {
       collections.push_back(std::make_tuple(collection_name, row, count));
     }
 
-    enemies_info[type] = {asset_name, collections};
+    enemies_info[type] = {asset_name, {width, height}, collections};
   }
 }
