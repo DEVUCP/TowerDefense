@@ -29,7 +29,7 @@ const Vector<float> Map::get_initial_enemy_destination() const {
 
 std::pair<int, int> Map::map_coords_to_indices(float x, float y) const {
   auto len = GameSettings::get_instance().get_tile_size();
-  int i = x / len, j = y / len;
+  int j = x / len, i = y / len;
   return {i, j};
 }
 
