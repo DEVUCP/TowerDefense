@@ -18,7 +18,7 @@ void Moveable::move_next() {
   if (is_out_of_board()) on_out_of_board();
   if (has_reached_destination()) on_reach();
 
-  update_position(get_position() + unit_direction * this->velocity);
+  update_position(get_position() + unit_direction * velocity);
   on_move();
 }
 
@@ -33,12 +33,8 @@ void Moveable::update_dest(Vector<float> destination) {
 
 bool Moveable::is_out_of_board() {
   Vector<unsigned> size = GameSettings::get_instance().get_size();
-  // std::cout << position.x << " " << position.y << " ";
-  // std::cout << size.x << " " << size.y << std::endl;
-  auto pos = get_position();
-  return pos.x >= size.x ||
-         pos.y >= size.y;  // < This line uses the fact that unsigned
-                           // is never negative, so need to check
+  Vector<float> pos = get_position();
+  return pos.x < 0 || pos.x > size.x || pos.y < 0 || pos.y >= size.y;
 }
 
 float Moveable::get_rotation() const {
