@@ -50,6 +50,7 @@ set(HEADERS
     include/Views/EnemyPathTileView.hpp
     include/Views/EnemyView.hpp
     include/Views/TowerView.hpp
+    include/Views/AttackView.hpp
     # Pages
     include/Pages/MainMenu.hpp
     include/Pages/LevelsPage.hpp
@@ -89,6 +90,7 @@ set(SOURCES
     src/Views/EnemyPathTileView.cpp
     src/Views/EnemyView.cpp
     src/Views/TowerView.cpp
+    src/Views/AttackView.cpp
     # Interfaces
     src/Interfaces/Clickable.cpp
     # Widget

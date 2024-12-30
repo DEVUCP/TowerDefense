@@ -24,7 +24,7 @@ GamePage::GamePage(unsigned width, unsigned height) : Page(width, height) {
   // enemies.push_back(view);
 
   // Set a callback for the business
-  init_enemy_creation_callback();
+  init_callbacks();
 }
 
 void GamePage::on_pause() {}
@@ -66,6 +66,7 @@ void GamePage::render(RenderData ren) {
   for (auto& row : map)
     for (auto tl : row) tl->render(ren);
   for (auto& enm : enemies) enm->render(ren);
+  for (auto& attack : attacks) attack->render(ren);
   sidebar->render(ren);
 }
 
@@ -81,8 +82,20 @@ void GamePage::update(UpdateData dat) {
     else
       itr++;
   }
+  // Filter Attacks
+  for (auto itr = attacks.begin(); itr != attacks.end();) {
+    if ((*itr)->is_to_be_removed()) {
+      itr = attacks.erase(itr);
+    } else {
+      itr++;
+    }
+  }
 
+  // Update enemies
   for (auto& enm : enemies) enm->update(dat);
+  // Update attacks
+  for (auto& att : attacks) att->update(dat);
+  // Update sidebar
   sidebar->update(dat);
 }
 
@@ -129,11 +142,14 @@ void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
   sidebar->set_tile_target(tile_view);
 }
 
-void GamePage::init_enemy_creation_callback() {
+void GamePage::init_callbacks() {
   auto lvl = Game::get_instance().get_level();
   assert(lvl != nullptr);
 
   lvl->set_on_enemy_created([this](std::shared_ptr<BaseEnemy> enm) {
     enemies.push_back(std::make_shared<EnemyView>(enm));
+  });
+  lvl->set_on_attack_created([this](std::shared_ptr<BaseAttack> att) {
+    attacks.push_back(std::make_shared<AttackView>(att));
   });
 }

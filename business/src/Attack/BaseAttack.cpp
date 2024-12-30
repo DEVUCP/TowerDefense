@@ -1,15 +1,18 @@
 #include "Attack/BaseAttack.hpp"
 #include <algorithm>
+#include <iostream>
 #include "Map/EnemyPathTile.hpp"
 #include "Utils/Positionable.hpp"
 
 BaseAttack::BaseAttack(float x, float y, float width, float height,
-                       float velocity, Vector<float> target,
-                       const std::string& sprite, int damage)
+                       float velocity, Vector<float> target, int damage,
+                       AttackType type)
     : Moveable(x, y, velocity, target),
-      Collidable(x, y, width, height),
+      Collidable(x - width / 2, y - height / 2, width, height),
       Positionable(x, y),
-      damage(damage) {}
+      damage(damage),
+      type{type},
+      to_be_removed(false) {}
 
 bool BaseAttack::is_to_be_removed() { return to_be_removed; }
 
@@ -79,5 +82,9 @@ bool BaseAttack::hit(std::shared_ptr<BaseEnemy> enemy) {
 void BaseAttack::on_hit() {}
 void BaseAttack::on_move() {}
 
-void BaseAttack::on_reach() { to_be_removed = true; }
+void BaseAttack::on_reach() {
+  // to_be_removed = true;
+}
 void BaseAttack::on_out_of_board() { to_be_removed = true; }
+
+BaseAttack::AttackType BaseAttack::get_type() { return type; }

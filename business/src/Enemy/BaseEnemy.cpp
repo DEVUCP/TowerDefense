@@ -1,5 +1,6 @@
 #include "Enemy/BaseEnemy.hpp"
 #include <algorithm>
+#include <iostream>
 #include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
@@ -117,7 +118,10 @@ void BaseEnemy::invoke_damage(float amount) {
 
 BaseEnemy::EnemyType BaseEnemy::get_type() const { return type; }
 
-void BaseEnemy::on_out_of_board() { to_be_removed = true; }
+void BaseEnemy::on_out_of_board() {
+  to_be_removed = true;
+  std::cout << "removing enemy" << std::endl;
+}
 
 void BaseEnemy::on_move() {
   auto map = Game::get_instance().get_level()->get_map();

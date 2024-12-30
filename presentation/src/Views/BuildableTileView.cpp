@@ -35,7 +35,7 @@ bool BuildableTileView::build_tower(BaseTower::TowerType type) {
   auto twr = lvl->build_tower(type, converted_tile);
   if (twr) {
     tower = std::make_shared<TowerView>(twr);
-    std::cout << "made a tower" << std::endl;
+    // std::cout << "made a tower" << std::endl;
     return true;
   } else {
     std::cout << "you don't have enough coins to buy that tower" << std::endl;

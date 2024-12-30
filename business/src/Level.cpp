@@ -3,6 +3,8 @@
 #include <iostream>
 #include <memory>
 #include <stdexcept>
+#include "Attack/Attacks/ArcheryAttack.hpp"
+#include "Attack/BaseAttack.hpp"
 #include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/CatapultTower.hpp"
 #include "Tower/Towers/ElectroTower.hpp"
@@ -90,12 +92,13 @@ void Level::run_iteration() {
     enemy_mng->regiseter_enemy(enm);
   }
 
+  // Enemy Manager
   enemy_mng->filter_enemies();
   enemy_mng->move_enemies();
-  // attack_mng->move_attacks();
 
-  // TODO: Call the appropriate tower manager method when it is implemented.
-  // tower_mng.check_ranges();
+  // Attack manager
+  attack_mng->filter_attacks();
+  attack_mng->move_attacks();
 }
 
 std::shared_ptr<AttackManager> Level::get_attack_mng() const {
@@ -152,4 +155,16 @@ int Level::get_level_num() const { return level_num; }
 void Level::set_on_enemy_created(
     std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
   on_enemy_created = handler;
+}
+
+void Level::attack(BaseTower::TowerType, float x, float y, float width,
+                   float height, Vector<float> target) {
+  auto attack = std::make_shared<ArcheryAttack>(x, y, width, height, target);
+  attack_mng->register_attack(attack);
+  on_attack_created(attack);
+}
+
+void Level::set_on_attack_created(
+    std::function<void(std::shared_ptr<BaseAttack>)> handler) {
+  on_attack_created = handler;
 }

@@ -4,10 +4,12 @@
 #include <functional>
 #include <memory>
 #include "Attack/AttackManager.hpp"
+#include "Attack/BaseAttack.hpp"
 #include "Enemy/EnemyManager.hpp"
 #include "Map/BuildableTile.hpp"
 #include "Map/Map.hpp"
 #include "Tower/TowerManager.hpp"
+#include "Utils/Vector.hpp"
 #include "WaveManager.hpp"
 
 class Level {
@@ -151,6 +153,17 @@ public:
   void set_on_enemy_created(
       std::function<void(std::shared_ptr<BaseEnemy>)> handler);
 
+  /**
+   * @brief Initiate an attack
+   */
+  void attack(BaseTower::TowerType, float x, float y, float width, float height,
+              Vector<float> target);
+
+  /**
+   * @brief A callback to run when an attack has been created
+   */
+  void set_on_attack_created(std::function<void(std::shared_ptr<BaseAttack>)>);
+
 private:
   int lives;
   int score;
@@ -165,6 +178,7 @@ private:
 
   // Callbacks
   std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_created;
+  std::function<void(std::shared_ptr<BaseAttack>)> on_attack_created;
 
   // Timer Info
   std::chrono::steady_clock::time_point last_run_time;  // Track last run time

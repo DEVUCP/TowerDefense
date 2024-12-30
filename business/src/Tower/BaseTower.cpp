@@ -1,4 +1,5 @@
 #include "Tower/BaseTower.hpp"
+#include <chrono>
 #include <cmath>
 #include <memory>
 #include <queue>
@@ -22,7 +23,8 @@ BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
     : tile(tile),
       range(range),
       type(type),
-      lvl(1)  // The starting level for each tower
+      lvl(1),          // The starting level for each tower
+      shoot_rate(500)  // TODO: Elevate to subclasses
 {
   // Initialize upgrades
   // TODO: Handle price decreasing
@@ -141,3 +143,15 @@ BaseTower::TowerType BaseTower::get_type() const { return type; }
 Vector<float> BaseTower::get_position() const { return tile->get_position(); }
 
 int BaseTower::get_level() const { return lvl; }
+
+void BaseTower::reset_shoot_time() {
+  last_shoot_time = std::chrono::steady_clock::now();
+}
+
+bool BaseTower::can_shoot() const {
+  auto now = std::chrono::steady_clock::now();
+  auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+                        now - last_shoot_time)
+                        .count();
+  return elapsed_ms >= shoot_rate;
+}

@@ -30,7 +30,8 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
     auto& [name, row, count] = clc;
     sheet_mng.register_collection(name, row, count);
   }
-  sheet_mng.set_collection("LEFT_MOVEMENT");
+  sheet_mng.set_collection(
+      "LEFT_MOVEMENT");  // TODO: Get the current collection
   sheet_mng.init_sprite_texture(sprite);
 
   // Scale up to desired

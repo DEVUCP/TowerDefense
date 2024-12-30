@@ -4,6 +4,7 @@
 #include <memory>
 #include <sstream>
 #include <unordered_map>
+#include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Tower/BaseTower.hpp"
 
@@ -80,16 +81,21 @@ void TowerView::init_weapon_sprite() {
 }
 void TowerView::handle_events(EventData data) {}
 void TowerView::render(RenderData ren) {
+  auto& [tower_texture_sheet, weapon_texture_sheet, attacks_offsets,
+         attacks_size, sprites_number, shooting_sprite] =
+      towers_info[tower->get_type()];
   ren.window->draw(sprite);
   ren.window->draw(weapon);
 
   auto enemies_in_range = tower->enemies_in_range();
-  if (!enemies_in_range.size()) {
+  if (!enemies_in_range.size() || !tower->can_shoot()) {
     if (weapon_sprite_mng.get_current_index() != 0)
       weapon_sprite_mng.next_sprite(weapon);
     return;
   }
   weapon_sprite_mng.next_sprite(weapon);
+
+  // Change the weapon direction to that enemy
 
   // Get the position of the first enemy in range
   auto enemy_position = enemies_in_range[0]->get_position();
@@ -106,6 +112,15 @@ void TowerView::render(RenderData ren) {
 
   // Rotate the weapon to face the enemy (ensure it rotates around its center)
   weapon.setRotation(angle + 90);  // Adjust by 90 if necessary
+
+  // Shoot the attack if on the current sprite
+  if (weapon_sprite_mng.get_current_index() ==
+      shooting_sprite[tower->get_level() - 1]) {
+    auto lvl = Game::get_instance().get_level();
+    lvl->attack(tower->get_type(), weapon_pos.x, weapon_pos.y, 40, 40,
+                enemy_position);
+    tower->reset_shoot_time();
+  }
 }
 void TowerView::update(UpdateData dat) {}
 

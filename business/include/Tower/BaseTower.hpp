@@ -1,9 +1,9 @@
 #pragma once
 
+#include <chrono>
 #include <memory>
 #include "Enemy/BaseEnemy.hpp"
 #include "Map/BaseTile.hpp"
-#include "Upgrade.hpp"
 #include "Utils/Vector.hpp"
 
 /**
@@ -87,6 +87,16 @@ public:
    */
   int get_level() const;
 
+  /**
+   * @brief Reset the tower shooting time
+   */
+  void reset_shoot_time();
+
+  /**
+   * @brief check if the tower can shoot now
+   */
+  bool can_shoot() const;
+
 private:
   std::shared_ptr<BaseTile> tile;  // The tile this tower is on
   unsigned range;                  // The attack range of the tower.
@@ -96,4 +106,6 @@ private:
   //     upgrades;          // The upgrades currently applied to the tower.
   int lvl;         // < The greater the leve, the greater the power
   TowerType type;  // < The type
+  unsigned shoot_rate;
+  std::chrono::steady_clock::time_point last_shoot_time;  // Track last run time
 };

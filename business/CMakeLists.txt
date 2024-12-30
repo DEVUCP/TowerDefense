@@ -44,7 +44,9 @@ set(HEADERS
     include/Map/EnemyPathTile.hpp
     # Attack
     include/Attack/BaseAttack.hpp
-    include/Attack/AttackManager.hpp)
+    include/Attack/AttackManager.hpp
+    # Attacks
+    include/Attack/Attacks/ArcheryAttack.hpp)
 
 set(SOURCES # Sources
     src/Game.cpp
@@ -83,7 +85,10 @@ set(SOURCES # Sources
     src/Map/NonBuildableTile.cpp
     src/Map/EnemyPathTile.cpp
     # Attack
-    src/Attack/BaseAttack.cpp)
+    src/Attack/BaseAttack.cpp
+    src/Attack/AttackManager.cpp
+    # Attacks
+    src/Attack/Attacks/ArcheryAttack.cpp)
 
 add_library(business ${HEADERS} ${SOURCES})
 file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})

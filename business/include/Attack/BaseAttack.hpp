@@ -13,13 +13,16 @@
  */
 class BaseAttack : public Moveable, public Collidable {
 public:
+  enum AttackType { ARCHERY_ATTACK = 0 };
+
+public:
   /**
    * @brief Constructor
    *
    * @note Must call Moveable
    */
   BaseAttack(float x, float y, float width, float height, float velocity,
-             Vector<float> target, const std::string& sprite, int damage);
+             Vector<float> target, int damage, AttackType type);
 
   /**
    * @brief Check if the element is to be removed
@@ -69,9 +72,9 @@ public:
   void on_hit();
 
   /**
-   * @brief Getter for CurrentTile
+   * @brief Get the attack type
    */
-  std::shared_ptr<BaseTile> tile;
+  AttackType get_type();
 
 protected:
   // Inherited callbacks
@@ -90,4 +93,5 @@ private:
                        // edge or because it's hit target
   int damage;
   std::vector<std::shared_ptr<BaseTile>> current_tile;
+  AttackType type;
 };

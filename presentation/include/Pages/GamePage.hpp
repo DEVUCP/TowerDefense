@@ -4,6 +4,7 @@
 #include "Components/Page.hpp"
 #include "Components/Sidebar.hpp"
 #include "Tower/BaseTower.hpp"
+#include "Views/AttackView.hpp"
 #include "Views/EnemyView.hpp"
 #include "Views/TileView.hpp"
 
@@ -37,15 +38,17 @@ private:
   void init_sidebar();
 
   /**
-   * @brief Initialize the handler for enemy creation in the levels
+   * @brief Initialize the callbacks in the business logic
    *
-   * @details Capture the enemy and create a view for it
+   * @details 1. Capture the enemy and create a view for it
+   * @details 2. Capture the attack and create a view for it
    */
-  void init_enemy_creation_callback();
+  void init_callbacks();
 
 private:
   std::vector<std::vector<std::shared_ptr<TileView>>> map;
   std::vector<std::shared_ptr<EnemyView>> enemies;
+  std::vector<std::shared_ptr<AttackView>> attacks;
   std::shared_ptr<Sidebar> sidebar;
   std::shared_ptr<TileView> selected_tile;
 };
