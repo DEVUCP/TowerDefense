@@ -82,12 +82,14 @@ void TowerView::init_weapon_sprite() {
 }
 void TowerView::handle_events(EventData data) {}
 void TowerView::render(RenderData ren) {
+  ren.window->draw(sprite);
+  ren.window->draw(weapon);
+}
+
+void TowerView::update(UpdateData dat) {
   auto& [tower_texture_sheet, weapon_texture_sheet, attacks_offsets,
          attacks_size, sprites_number, shooting_sprite] =
       towers_info[tower->get_type()];
-  ren.window->draw(sprite);
-  ren.window->draw(weapon);
-
   auto enemies_in_range = tower->enemies_in_range();
   if (!enemies_in_range.size() || !tower->can_shoot()) {
     if (weapon_sprite_mng.get_current_index() != 0)
@@ -118,12 +120,11 @@ void TowerView::render(RenderData ren) {
   if (weapon_sprite_mng.get_current_index() ==
       shooting_sprite[tower->get_level() - 1]) {
     auto lvl = Game::get_instance().get_level();
-    lvl->attack(tower->get_type(), weapon_pos.x, weapon_pos.y, 40, 40,
-                enemy_position);
-    tower->reset_shoot_time();
+    lvl->attack(
+        tower, weapon_pos.x, weapon_pos.y, 60, 60,
+        enemy_position);  // FIX this magic number or declare them a constant
   }
 }
-void TowerView::update(UpdateData dat) {}
 
 void TowerView::load_tower_info() {
   std::ifstream file(FILE_PATH);

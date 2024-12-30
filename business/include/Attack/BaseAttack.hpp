@@ -45,8 +45,8 @@ public:
    * @details helper for check_collisions that returns vector of only the tiles
    * the attack is in that are enemypaths.
    */
-  std::vector<std::shared_ptr<BaseTile>> filter_tiles(
-      std::vector<std::shared_ptr<BaseTile>> nearby);
+  std::set<std::shared_ptr<BaseTile>> filter_tiles(
+      std::set<std::shared_ptr<BaseTile>>&& nearby);
 
   /**
    * @brief get all nearby tiles
@@ -54,7 +54,7 @@ public:
    * @details helper for check_collisions that returns vector of any tiles that
    * are within collision points
    */
-  std::vector<std::shared_ptr<BaseTile>> get_nearby_tiles(
+  std::set<std::shared_ptr<BaseTile>> get_nearby_tiles(
       std::shared_ptr<Map> map);
 
   /**
@@ -92,6 +92,5 @@ private:
                        // to be removed, either because it's out of
                        // edge or because it's hit target
   int damage;
-  std::vector<std::shared_ptr<BaseTile>> current_tile;
   AttackType type;
 };

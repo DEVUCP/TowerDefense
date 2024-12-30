@@ -87,7 +87,7 @@ std::set<std::shared_ptr<BaseTile>> BaseEnemy::get_nearby_tiles(
 
   // Add the points tiles
   for (auto p : points) {
-    auto tile = map->map_coords_to_tile(p.y, p.x);
+    auto tile = map->map_coords_to_tile(p.x, p.y);
     // if (tile != nullptr)
     //   std::cout << "positions: " << p.x << " " << p.y
     //             << " and tile indices are " << tile->get_position().x / 120
@@ -126,4 +126,6 @@ void BaseEnemy::on_out_of_board() {
 void BaseEnemy::on_move() {
   auto map = Game::get_instance().get_level()->get_map();
   handle_next_tile_redirection(map);
+  std::cout << "Enemy: " << get_position().x << " " << get_position().y
+            << std::endl;
 }

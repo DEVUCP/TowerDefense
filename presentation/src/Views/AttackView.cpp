@@ -14,7 +14,7 @@ AttackView::AttackView(std::shared_ptr<BaseAttack> attack) : attack{attack} {
 
   sheet_mng.load_sheet(sprite, sprite_sheet,
                        attack_info[attack->get_type()].texture_path);
-  // TODO: Fix this magic numbers
+  // TODO: Fix these magic numbers
   sheet_mng.set_width(8);
   sheet_mng.set_height(40);
   sheet_mng.register_collection("LVL1", 0, 3);
@@ -25,8 +25,8 @@ AttackView::AttackView(std::shared_ptr<BaseAttack> attack) : attack{attack} {
   sprite.setRotation(attack->get_rotation() + 90);
 
   // Set Origin
-  auto bounds = sprite.getLocalBounds();
-  sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+  // auto bounds = sprite.getLocalBounds();
+  // sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 }
 
 void AttackView::handle_events(EventData data) {}

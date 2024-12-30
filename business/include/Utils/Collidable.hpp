@@ -54,8 +54,5 @@ protected:
 
 private:
   bool enabled;
-  union {
-    Vector<float> size;
-    float width, height;
-  };
+  Vector<float> size;
 };

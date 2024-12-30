@@ -76,6 +76,7 @@ void Level::run_iteration() {
   // Return early if the elapsed time is less than the minimum frame time
   if (elapsed_ms < frame_time_ms) return;
 
+  std::cout << "Iteration begin" << std::endl;
   // Update the last run time
   last_run_time = now;
 
@@ -99,6 +100,7 @@ void Level::run_iteration() {
   // Attack manager
   attack_mng->filter_attacks();
   attack_mng->move_attacks();
+  std::cout << "Iteration end" << std::endl;
 }
 
 std::shared_ptr<AttackManager> Level::get_attack_mng() const {
@@ -157,11 +159,12 @@ void Level::set_on_enemy_created(
   on_enemy_created = handler;
 }
 
-void Level::attack(BaseTower::TowerType, float x, float y, float width,
-                   float height, Vector<float> target) {
+void Level::attack(std::shared_ptr<BaseTower> tower, float x, float y,
+                   float width, float height, Vector<float> target) {
   auto attack = std::make_shared<ArcheryAttack>(x, y, width, height, target);
   attack_mng->register_attack(attack);
   on_attack_created(attack);
+  tower->reset_shoot_time();
 }
 
 void Level::set_on_attack_created(

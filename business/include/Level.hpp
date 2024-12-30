@@ -14,7 +14,7 @@
 
 class Level {
 public:
-  static constexpr int frame_time_ms = 100;
+  static constexpr int frame_time_ms = 10;
 
 private:
   enum GameState {
@@ -156,8 +156,8 @@ public:
   /**
    * @brief Initiate an attack
    */
-  void attack(BaseTower::TowerType, float x, float y, float width, float height,
-              Vector<float> target);
+  void attack(std::shared_ptr<BaseTower> tower, float x, float y, float width,
+              float height, Vector<float> target);
 
   /**
    * @brief A callback to run when an attack has been created

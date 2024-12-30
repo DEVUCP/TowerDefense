@@ -4,7 +4,7 @@
 #include "Utils/Vector.hpp"
 class LeafBug : public BaseEnemy {
 public:
-  static constexpr int VELOCITY = 10;
+  static constexpr int VELOCITY = 1;
   static constexpr int KILL_COINS = 1;
   static constexpr int INITIAL_HEALTH = 3;
 
