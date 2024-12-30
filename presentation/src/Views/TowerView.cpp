@@ -55,6 +55,7 @@ void TowerView::init_weapon_sprite() {
   weapon_sprite_mng.register_collection("LVL2", 1, num2);
   weapon_sprite_mng.register_collection("LVL3", 2, num3);
   weapon_sprite_mng.set_collection("LVL1");
+  weapon_sprite_mng.scale_animation_delay(2);
   weapon_sprite_mng.init_sprite_texture(weapon);
 
   // Calculate weapon position
@@ -179,17 +180,17 @@ void TowerView::load_tower_info() {
     attack_size.second = std::stoi(size_value);
 
     // Parse FrameCounts
-    std::vector<int> frame_counts;
+    std::vector<int> num_of_sprites;
     std::istringstream frame_counts_stream(frame_counts_str);
     for (std::string value; std::getline(frame_counts_stream, value, ',');) {
-      frame_counts.push_back(std::stoi(value));
+      num_of_sprites.push_back(std::stoi(value));
     }
 
     // Parse FrameSpeeds
-    std::vector<int> frame_speeds;
+    std::vector<int> shooting_sprite_indices;
     std::istringstream frame_speeds_stream(frame_speeds_str);
     for (std::string value; std::getline(frame_speeds_stream, value, ',');) {
-      frame_speeds.push_back(std::stoi(value));
+      shooting_sprite_indices.push_back(std::stoi(value));
     }
 
     // Construct TowerInfo and insert into map
@@ -197,8 +198,9 @@ void TowerView::load_tower_info() {
                       weapon_sprite,
                       {attack_offsets[0], attack_offsets[1], attack_offsets[2]},
                       attack_size,
-                      {frame_counts[0], frame_counts[1], frame_counts[2]},
-                      {frame_speeds[0], frame_speeds[1], frame_speeds[2]}};
+                      {num_of_sprites[0], num_of_sprites[1], num_of_sprites[2]},
+                      {shooting_sprite_indices[0], shooting_sprite_indices[1],
+                       shooting_sprite_indices[2]}};
 
     towers_info[type] = info;
   }

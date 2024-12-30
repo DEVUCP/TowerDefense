@@ -71,9 +71,10 @@ public:
   void init_sprite_texture(sf::Sprite& sprite);
 
   /**
-   * @brief Update the animation delay value in milliseconds
+   * @brief Update the animation delay value in milliseconds relative to the
+   * DEFAULT_ANIMATION_DELAY
    */
-  void update_animation_delay(unsigned new_value);
+  void scale_animation_delay(unsigned new_value);
 
   /**
    * @brief Return the current animation name

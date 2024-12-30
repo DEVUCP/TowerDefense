@@ -85,8 +85,8 @@ void SpriteSheetManager::init_sprite_texture(sf::Sprite& sprite) {
   sprite.setTextureRect(sf::IntRect(x, y, width, height));
 }
 
-void SpriteSheetManager::update_animation_delay(unsigned new_value) {
-  animation_delay = new_value;
+void SpriteSheetManager::scale_animation_delay(unsigned new_value) {
+  animation_delay = new_value * DEFAULT_ANIMATION_DELAY;
 }
 
 std::string SpriteSheetManager::get_current_collection() const {
