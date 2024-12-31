@@ -143,3 +143,5 @@ void BaseEnemy::check_state() {
       state = ON_BOARD;
   }
 }
+
+int BaseEnemy::get_kill_coins() const { return kill_coins; }

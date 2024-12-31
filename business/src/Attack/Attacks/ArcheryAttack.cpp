@@ -2,8 +2,8 @@
 #include "Attack/BaseAttack.hpp"
 #include "Utils/Positionable.hpp"
 
-ArcheryAttack::ArcheryAttack(float x, float y, float width, float height,
-                             Vector<float> target)
-    : BaseAttack(x, y, width, height, VELOCITY, target, DAMAGE,
+ArcheryAttack::ArcheryAttack(int level, float x, float y, float width,
+                             float height, Vector<float> target)
+    : BaseAttack(x, y, width, height, VELOCITY[level], target, DAMAGE[level],
                  BaseAttack::ARCHERY_ATTACK),
       Positionable(x, y) {}

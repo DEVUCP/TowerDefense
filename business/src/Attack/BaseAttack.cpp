@@ -1,5 +1,4 @@
 #include "Attack/BaseAttack.hpp"
-#include <iostream>
 #include <memory>
 #include "Enemy/BaseEnemy.hpp"
 #include "Game.hpp"
@@ -107,6 +106,7 @@ void BaseAttack::on_move() {
   auto enemy = check_collisions(map);
   if (enemy == nullptr) return;
   enemy->invoke_damage(damage);
+  state = HIT;
 }
 
 void BaseAttack::on_reach() {

@@ -38,12 +38,9 @@ public:
    * If the resulted lives are less than zero, meaning that the player has
    * lost, calls end_game(false).
    *
-   * @param amount The amount to add/subtract from the player's lives.
-   * A +ve value represents the player has won more lives (survived a wave
-   * or got  some sort of bonus). A -ve value represents taht player has
-   * lost lives (an enemy reached the end of the path).
+   * @param amount The amount to subtract from the player's lives.
    */
-  void update_lives(int amount);
+  void decrease_lives(int amount);
 
   /**
    * @brief modifier for score
