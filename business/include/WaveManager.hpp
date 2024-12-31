@@ -20,20 +20,14 @@ public:
   void spawn_enemy();
 
   /**
-   * @brief Returns the total number of enemies that are either on board or
-   * killed
+   * @brief Set the number of enemies on the map
    */
-  int get_total_enemies_spawned() const;
+  void set_current_enemies(int value);
 
   /**
    * @brief Returns the amount of enemies killed
    */
   int get_killed_enemies() const;
-
-  /**
-   * @brief Returns the number of enemies on map
-   */
-  int get_enemies_on_map() const;
 
   /**
    * @brief Check if the wave is over or not
@@ -63,8 +57,6 @@ private:
                       // not
   int enemies_count_on_map;  // all enemies that are in the current wave, but
                              // haven't been killed
-  int enemies_killed;        // all killed enemies
-  int enemies_escaped;  // all enemies that traversed the entire map and invoked
-                        // damage
-  int wave_count;       // number of waves in the current level
+  int enemies_spawned;       // Total enemies removed already
+  int wave_count;            // number of waves in the current level
 };

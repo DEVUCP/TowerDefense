@@ -30,14 +30,6 @@ public:
    */
   BaseTower(std::shared_ptr<BaseTile> tile, unsigned range, TowerType type,
             int price);
-  /**
-   * @brief Initiates an attack on the specified enemy.
-   *
-   * @param enemy A shared pointer to the enemy to attack.
-   *
-   * @details Checks if the enemy is within range and performs the attack logic.
-   */
-  void init_attack(std::shared_ptr<BaseEnemy> enemy);
 
   /**
    * @brief Returns all enemies in `range`

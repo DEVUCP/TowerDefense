@@ -5,28 +5,18 @@ WaveManager::WaveManager(int wave_1_enemies_total, int wave_count)
     : wave(1),
       enemies_total(wave_1_enemies_total),
       enemies_count_on_map(0),
-      enemies_killed(0),
-      enemies_escaped(0),
+      enemies_spawned(0),
       wave_count(wave_count) {}
 
 bool WaveManager::should_spawn_enemy() const {
   // If there are still enemies left to spawn, return true
-  return enemies_count_on_map < enemies_total;
+  return enemies_spawned < enemies_total;
 };
-
-int WaveManager::get_total_enemies_spawned() const {
-  // Total spawned enemies is the sum of killed and enemies still on the map
-  return enemies_killed + enemies_count_on_map;
-}
-
-int WaveManager::get_killed_enemies() const { return enemies_killed; }
-
-int WaveManager::get_enemies_on_map() const { return enemies_count_on_map; }
 
 bool WaveManager::wave_over() const {
   // The wave is over when the total number of enemies is equal to the sum of
   // killed and escaped enemies
-  return enemies_total == enemies_killed + enemies_escaped;
+  return enemies_total == enemies_spawned && enemies_count_on_map == 0;
 }
 
 void WaveManager::next_wave() {
@@ -37,11 +27,13 @@ void WaveManager::next_wave() {
     wave++;
     enemies_total = static_cast<int>(enemies_total * DIFFICULTY_FACTORY);
     enemies_count_on_map = 0;
-    enemies_killed = 0;
-    enemies_escaped = 0;
   }
 }
 
 int WaveManager::get_wave() const { return wave; }
 
-void WaveManager::spawn_enemy() { enemies_count_on_map++; }
+void WaveManager::spawn_enemy() { enemies_spawned++; }
+
+void WaveManager::set_current_enemies(int value) {
+  enemies_count_on_map = value;
+}

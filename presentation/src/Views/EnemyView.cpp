@@ -38,13 +38,18 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
   auto width = GameSettings::get_instance().get_enemy_width();
   auto height = GameSettings::get_instance().get_enemy_height();
   sprite.setScale(sf::Vector2f(width / size.first, height / size.second));
-  sprite.setOrigin(width / 2.f, height / 2.f);
+
+  // Set Origin
+  auto bounds = sprite.getGlobalBounds();
+  sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 }
 
 void EnemyView::handle_events(EventData evt) {}
 void EnemyView::update(UpdateData dat) {
   auto pos = enemy->get_position();
   int angle = enemy->get_rotation();
+  angle =
+      ((angle + 45) / 90) * 90 % 360;  // approximate to the nearest 90 degrees
   sprite.setPosition(pos.x, pos.y);
   switch (angle) {
     case 0:
@@ -66,7 +71,8 @@ void EnemyView::update(UpdateData dat) {
     default:
       throw std::runtime_error(
           "Current game doesn't support enemies moving in directions other "
-          "than the 4 axes");
+          "than the 4 axes. Angle is: " +
+          std::to_string(angle));
   }
 }
 void EnemyView::render(RenderData ren) { ren.window->draw(sprite); }

@@ -44,12 +44,12 @@ void GamePage::handle_events(EventData evt) {
 
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
     // Game::get_instance().get_level()->end_game();
-    notify_observers(Event::WIN_PAGE_SWITCH);
+    notify_observers(Event::WIN_PAGE_REPLACE);
   }
 
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
     // Game::get_instance().get_level()->end_game();
-    notify_observers(Event::LOSE_PAGE_SWITCH);
+    notify_observers(Event::LOSE_PAGE_REPLACE);
   }
 
   auto row = map.size();

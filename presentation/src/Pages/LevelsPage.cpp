@@ -9,7 +9,7 @@
 
 LevelsPage::LevelsPage(unsigned w, unsigned h) : Page(w, h) {
   // Initia
-  level_count = 8;  // hardcoded for now
+  level_count = Game::get_instance().get_level()->get_level_count();
 
   const int ROW_COUNT = 5;                 // 5 levels per row
   const int startx = 440, starty = 400;    // Starting position

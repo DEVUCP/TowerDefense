@@ -24,13 +24,12 @@ void EnemyManager::set_starting_wave(const BaseEnemy::EnemyType &type,
   starting_waves[type] = wave;
 }
 
-void EnemyManager::filter_enemies(
+void EnemyManager::process_enemies_states(
     std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_death,
     std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_out_of_bound) {
   for (auto itr = enemies.begin(); itr != enemies.end();) {
     switch ((*itr)->get_state()) {
       case BaseEnemy::ENTERING:
-        // TODO: Update it to ON_BOARD when in
         itr++;
         break;
       case BaseEnemy::ON_BOARD:
@@ -103,3 +102,5 @@ std::shared_ptr<BaseEnemy> EnemyManager::generate_enemy(
 void EnemyManager::regiseter_enemy(std::shared_ptr<BaseEnemy> enm) {
   enemies.push_back(enm);
 }
+
+int EnemyManager::get_enemy_count() const { return enemies.size(); }

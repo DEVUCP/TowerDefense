@@ -24,7 +24,6 @@ public:
   /**
    * @brief Getter for `attack`
    */
-
   std::shared_ptr<BaseAttack> get_attack() const;
 
 private:
