@@ -6,7 +6,6 @@
 #include "Enums/Event.hpp"
 #include "Enums/PageType.hpp"
 #include "Interfaces/EventData.hpp"
-#include "SFML/Graphics/RenderTarget.hpp"
 
 PageManager::PageManager(unsigned width, unsigned height)
     : target_width(width),
@@ -81,6 +80,27 @@ void PageManager::onEvent(Event evt) {
       break;
     case Event::LOSE_PAGE_SWITCH:
       go_to_page(PageType::LOSE_PAGE);
+      break;
+    case Event::MENU_MENU_REPLACE:
+      replace_page(PageType::MAIN_MENU);
+      break;
+    case Event::LEVEL_PAGE_REPLACE:
+      replace_page(PageType::LEVELS_PAGE);
+      break;
+    case Event::GAME_PAGE_REPLACE:
+      replace_page(PageType::GAME_PAGE);
+      break;
+    case Event::ABOUT_PAGE_REPLACE:
+      replace_page(PageType::ABOUT_PAGE);
+      break;
+    case Event::PAUSE_PAGE_REPLACE:
+      replace_page(PageType::PAUSE_PAGE);
+      break;
+    case Event::WIN_PAGE_REPLACE:
+      replace_page(PageType::WIN_PAGE);
+      break;
+    case Event::LOSE_PAGE_REPLACE:
+      replace_page(PageType::LOSE_PAGE);
       break;
     case Event::GO_BACK_SWITCH:
       go_back();

@@ -68,6 +68,11 @@ public:
    */
   enemy_path_list::iterator get_last_enemy_tile();
 
+  /**
+   * @brief: Return `true` if these coordinates map to values in the map
+   */
+  bool is_on_map(Vector<float> pos) const;
+
 private:
   std::vector<std::vector<std::shared_ptr<BaseTile>>> grid;
   std::list<std::shared_ptr<EnemyPathTile>> enemy_path;

@@ -24,21 +24,12 @@ BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
     : tile(tile),
       range(range),
       type(type),
-      lvl(1),          // The starting level for each tower
-      shoot_rate(100)  // TODO: Elevate to subclasses
+      lvl(1),           // The starting level for each tower
+      shoot_rate(1000)  // TODO: Elevate to subclasses
 {
-  last_shoot_time =
-      std::chrono::steady_clock::now() - std::chrono::hours(100001);
   // Initialize upgrades
   // TODO: Handle price decreasing : AFter thinking, handle it outside
   // Invariant: Current number of coins is already >= price
-}
-
-void BaseTower::init_attack(std::shared_ptr<BaseEnemy> enemy) {
-  // std::cout << "Attacking enemy at position: " << enemy->get_position()
-  //           << std::endl;
-  // enemy->invoke_damage(damage);
-  // TODO: Implement attack logic here
 }
 
 std::vector<std::shared_ptr<BaseEnemy>> BaseTower::enemies_in_range() {

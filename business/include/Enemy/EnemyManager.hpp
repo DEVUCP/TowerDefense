@@ -1,10 +1,12 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 #include <unordered_map>
 #include <utility>
 #include "BaseEnemy.hpp"
 #include "Enemy/BaseEnemy.hpp"
+#include "Map/Map.hpp"
 
 class EnemyManager {
 public:
@@ -27,7 +29,7 @@ public:
    *@brief remove enemies to be deleted from the enemies list
    */
   // call this before move_enemies() in gameloop
-  void filter_enemies(
+  void process_enemies_states(
       std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_death,
       std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_out_of_bound);
 
@@ -71,6 +73,11 @@ public:
    * @brief Remove an enemy
    */
   void remove_enemy(std::shared_ptr<BaseEnemy> enm);
+
+  /**
+   * @brief Get the count of enemy
+   */
+  int get_enemy_count() const;
 
 private:
   std::list<std::pair<BaseEnemy::EnemyType, int>> tickets;

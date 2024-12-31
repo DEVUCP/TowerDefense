@@ -75,12 +75,14 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
   for (int i = 0; i < row; i++) {
     for (int j = 0; j < col; j++) {
       char c;
-      if (!(file >> c)) {
-        if (file.eof())
-          throw std::runtime_error("Unexpected end of file while reading data");
-        else
-          throw std::runtime_error("Error reading from file");
-      }
+      // if (!(file >> c)) {
+      //   if (file.eof())
+      //     throw std::runtime_error("Unexpected end of file while reading
+      //     data");
+      //   else
+      //     throw std::runtime_error("Error reading from file");
+      // }
+      file >> c;
 
       std::shared_ptr<BaseTile> tile = nullptr;
 
@@ -163,7 +165,8 @@ std::shared_ptr<Level> LevelReader::build_level(int level_num) {
 
   // Create a Level with the data read
   return std::make_shared<Level>(lives, coins, map, wave_manager,
-                                 attack_manager, tower_manager, enemy_manager, level_num);
+                                 attack_manager, tower_manager, enemy_manager,
+                                 level_num);
 }
 
 int LevelReader::levels_count() {

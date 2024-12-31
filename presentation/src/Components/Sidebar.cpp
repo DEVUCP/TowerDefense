@@ -60,14 +60,14 @@ void Sidebar::init_content() {
       lives, "./assets/textures/sidebar/lives.png",
       []() {
         auto lvl = Game::get_instance().get_level();
-        return "lives: " + std::to_string(lvl->get_lives());
+        return std::to_string(lvl->get_lives());
       },
       100);
   init_item(
       coins, "./assets/textures/sidebar/coins.png",
       []() {
         auto lvl = Game::get_instance().get_level();
-        return "Coins: " + std::to_string(lvl->get_coins());
+        return std::to_string(lvl->get_coins());
       },
       200);
 }
@@ -195,7 +195,8 @@ void Sidebar::init_tower_buttons() {
     int x = x_start + column * cell_width + (column != 0 ? TOWERS_OFFSET : 0);
     int y = y_start + static_cast<int>(row * cell_height * vertical_spacing);
 
-    auto twr = std::make_shared<SidebarTowerButton>(x, y, path, BaseTower::get_buy_price(type));
+    auto twr = std::make_shared<SidebarTowerButton>(
+        x, y, path, BaseTower::get_buy_price(type));
     twr->set_handler([this, type]() {
       if (target->get_tile()->get_type() != BaseTile::Buildable) return;
       auto converted = std::dynamic_pointer_cast<BuildableTileView>(target);

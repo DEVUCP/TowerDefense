@@ -101,8 +101,8 @@ bool BaseAttack::hit(std::shared_ptr<BaseEnemy> enemy) {
 
 void BaseAttack::on_hit() {}
 void BaseAttack::on_move() {
-  std::cout << "Attack: " << get_position().x << " " << get_position().y
-            << std::endl;
+  // std::cout << "Attack: " << get_position().x << " " << get_position().y
+  //           << std::endl;
   auto map = Game::get_instance().get_level()->get_map();
   auto enemy = check_collisions(map);
   if (enemy == nullptr) return;

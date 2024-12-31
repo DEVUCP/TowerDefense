@@ -14,7 +14,7 @@
 
 class Level {
 public:
-  static constexpr int frame_time_ms = 10;
+  static constexpr int frame_time_ms = 30;
 
 private:
   enum GameState {
@@ -174,6 +174,22 @@ public:
   void set_on_attack_out_of_bound(
       std::function<void(std::shared_ptr<BaseAttack>)>);
 
+  /**
+   * @brief Run Callbacks
+   */
+  void on_attack_created(std::shared_ptr<BaseAttack>);
+  void on_enemy_created(std::shared_ptr<BaseEnemy>);
+  void on_attack_hit(std::shared_ptr<BaseAttack>);
+  void on_enemy_death(std::shared_ptr<BaseEnemy>);
+  void on_enemy_out_of_bound(std::shared_ptr<BaseEnemy>);
+  void on_attack_out_of_bound(std::shared_ptr<BaseAttack>);
+
+private:
+  /**
+   * @brief Initialize the default callbacks
+   */
+  void init_default_callbacks();
+
 private:
   int lives;
   int score;
@@ -187,12 +203,18 @@ private:
   int level_num;
 
   // Callbacks
-  std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_created;
-  std::function<void(std::shared_ptr<BaseAttack>)> on_attack_created;
-  std::function<void(std::shared_ptr<BaseAttack>)> on_attack_hit;
-  std::function<void(std::shared_ptr<BaseAttack>)> on_attack_out_of_bound;
-  std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_death;
-  std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_out_of_bound;
+  std::vector<std::function<void(std::shared_ptr<BaseEnemy>)>>
+      on_enemy_created_callbacks;
+  std::vector<std::function<void(std::shared_ptr<BaseAttack>)>>
+      on_attack_created_callbacks;
+  std::vector<std::function<void(std::shared_ptr<BaseAttack>)>>
+      on_attack_hit_callbacks;
+  std::vector<std::function<void(std::shared_ptr<BaseAttack>)>>
+      on_attack_out_of_bound_callbacks;
+  std::vector<std::function<void(std::shared_ptr<BaseEnemy>)>>
+      on_enemy_death_callbacks;
+  std::vector<std::function<void(std::shared_ptr<BaseEnemy>)>>
+      on_enemy_out_of_bound_callbacks;
 
   // Timer Info
   std::chrono::steady_clock::time_point last_run_time;  // Track last run time

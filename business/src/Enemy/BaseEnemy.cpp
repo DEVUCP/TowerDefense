@@ -113,8 +113,6 @@ BaseEnemy::EnemyState BaseEnemy::get_state() const { return state; }
 
 void BaseEnemy::invoke_damage(float amount) {
   health -= amount;
-  std::cout << "new health: " << health << " amount decreased " << amount
-            << std::endl;
   if (health <= 0) {
     state = DEAD;
     for (auto& tile : current_tiles) {
@@ -127,11 +125,21 @@ void BaseEnemy::invoke_damage(float amount) {
 
 BaseEnemy::EnemyType BaseEnemy::get_type() const { return type; }
 
-void BaseEnemy::on_out_of_board() { state = OUT_BOUND; }
+void BaseEnemy::on_out_of_board() {
+  if (state == ON_BOARD) state = OUT_BOUND;
+}
 
 void BaseEnemy::on_move() {
   auto map = Game::get_instance().get_level()->get_map();
   handle_next_tile_redirection(map);
-  // std::cout << "Enemy: " << get_position().x << " " << get_position().y
-  //           << std::endl;
+  check_state();
+}
+
+void BaseEnemy::check_state() {
+  auto [width, height] = GameSettings::get_instance().get_size();
+  auto pos = get_position();
+  if (state == ENTERING) {
+    if (pos.x > 0 && pos.x < width && pos.y > 0 && pos.y < height)
+      state = ON_BOARD;
+  }
 }

@@ -1,6 +1,4 @@
 #include "Utils/Moveable.hpp"
-#include <sched.h>
-#include <iostream>
 #include "GameSettings.hpp"
 #include "Utils/Positionable.hpp"
 #include "cmath"

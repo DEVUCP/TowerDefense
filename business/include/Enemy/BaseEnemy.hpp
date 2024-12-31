@@ -11,7 +11,11 @@ class BaseEnemy : public Moveable,
                   public Collidable,
                   public std::enable_shared_from_this<BaseEnemy> {
 public:
-  enum class EnemyType { LEAF_BUG = 0, MAGMA_CRAB, CLAMP_BEETLE };
+  enum class EnemyType {
+    LEAF_BUG = 0,
+    MAGMA_CRAB,
+    CLAMP_BEETLE,
+  };
   static constexpr int EnemyTypeCount = 3;
 
   enum EnemyState {
@@ -105,6 +109,9 @@ protected:
    * @details Inherited by the child classes to adjust their behavior
    */
   virtual void on_move() override;
+
+private:
+  void check_state();
 
 protected:
   int health;

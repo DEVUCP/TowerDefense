@@ -1,6 +1,5 @@
 #include "Level.hpp"
 #include <LevelReader.hpp>
-#include <iostream>
 #include <memory>
 #include <stdexcept>
 #include "Attack/Attacks/ArcheryAttack.hpp"
@@ -25,14 +24,14 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
       tower_mng{tower_mng},
       state(ON),
       score(0),
-      level_num(level_num) {}
+      level_num(level_num) {
+  init_default_callbacks();
+}
 
 void Level::update_lives(int amount) {
   lives += amount;
 
-  if (lives < 0) {
-    end_game();
-  }
+  if (lives < 0) end_game();
 }
 
 void Level::increase_score(int amount) {
@@ -82,6 +81,11 @@ void Level::run_iteration() {
 
   // Iterate
   if (is_paused() || has_ended()) return;
+
+  // Update
+  wave_mng->set_current_enemies(enemy_mng->get_enemy_count());
+
+  // Check Next Wave
   if (wave_mng->wave_over()) {
     wave_mng->next_wave();
   }
@@ -94,11 +98,15 @@ void Level::run_iteration() {
   }
 
   // Enemy Manager
-  enemy_mng->filter_enemies(on_enemy_death, on_enemy_out_of_bound);
+  enemy_mng->process_enemies_states(
+      [this](std::shared_ptr<BaseEnemy> enm) { on_enemy_death(enm); },
+      [this](std::shared_ptr<BaseEnemy> enm) { on_enemy_out_of_bound(enm); });
   enemy_mng->move_enemies();
 
   // Attack manager
-  attack_mng->filter_attacks(on_attack_hit, on_attack_out_of_bound);
+  attack_mng->filter_attacks(
+      [this](std::shared_ptr<BaseAttack> enm) { on_attack_hit(enm); },
+      [this](std::shared_ptr<BaseAttack> att) { on_attack_out_of_bound(att); });
   attack_mng->move_attacks();
 }
 
@@ -174,7 +182,7 @@ int Level::get_coins() const { return coins; }
 int Level::get_level_num() const { return level_num; }
 void Level::set_on_enemy_created(
     std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
-  on_enemy_created = handler;
+  on_enemy_created_callbacks.push_back(handler);
 }
 
 void Level::attack(std::shared_ptr<BaseTower> tower, float x, float y,
@@ -187,22 +195,40 @@ void Level::attack(std::shared_ptr<BaseTower> tower, float x, float y,
 
 void Level::set_on_attack_created(
     std::function<void(std::shared_ptr<BaseAttack>)> handler) {
-  on_attack_created = handler;
+  on_attack_created_callbacks.push_back(handler);
 }
 
 void Level::set_on_attack_hit(
     std::function<void(std::shared_ptr<BaseAttack>)> handler) {
-  on_attack_hit = handler;
+  on_attack_hit_callbacks.push_back(handler);
 }
 void Level::set_on_attack_out_of_bound(
     std::function<void(std::shared_ptr<BaseAttack>)> handler) {
-  on_attack_out_of_bound = handler;
+  on_attack_out_of_bound_callbacks.push_back(handler);
 }
 void Level::set_on_enemy_death(
     std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
-  on_enemy_death = handler;
+  on_enemy_death_callbacks.push_back(handler);
 }
 void Level::set_on_enemy_out_of_bound(
     std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
-  on_enemy_out_of_bound = handler;
+  on_enemy_out_of_bound_callbacks.push_back(handler);
+}
+void Level::on_enemy_created(std::shared_ptr<BaseEnemy> enm) {
+  for (auto& fun : on_enemy_created_callbacks) fun(enm);
+}
+void Level::on_attack_created(std::shared_ptr<BaseAttack> v) {
+  for (auto& fun : on_attack_created_callbacks) fun(v);
+}
+void Level::on_attack_hit(std::shared_ptr<BaseAttack> v) {
+  for (auto& fun : on_attack_hit_callbacks) fun(v);
+}
+void Level::on_enemy_death(std::shared_ptr<BaseEnemy> v) {
+  for (auto& fun : on_enemy_death_callbacks) fun(v);
+}
+void Level::on_enemy_out_of_bound(std::shared_ptr<BaseEnemy> v) {
+  for (auto& fun : on_enemy_out_of_bound_callbacks) fun(v);
+}
+void Level::on_attack_out_of_bound(std::shared_ptr<BaseAttack> v) {
+  for (auto& fun : on_attack_out_of_bound_callbacks) fun(v);
 }

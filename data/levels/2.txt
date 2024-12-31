@@ -1,14 +1,14 @@
-20 100 5 3
+10 5000 30 10
 5 1
 3 2
 2 3
-0 2
-B B D B B N N N N N U N N
-B B D B B N N N N N U N N
-N N D N B B B N N N U N N
-N N D N N B B N N B U N N
-N N D N N N N N N B U N B
-N N D N N N N N B B U N B
-N N D N N N N B B B U N N
-N N D N N N N B B B U N N
-N N R R R R R R R R U N N
+4 12
+B B B B B B B B B B B B B
+B B B B B B B B B B B B B
+B B B B B B B B B B B B B
+B B B B B B B B B B B B B
+L L L L L L L L L L L L L
+B B B B B B B B B B B B B
+B B B B B B B B B B B B B
+B B B B B B B B B B B B B
+B B B B B B B B B B B B B

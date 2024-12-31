@@ -1,6 +1,5 @@
 #include "Views/TowerView.hpp"
 #include <fstream>
-#include <iostream>
 #include <memory>
 #include <sstream>
 #include <unordered_map>
@@ -98,8 +97,6 @@ void TowerView::update(UpdateData dat) {
   }
   weapon_sprite_mng.next_sprite(weapon);
 
-  // Change the weapon direction to that enemy
-
   // Get the position of the first enemy in range
   auto enemy_position = enemies_in_range[0]->get_position();
   auto weapon_pos = weapon.getPosition();
@@ -120,9 +117,9 @@ void TowerView::update(UpdateData dat) {
   if (weapon_sprite_mng.get_current_index() ==
       shooting_sprite[tower->get_level() - 1]) {
     auto lvl = Game::get_instance().get_level();
-    lvl->attack(
-        tower, weapon_pos.x, weapon_pos.y, 40, 40,
-        enemy_position);  // FIX this magic number or declare them a constant
+    lvl->attack(tower, weapon_pos.x, weapon_pos.y, 40, 40,
+                enemy_position);  // TODO: FIX this magic number or declare them
+                                  // a constant
   }
 }
 
