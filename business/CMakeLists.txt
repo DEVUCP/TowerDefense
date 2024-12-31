@@ -46,7 +46,10 @@ set(HEADERS
     include/Attack/BaseAttack.hpp
     include/Attack/AttackManager.hpp
     # Attacks
-    include/Attack/Attacks/ArcheryAttack.hpp)
+    include/Attack/Attacks/ArcheryAttack.hpp
+    include/Attack/Attacks/ElectroAttack.hpp
+    include/Attack/Attacks/SlingshotAttack.hpp
+    include/Attack/Attacks/CatapultAttack.hpp)
 
 set(SOURCES # Sources
     src/Game.cpp
@@ -88,7 +91,11 @@ set(SOURCES # Sources
     src/Attack/BaseAttack.cpp
     src/Attack/AttackManager.cpp
     # Attacks
-    src/Attack/Attacks/ArcheryAttack.cpp)
+    src/Attack/Attacks/ArcheryAttack.cpp
+    src/Attack/Attacks/ElectroAttack.cpp
+    src/Attack/Attacks/SlingshotAttack.cpp
+    src/Attack/Attacks/CatapultAttack.cpp
+    )
 
 add_library(business ${HEADERS} ${SOURCES})
 file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})
