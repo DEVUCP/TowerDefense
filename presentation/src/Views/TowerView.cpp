@@ -61,7 +61,7 @@ void TowerView::init_weapon_sprite() {
   weapon_sprite_mng.register_collection("LVL1", 0, num1);
   weapon_sprite_mng.register_collection("LVL2", 1, num2);
   weapon_sprite_mng.register_collection("LVL3", 2, num3);
-  weapon_sprite_mng.set_collection("LVL" + std::to_string(tower->get_level()));
+  weapon_sprite_mng.set_collection("LVL1");
   weapon_sprite_mng.scale_animation_delay(2);
   weapon_sprite_mng.init_sprite_texture(weapon);
 
