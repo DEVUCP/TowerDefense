@@ -71,8 +71,6 @@ void EnemyView::update(UpdateData dat) {
 }
 void EnemyView::render(RenderData ren) { ren.window->draw(sprite); }
 
-bool EnemyView::is_to_be_removed() const { return enemy->is_to_be_removed(); }
-
 // EnemyName AssetName [CollectionName,row,count]*
 void EnemyView::load_enemy_info() {
   std::ifstream file(FILE_PATH);
@@ -117,3 +115,5 @@ void EnemyView::load_enemy_info() {
     enemies_info[type] = {asset_name, {width, height}, collections};
   }
 }
+
+std::shared_ptr<BaseEnemy> EnemyView::get_enemy() const { return enemy; }

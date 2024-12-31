@@ -1,4 +1,5 @@
 #include "Pages/GamePage.hpp"
+#include <algorithm>
 #include <memory>
 #include "Components/MusicPlayer.hpp"
 #include "Enums/Event.hpp"
@@ -75,21 +76,6 @@ void GamePage::update(UpdateData dat) {
   Game::get_instance().get_level()->run_iteration();
   for (auto& row : map)
     for (auto tl : row) tl->update(dat);
-  // Filter enemies
-  for (auto itr = enemies.begin(); itr != enemies.end();) {
-    if ((*itr)->is_to_be_removed())
-      itr = enemies.erase(itr);
-    else
-      itr++;
-  }
-  // Filter Attacks
-  for (auto itr = attacks.begin(); itr != attacks.end();) {
-    if ((*itr)->is_to_be_removed()) {
-      itr = attacks.erase(itr);
-    } else {
-      itr++;
-    }
-  }
 
   // Update enemies
   for (auto& enm : enemies) enm->update(dat);
@@ -151,5 +137,29 @@ void GamePage::init_callbacks() {
   });
   lvl->set_on_attack_created([this](std::shared_ptr<BaseAttack> att) {
     attacks.push_back(std::make_shared<AttackView>(att));
+  });
+  lvl->set_on_enemy_death([this](std::shared_ptr<BaseEnemy> enm) {
+    enemies.erase(std::find_if(enemies.begin(), enemies.end(),
+                               [enm](std::shared_ptr<EnemyView> view) {
+                                 return view->get_enemy() == enm;
+                               }));
+  });
+  lvl->set_on_enemy_out_of_bound([this](std::shared_ptr<BaseEnemy> enm) {
+    enemies.erase(std::find_if(enemies.begin(), enemies.end(),
+                               [enm](std::shared_ptr<EnemyView> view) {
+                                 return view->get_enemy() == enm;
+                               }));
+  });
+  lvl->set_on_attack_hit([this](std::shared_ptr<BaseAttack> att) {
+    attacks.erase(std::find_if(attacks.begin(), attacks.end(),
+                               [att](std::shared_ptr<AttackView> view) {
+                                 return view->get_attack() == att;
+                               }));
+  });
+  lvl->set_on_attack_out_of_bound([this](std::shared_ptr<BaseAttack> att) {
+    attacks.erase(std::find_if(attacks.begin(), attacks.end(),
+                               [att](std::shared_ptr<AttackView> view) {
+                                 return view->get_attack() == att;
+                               }));
   });
 }

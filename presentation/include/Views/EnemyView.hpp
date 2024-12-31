@@ -29,14 +29,14 @@ public:
   void update(UpdateData);
 
   /**
-   * @brief Return if the element should be removed
-   */
-  bool is_to_be_removed() const;
-
-  /**
    * @brief Initialize the enemy info
    */
   static void load_enemy_info();
+
+  /**
+   * @brief Getter for enemy
+   */
+  std::shared_ptr<BaseEnemy> get_enemy() const;
 
 private:
   std::shared_ptr<BaseEnemy> enemy;

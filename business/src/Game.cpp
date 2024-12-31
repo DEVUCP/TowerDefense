@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <iostream>
 #include "LevelReader.hpp"
 
 Game& Game::get_instance() {

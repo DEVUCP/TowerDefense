@@ -147,22 +147,22 @@ public:
   int get_level_num() const;
 
   /**
-   * @brief A callback for when an enemy has been created
-   * Specified by the presentation layer
-   */
-  void set_on_enemy_created(
-      std::function<void(std::shared_ptr<BaseEnemy>)> handler);
-
-  /**
    * @brief Initiate an attack
    */
   void attack(std::shared_ptr<BaseTower> tower, float x, float y, float width,
               float height, Vector<float> target);
 
   /**
-   * @brief A callback to run when an attack has been created
+   * @brief Set Callbacks
    */
   void set_on_attack_created(std::function<void(std::shared_ptr<BaseAttack>)>);
+  void set_on_enemy_created(std::function<void(std::shared_ptr<BaseEnemy>)>);
+  void set_on_attack_hit(std::function<void(std::shared_ptr<BaseAttack>)>);
+  void set_on_enemy_death(std::function<void(std::shared_ptr<BaseEnemy>)>);
+  void set_on_enemy_out_of_bound(
+      std::function<void(std::shared_ptr<BaseEnemy>)>);
+  void set_on_attack_out_of_bound(
+      std::function<void(std::shared_ptr<BaseAttack>)>);
 
 private:
   int lives;
@@ -179,6 +179,10 @@ private:
   // Callbacks
   std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_created;
   std::function<void(std::shared_ptr<BaseAttack>)> on_attack_created;
+  std::function<void(std::shared_ptr<BaseAttack>)> on_attack_hit;
+  std::function<void(std::shared_ptr<BaseAttack>)> on_attack_out_of_bound;
+  std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_death;
+  std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_out_of_bound;
 
   // Timer Info
   std::chrono::steady_clock::time_point last_run_time;  // Track last run time

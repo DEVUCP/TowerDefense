@@ -1,5 +1,5 @@
 #pragma once
-
+#include <functional>
 #include <memory>
 #include <vector>
 #include "Map/BaseTile.hpp"
@@ -25,9 +25,10 @@ public:
   void remove_attack(std::shared_ptr<BaseAttack>);
 
   /**
-   * @brief Filter attacks with `to_be_removed`
+   * @brief Filter attacks
    */
-  void filter_attacks();
+  void filter_attacks(std::function<void(std::shared_ptr<BaseAttack>)>,
+                      std::function<void(std::shared_ptr<BaseAttack>)>);
 
 private:
   std::vector<std::shared_ptr<BaseAttack>> attacks;

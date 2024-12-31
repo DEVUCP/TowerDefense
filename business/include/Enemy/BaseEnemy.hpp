@@ -14,6 +14,13 @@ public:
   enum class EnemyType { LEAF_BUG = 0, MAGMA_CRAB, CLAMP_BEETLE };
   static constexpr int EnemyTypeCount = 3;
 
+  enum EnemyState {
+    ENTERING,
+    ON_BOARD,
+    OUT_BOUND,
+    DEAD,
+  };
+
 public:
   /**
    * @brief Constructor
@@ -53,9 +60,9 @@ public:
   const float get_initial_health() const;
 
   /**
-   * @brief Getter for `to_be_removed`
+   * @brief Getter for `state`
    */
-  const bool is_to_be_removed() const;
+  BaseEnemy::EnemyState get_state() const;
 
   /**
    * @brief Invoke damage to enemy
@@ -102,11 +109,11 @@ protected:
 protected:
   int health;
   int initial_health;
-  bool to_be_removed;  // < indicate if the enemy has invoked damage to player
-                       // by -1 or has died due to an attack
-  int kill_coins;      // represent the amount of money when killing this enemy
+  // by -1 or has died due to an attack
+  int kill_coins;  // represent the amount of money when killing this enemy
   std::set<std::shared_ptr<BaseTile>>
       current_tiles;  // represent the current tile on which the enemy is
   EnemyType type;
   Map::enemy_path_list::iterator dest_tile;
+  EnemyState state;
 };

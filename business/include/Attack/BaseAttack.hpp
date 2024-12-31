@@ -14,6 +14,7 @@
 class BaseAttack : public Moveable, public Collidable {
 public:
   enum AttackType { ARCHERY_ATTACK = 0 };
+  enum AttackState { MOVING, HIT, OUT };
 
 public:
   /**
@@ -25,11 +26,9 @@ public:
              Vector<float> target, int damage, AttackType type);
 
   /**
-   * @brief Check if the element is to be removed
-   *
-   * @details Getter for `to_be_removed`
+   * @brief Getter for `state`
    */
-  bool is_to_be_removed();
+  AttackState get_state() const;
 
   /**
    * @brief Will call helper methods to detect collisions and apply them in
@@ -37,7 +36,7 @@ public:
    *
    * @details will be called by AttackManager after moving.
    */
-  void check_collisions(std::shared_ptr<Map> map);
+  std::shared_ptr<BaseEnemy> check_collisions(std::shared_ptr<Map> map);
 
   /**
    * @brief Filter nearby tiles
@@ -88,9 +87,7 @@ protected:
   virtual void on_move() override;
 
 private:
-  bool to_be_removed;  // < a flag to indicate that this attack is
-                       // to be removed, either because it's out of
-                       // edge or because it's hit target
   int damage;
   AttackType type;
+  AttackState state;
 };

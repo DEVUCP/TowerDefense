@@ -24,14 +24,29 @@ void EnemyManager::set_starting_wave(const BaseEnemy::EnemyType &type,
   starting_waves[type] = wave;
 }
 
-void EnemyManager::filter_enemies() {
-  for (auto itr = enemies.begin(); itr != enemies.end();)
-    if ((*itr)->is_to_be_removed()) {
-      itr = enemies.erase(itr);
-      std::cout << "Removing enemy " << itr - enemies.begin() << std::endl;
-    } else {
-      itr++;
+void EnemyManager::filter_enemies(
+    std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_death,
+    std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_out_of_bound) {
+  for (auto itr = enemies.begin(); itr != enemies.end();) {
+    switch ((*itr)->get_state()) {
+      case BaseEnemy::ENTERING:
+        // TODO: Update it to ON_BOARD when in
+        itr++;
+        break;
+      case BaseEnemy::ON_BOARD:
+        itr++;
+        break;
+      case BaseEnemy::OUT_BOUND:
+        on_enemy_out_of_bound(*itr);
+        itr = enemies.erase(itr);
+        // TODO: Decrease lives
+        break;
+      case BaseEnemy::DEAD:
+        on_enemy_death(*itr);
+        itr = enemies.erase(itr);
+        break;
     }
+  }
 }
 
 void EnemyManager::move_enemies() const {

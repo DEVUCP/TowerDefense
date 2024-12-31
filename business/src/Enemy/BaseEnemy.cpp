@@ -1,6 +1,7 @@
 #include "Enemy/BaseEnemy.hpp"
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
@@ -21,7 +22,7 @@ BaseEnemy::BaseEnemy(float x, float y, Vector<float> dest, int initial_health,
       type{type},
       health{initial_health},
       initial_health{health},
-      to_be_removed(false) {
+      state(BaseEnemy::ENTERING) {
   dest_tile =
       Game::get_instance().get_level()->get_map()->get_first_enemy_tile();
 }
@@ -75,7 +76,6 @@ std::set<std::shared_ptr<BaseTile>> BaseEnemy::filter_tiles(
 
 std::set<std::shared_ptr<BaseTile>> BaseEnemy::get_nearby_tiles(
     std::shared_ptr<Map> map) {
-  // return the tiles of all 4 points of collidable
   auto nearby_tiles = std::set<std::shared_ptr<BaseTile>>();
   std::vector<Vector<float>> points;
 
@@ -109,23 +109,29 @@ const float BaseEnemy::get_health() const { return health; }
 
 const float BaseEnemy::get_initial_health() const { return initial_health; }
 
-const bool BaseEnemy::is_to_be_removed() const { return to_be_removed; }
+BaseEnemy::EnemyState BaseEnemy::get_state() const { return state; }
 
 void BaseEnemy::invoke_damage(float amount) {
   health -= amount;
-  if (health <= 0) on_killed();
+  std::cout << "new health: " << health << " amount decreased " << amount
+            << std::endl;
+  if (health <= 0) {
+    state = DEAD;
+    for (auto& tile : current_tiles) {
+      auto converted = std::static_pointer_cast<EnemyPathTile>(tile);
+      converted->remove_enemy(shared_from_this());
+    }
+    on_killed();
+  }
 }
 
 BaseEnemy::EnemyType BaseEnemy::get_type() const { return type; }
 
-void BaseEnemy::on_out_of_board() {
-  to_be_removed = true;
-  std::cout << "removing enemy" << std::endl;
-}
+void BaseEnemy::on_out_of_board() { state = OUT_BOUND; }
 
 void BaseEnemy::on_move() {
   auto map = Game::get_instance().get_level()->get_map();
   handle_next_tile_redirection(map);
-  std::cout << "Enemy: " << get_position().x << " " << get_position().y
-            << std::endl;
+  // std::cout << "Enemy: " << get_position().x << " " << get_position().y
+  //           << std::endl;
 }

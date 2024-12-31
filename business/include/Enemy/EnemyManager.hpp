@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <unordered_map>
 #include <utility>
 #include "BaseEnemy.hpp"
@@ -26,7 +27,9 @@ public:
    *@brief remove enemies to be deleted from the enemies list
    */
   // call this before move_enemies() in gameloop
-  void filter_enemies();
+  void filter_enemies(
+      std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_death,
+      std::function<void(std::shared_ptr<BaseEnemy>)> on_enemy_out_of_bound);
 
   /*
    * @brief Move all enemies by calling `move_next` on each enemy

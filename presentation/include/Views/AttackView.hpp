@@ -22,9 +22,10 @@ public:
   void update(UpdateData);
 
   /**
-   * @brief Return `true` if the view is to be removed
+   * @brief Getter for `attack`
    */
-  bool is_to_be_removed() const;
+
+  std::shared_ptr<BaseAttack> get_attack() const;
 
 private:
   std::shared_ptr<BaseAttack> attack;

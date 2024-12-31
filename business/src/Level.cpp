@@ -76,7 +76,6 @@ void Level::run_iteration() {
   // Return early if the elapsed time is less than the minimum frame time
   if (elapsed_ms < frame_time_ms) return;
 
-  std::cout << "Iteration begin" << std::endl;
   // Update the last run time
   last_run_time = now;
 
@@ -94,13 +93,12 @@ void Level::run_iteration() {
   }
 
   // Enemy Manager
-  enemy_mng->filter_enemies();
+  enemy_mng->filter_enemies(on_enemy_death, on_enemy_out_of_bound);
   enemy_mng->move_enemies();
 
   // Attack manager
-  attack_mng->filter_attacks();
+  attack_mng->filter_attacks(on_attack_hit, on_attack_out_of_bound);
   attack_mng->move_attacks();
-  std::cout << "Iteration end" << std::endl;
 }
 
 std::shared_ptr<AttackManager> Level::get_attack_mng() const {
@@ -170,4 +168,21 @@ void Level::attack(std::shared_ptr<BaseTower> tower, float x, float y,
 void Level::set_on_attack_created(
     std::function<void(std::shared_ptr<BaseAttack>)> handler) {
   on_attack_created = handler;
+}
+
+void Level::set_on_attack_hit(
+    std::function<void(std::shared_ptr<BaseAttack>)> handler) {
+  on_attack_hit = handler;
+}
+void Level::set_on_attack_out_of_bound(
+    std::function<void(std::shared_ptr<BaseAttack>)> handler) {
+  on_attack_out_of_bound = handler;
+}
+void Level::set_on_enemy_death(
+    std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
+  on_enemy_death = handler;
+}
+void Level::set_on_enemy_out_of_bound(
+    std::function<void(std::shared_ptr<BaseEnemy>)> handler) {
+  on_enemy_out_of_bound = handler;
 }

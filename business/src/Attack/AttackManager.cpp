@@ -13,15 +13,23 @@ void AttackManager::remove_attack(std::shared_ptr<BaseAttack> att) {
 
 void AttackManager::move_attacks() {
   for (auto& att : attacks) att->move_next();
-  for (auto& att : attacks) {
-  }
-  std::cout << "Attacks Size: " << attacks.size() << std::endl;
 }
 
-void AttackManager::filter_attacks() {
+void AttackManager::filter_attacks(
+    std::function<void(std::shared_ptr<BaseAttack>)> on_attack_hit,
+    std::function<void(std::shared_ptr<BaseAttack>)> on_attack_out_of_bound) {
   for (auto itr = attacks.begin(); itr != attacks.end();)
-    if ((*itr)->is_to_be_removed()) {
-      itr = attacks.erase(itr);
-    } else
-      itr++;
+    switch ((*itr)->get_state()) {
+      case BaseAttack::MOVING:
+        itr++;
+        break;
+      case BaseAttack::HIT:
+        on_attack_hit(*itr);
+        itr = attacks.erase(itr);
+        break;
+      case BaseAttack::OUT:
+        on_attack_out_of_bound(*itr);
+        itr = attacks.erase(itr);
+        break;
+    }
 }

@@ -37,4 +37,4 @@ void AttackView::update(UpdateData) {
   sheet_mng.next_sprite(sprite);
 }
 
-bool AttackView::is_to_be_removed() const { return attack->is_to_be_removed(); }
+std::shared_ptr<BaseAttack> AttackView::get_attack() const { return attack; }

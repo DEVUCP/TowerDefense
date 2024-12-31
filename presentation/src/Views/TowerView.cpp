@@ -121,7 +121,7 @@ void TowerView::update(UpdateData dat) {
       shooting_sprite[tower->get_level() - 1]) {
     auto lvl = Game::get_instance().get_level();
     lvl->attack(
-        tower, weapon_pos.x, weapon_pos.y, 60, 60,
+        tower, weapon_pos.x, weapon_pos.y, 40, 40,
         enemy_position);  // FIX this magic number or declare them a constant
   }
 }
@@ -187,7 +187,7 @@ void TowerView::load_tower_info() {
       num_of_sprites.push_back(std::stoi(value));
     }
 
-    // Parse FrameSpeeds
+    // Parse Shooting sprite indices
     std::vector<int> shooting_sprite_indices;
     std::istringstream frame_speeds_stream(frame_speeds_str);
     for (std::string value; std::getline(frame_speeds_stream, value, ',');) {

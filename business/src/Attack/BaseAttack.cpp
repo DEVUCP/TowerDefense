@@ -1,6 +1,7 @@
 #include "Attack/BaseAttack.hpp"
 #include <iostream>
 #include <memory>
+#include "Enemy/BaseEnemy.hpp"
 #include "Game.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Utils/Positionable.hpp"
@@ -13,22 +14,23 @@ BaseAttack::BaseAttack(float x, float y, float width, float height,
       Positionable(x, y),
       damage(damage),
       type{type},
-      to_be_removed(false) {
-  std::cout << "Attack target: " << target.x << " " << target.y << std::endl;
+      state(MOVING) {
+  // std::cout << "Attack target: " << target.x << " " << target.y << std::endl;
 }
 
-bool BaseAttack::is_to_be_removed() { return to_be_removed; }
+BaseAttack::AttackState BaseAttack::get_state() const { return state; }
 
-void BaseAttack::check_collisions(std::shared_ptr<Map> map) {
+std::shared_ptr<BaseEnemy> BaseAttack::check_collisions(
+    std::shared_ptr<Map> map) {
   // get nearby tiles
   // filter tiles
   auto nearby = filter_tiles(get_nearby_tiles(map));
 
-  std::cout << "Tiles Indices: " << std::endl;
-  for (auto& tile : nearby) {
-    std::cout << tile->get_position().y / 120 << " "
-              << tile->get_position().x / 120 << std::endl;
-  }
+  // std::cout << "Tiles Indices: " << std::endl;
+  // for (auto& tile : nearby) {
+  //   std::cout << tile->get_position().y / 120 << " "
+  //             << tile->get_position().x / 120 << std::endl;
+  // }
   // get enemies in current tile(s)
   std::set<std::shared_ptr<BaseEnemy>> enemies;
   for (auto& tile : nearby) {
@@ -37,7 +39,7 @@ void BaseAttack::check_collisions(std::shared_ptr<Map> map) {
     for (auto& enemy : tile_enemies) enemies.insert(enemy);
   }
 
-  if (enemies.empty()) return;
+  if (enemies.empty()) return nullptr;
 
   // filter non colliding enemies
   for (auto itr = enemies.begin(); itr != enemies.end();) {
@@ -47,8 +49,9 @@ void BaseAttack::check_collisions(std::shared_ptr<Map> map) {
       itr = enemies.erase(itr);
   }
 
-  if (!enemies.size()) return;
-  std::cout << "Checking against " << enemies.size() << " enemies" << std::endl;
+  if (!enemies.size()) return nullptr;
+  // std::cout << "Checking against " << enemies.size() << " enemies" <<
+  // std::endl;
 
   // find nearest enemy
   auto enemy_to_affect = *enemies.begin();
@@ -57,9 +60,9 @@ void BaseAttack::check_collisions(std::shared_ptr<Map> map) {
         get_position().get_distance_to(enemy_to_affect->get_position()))
       enemy_to_affect = enemy;
   }
-  std::cout << "will apply damage" << std::endl;
+  // std::cout << "will apply damage" << std::endl;
 
-  // apply damage to nearest (im not sure with the architecture, omar)
+  return enemy_to_affect;
 }
 
 std::set<std::shared_ptr<BaseTile>> BaseAttack::filter_tiles(
@@ -101,12 +104,14 @@ void BaseAttack::on_move() {
   std::cout << "Attack: " << get_position().x << " " << get_position().y
             << std::endl;
   auto map = Game::get_instance().get_level()->get_map();
-  check_collisions(map);
+  auto enemy = check_collisions(map);
+  if (enemy == nullptr) return;
+  enemy->invoke_damage(damage);
 }
 
 void BaseAttack::on_reach() {
   // to_be_removed = true;
 }
-void BaseAttack::on_out_of_board() { to_be_removed = true; }
+void BaseAttack::on_out_of_board() { state = OUT; }
 
 BaseAttack::AttackType BaseAttack::get_type() { return type; }
