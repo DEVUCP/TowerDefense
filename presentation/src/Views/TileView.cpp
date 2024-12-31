@@ -55,6 +55,7 @@ void TileView::init_selected() {
   selected_mng.set_height(32);
   selected_mng.register_collection("C", 0, 4);
   selected_mng.set_collection("C");
+  selected_mng.scale_animation_delay(4);
   selected_mng.init_sprite_texture(selected_sprite);
 
   auto pos = tile->get_position();

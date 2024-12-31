@@ -10,8 +10,8 @@ private:
     int row_count;  // < Represent the number of rows in this collection
   };
 
-public:
-  static constexpr unsigned DEFAULT_ANIMATION_DELAY = 50;
+private:
+  static constexpr float DEFAULT_ANIMATION_DELAY = 50;
 
 public:
   SpriteSheetManager();

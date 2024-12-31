@@ -64,4 +64,5 @@ private:
   sf::Sprite weapon;
   SpriteSheetManager weapon_sprite_mng;
   static std::unordered_map<BaseTower::TowerType, TowerInfo> towers_info;
+  static std::unordered_map<int, std::string> levels_info;
 };

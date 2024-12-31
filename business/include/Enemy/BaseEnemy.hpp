@@ -69,6 +69,10 @@ public:
   BaseEnemy::EnemyState get_state() const;
 
   /**
+   * @brief Getter for `state`
+   */
+  int get_kill_coins() const;
+  /**
    * @brief Invoke damage to enemy
    *
    * @detail If health reaches zero, call `on_killed`

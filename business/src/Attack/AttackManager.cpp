@@ -25,7 +25,8 @@ void AttackManager::filter_attacks(
         break;
       case BaseAttack::HIT:
         on_attack_hit(*itr);
-        itr = attacks.erase(itr);
+        // itr = attacks.erase(itr);
+        itr++;
         break;
       case BaseAttack::OUT:
         on_attack_out_of_bound(*itr);

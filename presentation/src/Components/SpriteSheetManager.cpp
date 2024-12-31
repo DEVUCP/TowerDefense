@@ -48,7 +48,9 @@ void SpriteSheetManager::next_sprite(sf::Sprite& sprite) {
     throw std::runtime_error("No current collection");
 
   auto collection = info[current_collection];
-  auto maximum_count_per_row = sprite.getGlobalBounds().width / width;
+  auto maximum_count_per_row =
+      sprite.getGlobalBounds().width /
+      width;  // TODO: Fails already, load texture instead
 
   unsigned total =
       (collection.row_count - 1) * maximum_count_per_row + collection.count;

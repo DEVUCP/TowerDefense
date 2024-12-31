@@ -162,10 +162,11 @@ void GamePage::init_callbacks() {
                                }));
   });
   lvl->set_on_attack_hit([this](std::shared_ptr<BaseAttack> att) {
-    attacks.erase(std::find_if(attacks.begin(), attacks.end(),
-                               [att](std::shared_ptr<AttackView> view) {
-                                 return view->get_attack() == att;
-                               }));
+    // attacks.erase(std::find_if(attacks.begin(), attacks.end(),
+    //                            [att](std::shared_ptr<AttackView> view) {
+    //                              return view->get_attack() == att;
+    //                            }));
+    // TODO: ADD SFX HERE
   });
   lvl->set_on_attack_out_of_bound([this](std::shared_ptr<BaseAttack> att) {
     attacks.erase(std::find_if(attacks.begin(), attacks.end(),

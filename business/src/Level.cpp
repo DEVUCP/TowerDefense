@@ -28,11 +28,7 @@ Level::Level(int lives, int coins, std::shared_ptr<Map> map,
   init_default_callbacks();
 }
 
-void Level::update_lives(int amount) {
-  lives += amount;
-
-  if (lives < 0) end_game();
-}
+void Level::decrease_lives(int amount) { lives -= amount; }
 
 void Level::increase_score(int amount) {
   score += (amount < 0 ? amount * -1 : amount);
@@ -187,7 +183,8 @@ void Level::set_on_enemy_created(
 
 void Level::attack(std::shared_ptr<BaseTower> tower, float x, float y,
                    float width, float height, Vector<float> target) {
-  auto attack = std::make_shared<ArcheryAttack>(x, y, width, height, target);
+  auto attack = std::make_shared<ArcheryAttack>(tower->get_level(), x, y, width,
+                                                height, target);
   attack_mng->register_attack(attack);
   on_attack_created(attack);
   tower->reset_shoot_time();
@@ -231,4 +228,12 @@ void Level::on_enemy_out_of_bound(std::shared_ptr<BaseEnemy> v) {
 }
 void Level::on_attack_out_of_bound(std::shared_ptr<BaseAttack> v) {
   for (auto& fun : on_attack_out_of_bound_callbacks) fun(v);
+}
+
+void Level::init_default_callbacks() {
+  set_on_enemy_out_of_bound(
+      [this](std::shared_ptr<BaseEnemy> enm) { decrease_lives(1); });
+  set_on_enemy_death([this](std::shared_ptr<BaseEnemy> enm) {
+    update_coins(enm->get_kill_coins());
+  });
 }

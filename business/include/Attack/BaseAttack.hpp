@@ -1,7 +1,7 @@
 #pragma once
 
+#include <array>
 #include <memory>
-#include <string>
 #include "Enemy/BaseEnemy.hpp"
 #include "Utils/Moveable.hpp"
 

@@ -1,5 +1,6 @@
 #include "Views/TowerView.hpp"
 #include <fstream>
+#include <iostream>
 #include <memory>
 #include <sstream>
 #include <unordered_map>
@@ -9,7 +10,11 @@
 
 std::unordered_map<BaseTower::TowerType, TowerView::TowerInfo>
     TowerView::towers_info = {};
-
+std::unordered_map<int, std::string> TowerView::levels_info = {
+    {0, "LVL1"},
+    {1, "LVL2"},
+    {2, "LVL3"},
+};
 TowerView::TowerView(std::shared_ptr<BaseTower> tower) : tower(tower) {
   init_tower_sprite();
   init_weapon_sprite();
@@ -23,8 +28,11 @@ void TowerView::init_tower_sprite() {
                               towers_info[tower->get_type()].tower_sprite);
   tower_sprite_mng.set_width(64);
   tower_sprite_mng.set_height(128);
-  tower_sprite_mng.register_collection("LVL" + std::to_string(tower->get_level()), tower->get_level() - 1, 1);
-  tower_sprite_mng.set_collection("LVL" + std::to_string(tower->get_level()));
+  for (auto& [i, collc] : levels_info) {
+    std::cout << i << " " << collc << std::endl;
+    tower_sprite_mng.register_collection(collc, i, 1);
+  }
+  tower_sprite_mng.set_collection("LVL1");
   tower_sprite_mng.init_sprite_texture(sprite);
 
   // Set Position with Offset
@@ -53,7 +61,7 @@ void TowerView::init_weapon_sprite() {
   weapon_sprite_mng.register_collection("LVL1", 0, num1);
   weapon_sprite_mng.register_collection("LVL2", 1, num2);
   weapon_sprite_mng.register_collection("LVL3", 2, num3);
-  weapon_sprite_mng.set_collection("LVL" + std::to_string(tower->get_level()));
+  weapon_sprite_mng.set_collection("LVL1");
   weapon_sprite_mng.scale_animation_delay(2);
   weapon_sprite_mng.init_sprite_texture(weapon);
 
@@ -86,6 +94,19 @@ void TowerView::render(RenderData ren) {
 }
 
 void TowerView::update(UpdateData dat) {
+  // Check update of level
+  auto current_lvl_collection = levels_info[tower->get_level() - 1];
+  if (current_lvl_collection != tower_sprite_mng.get_current_collection()) {
+    tower_sprite_mng.set_collection(levels_info[tower->get_level() - 1]);
+    tower_sprite_mng.init_sprite_texture(sprite);
+  }
+
+  // Check Update of attack
+  if (current_lvl_collection != weapon_sprite_mng.get_current_collection()) {
+    weapon_sprite_mng.set_collection(levels_info[tower->get_level() - 1]);
+    weapon_sprite_mng.init_sprite_texture(weapon);
+  }
+
   auto& [tower_texture_sheet, weapon_texture_sheet, attacks_offsets,
          attacks_size, sprites_number, shooting_sprite] =
       towers_info[tower->get_type()];
@@ -117,7 +138,7 @@ void TowerView::update(UpdateData dat) {
   if (weapon_sprite_mng.get_current_index() ==
       shooting_sprite[tower->get_level() - 1]) {
     auto lvl = Game::get_instance().get_level();
-    lvl->attack(tower, weapon_pos.x, weapon_pos.y, 40, 40,
+    lvl->attack(tower, weapon_pos.x, weapon_pos.y, 8, 8,
                 enemy_position);  // TODO: FIX this magic number or declare them
                                   // a constant
   }
