@@ -13,7 +13,12 @@
  */
 class BaseAttack : public Moveable, public Collidable {
 public:
-  enum AttackType { ARCHERY_ATTACK = 0 };
+  enum AttackType {
+    ARCHERY_ATTACK = 0,
+    ELECTRO_ATTACK,
+    SLINGSHOT_ATTACK,
+    CATAPULT_ATTACK,
+  };
   enum AttackState { MOVING, HIT, OUT };
 
 public:
