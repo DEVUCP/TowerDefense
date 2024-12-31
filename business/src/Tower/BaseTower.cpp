@@ -10,12 +10,12 @@
 #include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
-#include "iostream"
 #include "Map/Map.hpp"
 #include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/CatapultTower.hpp"
 #include "Tower/Towers/ElectroTower.hpp"
 #include "Tower/Towers/SlingshotTower.hpp"
+#include "iostream"
 
 // TODO: check the correct initialization for the sprite in BaseTower
 BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
@@ -109,21 +109,20 @@ std::vector<std::shared_ptr<BaseEnemy>> BaseTower::enemies_in_range() {
 }
 
 void BaseTower::upgrade() {
-  if(get_level() < get_upgrades_count()) lvl++;
+  if (get_level() < get_upgrades_count()) lvl++;
 }
 
 int BaseTower::get_upgrades_count() const {
   static std::unordered_map<BaseTower::TowerType, int> levels = {
-    {BaseTower::ArcheryTower, ArcheryTower::LEVELS},
-    {BaseTower::CatapultTower, CatapultTower::LEVELS},
-    {BaseTower::ElectroTower, ElectroTower::LEVELS},
-    {BaseTower::SlingshotTower, SlingshotTower::LEVELS},
-};
+      {BaseTower::ArcheryTower, ArcheryTower::LEVELS},
+      {BaseTower::CatapultTower, CatapultTower::LEVELS},
+      {BaseTower::ElectroTower, ElectroTower::LEVELS},
+      {BaseTower::SlingshotTower, SlingshotTower::LEVELS},
+  };
 
   if (levels.find(get_type()) == levels.end())
     throw std::runtime_error("Unidentified tower type");
   return levels[get_type()];
-
 }
 
 int BaseTower::get_buy_price(BaseTower::TowerType type) {
@@ -151,8 +150,9 @@ int BaseTower::get_sell_price() {
     upgrades_price += get_buy_price(type) * (level + 1);
   }
 
-  // Sell for half the amount of coins spent on building the tower and its current upgrades
-  return (base_price + upgrades_price)/2;
+  // Sell for half the amount of coins spent on building the tower and its
+  // current upgrades
+  return (base_price + upgrades_price) / 2;
 }
 
 BaseTower::TowerType BaseTower::get_type() const { return type; }
