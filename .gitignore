@@ -41,4 +41,5 @@ __tests/
 cmake-build-debug/
 
 .vs/
+.vscode
 mbuild/
