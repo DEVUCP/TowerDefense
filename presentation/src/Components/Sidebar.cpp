@@ -5,6 +5,7 @@
 #include "Components/SidebarItem.hpp"
 #include "Components/SidebarTowerButton.hpp"
 #include "Game.hpp"
+#include "iostream"
 #include "GameSettings.hpp"
 #include "Tower/BaseTower.hpp"
 #include "Views/BuildableTileView.hpp"
@@ -21,7 +22,10 @@ std::vector<std::pair<BaseTower::TowerType, std::string>> Sidebar::towers_info =
 Sidebar::Sidebar() {
   init_sidebar_bg();
   init_content();
+
+  show_upgrade_buttons = false;
   init_tower_buttons();
+
 }
 
 void Sidebar::init_sidebar_bg() {
@@ -69,7 +73,12 @@ void Sidebar::init_content() {
 }
 
 void Sidebar::handle_events(EventData data) {
-  for (auto& twr : twr_btns) twr->handle_events(data);
+  if(!show_upgrade_buttons) {
+    for (auto& twr : twr_btns) twr->handle_events(data);
+  } else {
+    upgrade_button->handle_events(data);
+    sell_button->handle_events(data);
+  }
 }
 
 void Sidebar::render(RenderData ren) {
@@ -77,8 +86,14 @@ void Sidebar::render(RenderData ren) {
   lives->render(ren);
   coins->render(ren);
 
-  if (target != nullptr)
-    for (auto& twr_btn : twr_btns) twr_btn->render(ren);
+  if (target != nullptr) {
+    if(!show_upgrade_buttons) {
+      for (auto& twr_btn : twr_btns) twr_btn->render(ren);
+    } else {
+      upgrade_button->render(ren);
+      sell_button->render(ren);
+    }
+  }
 }
 void Sidebar::update(UpdateData dat) {
   lives->update(dat);
@@ -99,6 +114,25 @@ void Sidebar::init_item(std::shared_ptr<SidebarItem>& item,
 
 void Sidebar::set_tile_target(std::shared_ptr<TileView> tile) { target = tile; }
 
+void Sidebar::show_upgrades() {
+  auto tile = std::static_pointer_cast<BuildableTileView>(target);
+  auto tower = tile->get_tower_view()->get_tower();
+
+  if (tower->get_level() < tower->get_upgrades_count()) {
+    upgrade_button->set_text("upgrade\n     for\n    " + std::to_string(tower->get_upgrade_price()));
+  } else {
+    upgrade_button->set_text("max\nlevel");
+  }
+
+  sell_button->set_text("sell\nfor\n    " + std::to_string(tower->get_sell_price()));
+
+  show_upgrade_buttons = true;
+}
+
+void Sidebar::hide_upgrades() {
+  show_upgrade_buttons = false;
+}
+
 void Sidebar::init_tower_buttons() {
   auto col = GameSettings::get_instance().get_columns();
   auto tile_len = GameSettings::get_instance().get_tile_size();
@@ -114,6 +148,42 @@ void Sidebar::init_tower_buttons() {
   int x_start = col * tile_len +
                 (sidebar_width - grid_width * cell_width - TOWERS_OFFSET) / 2;
   int y_start = 400;
+
+  upgrade_button = std::make_shared<TextButton>("upgrade", x_start + cell_width, y_start + 150,
+                                      StandardButton::ButtonSize::XLARGE,
+                                      StandardButton::ButtonType::SQUARE);
+  upgrade_button->set_handler(
+      [this]() {
+          auto tile = std::static_pointer_cast<BuildableTileView>(target);
+          if(tile->upgrade_tower()) {
+            target->set_selected(false);
+            target = nullptr;
+            SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
+          } else {
+            target->set_selected(false);
+            target = nullptr;
+            // TODO: Replace with failed to upgrade sound
+            // SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
+          }
+      });
+
+  upgrade_button->transform_text(0, -40*2);
+
+  sell_button = std::make_shared<TextButton>(
+      "sell", x_start + cell_width, y_start + 150 + 260,
+      StandardButton::ButtonSize::XLARGE, StandardButton::ButtonType::SQUARE);
+  sell_button->set_handler(
+      [this]() {
+        auto tile = std::static_pointer_cast<BuildableTileView>(target);
+          tile->sell_tower();
+          target->set_selected(false);
+          target = nullptr;
+          // TODO: Replace with tower destroying sound
+          SFXPlayer::get_instance().play(SFXPlayer::TOWER_BUILD);
+      });
+
+  sell_button->transform_text(0, -40*2);
+
 
   int index = 0;
   for (auto& [type, path] : towers_info) {
