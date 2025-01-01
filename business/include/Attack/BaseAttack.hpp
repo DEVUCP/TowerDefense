@@ -18,6 +18,8 @@ public:
     ELECTRO_ATTACK,
     SLINGSHOT_ATTACK,
     CATAPULT_ATTACK,
+    ORB_ATTACK,
+    CROSSBOW_ATTACK,
   };
   enum AttackState { MOVING, HIT, OUT };
 
