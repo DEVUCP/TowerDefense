@@ -32,12 +32,12 @@ set(HEADERS
     include/Enemy/EnemyManager.hpp
     # Enemies
     include/Enemy/Enemies/LeafBug.hpp
-    include/Enemy/Enemies/FireBug.hpp
     include/Enemy/Enemies/FireWasp.hpp
     include/Enemy/Enemies/FlyingLocust.hpp
     include/Enemy/Enemies/MagmaCrab.hpp
     include/Enemy/Enemies/ClampBeetle.hpp
     include/Enemy/Enemies/VoidButterfly.hpp
+    include/Enemy/Enemies/Scorpion.hpp
     # Map
     include/Map/Map.hpp
     include/Map/BaseTile.hpp
@@ -85,7 +85,6 @@ set(SOURCES # Sources
     src/Enemy/Enemies/LeafBug.cpp
     src/Enemy/Enemies/MagmaCrab.cpp
     src/Enemy/Enemies/ClampBeetle.cpp
-    src/Enemy/Enemies/FireBug.cpp
     src/Enemy/Enemies/FireWasp.cpp
     src/Enemy/Enemies/FlyingLocust.cpp
     src/Enemy/Enemies/VoidButterfly.cpp
@@ -105,7 +104,7 @@ set(SOURCES # Sources
     src/Attack/Attacks/CatapultAttack.cpp
     src/Attack/Attacks/OrbAttack.cpp
     src/Attack/Attacks/CrossbowAttack.cpp
-
+    src/Enemy/Enemies/Scorpion.cpp
     )
 
 add_library(business ${HEADERS} ${SOURCES})
