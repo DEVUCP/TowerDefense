@@ -3,8 +3,12 @@
 #include <stdexcept>
 #include "Enemy/BaseEnemy.hpp"
 #include "Enemy/Enemies/ClampBeetle.hpp"
+#include "Enemy/Enemies/FireWasp.hpp"
+#include "Enemy/Enemies/FlyingLocust.hpp"
 #include "Enemy/Enemies/LeafBug.hpp"
 #include "Enemy/Enemies/MagmaCrab.hpp"
+#include "Enemy/Enemies/Scorpion.hpp"
+#include "Enemy/Enemies/VoidButterfly.hpp"
 #include "Game.hpp"
 
 EnemyFactory& EnemyFactory::get_intance() {
@@ -30,6 +34,18 @@ std::shared_ptr<BaseEnemy> EnemyFactory::generate_enemy(
           starting_pos_enemies.x, starting_pos_enemies.y, starting_dest_enemy);
     case BaseEnemy::EnemyType::CLAMP_BEETLE:
       return std::make_shared<ClampBeetle>(
+          starting_pos_enemies.x, starting_pos_enemies.y, starting_dest_enemy);
+    case BaseEnemy::EnemyType::FIRE_WASP:
+      return std::make_shared<FireWasp>(
+          starting_pos_enemies.x, starting_pos_enemies.y, starting_dest_enemy);
+    case BaseEnemy::EnemyType::SCORPION:
+      return std::make_shared<Scorpion>(
+          starting_pos_enemies.x, starting_pos_enemies.y, starting_dest_enemy);
+    case BaseEnemy::EnemyType::FLYING_LOCUST:
+      return std::make_shared<FlyingLocust>(
+          starting_pos_enemies.x, starting_pos_enemies.y, starting_dest_enemy);
+    case BaseEnemy::EnemyType::VOID_BUTTERFLY:
+      return std::make_shared<VoidButterfly>(
           starting_pos_enemies.x, starting_pos_enemies.y, starting_dest_enemy);
     default:
       throw std::runtime_error("No constructor provided for all enemy types");

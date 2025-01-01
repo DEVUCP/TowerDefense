@@ -94,7 +94,7 @@ void EnemyView::render(RenderData ren) { ren.window->draw(sprite); }
 void EnemyView::load_enemy_info() {
   std::ifstream file(FILE_PATH);
   if (!file.is_open()) {
-    throw std::runtime_error("Failed to open towers info file: " + FILE_PATH);
+    throw std::runtime_error("Failed to open enemies info file: " + FILE_PATH);
   }
 
   enemies_info.clear();  // Clear existing data if any
@@ -115,6 +115,14 @@ void EnemyView::load_enemy_info() {
       type = BaseEnemy::EnemyType::MAGMA_CRAB;
     else if (enemy_name == "CLAMP_BEETLE")
       type = BaseEnemy::EnemyType::CLAMP_BEETLE;
+    else if (enemy_name == "FIRE_WASP")
+      type = BaseEnemy::EnemyType::FIRE_WASP;
+    else if (enemy_name == "SCORPION")
+      type = BaseEnemy::EnemyType::SCORPION;
+    else if (enemy_name == "FLYING_LOCUST")
+      type = BaseEnemy::EnemyType::FLYING_LOCUST;
+    else if (enemy_name == "VOID_BUTTERFLY")
+      type = BaseEnemy::EnemyType::VOID_BUTTERFLY;
     else
       throw std::runtime_error("Unknown enemy data: " + enemy_name);
 
