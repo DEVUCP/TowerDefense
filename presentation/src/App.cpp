@@ -5,6 +5,7 @@
 #include "Components/PageManager.hpp"
 #include "SFML/Window/Event.hpp"
 #include "SFML/Window/Keyboard.hpp"
+#include "Views/AttackView.hpp"
 #include "Views/EnemyView.hpp"
 #include "Views/TowerView.hpp"
 
@@ -63,4 +64,5 @@ void App::init_time() { deltaTime = sf::Time::Zero; }
 void App::init_info() {
   TowerView::load_tower_info();
   EnemyView::load_enemy_info();
+  AttackView::load_attack_info();
 }

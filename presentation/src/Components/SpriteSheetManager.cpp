@@ -102,6 +102,7 @@ void SpriteSheetManager::handle_reverse(bool value, sf::Sprite spr) {
 }
 
 void SpriteSheetManager::reverse_sprite(sf::Sprite& spr) {
+  std::cout << "made it here" << std::endl;
   auto current_scale = spr.getScale();
   spr.setScale(-1 * current_scale.x, -1 * current_scale.y);
 }

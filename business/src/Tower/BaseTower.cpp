@@ -13,7 +13,9 @@
 #include "Map/Map.hpp"
 #include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/CatapultTower.hpp"
+#include "Tower/Towers/CrossbowTower.hpp"
 #include "Tower/Towers/ElectroTower.hpp"
+#include "Tower/Towers/OrbTower.hpp"
 #include "Tower/Towers/SlingshotTower.hpp"
 #include "iostream"
 
@@ -118,6 +120,8 @@ int BaseTower::get_upgrades_count() const {
       {BaseTower::CatapultTower, CatapultTower::LEVELS},
       {BaseTower::ElectroTower, ElectroTower::LEVELS},
       {BaseTower::SlingshotTower, SlingshotTower::LEVELS},
+      {BaseTower::OrbTower, OrbTower::LEVELS},
+      {BaseTower::CrossbowTower, CrossbowTower::LEVELS},
   };
 
   if (levels.find(get_type()) == levels.end())
@@ -131,6 +135,8 @@ int BaseTower::get_buy_price(BaseTower::TowerType type) {
       {BaseTower::CatapultTower, CatapultTower::PRICE},
       {BaseTower::ElectroTower, ElectroTower::PRICE},
       {BaseTower::SlingshotTower, SlingshotTower::PRICE},
+      {BaseTower::OrbTower, OrbTower::PRICE},
+      {BaseTower::CrossbowTower, CrossbowTower::PRICE},
   };
 
   if (prices.find(type) == prices.end())

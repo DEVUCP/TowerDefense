@@ -29,8 +29,8 @@ public:
    *
    * @note Must call Moveable
    */
-  BaseAttack(float x, float y, float width, float height, float velocity,
-             Vector<float> target, int damage, AttackType type);
+  BaseAttack(int level, float x, float y, float width, float height,
+             float velocity, Vector<float> target, int damage, AttackType type);
 
   /**
    * @brief Getter for `state`
@@ -82,6 +82,11 @@ public:
    */
   AttackType get_type();
 
+  /**
+   * @brief Getter for `level`
+   */
+  int get_lvl() const;
+
 protected:
   // Inherited callbacks
   virtual void on_reach()
@@ -97,4 +102,5 @@ private:
   int damage;
   AttackType type;
   AttackState state;
+  int level;
 };

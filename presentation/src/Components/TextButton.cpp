@@ -2,13 +2,12 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "Utils/FontFactory.hpp"
 
-TextButton::TextButton(std::string str, unsigned x, unsigned y, ButtonSize size,
-                       ButtonType type)
+TextButton::TextButton(std::string str, unsigned x, unsigned y, int font_size,
+                       ButtonSize size, ButtonType type)
     : StandardButton(x, y, size, type) {
   text.setFillColor(sf::Color(BUTTON_TEXT_COLOR));
   text.setString(str);
-  text.setCharacterSize(size == ButtonSize::LARGE ? LARGE_FONT_SIZE
-                                                  : DEFAULT_FONT_SIZE);
+  text.setCharacterSize(font_size);
 
   font = FontFactory::get_instance().get_primary_font();
   text.setFont(font);

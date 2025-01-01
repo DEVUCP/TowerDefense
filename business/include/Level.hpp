@@ -14,7 +14,7 @@
 
 class Level {
 public:
-  static constexpr int frame_time_ms = 30;
+  static constexpr int frame_time_ms = 20;
 
 private:
   enum GameState {

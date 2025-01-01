@@ -1,11 +1,12 @@
 #include "Attack/BaseAttack.hpp"
+#include <iostream>
 #include <memory>
 #include "Enemy/BaseEnemy.hpp"
 #include "Game.hpp"
 #include "Map/EnemyPathTile.hpp"
 #include "Utils/Positionable.hpp"
 
-BaseAttack::BaseAttack(float x, float y, float width, float height,
+BaseAttack::BaseAttack(int level, float x, float y, float width, float height,
                        float velocity, Vector<float> target, int damage,
                        AttackType type)
     : Moveable(x, y, velocity, target),
@@ -13,9 +14,8 @@ BaseAttack::BaseAttack(float x, float y, float width, float height,
       Positionable(x, y),
       damage(damage),
       type{type},
-      state(MOVING) {
-  // std::cout << "Attack target: " << target.x << " " << target.y << std::endl;
-}
+      level{level},
+      state(MOVING) {}
 
 BaseAttack::AttackState BaseAttack::get_state() const { return state; }
 
@@ -115,3 +115,5 @@ void BaseAttack::on_reach() {
 void BaseAttack::on_out_of_board() { state = OUT; }
 
 BaseAttack::AttackType BaseAttack::get_type() { return type; }
+
+int BaseAttack::get_lvl() const { return level; }
