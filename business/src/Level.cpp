@@ -10,6 +10,7 @@
 #include "Tower/Towers/ElectroTower.hpp"
 #include "Tower/Towers/SlingshotTower.hpp"
 
+class BuildableTileView;
 Level::Level(int lives, int coins, std::shared_ptr<Map> map,
              std::shared_ptr<WaveManager> wave_mng,
              std::shared_ptr<AttackManager> attack_mng,
@@ -146,6 +147,25 @@ std::shared_ptr<BaseTower> Level::build_tower(
 
   return twr;
 }
+
+
+std::shared_ptr<BaseTower> Level::upgrade_tower(std::shared_ptr<BaseTower> twr) {
+
+  if (twr->get_upgrade_price() <= get_coins() && twr->get_level() < twr->get_upgrades_count()) {
+    update_coins(-1 * twr->get_upgrade_price());
+    tower_mng->upgrade_tower(twr);
+  } else {
+    twr = nullptr;
+  }
+
+  return twr;
+}
+
+void Level::sell_tower(std::shared_ptr<BaseTower> twr) {
+  update_coins(1 * twr->get_sell_price());
+  tower_mng->remove_tower(twr);
+}
+
 
 int Level::get_lives() const { return lives; }
 int Level::get_score() const { return score; }

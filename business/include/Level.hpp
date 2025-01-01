@@ -135,6 +135,16 @@ public:
                                          std::shared_ptr<BuildableTile> tile);
 
   /**
+   * @brief Upgrade a tower
+   */
+  std::shared_ptr<BaseTower> upgrade_tower(std::shared_ptr<BaseTower> twr);
+
+  /**
+   * @brief Upgrade a tower
+   */
+  void sell_tower(std::shared_ptr<BaseTower> twr);
+
+  /**
    * @brief Getters for game info
    */
   int get_lives() const;
