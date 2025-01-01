@@ -24,7 +24,7 @@ BaseTower::BaseTower(std::shared_ptr<BaseTile> tile, unsigned range,
     : tile(tile),
       range(range),
       type(type),
-      lvl(2),          // The starting level for each tower
+      lvl(1),          // The starting level for each tower
       shoot_rate(800)  // TODO: Elevate to subclasses
 {
   // Initialize upgrades
