@@ -38,6 +38,12 @@ public:
    */
   static void load_tower_info();
 
+  /**
+   * @brief Get the tower poninter
+   */
+  std::shared_ptr<BaseTower> get_tower();
+
+
 private:
   /**
    * @brief Initialize the tower sprite manager

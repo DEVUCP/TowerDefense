@@ -24,8 +24,8 @@ void TowerView::init_tower_sprite() {
                               towers_info[tower->get_type()].tower_sprite);
   tower_sprite_mng.set_width(64);
   tower_sprite_mng.set_height(128);
-  tower_sprite_mng.register_collection("LVL1", 0, 1);
-  tower_sprite_mng.set_collection("LVL1");
+  tower_sprite_mng.register_collection("LVL" + std::to_string(tower->get_level()), tower->get_level() - 1, 1);
+  tower_sprite_mng.set_collection("LVL" + std::to_string(tower->get_level()));
   tower_sprite_mng.init_sprite_texture(sprite);
 
   // Set Position with Offset
@@ -54,7 +54,7 @@ void TowerView::init_weapon_sprite() {
   weapon_sprite_mng.register_collection("LVL1", 0, num1);
   weapon_sprite_mng.register_collection("LVL2", 1, num2);
   weapon_sprite_mng.register_collection("LVL3", 2, num3);
-  weapon_sprite_mng.set_collection("LVL1");
+  weapon_sprite_mng.set_collection("LVL" + std::to_string(tower->get_level()));
   weapon_sprite_mng.scale_animation_delay(2);
   weapon_sprite_mng.init_sprite_texture(weapon);
 
@@ -124,6 +124,10 @@ void TowerView::update(UpdateData dat) {
         tower, weapon_pos.x, weapon_pos.y, 40, 40,
         enemy_position);  // FIX this magic number or declare them a constant
   }
+}
+
+std::shared_ptr<BaseTower> TowerView::get_tower() {
+  return tower;
 }
 
 void TowerView::load_tower_info() {
