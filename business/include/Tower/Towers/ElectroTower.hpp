@@ -5,6 +5,7 @@ class ElectroTower : public BaseTower {
 public:
   static constexpr unsigned RANGE = 1;
   static constexpr unsigned PRICE = 50;
+  static constexpr unsigned LEVELS = 3;
 
 public:
   ElectroTower(std::shared_ptr<BaseTile> tile);
