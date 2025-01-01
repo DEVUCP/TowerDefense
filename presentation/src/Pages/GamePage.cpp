@@ -125,7 +125,18 @@ void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
   if (selected_tile != nullptr) selected_tile->set_selected(false);
   selected_tile = tile_view;
   selected_tile->set_selected(true);
+
+  auto tile = std::dynamic_pointer_cast<BuildableTileView>(tile_view);
+
   sidebar->set_tile_target(tile_view);
+
+  if (tile->get_tower_view() != nullptr) {
+    auto tower = tile->get_tower_view()->get_tower();
+    sidebar->show_upgrades();
+  } else {
+    sidebar->hide_upgrades();
+  }
+
 }
 
 void GamePage::init_callbacks() {
