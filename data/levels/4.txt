@@ -1,0 +1,14 @@
+60 350 50 40
+30 1
+25 2
+15 4
+1 12
+U N N N N N N N N N N N N
+U B N N N N N N N N B D L
+U B N N N N N N N B D L B
+U B N N N N N N B D L N B
+U B N N N N N B D L N N B
+U B N N N N B D L N N N B
+U B N N N N B R R R R D B
+U N B B B B N B B B B D B
+U L L L L L L L L L L L N
