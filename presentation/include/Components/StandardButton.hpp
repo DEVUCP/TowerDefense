@@ -6,7 +6,9 @@ class StandardButton : public IButton {
 public:
   enum class ButtonSize {
     LARGE,
+    MEDIUM,
     DEFAULT,
+    XLARGE
   };
 
   enum class ButtonType {
