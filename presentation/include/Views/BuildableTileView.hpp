@@ -21,6 +21,21 @@ public:
    */
   bool build_tower(BaseTower::TowerType type);
 
+  /**
+   * @brief Upgrade the tower in this tile
+   */
+  bool upgrade_tower();
+
+  /**
+   * @brief Upgrade the tower in this tile
+   */
+  void sell_tower();
+
+  /**
+   * @brief Get the tower poninter
+   */
+  std::shared_ptr<TowerView> get_tower_view();
+
 private:
   static std::vector<std::string> sheets;
   std::shared_ptr<TowerView> tower;

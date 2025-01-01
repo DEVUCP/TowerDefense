@@ -42,3 +42,28 @@ bool BuildableTileView::build_tower(BaseTower::TowerType type) {
     return false;
   }
 }
+
+bool BuildableTileView::upgrade_tower() {
+  auto lvl = Game::get_instance().get_level();
+  auto twr = lvl->upgrade_tower(get_tower_view()->get_tower());
+  if (twr) {
+    tower = std::make_shared<TowerView>(twr);
+    std::cout << "upgraded a tower" << std::endl;
+    return true;
+  } else {
+    std::cout << "you don't have enough coins to upgrade that tower" << std::endl;
+    return false;
+  }
+}
+
+void BuildableTileView::sell_tower() {
+  auto lvl = Game::get_instance().get_level();
+  lvl->sell_tower(get_tower_view()->get_tower());
+  tower = nullptr;
+  std::cout << "made a tower" << std::endl;
+}
+
+
+std::shared_ptr<TowerView> BuildableTileView::get_tower_view() {
+  return tower;
+}
