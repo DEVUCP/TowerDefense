@@ -85,7 +85,7 @@ void EnemyView::update(UpdateData dat) {
   const std::string& collection_name = it->second;
   sheet_mng.next_sprite(sprite, collection_name);
   if (state == BaseEnemy::DEAD) {
-    sheet_mng.scale_animation_delay(10);
+    sheet_mng.scale_animation_delay(8);
   }
 }
 void EnemyView::render(RenderData ren) { ren.window->draw(sprite); }

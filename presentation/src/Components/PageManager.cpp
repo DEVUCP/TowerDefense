@@ -5,6 +5,7 @@
 #include "Components/PageFactory.hpp"
 #include "Enums/Event.hpp"
 #include "Enums/PageType.hpp"
+#include "Game.hpp"
 #include "Interfaces/EventData.hpp"
 
 PageManager::PageManager(unsigned width, unsigned height)
@@ -86,9 +87,11 @@ void PageManager::onEvent(Event evt) {
       break;
     case Event::LEVEL_PAGE_REPLACE:
       replace_page(PageType::LEVELS_PAGE);
+      Game::get_instance().clear_level();
       break;
     case Event::GAME_PAGE_REPLACE:
       replace_page(PageType::GAME_PAGE);
+      Game::get_instance().clear_level();
       break;
     case Event::ABOUT_PAGE_REPLACE:
       replace_page(PageType::ABOUT_PAGE);
@@ -101,6 +104,7 @@ void PageManager::onEvent(Event evt) {
       break;
     case Event::LOSE_PAGE_REPLACE:
       replace_page(PageType::LOSE_PAGE);
+      std::cout << "finished lose page replacement";
       break;
     case Event::GO_BACK_SWITCH:
       go_back();

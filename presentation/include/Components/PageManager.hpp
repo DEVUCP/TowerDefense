@@ -7,6 +7,7 @@
 #include "Interfaces/EventData.hpp"
 #include "Interfaces/Observer.hpp"
 #include "Interfaces/Widget.hpp"
+#include "Utils/Stack.hpp"
 
 /*
  * Invariants:
@@ -50,7 +51,7 @@ public:
   void onEvent(Event) override;
 
 private:
-  std::stack<std::shared_ptr<Page>>
+  stack<std::shared_ptr<Page>>
       pages;  //< A stack with all pages to support going back
   unsigned target_width;
   unsigned target_height;

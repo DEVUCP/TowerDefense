@@ -37,9 +37,7 @@ void GamePage::on_unpause() {
 }
 
 void GamePage::handle_events(EventData evt) {
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-    // Game::get_instance().get_level().pause();
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
     notify_observers(Event::PAUSE_PAGE_SWITCH);
   } else {
     auto row = map.size();
@@ -66,10 +64,10 @@ void GamePage::update(UpdateData dat) {
   // Iterate in the game
   auto lvl = Game::get_instance().get_level();
   if (lvl->get_game_state() == Level::WON) {
-    notify_observers(Event::WIN_PAGE_REPLACE);
+    notify_observers(Event::WIN_PAGE_SWITCH);
     return;
   } else if (lvl->get_game_state() == Level::LOST) {
-    notify_observers(Event::LOSE_PAGE_REPLACE);
+    notify_observers(Event::LOSE_PAGE_SWITCH);
     return;
   }
   lvl->run_iteration();

@@ -45,6 +45,6 @@ void LosePage::update(UpdateData dat) {}
 
 void LosePage::render(RenderData ren) {
   title.render(ren);
-  restart_button->render(ren);
-  levels_button->render(ren);
+  if (restart_button) restart_button->render(ren);
+  if (levels_button) levels_button->render(ren);
 }
