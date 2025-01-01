@@ -24,6 +24,8 @@ set(HEADERS
     include/Tower/Towers/ElectroTower.hpp
     include/Tower/Towers/SlingshotTower.hpp
     include/Tower/Towers/CatapultTower.hpp
+    include/Tower/Towers/OrbTower.hpp
+    include/Tower/Towers/CrossbowTower.hpp
     # Enemy
     include/Enemy/BaseEnemy.hpp
     include/Enemy/EnemyFactory.hpp
@@ -49,7 +51,10 @@ set(HEADERS
     include/Attack/Attacks/ArcheryAttack.hpp
     include/Attack/Attacks/ElectroAttack.hpp
     include/Attack/Attacks/SlingshotAttack.hpp
-    include/Attack/Attacks/CatapultAttack.hpp)
+    include/Attack/Attacks/CatapultAttack.hpp
+    include/Attack/Attacks/OrbAttack.hpp
+    include/Attack/Attacks/CrossbowAttack.hpp
+    )
 
 set(SOURCES # Sources
     src/Game.cpp
@@ -69,6 +74,9 @@ set(SOURCES # Sources
     src/Tower/Towers/CatapultTower.cpp
     src/Tower/Towers/ElectroTower.cpp
     src/Tower/Towers/SlingshotTower.cpp
+    src/Tower/Towers/OrbTower.cpp
+    src/Tower/Towers/CrossbowTower.cpp
+
     # Enemy
     src/Enemy/BaseEnemy.cpp
     src/Enemy/EnemyFactory.cpp
@@ -95,6 +103,9 @@ set(SOURCES # Sources
     src/Attack/Attacks/ElectroAttack.cpp
     src/Attack/Attacks/SlingshotAttack.cpp
     src/Attack/Attacks/CatapultAttack.cpp
+    src/Attack/Attacks/OrbAttack.cpp
+    src/Attack/Attacks/CrossbowAttack.cpp
+
     )
 
 add_library(business ${HEADERS} ${SOURCES})

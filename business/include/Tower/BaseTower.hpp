@@ -19,6 +19,8 @@ public:
     ElectroTower,
     SlingshotTower,
     CatapultTower,
+    OrbTower,
+    CrossbowTower,
   };
 
 public:
