@@ -34,7 +34,6 @@ void LosePage::on_unpause() {
   notify_observers(Event::BG_SHADOW_SWITCH);
   // TODO: Change to lose music
   MusicPlayer::get_instance().set_current_music(MusicPlayer::LEVEL_MUSIC);
-  std::cout << "hello" << std::endl;
 }
 
 void LosePage::handle_events(EventData evt) {

@@ -82,15 +82,9 @@ public:
   std::string get_current_collection() const;
 
   /**
-   * @brief Control the sprite being reversed or not
+   * @brief Get the last index in the current collection
    */
-  void handle_reverse(bool value, sf::Sprite spr);
-
-private:
-  /**
-   * @brief A helper to handle reversing the sprite
-   */
-  void reverse_sprite(sf::Sprite&);
+  bool get_last_index();
 
 private:
   unsigned width;
@@ -103,5 +97,4 @@ private:
   sf::Time time_elapsed;
   unsigned desired_x, desired_y;
   unsigned animation_delay;
-  bool reversed;  // < helps check in case of needing to reverse a direction
 };

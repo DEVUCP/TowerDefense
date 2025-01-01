@@ -6,20 +6,29 @@
 #include <stdexcept>
 #include <string>
 #include <tuple>
+#include "Enemy/BaseEnemy.hpp"
 #include "GameSettings.hpp"
 #include "Interfaces/EventData.hpp"
 
 #define LEFT_MOVEMENT "LEFT_MOVEMENT"
+#define RIGHT_MOVEMENT "LEFT_MOVEMENT"
 #define UP_MOVEMENT "UP_MOVEMENT"
 #define DOWN_MOVEMENT "DOWN_MOVEMENT"
 #define LEFT_DESTRUCTION "LEFT_DESTRUCTION"
+#define RIGHT_DESTRUCTION "LEFT_DESTRUCTION"
 #define UP_DESTRUCTION "UP_DESTRUCTION"
 #define DOWN_DESTRUCTION "DOWN_DESTRUCTION"
 
 std::unordered_map<BaseEnemy::EnemyType, EnemyView::EnemyInfo>
     EnemyView::enemies_info = {};
-
-EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
+struct pair_hash {
+  template <class T1, class T2>
+  std::size_t operator()(const std::pair<T1, T2>& pair) const {
+    return std::hash<T1>()(pair.first) ^ (std::hash<T2>()(pair.second) << 1);
+  }
+};
+EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm)
+    : enemy(enm), removed(false) {
   assert(enm != nullptr);
   auto& [texture_path, size, collections] = enemies_info[enm->get_type()];
   sheet_mng.load_sheet(sprite, sprite_sheet, texture_path);
@@ -46,33 +55,37 @@ EnemyView::EnemyView(std::shared_ptr<BaseEnemy> enm) : enemy(enm) {
 
 void EnemyView::handle_events(EventData evt) {}
 void EnemyView::update(UpdateData dat) {
+  auto state = enemy->get_state();
+  if (state == BaseEnemy::DEAD &&
+      sheet_mng.get_current_index() == sheet_mng.get_last_index()) {
+    removed = true;
+    return;
+  }
+
   auto pos = enemy->get_position();
   int angle = enemy->get_rotation();
   angle =
       ((angle + 45) / 90) * 90 % 360;  // approximate to the nearest 90 degrees
   sprite.setPosition(pos.x, pos.y);
-  switch (angle) {
-    case 0:
-      sheet_mng.next_sprite(sprite, LEFT_MOVEMENT);
-      sheet_mng.handle_reverse(false, sprite);
-      break;
-    case 90:
-      sheet_mng.next_sprite(sprite, DOWN_MOVEMENT);
-      sheet_mng.handle_reverse(false, sprite);
-      break;
-    case 270:
-      sheet_mng.next_sprite(sprite, UP_MOVEMENT);
-      sheet_mng.handle_reverse(false, sprite);
-      break;
-    case 180:
-      sheet_mng.next_sprite(sprite, LEFT_MOVEMENT);
-      sheet_mng.handle_reverse(true, sprite);
-      break;
-    default:
-      throw std::runtime_error(
-          "Current game doesn't support enemies moving in directions other "
-          "than the 4 axes. Angle is: " +
-          std::to_string(angle));
+
+  static const std::unordered_map<std::pair<int, bool>, std::string, pair_hash>
+      angle_state_to_collection = {
+          {{0, 0}, RIGHT_MOVEMENT},    {{90, 0}, DOWN_MOVEMENT},
+          {{270, 0}, UP_MOVEMENT},     {{180, 0}, LEFT_MOVEMENT},
+          {{0, 1}, RIGHT_DESTRUCTION}, {{90, 1}, DOWN_DESTRUCTION},
+          {{270, 1}, UP_DESTRUCTION},  {{180, 1}, LEFT_DESTRUCTION}};
+
+  auto it = angle_state_to_collection.find({angle, state == BaseEnemy::DEAD});
+  if (it == angle_state_to_collection.end())
+    throw std::runtime_error(
+        "Current game doesn't support enemies moving or destructing in "
+        "directions other than the 4 axes. Angle is: " +
+        std::to_string(angle));
+
+  const std::string& collection_name = it->second;
+  sheet_mng.next_sprite(sprite, collection_name);
+  if (state == BaseEnemy::DEAD) {
+    sheet_mng.scale_animation_delay(10);
   }
 }
 void EnemyView::render(RenderData ren) { ren.window->draw(sprite); }
@@ -122,3 +135,5 @@ void EnemyView::load_enemy_info() {
 }
 
 std::shared_ptr<BaseEnemy> EnemyView::get_enemy() const { return enemy; }
+
+bool EnemyView::get_removed() const { return removed; }

@@ -42,7 +42,6 @@ WinPage::WinPage(unsigned width, unsigned height)
       notify_observers(Event::GAME_PAGE_REPLACE);
     } else {
       notify_observers(Event::GO_BACK_SWITCH);
-      notify_observers(Event::GO_BACK_SWITCH);
     }
   });
 
@@ -62,9 +61,9 @@ void WinPage::on_unpause() {
 }
 
 void WinPage::handle_events(EventData evt) {
-  restart_button->handle_events(evt);
-  levels_button->handle_events(evt);
-  continue_button->handle_events(evt);
+  if (levels_button) levels_button->handle_events(evt);
+  if (continue_button) continue_button->handle_events(evt);
+  if (restart_button) restart_button->handle_events(evt);
 }
 
 void WinPage::update(UpdateData dat) {}

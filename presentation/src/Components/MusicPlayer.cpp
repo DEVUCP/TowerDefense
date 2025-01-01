@@ -29,11 +29,10 @@ void MusicPlayer::set_current_music(MusicType type) {
   }
 }
 void MusicPlayer::toggle() {
-  if (is_playing()) {
+  if (is_playing())
     music.stop();
-  } else {
+  else
     music.play();
-  }
 }
 
 bool MusicPlayer::is_playing() const {
