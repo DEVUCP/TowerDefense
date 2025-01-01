@@ -32,5 +32,12 @@ void TextButton::render(RenderData ren) {
   ren.window->draw(text);
 }
 
+void TextButton::transform_text(int x, int y) {
+  int start_x = text.getPosition().x;
+  int start_y = text.getPosition().y;
+
+  text.setPosition(start_x + x, start_y + y);
+}
+
 void TextButton::set_text(std::string txt) { text.setString(txt); }
 void TextButton::set_color(sf::Color clr) { text.setFillColor(clr); }

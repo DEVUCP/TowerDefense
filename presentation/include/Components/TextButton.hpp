@@ -31,6 +31,12 @@ public:
    */
   void set_color(sf::Color clr);
 
+  /*
+   * @brief Transform the button's text
+   */
+  void transform_text(int x = 0, int y = 0);
+
+
 private:
   sf::Text text;
   sf::Font font;
