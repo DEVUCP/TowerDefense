@@ -89,9 +89,21 @@ void Level::run_iteration() {
   // Update
   wave_mng->set_current_enemies(enemy_mng->get_enemy_count());
 
+  // Check if game is LOST
+  if (lives <= 0) {
+    state = LOST;
+    return;
+  }
+
   // Check Next Wave
   if (wave_mng->wave_over()) {
-    wave_mng->next_wave();
+    if (wave_mng->is_last_wave()) {
+      std::cout << "won" << std::endl;
+      state = WON;
+      return;
+    } else {
+      wave_mng->next_wave();
+    }
   }
 
   if (wave_mng->should_spawn_enemy()) {

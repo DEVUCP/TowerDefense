@@ -1,6 +1,7 @@
 #include "Pages/GamePage.hpp"
 #include <algorithm>
 #include <memory>
+#include <vector>
 #include "Components/MusicPlayer.hpp"
 #include "Enums/Event.hpp"
 #include "Game.hpp"
@@ -40,27 +41,17 @@ void GamePage::handle_events(EventData evt) {
       sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
     // Game::get_instance().get_level().pause();
     notify_observers(Event::PAUSE_PAGE_SWITCH);
-  }
-
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-    // Game::get_instance().get_level()->end_game();
-    notify_observers(Event::WIN_PAGE_REPLACE);
-  }
-
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
-    // Game::get_instance().get_level()->end_game();
-    notify_observers(Event::LOSE_PAGE_REPLACE);
-  }
-
-  auto row = map.size();
-  auto col = map[0].size();
-  for (int i = 0; i < row; i++) {
-    for (int j = 0; j < col; j++) {
-      map[i][j]->handle_events(evt);
+  } else {
+    auto row = map.size();
+    auto col = map[0].size();
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
+        map[i][j]->handle_events(evt);
+      }
     }
-  }
 
-  sidebar->handle_events(evt);
+    sidebar->handle_events(evt);
+  }
 }
 
 void GamePage::render(RenderData ren) {
@@ -73,12 +64,27 @@ void GamePage::render(RenderData ren) {
 
 void GamePage::update(UpdateData dat) {
   // Iterate in the game
-  Game::get_instance().get_level()->run_iteration();
+  auto lvl = Game::get_instance().get_level();
+  if (lvl->get_game_state() == Level::WON) {
+    notify_observers(Event::WIN_PAGE_REPLACE);
+    return;
+  } else if (lvl->get_game_state() == Level::LOST) {
+    notify_observers(Event::LOSE_PAGE_REPLACE);
+    return;
+  }
+  lvl->run_iteration();
+
   for (auto& row : map)
     for (auto tl : row) tl->update(dat);
 
   // Update enemies
-  for (auto& enm : enemies) enm->update(dat);
+  for (auto itr = enemies.begin(); itr != enemies.end();) {
+    (*itr)->update(dat);
+    if ((*itr)->get_removed()) {
+      itr = enemies.erase(itr);
+    } else
+      itr++;
+  }
   // Update attacks
   for (auto& att : attacks) att->update(dat);
   // Update sidebar
@@ -136,7 +142,6 @@ void GamePage::set_selected(std::shared_ptr<TileView> tile_view) {
   } else {
     sidebar->hide_upgrades();
   }
-
 }
 
 void GamePage::init_callbacks() {
@@ -150,10 +155,10 @@ void GamePage::init_callbacks() {
     attacks.push_back(std::make_shared<AttackView>(att));
   });
   lvl->set_on_enemy_death([this](std::shared_ptr<BaseEnemy> enm) {
-    enemies.erase(std::find_if(enemies.begin(), enemies.end(),
-                               [enm](std::shared_ptr<EnemyView> view) {
-                                 return view->get_enemy() == enm;
-                               }));
+    auto view = std::find_if(enemies.begin(), enemies.end(),
+                             [enm](std::shared_ptr<EnemyView> view) {
+                               return view->get_enemy() == enm;
+                             });
   });
   lvl->set_on_enemy_out_of_bound([this](std::shared_ptr<BaseEnemy> enm) {
     enemies.erase(std::find_if(enemies.begin(), enemies.end(),

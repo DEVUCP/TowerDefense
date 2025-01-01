@@ -51,6 +51,11 @@ public:
    */
   int get_wave() const;
 
+  /**
+   * @brief Is the current wave the last wave
+   */
+  bool is_last_wave() const;
+
 private:
   int wave;
   int enemies_total;  // all enemies count in the current wave, either sent or

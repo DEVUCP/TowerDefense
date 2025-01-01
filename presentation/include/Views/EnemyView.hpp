@@ -38,10 +38,16 @@ public:
    */
   std::shared_ptr<BaseEnemy> get_enemy() const;
 
+  /**
+   * @brief Getter for `removed`
+   */
+  bool get_removed() const;
+
 private:
   std::shared_ptr<BaseEnemy> enemy;
   sf::Texture sprite_sheet;
   sf::Sprite sprite;
   SpriteSheetManager sheet_mng;
   static std::unordered_map<BaseEnemy::EnemyType, EnemyInfo> enemies_info;
+  bool removed;
 };

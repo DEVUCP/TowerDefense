@@ -37,3 +37,5 @@ void WaveManager::spawn_enemy() { enemies_spawned++; }
 void WaveManager::set_current_enemies(int value) {
   enemies_count_on_map = value;
 }
+
+bool WaveManager::is_last_wave() const { return wave == wave_count; }

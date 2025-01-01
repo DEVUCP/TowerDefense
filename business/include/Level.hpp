@@ -16,7 +16,7 @@ class Level {
 public:
   static constexpr int frame_time_ms = 20;
 
-private:
+public:
   enum GameState {
     PAUSED,
     ON,

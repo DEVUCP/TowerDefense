@@ -1,5 +1,6 @@
 #include "Enemy/BaseEnemy.hpp"
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <memory>
 #include "Game.hpp"

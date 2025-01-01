@@ -6,6 +6,7 @@
 #include "Components/SpriteSheetManager.hpp"
 #include "Interfaces/Widget.hpp"
 #include "Tower/BaseTower.hpp"
+
 class TowerView : public Widget {
 private:
   struct TowerInfo {

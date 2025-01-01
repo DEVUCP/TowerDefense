@@ -78,8 +78,7 @@ void SpriteSheetManager::init_sprite_texture(sf::Sprite& sprite) {
   auto collection = info[current_collection];
   auto maximum_count_per_row = sprite.getGlobalBounds().width / width;
 
-  unsigned total =
-      (collection.row_count - 1) * maximum_count_per_row + collection.count;
+  unsigned total = collection.count;
   current_index = (current_index + 1) % total;
   int offsetY = collection.row_num * height;
   int x = (current_index % total) * width,
@@ -95,16 +94,13 @@ std::string SpriteSheetManager::get_current_collection() const {
   return current_collection;
 }
 
-void SpriteSheetManager::handle_reverse(bool value, sf::Sprite spr) {
-  if (value == reversed) return;
-  reverse_sprite(spr);
-  reversed = value;
-}
-
-void SpriteSheetManager::reverse_sprite(sf::Sprite& spr) {
-  std::cout << "made it here" << std::endl;
-  auto current_scale = spr.getScale();
-  spr.setScale(-1 * current_scale.x, -1 * current_scale.y);
-}
-
 unsigned SpriteSheetManager::get_current_index() { return current_index; }
+
+bool SpriteSheetManager::get_last_index() {
+  assert(!current_collection.empty());
+
+  if (info.find(current_collection) == info.end())
+    throw std::runtime_error("No current collection");
+
+  return info[current_collection].count;
+}
