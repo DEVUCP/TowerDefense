@@ -1,18 +1,18 @@
-10 50 30 5
-5 1
-3 3
-2 5
-8 7
-12 9
-10 11
-9 13
-1 0
-N N N N N N N N N N N N N
-R R R R R R R R R R D B N
-B B B B B B B B B B D B N
-N N N N N N N N N B D B N
-N N N N N N N N N B D B N
-N N N N N N N N N B D B N
-B B B B B B B B B B D B N
-L L L L L L L L L L L B N
-N N N N N N N N N N N N N
+20 150 30 25
+30 1
+20 2
+20 4
+18 6
+15 8
+15 10
+12 11
+8 0
+N N N B N B N N B N B U N
+N B B R R R D B N N B U B
+N N B U N B D N B N B U N
+N B B U B N D B N N B U B
+N N B U N B D B N N B U N
+N B B U B N D N B N B U B
+N N B U N B D B N N B U N
+N B B U B N D B B B B U B
+R R R U N B R R R R R U N
