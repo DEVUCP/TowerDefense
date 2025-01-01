@@ -25,6 +25,11 @@ public:
    */
   void init_level(int level_num);
 
+  /**
+   * @brief Remove the level
+   */
+  void clear_level();
+
 private:
   Game() = default;  // < private constructor
 

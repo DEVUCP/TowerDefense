@@ -12,3 +12,5 @@ std::shared_ptr<Level> Game::get_level() { return lvl; }
 void Game::init_level(int level_num) {
   lvl = LevelReader::get_instance().build_level(level_num);
 }
+
+void Game::clear_level() { lvl = nullptr; }

@@ -4,7 +4,7 @@
 class CatapultTower : public BaseTower {
 public:
   static constexpr unsigned RANGE = 4;
-  static constexpr unsigned PRICE = 100;
+  static constexpr unsigned PRICE = 150;
   static constexpr unsigned LEVELS = 3;
 
 public:

@@ -5,7 +5,7 @@
 class ClampBeetle : public BaseEnemy {
 public:
   static constexpr int VELOCITY = 4;
-  static constexpr int KILL_COINS = 10;
+  static constexpr int KILL_COINS = 3;
   static constexpr int INITIAL_HEALTH = 15;
 
 public:
