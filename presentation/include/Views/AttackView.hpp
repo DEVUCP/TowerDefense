@@ -1,5 +1,7 @@
 #pragma once
+#include <array>
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include "Attack/BaseAttack.hpp"
 #include "Components/SpriteSheetManager.hpp"
@@ -7,8 +9,14 @@
 
 class AttackView : public Widget {
 private:
+  static const inline std::string FILE_PATH = "./data/attack_info.txt";
+
+private:
   struct AttackInfo {
     std::string texture_path;
+    std::array<int, 3> widths;
+    std::array<int, 3> heights;
+    std::array<int, 3> num_of_sprites;
   };
 
 public:
@@ -25,6 +33,8 @@ public:
    * @brief Getter for `attack`
    */
   std::shared_ptr<BaseAttack> get_attack() const;
+
+  static void load_attack_info();
 
 private:
   std::shared_ptr<BaseAttack> attack;

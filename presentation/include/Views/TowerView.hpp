@@ -19,7 +19,7 @@ private:
 
 public:
   static constexpr float TOWER_TILE_FACTOR = 0.6;
-  static constexpr float WEAPON_SPRITE_LEN = 64.f;
+  static constexpr float WEAPON_SPRITE_LEN = 96.f;
   static const inline std::string FILE_PATH = "./data/tower_info.txt";
 
 public:
@@ -42,7 +42,6 @@ public:
    * @brief Get the tower poninter
    */
   std::shared_ptr<BaseTower> get_tower();
-
 
 private:
   /**

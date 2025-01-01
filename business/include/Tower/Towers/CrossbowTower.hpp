@@ -4,7 +4,8 @@
 class CrossbowTower : public BaseTower {
 public:
   static constexpr unsigned RANGE = 1;
-  static constexpr unsigned PRICE = 25;
+  static constexpr unsigned PRICE = 10;
+  static constexpr unsigned LEVELS = 3;
 
 public:
   CrossbowTower(std::shared_ptr<BaseTile> tile);

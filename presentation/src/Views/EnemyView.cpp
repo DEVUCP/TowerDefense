@@ -114,9 +114,8 @@ void EnemyView::load_enemy_info() {
     std::string collection_name;
     int row, count;
 
-    while (line_stream >> collection_name >> row >> count) {
+    while (line_stream >> collection_name >> row >> count)
       collections.push_back(std::make_tuple(collection_name, row, count));
-    }
 
     enemies_info[type] = {asset_name, {width, height}, collections};
   }

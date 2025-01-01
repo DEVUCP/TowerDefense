@@ -1,12 +1,20 @@
 #include "Level.hpp"
 #include <LevelReader.hpp>
+#include <iostream>
 #include <memory>
 #include <stdexcept>
 #include "Attack/Attacks/ArcheryAttack.hpp"
+#include "Attack/Attacks/CatapultAttack.hpp"
+#include "Attack/Attacks/CrossbowAttack.hpp"
+#include "Attack/Attacks/ElectroAttack.hpp"
+#include "Attack/Attacks/OrbAttack.hpp"
+#include "Attack/Attacks/SlingshotAttack.hpp"
 #include "Attack/BaseAttack.hpp"
 #include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/CatapultTower.hpp"
+#include "Tower/Towers/CrossbowTower.hpp"
 #include "Tower/Towers/ElectroTower.hpp"
+#include "Tower/Towers/OrbTower.hpp"
 #include "Tower/Towers/SlingshotTower.hpp"
 
 class BuildableTileView;
@@ -138,6 +146,12 @@ std::shared_ptr<BaseTower> Level::build_tower(
     case BaseTower::SlingshotTower:
       twr = std::make_shared<SlingshotTower>(tile);
       break;
+    case BaseTower::OrbTower:
+      twr = std::make_shared<OrbTower>(tile);
+      break;
+    case BaseTower::CrossbowTower:
+      twr = std::make_shared<CrossbowTower>(tile);
+      break;
     default:
       throw std::runtime_error("Load all towers");
   }
@@ -152,10 +166,10 @@ std::shared_ptr<BaseTower> Level::build_tower(
   return twr;
 }
 
-
-std::shared_ptr<BaseTower> Level::upgrade_tower(std::shared_ptr<BaseTower> twr) {
-
-  if (twr->get_upgrade_price() <= get_coins() && twr->get_level() < twr->get_upgrades_count()) {
+std::shared_ptr<BaseTower> Level::upgrade_tower(
+    std::shared_ptr<BaseTower> twr) {
+  if (twr->get_upgrade_price() <= get_coins() &&
+      twr->get_level() < twr->get_upgrades_count()) {
     update_coins(-1 * twr->get_upgrade_price());
     tower_mng->upgrade_tower(twr);
   } else {
@@ -170,7 +184,6 @@ void Level::sell_tower(std::shared_ptr<BaseTower> twr) {
   tower_mng->remove_tower(twr);
 }
 
-
 int Level::get_lives() const { return lives; }
 int Level::get_score() const { return score; }
 int Level::get_coins() const { return coins; }
@@ -183,8 +196,35 @@ void Level::set_on_enemy_created(
 
 void Level::attack(std::shared_ptr<BaseTower> tower, float x, float y,
                    float width, float height, Vector<float> target) {
-  auto attack = std::make_shared<ArcheryAttack>(tower->get_level(), x, y, width,
+  std::shared_ptr<BaseAttack> attack;
+  switch (tower->get_type()) {
+    case BaseTower::ArcheryTower:
+      attack = std::make_shared<ArcheryAttack>(tower->get_level(), x, y, width,
+                                               height, target);
+      break;
+    case BaseTower::ElectroTower:
+      attack = std::make_shared<ElectroAttack>(tower->get_level(), x, y, width,
+                                               height, target);
+      break;
+    case BaseTower::SlingshotTower:
+      attack = std::make_shared<SlingshotAttack>(tower->get_level(), x, y,
+                                                 width, height, target);
+      break;
+    case BaseTower::CatapultTower:
+      attack = std::make_shared<CatapultAttack>(tower->get_level(), x, y, width,
                                                 height, target);
+      break;
+    case BaseTower::OrbTower:
+      attack = std::make_shared<OrbAttack>(tower->get_level(), x, y, width,
+                                           height, target);
+      break;
+    case BaseTower::CrossbowTower:
+      attack = std::make_shared<CrossbowAttack>(tower->get_level(), x, y, width,
+                                                height, target);
+      break;
+    default:
+      throw std::runtime_error("Unidentified Tower Type");
+  }
   attack_mng->register_attack(attack);
   on_attack_created(attack);
   tower->reset_shoot_time();

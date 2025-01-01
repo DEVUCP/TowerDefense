@@ -8,13 +8,13 @@
 
 MainMenu::MainMenu(unsigned width, unsigned height)
     : Page(width, height), title("Bug Slayer", width, height) {
-  play_btn = std::make_shared<TextButton>("play", width / 2.f, height / 2.f,
+  play_btn = std::make_shared<TextButton>("play", width / 2.f, height / 2.f, 70,
                                           StandardButton::ButtonSize::LARGE,
                                           StandardButton::ButtonType::RECT);
   play_btn->set_handler(
       [this]() { notify_observers(Event::LEVEL_PAGE_SWITCH); });
   about_btn = std::make_shared<TextButton>(
-      "about", width / 2.f, height / 2.f + 200,
+      "about", width / 2.f, height / 2.f + 200, 70,
       StandardButton::ButtonSize::LARGE, StandardButton::ButtonType::RECT);
   about_btn->set_handler(
       [this]() { notify_observers(Event::ABOUT_PAGE_SWITCH); });

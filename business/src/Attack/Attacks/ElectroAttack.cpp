@@ -4,6 +4,6 @@
 
 ElectroAttack::ElectroAttack(int level, float x, float y, float width,
                              float height, Vector<float> target)
-    : BaseAttack(x, y, width, height, VELOCITY[level], target, DAMAGE[level],
-                 BaseAttack::ELECTRO_ATTACK),
+    : BaseAttack(level, x, y, width, height, VELOCITY[level - 1], target,
+                 DAMAGE[level - 1], BaseAttack::ELECTRO_ATTACK),
       Positionable(x, y) {}

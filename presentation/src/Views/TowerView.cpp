@@ -138,9 +138,7 @@ void TowerView::update(UpdateData dat) {
   if (weapon_sprite_mng.get_current_index() ==
       shooting_sprite[tower->get_level() - 1]) {
     auto lvl = Game::get_instance().get_level();
-    lvl->attack(tower, weapon_pos.x, weapon_pos.y, 8, 8,
-                enemy_position);  // TODO: FIX this magic number or declare them
-                                  // a constant
+    lvl->attack(tower, weapon_pos.x, weapon_pos.y, 8, 8, enemy_position);
   }
 }
 
@@ -181,6 +179,10 @@ void TowerView::load_tower_info() {
       type = BaseTower::SlingshotTower;
     else if (tower_name == "ElectroTower")
       type = BaseTower::ElectroTower;
+    else if (tower_name == "OrbTower")
+      type = BaseTower::OrbTower;
+    else if (tower_name == "CrossbowTower")
+      type = BaseTower::CrossbowTower;
     else
       throw std::runtime_error("Unknown tower type: " + tower_name);
 
@@ -227,4 +229,6 @@ void TowerView::load_tower_info() {
   }
 
   file.close();
+  std::cout << "Load Tower Info: " << towers_info.size() << " towers"
+            << std::endl;
 }

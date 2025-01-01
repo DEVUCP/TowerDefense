@@ -51,7 +51,8 @@ bool BuildableTileView::upgrade_tower() {
     std::cout << "upgraded a tower" << std::endl;
     return true;
   } else {
-    std::cout << "you don't have enough coins to upgrade that tower" << std::endl;
+    std::cout << "you don't have enough coins to upgrade that tower"
+              << std::endl;
     return false;
   }
 }
@@ -63,7 +64,4 @@ void BuildableTileView::sell_tower() {
   std::cout << "made a tower" << std::endl;
 }
 
-
-std::shared_ptr<TowerView> BuildableTileView::get_tower_view() {
-  return tower;
-}
+std::shared_ptr<TowerView> BuildableTileView::get_tower_view() { return tower; }

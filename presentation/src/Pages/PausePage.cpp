@@ -2,11 +2,8 @@
 #include <memory>
 
 #include "Components/MusicPlayer.hpp"
-#include "Components/TextButton.hpp"
 #include "Enums/Event.hpp"
 #include "Game.hpp"
-#include "SFML/Graphics/RenderTarget.hpp"
-#include "Widgets/MuteButton.hpp"
 
 PausePage::PausePage(unsigned width, unsigned height)
     : Page(width, height), title("Pause", width, height) {
