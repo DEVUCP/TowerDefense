@@ -15,8 +15,12 @@ public:
     LEAF_BUG = 0,
     MAGMA_CRAB,
     CLAMP_BEETLE,
+    FIRE_WASP,
+    FLYING_LOCUST,
+    SCORPION,
+    VOID_BUTTERFLY
   };
-  static constexpr int EnemyTypeCount = 3;
+  static constexpr int EnemyTypeCount = 7;
 
   enum EnemyState {
     ENTERING,
