@@ -37,7 +37,7 @@ public:
    * @param tower The tower to upgrade.
    * @param upgrade_index The index of the upgrade to apply.
    */
-  void upgrade_tower(std::shared_ptr<BaseTower> tower, int upgrade_index);
+  void upgrade_tower(std::shared_ptr<BaseTower> tower);
 
   /**
    * @brief Sells a tower and refunds the player.

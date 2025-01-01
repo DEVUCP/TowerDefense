@@ -21,10 +21,9 @@ void TowerManager::remove_tower(std::shared_ptr<BaseTower> tower) {
   }
 }
 
-void TowerManager::upgrade_tower(std::shared_ptr<BaseTower> tower,
-                                 int upgrade_index) {
+void TowerManager::upgrade_tower(std::shared_ptr<BaseTower> tower) {
   if (std::find(towers.begin(), towers.end(), tower) != towers.end()) {
-    tower->upgrade(upgrade_index);
+    tower->upgrade();
     std::cout << "Tower upgraded!" << std::endl;
   } else {
     std::cout << "Tower not found for upgrade!" << std::endl;
