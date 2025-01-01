@@ -10,6 +10,7 @@
 #include "Game.hpp"
 #include "GameSettings.hpp"
 #include "Map/EnemyPathTile.hpp"
+#include "iostream"
 #include "Map/Map.hpp"
 #include "Tower/Towers/ArcheryTower.hpp"
 #include "Tower/Towers/CatapultTower.hpp"
@@ -116,7 +117,23 @@ std::vector<std::shared_ptr<BaseEnemy>> BaseTower::enemies_in_range() {
   return sorted_enemies;
 }
 
-void BaseTower::upgrade(int upgrade_index) {}
+void BaseTower::upgrade() {
+  if(get_level() < get_upgrades_count()) lvl++;
+}
+
+int BaseTower::get_upgrades_count() const {
+  static std::unordered_map<BaseTower::TowerType, int> levels = {
+    {BaseTower::ArcheryTower, ArcheryTower::LEVELS},
+    {BaseTower::CatapultTower, CatapultTower::LEVELS},
+    {BaseTower::ElectroTower, ElectroTower::LEVELS},
+    {BaseTower::SlingshotTower, SlingshotTower::LEVELS},
+};
+
+  if (levels.find(get_type()) == levels.end())
+    throw std::runtime_error("Unidentified tower type");
+  return levels[get_type()];
+
+}
 
 int BaseTower::get_buy_price(BaseTower::TowerType type) {
   static std::unordered_map<BaseTower::TowerType, int> prices = {
@@ -131,13 +148,20 @@ int BaseTower::get_buy_price(BaseTower::TowerType type) {
   return prices[type];
 }
 
-// TODO: change base_price
+int BaseTower::get_upgrade_price() {
+  return get_buy_price(type) * (get_level() + 1);
+}
+
 int BaseTower::get_sell_price() {
-  // int base_price = 200;  // Example base price
-  // int upgrade_value =
-  //     upgrades ? upgrades->get_cost() / 2 : 0;  // Half of upgrade cost
-  // return base_price + upgrade_value;
-  return 0;
+  int base_price = get_buy_price(type);
+
+  int upgrades_price = 0;
+  for (int level = 1; level < get_level(); level++) {
+    upgrades_price += get_buy_price(type) * (level + 1);
+  }
+
+  // Sell for half the amount of coins spent on building the tower and its current upgrades
+  return (base_price + upgrades_price)/2;
 }
 
 BaseTower::TowerType BaseTower::get_type() const { return type; }

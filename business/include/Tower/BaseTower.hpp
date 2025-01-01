@@ -55,7 +55,7 @@ public:
    * @details The upgrade improves the tower's attributes, such as range or
    * damage, based on the selected upgrade option.
    */
-  void upgrade(int upgrade_index);
+  void upgrade();
 
   /**
    * @brief Calculates the selling price of the tower.
@@ -71,6 +71,13 @@ public:
    * @return The base price of the tower.
    */
   static int get_buy_price(TowerType type);
+
+  /**
+   * @brief Get tower's update price.
+   *
+   * @return The price needed to upgrade to the next level.
+   */
+  int get_upgrade_price();
 
   /**
    * @brief Get tower Type
@@ -96,6 +103,11 @@ public:
    * @brief check if the tower can shoot now
    */
   bool can_shoot() const;
+
+  /**
+   * @brief Get the number of possible upgrades for this tower
+   */
+  int get_upgrades_count() const;
 
 private:
   std::shared_ptr<BaseTile> tile;  // The tile this tower is on
