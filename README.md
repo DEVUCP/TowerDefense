@@ -29,5 +29,3 @@ cmake --build ./build
 ```sh
 ./build/main
 ```
-
-# Gallery
