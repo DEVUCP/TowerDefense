@@ -75,11 +75,13 @@ void Sidebar::init_content() {
 }
 
 void Sidebar::handle_events(EventData data) {
-  if (!show_upgrade_buttons) {
-    for (auto& twr : twr_btns) twr->handle_events(data);
-  } else {
-    upgrade_button->handle_events(data);
-    sell_button->handle_events(data);
+  if (target != nullptr) {
+    if (!show_upgrade_buttons) {
+      for (auto& twr : twr_btns) twr->handle_events(data);
+    } else {
+      upgrade_button->handle_events(data);
+      sell_button->handle_events(data);
+    }
   }
 }
 
