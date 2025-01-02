@@ -4,7 +4,7 @@
 #include "Utils/Vector.hpp"
 class VoidButterfly : public BaseEnemy {
 public:
-  static constexpr int VELOCITY = 10;
+  static constexpr int VELOCITY = 8;
   static constexpr int KILL_COINS = 20;
   static constexpr int INITIAL_HEALTH = 20;
 
