@@ -1,8 +1,8 @@
 #include "GameSettings.hpp"
 
 #define TILE_LENGTH (120)
-#define ENEMY_WIDTH (60)
-#define ENEMY_HEIGHT (60)
+#define ENEMY_WIDTH (120)
+#define ENEMY_HEIGHT (120)
 #define SIDEBAR_WIDTH_COLS (3)
 #define WIDTH (1920 - TILE_LENGTH * SIDEBAR_WIDTH_COLS)
 #define HEIGHT (1080)

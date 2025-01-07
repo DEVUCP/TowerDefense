@@ -66,7 +66,8 @@ void EnemyView::update(UpdateData dat) {
   int angle = enemy->get_rotation();
   angle =
       ((angle + 45) / 90) * 90 % 360;  // approximate to the nearest 90 degrees
-  sprite.setPosition(pos.x, pos.y);
+  auto tile_len = GameSettings::get_instance().get_tile_size();
+  sprite.setPosition(pos.x + tile_len / 2.f, pos.y + tile_len / 2.f);
 
   static const std::unordered_map<std::pair<int, bool>, std::string, pair_hash>
       angle_state_to_collection = {
